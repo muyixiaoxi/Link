@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package tag;
+option go_package="./tag";
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+service Tag {
+  rpc Ping(Request) returns(Response);
+}
