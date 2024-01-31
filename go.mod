@@ -1,5 +1,10 @@
 module Link
 
-go 1.21
+go 1.20
 
-require github.com/zeromicro/go-zero v1.6.1 // indirect
+require gorm.io/gorm v1.25.6
+
+require (
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
+)
