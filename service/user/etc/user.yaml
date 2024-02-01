@@ -4,3 +4,10 @@ Etcd:
   Hosts:
   - 39.101.77.206:2379
   Key: user.rpc
+Mysql:
+  Datasource: itoffice:Wksycxy0.0@tcp(39.101.77.206:3306)/ycx?charset=utf8mb4&parseTime=True&loc=Local
+Redis:
+  Host: 39.101.77.206:6379
+  Type: node
+  Pass: Wksycxy0.0
+

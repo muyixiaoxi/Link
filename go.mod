@@ -6,6 +6,7 @@ require (
 	github.com/zeromicro/go-zero v1.6.1
 	google.golang.org/grpc v1.61.0
 	google.golang.org/protobuf v1.32.0
+	gorm.io/gorm v1.25.6
 )
 
 require (
@@ -33,6 +34,8 @@ require (
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.4.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.0 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
