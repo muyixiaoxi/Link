@@ -33,6 +33,7 @@ func (l *UserLoginLogic) UserLogin(in *user.UserLoginRequest) (pd *user.UserLogi
 	pd = &user.UserLoginResponse{
 		Id:       uint64(model.ID),
 		Username: model.Username,
+		Avatar:   model.Avatar,
 	}
 	return
 }

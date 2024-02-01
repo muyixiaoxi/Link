@@ -1,15 +1,38 @@
 syntax = "v1"
 
-type Request {
-	Name string `path:"name,options=you|me"`
+type UserCreateRequest {
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Avatar   string `json:"avatar"`
+	Phone    string `json:"phone"`
+}
+type UserCreateResponse {
+	Token    string `json:"token"`
+	Username string `json:"username"`
+	Avatar   string `json:"avatar"`
 }
 
-type Response {
-	Message string `json:"message"`
+type UserLoginRequest {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+type UserLoginResponse {
+	Token    string `json:"token"`
+	Username string `json:"username"`
+	Avatar   string `json:"avatar"`
 }
 
-service user-api {
-	@handler UserHandler
-	get /from/:name (Request) returns (Response)
+@server(
+	prefix: /app/user
+)
+service user {
+	@doc "注册"
+	@handler signUp
+	post / (UserCreateRequest) returns(UserCreateResponse)
+
+	@doc "登录"
+	@handler login
+	post /login (UserLoginRequest) returns(UserLoginResponse)
 }
 
+// goctl api go -api user.api -dir .

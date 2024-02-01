@@ -10,4 +10,5 @@ type User struct {
 	Gender   uint   `gorm:"comment:0: 未知 1：男 2：女" json:"gender"`
 	Address  string `json:"address"`
 	Phone    string `gorm:"size:11;" json:"phone"`
+	Avatar   string `json:"avatar"`
 }
