@@ -1,0 +1,6 @@
+Name: chat.rpc
+ListenOn: 0.0.0.0:8080
+Etcd:
+  Hosts:
+  - 39.101.77.206:2379
+  Key: chat.rpc
