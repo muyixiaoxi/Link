@@ -6,25 +6,25 @@ import (
 )
 
 type Body struct {
-	Code int    `json:"code"`
-	Data any    `json:"data"`
-	Msg  string `json:"msg"`
+	Code ResCode `json:"code"`
+	Data any     `json:"data"`
+	Msg  string  `json:"msg"`
 }
 
-func Response(w http.ResponseWriter, res any, err error) {
-	if err != nil {
+func Response(w http.ResponseWriter, res any, code ResCode) {
+	if code > 1000 {
 		body := Body{
-			Code: -1,
+			Code: code,
 			Data: nil,
-			Msg:  err.Error(),
+			Msg:  code.Msg(),
 		}
 		httpx.WriteJson(w, http.StatusOK, body)
 		return
 	}
 	body := Body{
-		Code: 0,
+		Code: code,
 		Data: res,
-		Msg:  "success",
+		Msg:  code.Msg(),
 	}
 	httpx.WriteJson(w, http.StatusOK, body)
 }

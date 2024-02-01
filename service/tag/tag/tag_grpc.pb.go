@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.25.2
-// source: tag.proto
+// source: service/tag/tag.proto
 
 package tag
 
@@ -19,91 +19,290 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Tag_Ping_FullMethodName = "/tag.Tag/Ping"
+	TagLogin_CreateTag_FullMethodName            = "/tag.TagLogin/CreateTag"
+	TagLogin_UpdateTag_FullMethodName            = "/tag.TagLogin/UpdateTag"
+	TagLogin_DeleteTag_FullMethodName            = "/tag.TagLogin/DeleteTag"
+	TagLogin_SelectGroupTag_FullMethodName       = "/tag.TagLogin/SelectGroupTag"
+	TagLogin_SelectAllTagsByGroup_FullMethodName = "/tag.TagLogin/SelectAllTagsByGroup"
 )
 
-// TagClient is the client API for Tag service.
+// TagLoginClient is the client API for TagLogin service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TagClient interface {
-	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+type TagLoginClient interface {
+	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error)
+	UpdateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error)
+	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
+	SelectGroupTag(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GroupTagResponse, error)
+	SelectAllTagsByGroup(ctx context.Context, in *SelectAllTagsByGroupName, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error)
 }
 
-type tagClient struct {
+type tagLoginClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewTagClient(cc grpc.ClientConnInterface) TagClient {
-	return &tagClient{cc}
+func NewTagLoginClient(cc grpc.ClientConnInterface) TagLoginClient {
+	return &tagLoginClient{cc}
 }
 
-func (c *tagClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := c.cc.Invoke(ctx, Tag_Ping_FullMethodName, in, out, opts...)
+func (c *tagLoginClient) CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error) {
+	out := new(CreateTagResponse)
+	err := c.cc.Invoke(ctx, TagLogin_CreateTag_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// TagServer is the server API for Tag service.
-// All implementations must embed UnimplementedTagServer
+func (c *tagLoginClient) UpdateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error) {
+	out := new(CreateTagResponse)
+	err := c.cc.Invoke(ctx, TagLogin_UpdateTag_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagLoginClient) DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error) {
+	out := new(DeleteTagResponse)
+	err := c.cc.Invoke(ctx, TagLogin_DeleteTag_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagLoginClient) SelectGroupTag(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GroupTagResponse, error) {
+	out := new(GroupTagResponse)
+	err := c.cc.Invoke(ctx, TagLogin_SelectGroupTag_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagLoginClient) SelectAllTagsByGroup(ctx context.Context, in *SelectAllTagsByGroupName, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error) {
+	out := new(AllTagsByGroupNameResponse)
+	err := c.cc.Invoke(ctx, TagLogin_SelectAllTagsByGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TagLoginServer is the server API for TagLogin service.
+// All implementations must embed UnimplementedTagLoginServer
 // for forward compatibility
-type TagServer interface {
-	Ping(context.Context, *Request) (*Response, error)
-	mustEmbedUnimplementedTagServer()
+type TagLoginServer interface {
+	CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error)
+	UpdateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error)
+	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
+	SelectGroupTag(context.Context, *Empty) (*GroupTagResponse, error)
+	SelectAllTagsByGroup(context.Context, *SelectAllTagsByGroupName) (*AllTagsByGroupNameResponse, error)
+	mustEmbedUnimplementedTagLoginServer()
 }
 
-// UnimplementedTagServer must be embedded to have forward compatible implementations.
-type UnimplementedTagServer struct {
+// UnimplementedTagLoginServer must be embedded to have forward compatible implementations.
+type UnimplementedTagLoginServer struct {
 }
 
-func (UnimplementedTagServer) Ping(context.Context, *Request) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+func (UnimplementedTagLoginServer) CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTag not implemented")
 }
-func (UnimplementedTagServer) mustEmbedUnimplementedTagServer() {}
+func (UnimplementedTagLoginServer) UpdateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTag not implemented")
+}
+func (UnimplementedTagLoginServer) DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTag not implemented")
+}
+func (UnimplementedTagLoginServer) SelectGroupTag(context.Context, *Empty) (*GroupTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SelectGroupTag not implemented")
+}
+func (UnimplementedTagLoginServer) SelectAllTagsByGroup(context.Context, *SelectAllTagsByGroupName) (*AllTagsByGroupNameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SelectAllTagsByGroup not implemented")
+}
+func (UnimplementedTagLoginServer) mustEmbedUnimplementedTagLoginServer() {}
 
-// UnsafeTagServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to TagServer will
+// UnsafeTagLoginServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TagLoginServer will
 // result in compilation errors.
-type UnsafeTagServer interface {
-	mustEmbedUnimplementedTagServer()
+type UnsafeTagLoginServer interface {
+	mustEmbedUnimplementedTagLoginServer()
 }
 
-func RegisterTagServer(s grpc.ServiceRegistrar, srv TagServer) {
-	s.RegisterService(&Tag_ServiceDesc, srv)
+func RegisterTagLoginServer(s grpc.ServiceRegistrar, srv TagLoginServer) {
+	s.RegisterService(&TagLogin_ServiceDesc, srv)
 }
 
-func _Tag_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+func _TagLogin_CreateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TagServer).Ping(ctx, in)
+		return srv.(TagLoginServer).CreateTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Tag_Ping_FullMethodName,
+		FullMethod: TagLogin_CreateTag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TagServer).Ping(ctx, req.(*Request))
+		return srv.(TagLoginServer).CreateTag(ctx, req.(*CreateTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Tag_ServiceDesc is the grpc.ServiceDesc for Tag service.
+func _TagLogin_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagLoginServer).UpdateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TagLogin_UpdateTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagLoginServer).UpdateTag(ctx, req.(*CreateTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagLogin_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagLoginServer).DeleteTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TagLogin_DeleteTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagLoginServer).DeleteTag(ctx, req.(*DeleteTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagLogin_SelectGroupTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagLoginServer).SelectGroupTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TagLogin_SelectGroupTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagLoginServer).SelectGroupTag(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagLogin_SelectAllTagsByGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SelectAllTagsByGroupName)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagLoginServer).SelectAllTagsByGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TagLogin_SelectAllTagsByGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagLoginServer).SelectAllTagsByGroup(ctx, req.(*SelectAllTagsByGroupName))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TagLogin_ServiceDesc is the grpc.ServiceDesc for TagLogin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Tag_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "tag.Tag",
-	HandlerType: (*TagServer)(nil),
+var TagLogin_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "tag.TagLogin",
+	HandlerType: (*TagLoginServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Ping",
-			Handler:    _Tag_Ping_Handler,
+			MethodName: "CreateTag",
+			Handler:    _TagLogin_CreateTag_Handler,
+		},
+		{
+			MethodName: "UpdateTag",
+			Handler:    _TagLogin_UpdateTag_Handler,
+		},
+		{
+			MethodName: "DeleteTag",
+			Handler:    _TagLogin_DeleteTag_Handler,
+		},
+		{
+			MethodName: "SelectGroupTag",
+			Handler:    _TagLogin_SelectGroupTag_Handler,
+		},
+		{
+			MethodName: "SelectAllTagsByGroup",
+			Handler:    _TagLogin_SelectAllTagsByGroup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "tag.proto",
+	Metadata: "service/tag/tag.proto",
+}
+
+const ()
+
+// TagLoginFrontClient is the client API for TagLoginFront service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type TagLoginFrontClient interface {
+}
+
+type tagLoginFrontClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTagLoginFrontClient(cc grpc.ClientConnInterface) TagLoginFrontClient {
+	return &tagLoginFrontClient{cc}
+}
+
+// TagLoginFrontServer is the server API for TagLoginFront service.
+// All implementations must embed UnimplementedTagLoginFrontServer
+// for forward compatibility
+type TagLoginFrontServer interface {
+	mustEmbedUnimplementedTagLoginFrontServer()
+}
+
+// UnimplementedTagLoginFrontServer must be embedded to have forward compatible implementations.
+type UnimplementedTagLoginFrontServer struct {
+}
+
+func (UnimplementedTagLoginFrontServer) mustEmbedUnimplementedTagLoginFrontServer() {}
+
+// UnsafeTagLoginFrontServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TagLoginFrontServer will
+// result in compilation errors.
+type UnsafeTagLoginFrontServer interface {
+	mustEmbedUnimplementedTagLoginFrontServer()
+}
+
+func RegisterTagLoginFrontServer(s grpc.ServiceRegistrar, srv TagLoginFrontServer) {
+	s.RegisterService(&TagLoginFront_ServiceDesc, srv)
+}
+
+// TagLoginFront_ServiceDesc is the grpc.ServiceDesc for TagLoginFront service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var TagLoginFront_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "tag.TagLoginFront",
+	HandlerType: (*TagLoginFrontServer)(nil),
+	Methods:     []grpc.MethodDesc{},
+	Streams:     []grpc.StreamDesc{},
+	Metadata:    "service/tag/tag.proto",
 }

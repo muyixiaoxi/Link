@@ -1,4 +1,4 @@
-package logic
+package tagloginlogic
 
 import (
 	"context"
@@ -9,22 +9,22 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type PingLogic struct {
+type SelectGroupTagLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewPingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PingLogic {
-	return &PingLogic{
+func NewSelectGroupTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SelectGroupTagLogic {
+	return &SelectGroupTagLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *PingLogic) Ping(in *tag.Request) (*tag.Response, error) {
+func (l *SelectGroupTagLogic) SelectGroupTag(in *tag.Empty) (*tag.GroupTagResponse, error) {
 	// todo: add your logic here and delete this line
 
-	return &tag.Response{}, nil
+	return &tag.GroupTagResponse{}, nil
 }
