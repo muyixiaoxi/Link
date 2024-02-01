@@ -19,11 +19,9 @@ func signUpHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		l := logic.NewSignUpLogic(r.Context(), svcCtx)
 		resp, err := l.SignUp(&req)
-		// if err != nil {
-		// 	httpx.ErrorCtx(r.Context(), w, err)
-		// } else {
-		// 	httpx.OkJsonCtx(r.Context(), w, resp)
-		// }
-		response.Response(w, resp, err)
+		if err != nil {
+			response.Response(w, resp, response.CodeUserNotExit)
+		}
+		response.Response(w, resp, response.CodeSuccess)
 	}
 }
