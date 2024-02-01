@@ -1,8 +1,11 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logc"
+	"github.com/zeromicro/go-zero/core/logx"
 
 	"Link/service/user/internal/config"
 	"Link/service/user/internal/server"
@@ -20,6 +23,14 @@ var configFile = flag.String("f", "service/user/etc/user.yaml", "the config file
 
 func main() {
 	flag.Parse()
+
+	var cfg logx.LogConf
+	_ = conf.FillDefault(&cfg)
+	cfg.Mode = "file"
+	cfg.Path = "service/user/logs"
+	logc.MustSetup(cfg)
+
+	logc.Info(context.Background(), "hello world")
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
