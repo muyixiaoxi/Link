@@ -6,11 +6,30 @@ option go_package="./user";
 message Request {
   string ping = 1;
 }
-
 message Response {
   string pong = 1;
 }
 
+message UserCreateRequest {
+  string username = 1;
+  string password = 2;
+}
+message UserCreateResponse {
+  string err = 1;
+}
+
+message UserLoginRequest {
+  string username = 1;
+  string password = 2;
+}
+message UserLoginResponse {
+  string err = 1;
+}
+
 service User {
   rpc Ping(Request) returns(Response);
+  rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
+  rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
 }
+
+// goctl rpc protoc user.proto --go_out=./user --go-grpc_out=./user --zrpc_out=.

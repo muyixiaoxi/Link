@@ -6,18 +6,24 @@ package userclient
 import (
 	"context"
 
-	"Link/service/user/user"
+	"Link/service/user/user/user"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	Request  = user.Request
-	Response = user.Response
+	Request            = user.Request
+	Response           = user.Response
+	UserCreateRequest  = user.UserCreateRequest
+	UserCreateResponse = user.UserCreateResponse
+	UserLoginRequest   = user.UserLoginRequest
+	UserLoginResponse  = user.UserLoginResponse
 
 	User interface {
 		Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+		UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
+		UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error)
 	}
 
 	defaultUser struct {
@@ -34,4 +40,14 @@ func NewUser(cli zrpc.Client) User {
 func (m *defaultUser) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
 	client := user.NewUserClient(m.cli.Conn())
 	return client.Ping(ctx, in, opts...)
+}
+
+func (m *defaultUser) UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error) {
+	client := user.NewUserClient(m.cli.Conn())
+	return client.UserCreate(ctx, in, opts...)
+}
+
+func (m *defaultUser) UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error) {
+	client := user.NewUserClient(m.cli.Conn())
+	return client.UserLogin(ctx, in, opts...)
 }

@@ -8,7 +8,7 @@ import (
 
 	"Link/service/user/internal/logic"
 	"Link/service/user/internal/svc"
-	"Link/service/user/user"
+	"Link/service/user/user/user"
 )
 
 type UserServer struct {
@@ -25,4 +25,14 @@ func NewUserServer(svcCtx *svc.ServiceContext) *UserServer {
 func (s *UserServer) Ping(ctx context.Context, in *user.Request) (*user.Response, error) {
 	l := logic.NewPingLogic(ctx, s.svcCtx)
 	return l.Ping(in)
+}
+
+func (s *UserServer) UserCreate(ctx context.Context, in *user.UserCreateRequest) (*user.UserCreateResponse, error) {
+	l := logic.NewUserCreateLogic(ctx, s.svcCtx)
+	return l.UserCreate(in)
+}
+
+func (s *UserServer) UserLogin(ctx context.Context, in *user.UserLoginRequest) (*user.UserLoginResponse, error) {
+	l := logic.NewUserLoginLogic(ctx, s.svcCtx)
+	return l.UserLogin(in)
 }
