@@ -71,11 +71,8 @@ service TagLogin {
   rpc SelectAllTagsByGroup (SelectAllTagsByGroupName) returns (AllTagsByGroupNameResponse);
 }
 
-service TagLoginFront{
 
-}
-
-// goctl rpc protoc service/tag/tag.proto --go_out=service/tag/tag --go-grpc_out=service/tag/tag --zrpc_out=service/tag -m
+//  goctl rpc protoc service/tag/tag.proto --go_out=service/tag --go-grpc_out=service/tag --zrpc_out=service/tag -m
 
 
 
