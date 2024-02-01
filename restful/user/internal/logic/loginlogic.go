@@ -4,6 +4,7 @@ import (
 	"Link/internal/jwt"
 	"Link/service/user/user"
 	"context"
+	"errors"
 
 	"Link/restful/user/internal/svc"
 	"Link/restful/user/internal/types"
@@ -33,6 +34,10 @@ func (l *LoginLogic) Login(req *types.UserLoginRequest) (resp *types.UserLoginRe
 		Username: req.Username,
 		Password: req.Password,
 	})
+	if err != nil {
+		err = errors.New("用户名或密码错误")
+		return
+	}
 	claims := jwt.UserClaims{
 		UserID:   response.Id,
 		Username: response.Username,
