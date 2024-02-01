@@ -1,3 +1,11 @@
 Name: tag-api
 Host: 0.0.0.0
 Port: 8888
+TagRPC:
+  Etcd:
+    Hosts:
+      - 39.101.77.206:2379
+    Key: tag.rpc
+Auth:
+  AccessSecret: linkMarch
+  AccessExpire: 3600
