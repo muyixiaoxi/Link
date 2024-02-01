@@ -3,6 +3,7 @@ module Link
 go 1.21
 
 require (
+	github.com/jcmturner/gokrb5/v8 v8.4.3
 	github.com/zeromicro/go-zero v1.6.1
 	google.golang.org/grpc v1.61.0
 	google.golang.org/protobuf v1.32.0
@@ -36,6 +37,8 @@ require (
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.4.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.0 // indirect
+	github.com/jcmturner/dnsutils/v2 v2.0.0 // indirect
+	github.com/jcmturner/gofork v1.7.6 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
