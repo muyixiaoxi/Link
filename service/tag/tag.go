@@ -5,7 +5,8 @@ import (
 	"fmt"
 
 	"Link/service/tag/internal/config"
-	"Link/service/tag/internal/server"
+	tagloginServer "Link/service/tag/internal/server/taglogin"
+	tagloginfrontServer "Link/service/tag/internal/server/tagloginfront"
 	"Link/service/tag/internal/svc"
 	"Link/service/tag/tag"
 
@@ -16,7 +17,7 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var configFile = flag.String("f", "service/tag/etc/tag.yaml", "the config file")
+var configFile = flag.String("f", "etc/tag.yaml", "the config file")
 
 func main() {
 	flag.Parse()
@@ -26,7 +27,8 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		tag.RegisterTagServer(grpcServer, server.NewTagServer(ctx))
+		tag.RegisterTagLoginServer(grpcServer, tagloginServer.NewTagLoginServer(ctx))
+		tag.RegisterTagLoginFrontServer(grpcServer, tagloginfrontServer.NewTagLoginFrontServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
