@@ -35,10 +35,10 @@ func (l *CreateTagLogic) CreateTag(in *tag.CreateTagRequest) (*tag.CreateTagResp
 	}
 	//如果标签不存在则创建
 	createRequst = types.Tag{
-		Type:      "OFFICIAL",
-		GroupName: "游戏",
-		TagName:   "",
-		CreatorID: -1,
+		Type:      "USER",
+		GroupName: in.GroupName,
+		TagName:   in.TagName,
+		CreatorID: int64(in.CreatorId),
 	}
 	err = l.svcCtx.DB.Create(&createRequst).Error
 	//根据groupName 查询小标签

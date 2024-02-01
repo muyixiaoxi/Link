@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"Link/service/tag/internal/svc"
-	"Link/service/tag/tag/tag"
+	"Link/service/tag/tag"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
