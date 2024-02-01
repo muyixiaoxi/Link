@@ -1,2 +1,0 @@
-{"@timestamp":"2024-02-01T21:23:30.890+08:00","caller":"redis/hook.go:152","content":"[REDIS] slowcall on executing: ping","duration":"129.0ms","level":"slow"}
-{"@timestamp":"2024-02-01T21:24:26.632+08:00","caller":"redis/hook.go:152","content":"[REDIS] slowcall on executing: ping","duration":"113.3ms","level":"slow"}

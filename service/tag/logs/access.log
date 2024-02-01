@@ -1,4 +1,0 @@
-{"@timestamp":"2024-02-01T21:23:30.511+08:00","caller":"tag/tag.go:31","content":"hello world","level":"info"}
-{"@timestamp":"2024-02-01T21:23:30.511+08:00","caller":"tag/tag.go:33","content":"success","level":"info"}
-{"@timestamp":"2024-02-01T21:24:26.267+08:00","caller":"tag/tag.go:31","content":"hello world","level":"info"}
-{"@timestamp":"2024-02-01T21:24:26.267+08:00","caller":"tag/tag.go:33","content":"success","level":"info"}
