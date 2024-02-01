@@ -42,6 +42,5 @@ func (l *CreateTagLogic) CreateTag(in *tag.CreateTagRequest) (*tag.CreateTagResp
 	}
 	err = l.svcCtx.DB.Create(&createRequst).Error
 	//根据groupName 查询小标签
-
 	return &tag.CreateTagResponse{}, err
 }
