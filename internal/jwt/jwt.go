@@ -12,7 +12,7 @@ type JWT struct {
 
 type UserClaims struct {
 	// 可根据需要自行添加字段
-	UserID   uint   `json:"user_id"`
+	UserID   uint64 `json:"user_id"`
 	Username string `json:"username"`
 }
 

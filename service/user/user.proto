@@ -6,10 +6,13 @@ option go_package="./user";
 message UserCreateRequest {
   string username = 1;
   string password = 2;
+  string Avatar = 3;
+  string Phone = 4;
 }
 message UserCreateResponse {
   uint64 id = 1;
   string username = 2;
+  string avatar = 3;
 }
 
 message UserLoginRequest {
@@ -19,6 +22,7 @@ message UserLoginRequest {
 message UserLoginResponse {
   uint64 id = 1;
   string username = 2;
+  string avatar = 3;
 }
 
 service UserService {
