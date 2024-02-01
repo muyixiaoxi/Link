@@ -1,10 +1,11 @@
 package logic
 
 import (
+	"Link/service/user/internal/types"
 	"context"
 
 	"Link/service/user/internal/svc"
-	"Link/service/user/user/user"
+	"Link/service/user/user"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +24,15 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserLog
 	}
 }
 
-func (l *UserLoginLogic) UserLogin(in *user.UserLoginRequest) (*user.UserLoginResponse, error) {
-	// todo: add your logic here and delete this line
-
-	return &user.UserLoginResponse{}, nil
+func (l *UserLoginLogic) UserLogin(in *user.UserLoginRequest) (pd *user.UserLoginResponse, err error) {
+	model := &types.User{}
+	err = l.svcCtx.DB.Where("username = ? and password = ?", in.Username, in.Password).Find(model).Error
+	if err != nil {
+		return
+	}
+	pd = &user.UserLoginResponse{
+		Id:       uint64(model.ID),
+		Username: model.Username,
+	}
+	return
 }

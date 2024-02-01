@@ -3,19 +3,13 @@ syntax = "proto3";
 package user;
 option go_package="./user";
 
-message Request {
-  string ping = 1;
-}
-message Response {
-  string pong = 1;
-}
-
 message UserCreateRequest {
   string username = 1;
   string password = 2;
 }
 message UserCreateResponse {
-  string err = 1;
+  uint64 id = 1;
+  string username = 2;
 }
 
 message UserLoginRequest {
@@ -23,13 +17,13 @@ message UserLoginRequest {
   string password = 2;
 }
 message UserLoginResponse {
-  string err = 1;
+  uint64 id = 1;
+  string username = 2;
 }
 
-service User {
-  rpc Ping(Request) returns(Response);
+service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
 }
 
-// goctl rpc protoc user.proto --go_out=./user --go-grpc_out=./user --zrpc_out=.
+// goctl rpc protoc user.proto --go_out=. --go-grpc_out=. --zrpc_out=.

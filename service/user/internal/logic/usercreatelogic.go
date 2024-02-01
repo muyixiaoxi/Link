@@ -2,10 +2,13 @@ package logic
 
 import (
 	"Link/internal/bcrypt"
-	"Link/service/user/internal/svc"
 	"Link/service/user/internal/types"
-	"Link/service/user/user/user"
 	"context"
+	"errors"
+
+	"Link/service/user/internal/svc"
+	"Link/service/user/user"
+
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -23,24 +26,25 @@ func NewUserCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserCr
 	}
 }
 
-func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserCreateResponse, error) {
-	pd = new(user.UserCreateResponse)
+func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserCreateResponse, err error) {
 	// 判断用户是否存在
-	model := types.User{}
-	err := l.svcCtx.DB.Take(&model, "username = ?", in.Username).Error
+	err = l.svcCtx.DB.Take("username = ?", in.Username).Error
 	if err == nil {
-		pd.Err = "该用户已存在"
+		return nil, errors.New("用户存在")
 	}
-	// 注册
-	pwd, err := bcrypt.GetPwd(in.Password)
-	if err != nil {
-		return nil, err
-	}
-	model = types.User{
+	// 加密
+	pwd, _ := bcrypt.GetPwd(in.Password)
+	model := types.User{
 		Username: in.Username,
 		Password: pwd,
 	}
-	l.svcCtx.DB.Create(model)
-
+	err = l.svcCtx.DB.Create(model).Error
+	if err != nil {
+		return
+	}
+	pd = &user.UserCreateResponse{
+		Id:       uint64(model.ID),
+		Username: model.Username,
+	}
 	return &user.UserCreateResponse{}, nil
 }
