@@ -4,3 +4,10 @@ Etcd:
   Hosts:
   - 39.101.77.206:2379
   Key: chat.rpc
+Mysql:
+  Datasource: itoffice:Wksycxy0.0@tcp(39.101.77.206:3306)/link?charset=utf8mb4&parseTime=True&loc=Local
+RedisConf:
+  Host: 39.101.77.206:6379
+  Type: node
+  Pass: Wksycxy0.0
+
