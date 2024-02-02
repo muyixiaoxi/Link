@@ -4,6 +4,7 @@ import (
 	"Link/internal/jwt"
 	"Link/service/user/user"
 	"context"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"Link/restful/user/internal/svc"
 	"Link/restful/user/internal/types"
@@ -31,7 +32,7 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 		Password: req.Password,
 	})
 	if err != nil {
-		logx.Errorf("SignUp failed: ", err)
+		logc.Error(context.Background(), "l.svcCtx.UserRpc.UserCreate failed: ", err)
 		return
 	}
 	auth := l.svcCtx.Config.Auth

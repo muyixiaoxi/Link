@@ -22,6 +22,29 @@ type UserLoginResponse {
 	Avatar   string `json:"avatar"`
 }
 
+type UserInfoRequest {
+	Id uint `json:"id"`
+}
+type UserInfoResponse {
+	Id       uint   `json:"id"`
+	Username string `json:"username"`
+	Avatar   string `json:"avatar"`
+	Age      uint   `json:"age"`
+	Gender   string `json:"gender"`
+	Address  string `json:"address"`
+	Phone    string `json:"phone"`
+}
+
+type UserUpdateInfoRequest {
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Avatar   string `json:"avatar"`
+	Age      uint   `json:"age"`
+	Gender   uint   `json:"gender"`
+	Address  string `json:"address"`
+	Phone    string `json:"phone"`
+}
+
 @server(
 	prefix: /app/user
 )
@@ -33,6 +56,20 @@ service user {
 	@doc "登录"
 	@handler login
 	post /login (UserLoginRequest) returns(UserLoginResponse)
+}
+
+@server (
+	prefix:/app/user
+	jwt: Auth
+)
+service user {
+	@doc "获取用户信息"
+	@handler GetUserInfo
+	get / (UserInfoRequest) returns (UserInfoResponse)
+
+	@doc "修改用户信息"
+	@handler UpdateUserInfo
+	put / (UserUpdateInfoRequest)
 }
 
 // goctl api go -api user.api -dir .
