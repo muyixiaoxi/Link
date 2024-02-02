@@ -1,7 +1,6 @@
 syntax = "v1"
 
 type CreateTagRequest {
-	CreatorId uint64 `json:"creatorId"`
 	TagName   string `json:"tagName"`
 	groupName string `json:"groupName"`
 	Type      string `json:"type"`
@@ -12,6 +11,8 @@ type CreateTagResponse {
 	TagNames  []string `json:"tagNames"`
 }
 
+type TagGroupName {}
+
 @server (
 	prefix: /app/tag
 	jwt:    Auth
@@ -20,6 +21,9 @@ type CreateTagResponse {
 service tag-api {
 	@handler createTag
 	post /createTag (CreateTagRequest) returns (CreateTagResponse)
+
+	@handler selectGourpTag
+	post /selectGroupTag
 }
 
 // goctl api go -api restful/tag/tag.api -dir restful/tag

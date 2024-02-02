@@ -2,7 +2,6 @@
 package types
 
 type CreateTagRequest struct {
-	CreatorId uint64 `json:"creatorId"`
 	TagName   string `json:"tagName"`
 	GroupName string `json:"groupName"`
 	Type      string `json:"type"`
@@ -11,4 +10,7 @@ type CreateTagRequest struct {
 type CreateTagResponse struct {
 	GroupName string   `json:"groupName"`
 	TagNames  []string `json:"tagNames"`
+}
+
+type TagGroupName struct {
 }

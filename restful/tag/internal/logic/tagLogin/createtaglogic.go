@@ -5,6 +5,7 @@ import (
 	"Link/restful/tag/internal/types"
 	"Link/service/tag/tag"
 	"context"
+	"encoding/json"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,9 +26,11 @@ func NewCreateTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateT
 
 func (l *CreateTagLogic) CreateTag(req *types.CreateTagRequest) (resp *types.CreateTagResponse, err error) {
 	// todo: add your logic here and delete this line
+	userId := l.ctx.Value("user_id").(json.Number)
+	id, _ := userId.Int64()
 	//封装请求参数
 	createTagParams := &tag.CreateTagRequest{
-		CreatorId: req.CreatorId,
+		CreatorId: uint64(id),
 		TagName:   req.TagName,
 		GroupName: req.GroupName,
 		Type:      req.Type,
