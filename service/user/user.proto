@@ -3,6 +3,7 @@ syntax = "proto3";
 package user;
 option go_package="./user";
 
+message Empty {}
 message UserCreateRequest {
   string username = 1;
   string password = 2;
@@ -25,9 +26,36 @@ message UserLoginResponse {
   string avatar = 3;
 }
 
+message UserInfoRequest {
+  uint64 id = 1;
+}
+message UserInfoResponse {
+  uint64 id = 1;
+  string username = 2;
+  string avatar = 3;
+  uint64  age = 4;
+  string gender = 5;
+  string address = 6;
+  string phone = 7;
+}
+
+message UserUpdateInfoRequest {
+  uint64 id = 1;
+  string username = 2;
+  string password = 3;
+  string avatar = 4;
+  uint64 age = 5;
+  uint64 gender = 6;
+  string address = 7;
+  string phone = 8;
+}
+
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
+  rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);
+   rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty);
 }
 
 // goctl rpc protoc user.proto --go_out=. --go-grpc_out=. --zrpc_out=.
