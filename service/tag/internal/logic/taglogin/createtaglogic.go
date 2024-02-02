@@ -3,7 +3,9 @@ package tagloginlogic
 import (
 	"Link/service/tag/internal/types"
 	"context"
-	"errors"
+	"fmt"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 
 	"Link/service/tag/internal/svc"
 	"Link/service/tag/tag"
@@ -29,9 +31,10 @@ func NewCreateTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateT
 func (l *CreateTagLogic) CreateTag(in *tag.CreateTagRequest) (*tag.CreateTagResponse, error) {
 	// todo: add your logic here and delete this line
 	var createRequst types.Tag
-	err := l.svcCtx.DB.Take(&createRequst, "tag_name = ?", in.TagName).Error
+	err := l.svcCtx.DB.Debug().Take(&createRequst, "tag_name = ?", in.TagName).Error
 	if err == nil {
-		return nil, errors.New("TAG IS EXISTS")
+		fmt.Println("hahaha")
+		return nil, status.Error(codes.AlreadyExists, "标签已经存在")
 	}
 	//如果标签不存在则创建
 	createRequst = types.Tag{

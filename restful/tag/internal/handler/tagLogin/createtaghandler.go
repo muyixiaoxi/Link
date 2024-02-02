@@ -2,12 +2,15 @@ package tagLogin
 
 import (
 	"Link/internal/response"
-	"net/http"
-
 	"Link/restful/tag/internal/logic/tagLogin"
 	"Link/restful/tag/internal/svc"
 	"Link/restful/tag/internal/types"
+	"context"
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/rest/httpx"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+	"net/http"
 )
 
 func CreateTagHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
@@ -21,10 +24,14 @@ func CreateTagHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := tagLogin.NewCreateTagLogic(r.Context(), svcCtx)
 		resp, err := l.CreateTag(&req)
 		if err != nil {
-			if err.Error() == "TAG IS EXISTS" {
+			//fmt.Printf("Error type: %T, value: %v\n", err, err)
+			formError, _ := status.FromError(err)
+			if formError.Code() == codes.AlreadyExists {
+				logc.Error(context.Background(), "TAG IS EXISTS")
 				response.Response(w, nil, response.CodeTagIsExists)
 				return
 			}
+			logc.Error(context.Background(), "tagLogin.NewCreateTagLogic(r.Context(), svcCtx) is failed", err)
 			response.Response(w, nil, response.CodeServerBusy)
 			return
 		}

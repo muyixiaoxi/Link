@@ -1,15 +1,16 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-
 	"Link/service/tag/internal/config"
 	tagloginServer "Link/service/tag/internal/server/taglogin"
 	"Link/service/tag/internal/svc"
 	"Link/service/tag/tag"
-
+	"context"
+	"flag"
+	"fmt"
 	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/logc"
+	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/service"
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
@@ -20,6 +21,14 @@ var configFile = flag.String("f", "service/tag/etc/tag.yaml", "the config file")
 
 func main() {
 	flag.Parse()
+
+	var cfg logx.LogConf
+	_ = conf.FillDefault(&cfg)
+	cfg.Mode = "file"
+	cfg.Path = "service/tag/logs"
+	logc.MustSetup(cfg)
+
+	logc.Info(context.Background(), "hello world")
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
@@ -33,6 +42,7 @@ func main() {
 		}
 	})
 	defer s.Stop()
+	defer logc.Close()
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
 	s.Start()

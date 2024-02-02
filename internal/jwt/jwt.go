@@ -1,8 +1,12 @@
 package jwt
 
 import (
+	"Link/internal/response"
 	"errors"
+	"fmt"
 	"github.com/golang-jwt/jwt/v4"
+	"github.com/zeromicro/go-zero/rest/httpx"
+	"net/http"
 	"time"
 )
 
@@ -39,7 +43,7 @@ func (j *JWT) ParseToken(tokenString string) (*CustomClaims, error) {
 	// 如果是自定义Claim结构体则需要使用 ParseWithClaims 方法
 	token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (i interface{}, err error) {
 		// 直接使用标准的Claim则可以直接使用Parse方法
-		//token, err := jwt.Parse(tokenString, func(token *jwt.Token) (i interface{}, err error) {
+		//token, err := jwt.Parse(tokenString, func(token *jwt.Token) (i interface{}, err selfErroe) {
 		return j.signingKey, nil
 	})
 	if err != nil {
@@ -50,4 +54,14 @@ func (j *JWT) ParseToken(tokenString string) (*CustomClaims, error) {
 		return claims, nil
 	}
 	return nil, errors.New("invalid token")
+}
+
+// JwtUnauthorizedResult jwt验证失败的回调函数
+func JwtUnauthorizedResult(w http.ResponseWriter, r *http.Request, err error) {
+	fmt.Println(err)
+	httpx.WriteJson(w, http.StatusOK, response.Body{
+		Code: 10087,
+		Data: nil,
+		Msg:  "用户未登录",
+	})
 }

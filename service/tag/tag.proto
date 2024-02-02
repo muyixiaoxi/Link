@@ -9,21 +9,21 @@ message Empty {}
 //CreateTagRequest创建标签 start
 message CreateTagRequest{
   uint64 creatorId = 1;
-  string tagName = 2;
-  string groupName = 3;
-  string Type = 4;
+  string tag_name = 2;
+  string group_name = 3;
+  string type = 4;
 }
 
 message CreateTagResponse{
-  string groupName = 2;
-  repeated string tagName = 3;
+  string group_name = 2;
+  repeated string tag_name = 3;
 }
 // 创建标签end
 
 // 删除标签 start
 message DeleteTagRequest{
-  uint64 creatorId = 1;
-  repeated uint64 tagId = 2;
+  uint64 creator_id = 1;
+  repeated uint64 tag_id = 2;
 }
 
 message DeleteTagResponse{
@@ -32,34 +32,33 @@ message DeleteTagResponse{
 //删除标签end
 
 message UserChooseTagRequest{
-  uint64 userId = 1;
-  uint64 tagId = 2;
+  uint64 user_id = 1;
+  uint64 tag_id = 2;
 }
 
 // 查询全部标签组 start
 message GroupTag {
   uint64 id = 1;
-  string groupName = 2;
+  string group_name = 2;
 }
 message GroupTagResponse {
   repeated GroupTag tags = 1;
-
 }
 // 查询全部标签组 end
 
 // 根据所选标签组 查询对应小标签
 message SelectAllTagsByGroupName{
-  string groupName = 1;
+  string group_ame = 1;
 }
 
 message AllTags{
   uint64 id = 1;
   string name = 2;
-  bool isCreator = 3;
+  bool is_creator = 3;
 }
 
 message AllTagsByGroupNameResponse{
-  repeated AllTags lowTags = 1;
+  repeated AllTags low_tags = 1;
 }
 
 // TagLogin 登录之后的服务

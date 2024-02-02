@@ -8,4 +8,4 @@ UserRpc:
     Key: user.rpc
 Auth:
   AccessSecret: linkMarch
-  AccessExpire: 3600
+  AccessExpire: 360000
