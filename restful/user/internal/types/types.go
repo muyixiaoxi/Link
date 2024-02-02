@@ -24,3 +24,27 @@ type UserLoginResponse struct {
 	Username string `json:"username"`
 	Avatar   string `json:"avatar"`
 }
+
+type UserInfoRequest struct {
+	Id uint `json:"id"`
+}
+
+type UserInfoResponse struct {
+	Id       uint   `json:"id"`
+	Username string `json:"username"`
+	Avatar   string `json:"avatar"`
+	Age      uint   `json:"age"`
+	Gender   string `json:"gender"`
+	Address  string `json:"address"`
+	Phone    string `json:"phone"`
+}
+
+type UserUpdateInfoRequest struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Avatar   string `json:"avatar"`
+	Age      uint   `json:"age"`
+	Gender   uint   `json:"gender"`
+	Address  string `json:"address"`
+	Phone    string `json:"phone"`
+}
