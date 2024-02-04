@@ -25,6 +25,7 @@ func NewSelectAllTagsByGroupLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 func (l *SelectAllTagsByGroupLogic) SelectAllTagsByGroup(in *tag.SelectAllTagsByGroupName) (*tag.AllTagsByGroupNameResponse, error) {
 	// todo: add your logic here and delete this line
-
-	return &tag.AllTagsByGroupNameResponse{}, nil
+	var lowTags []*tag.AllTags
+	err := l.svcCtx.DB.Where("group_name = ? and type != OFFICIAL", in.GroupAme).Find(&lowTags).Error
+	return &tag.AllTagsByGroupNameResponse{LowTags: lowTags}, err
 }

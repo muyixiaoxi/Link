@@ -16,7 +16,13 @@ message CreateTagRequest{
 
 message CreateTagResponse{
   string group_name = 2;
-  repeated string tag_name = 3;
+  // 使用 repeated 关键字表示 LowTags 是一个切片
+  repeated LowTags low_tags = 3;
+  message LowTags {
+    uint64 id = 1;
+    uint64 creator_id = 2;
+    string tag_name = 3;
+  }
 }
 // 创建标签end
 
