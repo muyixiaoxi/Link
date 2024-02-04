@@ -27,8 +27,11 @@ func CreateTagHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			//fmt.Printf("Error type: %T, value: %v\n", err, err)
 			formError, _ := status.FromError(err)
 			if formError.Code() == codes.AlreadyExists {
-				logc.Error(context.Background(), "TAG IS EXISTS")
 				response.Response(w, nil, response.CodeTagIsExists)
+				return
+			}
+			if formError.Code() == codes.NotFound {
+				response.Response(w, nil, response.CodeSystemNotExist)
 				return
 			}
 			logc.Error(context.Background(), "tagLogin.NewCreateTagLogic(r.Context(), svcCtx) is failed", err)

@@ -8,14 +8,16 @@ const (
 	CodeTagIsExists
 	CodeUserExist
 	CodeUserNotExit
+	CodeSystemNotExist
 )
 
 var codeMsgMap = map[ResCode]string{
-	CodeSuccess:     "success",
-	CodeServerBusy:  "服务繁忙",
-	CodeTagIsExists: "标签已经存在",
-	CodeUserExist:   "用户已存在",
-	CodeUserNotExit: "用户不存在",
+	CodeSuccess:        "success",
+	CodeServerBusy:     "服务繁忙",
+	CodeTagIsExists:    "标签已经存在",
+	CodeUserExist:      "用户已存在",
+	CodeUserNotExit:    "用户不存在",
+	CodeSystemNotExist: "系统标签不存在",
 }
 
 func (c ResCode) Msg() string {
