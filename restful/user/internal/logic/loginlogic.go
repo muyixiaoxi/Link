@@ -5,6 +5,7 @@ import (
 	"Link/service/user/user"
 	"context"
 	"errors"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"Link/restful/user/internal/svc"
 	"Link/restful/user/internal/types"
@@ -36,6 +37,7 @@ func (l *LoginLogic) Login(req *types.UserLoginRequest) (resp *types.UserLoginRe
 	})
 	if err != nil {
 		err = errors.New("用户名或密码错误")
+		logc.Error(context.Background(), "l.svcCtx.UserRpc.UserLogin failed: ", err)
 		return
 	}
 	claims := jwt.UserClaims{

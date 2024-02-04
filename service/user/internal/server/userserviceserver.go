@@ -31,3 +31,13 @@ func (s *UserServiceServer) UserLogin(ctx context.Context, in *user.UserLoginReq
 	l := logic.NewUserLoginLogic(ctx, s.svcCtx)
 	return l.UserLogin(in)
 }
+
+func (s *UserServiceServer) UserInfo(ctx context.Context, in *user.UserInfoRequest) (*user.UserInfoResponse, error) {
+	l := logic.NewUserInfoLogic(ctx, s.svcCtx)
+	return l.UserInfo(in)
+}
+
+func (s *UserServiceServer) UserUpdateInfo(ctx context.Context, in *user.UserUpdateInfoRequest) (*user.Empty, error) {
+	l := logic.NewUserUpdateInfoLogic(ctx, s.svcCtx)
+	return l.UserUpdateInfo(in)
+}

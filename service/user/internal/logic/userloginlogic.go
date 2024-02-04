@@ -1,8 +1,10 @@
 package logic
 
 import (
+	"Link/internal/bcrypt"
 	"Link/service/user/internal/types"
 	"context"
+	"errors"
 
 	"Link/service/user/internal/svc"
 	"Link/service/user/user"
@@ -26,8 +28,13 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserLog
 
 func (l *UserLoginLogic) UserLogin(in *user.UserLoginRequest) (pd *user.UserLoginResponse, err error) {
 	model := &types.User{}
-	err = l.svcCtx.DB.Where("username = ? and password = ?", in.Username, in.Password).Find(model).Error
+	// 查找用户密码
+	err = l.svcCtx.DB.Where("username = ? ", in.Username).Find(model).Error
 	if err != nil {
+		return
+	}
+	if ok := bcrypt.ComparePwd(model.Password, in.Password); !ok {
+		err = errors.New("用户名或密码错误")
 		return
 	}
 	pd = &user.UserLoginResponse{
