@@ -3,6 +3,7 @@ package main
 import (
 	"Link/service/tag/internal/config"
 	tagloginServer "Link/service/tag/internal/server/taglogin"
+	tagSignServer "Link/service/tag/internal/server/tagsign"
 	"Link/service/tag/internal/svc"
 	"Link/service/tag/tag"
 	"context"
@@ -36,7 +37,7 @@ func main() {
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		tag.RegisterTagLoginServer(grpcServer, tagloginServer.NewTagLoginServer(ctx))
-
+		tag.RegisterTagSignServer(grpcServer, tagSignServer.NewTagSignServer(ctx))
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
 		}

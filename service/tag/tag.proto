@@ -38,10 +38,7 @@ message DeleteTagResponse{
 }
 //删除标签end
 
-message UserChooseTagRequest{
-  uint64 user_id = 1;
-  uint64 tag_id = 2;
-}
+
 
 // 查询全部标签组 start
 message GroupTag {
@@ -75,6 +72,12 @@ service TagLogin {
   rpc DeleteTag(DeleteTagRequest) returns(DeleteTagResponse);
   rpc SelectGroupTag(Empty) returns (GroupTagResponse);
   rpc SelectAllTagsByGroup (SelectAllTagsByGroupName) returns (AllTagsByGroupNameResponse);
+}
+
+
+message UserChooseTagRequest{
+  uint64 user_id = 1;
+  uint64 tag_id = 2;
 }
 
 // TagSign 登录之前的服务

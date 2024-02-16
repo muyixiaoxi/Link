@@ -288,61 +288,6 @@ func (*DeleteTagResponse) Descriptor() ([]byte, []int) {
 	return file_service_tag_tag_proto_rawDescGZIP(), []int{4}
 }
 
-type UserChooseTagRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	UserId uint64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	TagId  uint64 `protobuf:"varint,2,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
-}
-
-func (x *UserChooseTagRequest) Reset() {
-	*x = UserChooseTagRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_service_tag_tag_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *UserChooseTagRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserChooseTagRequest) ProtoMessage() {}
-
-func (x *UserChooseTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_tag_tag_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserChooseTagRequest.ProtoReflect.Descriptor instead.
-func (*UserChooseTagRequest) Descriptor() ([]byte, []int) {
-	return file_service_tag_tag_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UserChooseTagRequest) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *UserChooseTagRequest) GetTagId() uint64 {
-	if x != nil {
-		return x.TagId
-	}
-	return 0
-}
-
 // 查询全部标签组 start
 type GroupTag struct {
 	state         protoimpl.MessageState
@@ -356,7 +301,7 @@ type GroupTag struct {
 func (x *GroupTag) Reset() {
 	*x = GroupTag{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_service_tag_tag_proto_msgTypes[6]
+		mi := &file_service_tag_tag_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -369,7 +314,7 @@ func (x *GroupTag) String() string {
 func (*GroupTag) ProtoMessage() {}
 
 func (x *GroupTag) ProtoReflect() protoreflect.Message {
-	mi := &file_service_tag_tag_proto_msgTypes[6]
+	mi := &file_service_tag_tag_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -382,7 +327,7 @@ func (x *GroupTag) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupTag.ProtoReflect.Descriptor instead.
 func (*GroupTag) Descriptor() ([]byte, []int) {
-	return file_service_tag_tag_proto_rawDescGZIP(), []int{6}
+	return file_service_tag_tag_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GroupTag) GetId() uint64 {
@@ -410,7 +355,7 @@ type GroupTagResponse struct {
 func (x *GroupTagResponse) Reset() {
 	*x = GroupTagResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_service_tag_tag_proto_msgTypes[7]
+		mi := &file_service_tag_tag_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -423,7 +368,7 @@ func (x *GroupTagResponse) String() string {
 func (*GroupTagResponse) ProtoMessage() {}
 
 func (x *GroupTagResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_tag_tag_proto_msgTypes[7]
+	mi := &file_service_tag_tag_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -436,7 +381,7 @@ func (x *GroupTagResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupTagResponse.ProtoReflect.Descriptor instead.
 func (*GroupTagResponse) Descriptor() ([]byte, []int) {
-	return file_service_tag_tag_proto_rawDescGZIP(), []int{7}
+	return file_service_tag_tag_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GroupTagResponse) GetTags() []*GroupTag {
@@ -458,7 +403,7 @@ type SelectAllTagsByGroupName struct {
 func (x *SelectAllTagsByGroupName) Reset() {
 	*x = SelectAllTagsByGroupName{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_service_tag_tag_proto_msgTypes[8]
+		mi := &file_service_tag_tag_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -471,7 +416,7 @@ func (x *SelectAllTagsByGroupName) String() string {
 func (*SelectAllTagsByGroupName) ProtoMessage() {}
 
 func (x *SelectAllTagsByGroupName) ProtoReflect() protoreflect.Message {
-	mi := &file_service_tag_tag_proto_msgTypes[8]
+	mi := &file_service_tag_tag_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -484,7 +429,7 @@ func (x *SelectAllTagsByGroupName) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SelectAllTagsByGroupName.ProtoReflect.Descriptor instead.
 func (*SelectAllTagsByGroupName) Descriptor() ([]byte, []int) {
-	return file_service_tag_tag_proto_rawDescGZIP(), []int{8}
+	return file_service_tag_tag_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SelectAllTagsByGroupName) GetGroupAme() string {
@@ -507,7 +452,7 @@ type AllTags struct {
 func (x *AllTags) Reset() {
 	*x = AllTags{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_service_tag_tag_proto_msgTypes[9]
+		mi := &file_service_tag_tag_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -520,7 +465,7 @@ func (x *AllTags) String() string {
 func (*AllTags) ProtoMessage() {}
 
 func (x *AllTags) ProtoReflect() protoreflect.Message {
-	mi := &file_service_tag_tag_proto_msgTypes[9]
+	mi := &file_service_tag_tag_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -533,7 +478,7 @@ func (x *AllTags) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllTags.ProtoReflect.Descriptor instead.
 func (*AllTags) Descriptor() ([]byte, []int) {
-	return file_service_tag_tag_proto_rawDescGZIP(), []int{9}
+	return file_service_tag_tag_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AllTags) GetId() uint64 {
@@ -568,7 +513,7 @@ type AllTagsByGroupNameResponse struct {
 func (x *AllTagsByGroupNameResponse) Reset() {
 	*x = AllTagsByGroupNameResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_service_tag_tag_proto_msgTypes[10]
+		mi := &file_service_tag_tag_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -581,7 +526,7 @@ func (x *AllTagsByGroupNameResponse) String() string {
 func (*AllTagsByGroupNameResponse) ProtoMessage() {}
 
 func (x *AllTagsByGroupNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_tag_tag_proto_msgTypes[10]
+	mi := &file_service_tag_tag_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -594,7 +539,7 @@ func (x *AllTagsByGroupNameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllTagsByGroupNameResponse.ProtoReflect.Descriptor instead.
 func (*AllTagsByGroupNameResponse) Descriptor() ([]byte, []int) {
-	return file_service_tag_tag_proto_rawDescGZIP(), []int{10}
+	return file_service_tag_tag_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *AllTagsByGroupNameResponse) GetLowTags() []*AllTags {
@@ -602,6 +547,61 @@ func (x *AllTagsByGroupNameResponse) GetLowTags() []*AllTags {
 		return x.LowTags
 	}
 	return nil
+}
+
+type UserChooseTagRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId uint64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TagId  uint64 `protobuf:"varint,2,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
+}
+
+func (x *UserChooseTagRequest) Reset() {
+	*x = UserChooseTagRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_service_tag_tag_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserChooseTagRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserChooseTagRequest) ProtoMessage() {}
+
+func (x *UserChooseTagRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_tag_tag_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserChooseTagRequest.ProtoReflect.Descriptor instead.
+func (*UserChooseTagRequest) Descriptor() ([]byte, []int) {
+	return file_service_tag_tag_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *UserChooseTagRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserChooseTagRequest) GetTagId() uint64 {
+	if x != nil {
+		return x.TagId
+	}
+	return 0
 }
 
 type CreateTagResponse_LowTags struct {
@@ -700,32 +700,32 @@ var file_service_tag_tag_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x64, 0x12,
 	0x15, 0x0a, 0x06, 0x74, 0x61, 0x67, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x03, 0x28, 0x04, 0x52,
 	0x05, 0x74, 0x61, 0x67, 0x49, 0x64, 0x22, 0x13, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
-	0x54, 0x61, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x46, 0x0a, 0x14, 0x55,
-	0x73, 0x65, 0x72, 0x43, 0x68, 0x6f, 0x6f, 0x73, 0x65, 0x54, 0x61, 0x67, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06,
-	0x74, 0x61, 0x67, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x74, 0x61,
-	0x67, 0x49, 0x64, 0x22, 0x39, 0x0a, 0x08, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x54, 0x61, 0x67, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12,
-	0x1d, 0x0a, 0x0a, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x09, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x35,
-	0x0a, 0x10, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x54, 0x61, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x21, 0x0a, 0x04, 0x74, 0x61, 0x67, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
-	0x32, 0x0d, 0x2e, 0x74, 0x61, 0x67, 0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x54, 0x61, 0x67, 0x52,
-	0x04, 0x74, 0x61, 0x67, 0x73, 0x22, 0x37, 0x0a, 0x18, 0x53, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x41,
+	0x54, 0x61, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x39, 0x0a, 0x08, 0x47,
+	0x72, 0x6f, 0x75, 0x70, 0x54, 0x61, 0x67, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x67, 0x72, 0x6f, 0x75, 0x70,
+	0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x67, 0x72, 0x6f,
+	0x75, 0x70, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x35, 0x0a, 0x10, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x54,
+	0x61, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21, 0x0a, 0x04, 0x74, 0x61,
+	0x67, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x74, 0x61, 0x67, 0x2e, 0x47,
+	0x72, 0x6f, 0x75, 0x70, 0x54, 0x61, 0x67, 0x52, 0x04, 0x74, 0x61, 0x67, 0x73, 0x22, 0x37, 0x0a,
+	0x18, 0x53, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x41, 0x6c, 0x6c, 0x54, 0x61, 0x67, 0x73, 0x42, 0x79,
+	0x47, 0x72, 0x6f, 0x75, 0x70, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x67, 0x72, 0x6f,
+	0x75, 0x70, 0x5f, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x67, 0x72,
+	0x6f, 0x75, 0x70, 0x41, 0x6d, 0x65, 0x22, 0x53, 0x0a, 0x07, 0x41, 0x6c, 0x6c, 0x54, 0x61, 0x67,
+	0x73, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69,
+	0x64, 0x12, 0x19, 0x0a, 0x08, 0x74, 0x61, 0x67, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x74, 0x61, 0x67, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a,
+	0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x64, 0x22, 0x45, 0x0a, 0x1a, 0x41,
 	0x6c, 0x6c, 0x54, 0x61, 0x67, 0x73, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x4e, 0x61, 0x6d,
-	0x65, 0x12, 0x1b, 0x0a, 0x09, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x5f, 0x61, 0x6d, 0x65, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x41, 0x6d, 0x65, 0x22, 0x53,
-	0x0a, 0x07, 0x41, 0x6c, 0x6c, 0x54, 0x61, 0x67, 0x73, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x74, 0x61, 0x67,
-	0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x74, 0x61, 0x67,
-	0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x5f,
-	0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f,
-	0x72, 0x49, 0x64, 0x22, 0x45, 0x0a, 0x1a, 0x41, 0x6c, 0x6c, 0x54, 0x61, 0x67, 0x73, 0x42, 0x79,
-	0x47, 0x72, 0x6f, 0x75, 0x70, 0x4e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x27, 0x0a, 0x08, 0x6c, 0x6f, 0x77, 0x5f, 0x74, 0x61, 0x67, 0x73, 0x18, 0x01, 0x20,
-	0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x74, 0x61, 0x67, 0x2e, 0x41, 0x6c, 0x6c, 0x54, 0x61, 0x67,
-	0x73, 0x52, 0x07, 0x6c, 0x6f, 0x77, 0x54, 0x61, 0x67, 0x73, 0x32, 0xcb, 0x02, 0x0a, 0x08, 0x54,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x27, 0x0a, 0x08, 0x6c, 0x6f, 0x77,
+	0x5f, 0x74, 0x61, 0x67, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x74, 0x61,
+	0x67, 0x2e, 0x41, 0x6c, 0x6c, 0x54, 0x61, 0x67, 0x73, 0x52, 0x07, 0x6c, 0x6f, 0x77, 0x54, 0x61,
+	0x67, 0x73, 0x22, 0x46, 0x0a, 0x14, 0x55, 0x73, 0x65, 0x72, 0x43, 0x68, 0x6f, 0x6f, 0x73, 0x65,
+	0x54, 0x61, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73,
+	0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x75, 0x73, 0x65,
+	0x72, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x74, 0x61, 0x67, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x05, 0x74, 0x61, 0x67, 0x49, 0x64, 0x32, 0xcb, 0x02, 0x0a, 0x08, 0x54,
 	0x61, 0x67, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x3a, 0x0a, 0x09, 0x43, 0x72, 0x65, 0x61, 0x74,
 	0x65, 0x54, 0x61, 0x67, 0x12, 0x15, 0x2e, 0x74, 0x61, 0x67, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74,
 	0x65, 0x54, 0x61, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x74, 0x61,
@@ -774,30 +774,30 @@ var file_service_tag_tag_proto_goTypes = []interface{}{
 	(*CreateTagResponse)(nil),          // 2: tag.CreateTagResponse
 	(*DeleteTagRequest)(nil),           // 3: tag.DeleteTagRequest
 	(*DeleteTagResponse)(nil),          // 4: tag.DeleteTagResponse
-	(*UserChooseTagRequest)(nil),       // 5: tag.UserChooseTagRequest
-	(*GroupTag)(nil),                   // 6: tag.GroupTag
-	(*GroupTagResponse)(nil),           // 7: tag.GroupTagResponse
-	(*SelectAllTagsByGroupName)(nil),   // 8: tag.SelectAllTagsByGroupName
-	(*AllTags)(nil),                    // 9: tag.AllTags
-	(*AllTagsByGroupNameResponse)(nil), // 10: tag.AllTagsByGroupNameResponse
+	(*GroupTag)(nil),                   // 5: tag.GroupTag
+	(*GroupTagResponse)(nil),           // 6: tag.GroupTagResponse
+	(*SelectAllTagsByGroupName)(nil),   // 7: tag.SelectAllTagsByGroupName
+	(*AllTags)(nil),                    // 8: tag.AllTags
+	(*AllTagsByGroupNameResponse)(nil), // 9: tag.AllTagsByGroupNameResponse
+	(*UserChooseTagRequest)(nil),       // 10: tag.UserChooseTagRequest
 	(*CreateTagResponse_LowTags)(nil),  // 11: tag.CreateTagResponse.LowTags
 }
 var file_service_tag_tag_proto_depIdxs = []int32{
 	11, // 0: tag.CreateTagResponse.low_tags:type_name -> tag.CreateTagResponse.LowTags
-	6,  // 1: tag.GroupTagResponse.tags:type_name -> tag.GroupTag
-	9,  // 2: tag.AllTagsByGroupNameResponse.low_tags:type_name -> tag.AllTags
+	5,  // 1: tag.GroupTagResponse.tags:type_name -> tag.GroupTag
+	8,  // 2: tag.AllTagsByGroupNameResponse.low_tags:type_name -> tag.AllTags
 	1,  // 3: tag.TagLogin.CreateTag:input_type -> tag.CreateTagRequest
 	1,  // 4: tag.TagLogin.UpdateTag:input_type -> tag.CreateTagRequest
 	3,  // 5: tag.TagLogin.DeleteTag:input_type -> tag.DeleteTagRequest
 	0,  // 6: tag.TagLogin.SelectGroupTag:input_type -> tag.Empty
-	8,  // 7: tag.TagLogin.SelectAllTagsByGroup:input_type -> tag.SelectAllTagsByGroupName
-	5,  // 8: tag.TagSign.SignUserChooseTag:input_type -> tag.UserChooseTagRequest
+	7,  // 7: tag.TagLogin.SelectAllTagsByGroup:input_type -> tag.SelectAllTagsByGroupName
+	10, // 8: tag.TagSign.SignUserChooseTag:input_type -> tag.UserChooseTagRequest
 	2,  // 9: tag.TagLogin.CreateTag:output_type -> tag.CreateTagResponse
 	2,  // 10: tag.TagLogin.UpdateTag:output_type -> tag.CreateTagResponse
 	4,  // 11: tag.TagLogin.DeleteTag:output_type -> tag.DeleteTagResponse
-	7,  // 12: tag.TagLogin.SelectGroupTag:output_type -> tag.GroupTagResponse
-	10, // 13: tag.TagLogin.SelectAllTagsByGroup:output_type -> tag.AllTagsByGroupNameResponse
-	5,  // 14: tag.TagSign.SignUserChooseTag:output_type -> tag.UserChooseTagRequest
+	6,  // 12: tag.TagLogin.SelectGroupTag:output_type -> tag.GroupTagResponse
+	9,  // 13: tag.TagLogin.SelectAllTagsByGroup:output_type -> tag.AllTagsByGroupNameResponse
+	10, // 14: tag.TagSign.SignUserChooseTag:output_type -> tag.UserChooseTagRequest
 	9,  // [9:15] is the sub-list for method output_type
 	3,  // [3:9] is the sub-list for method input_type
 	3,  // [3:3] is the sub-list for extension type_name
@@ -872,18 +872,6 @@ func file_service_tag_tag_proto_init() {
 			}
 		}
 		file_service_tag_tag_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserChooseTagRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_service_tag_tag_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GroupTag); i {
 			case 0:
 				return &v.state
@@ -895,7 +883,7 @@ func file_service_tag_tag_proto_init() {
 				return nil
 			}
 		}
-		file_service_tag_tag_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_service_tag_tag_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GroupTagResponse); i {
 			case 0:
 				return &v.state
@@ -907,7 +895,7 @@ func file_service_tag_tag_proto_init() {
 				return nil
 			}
 		}
-		file_service_tag_tag_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_service_tag_tag_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SelectAllTagsByGroupName); i {
 			case 0:
 				return &v.state
@@ -919,7 +907,7 @@ func file_service_tag_tag_proto_init() {
 				return nil
 			}
 		}
-		file_service_tag_tag_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_service_tag_tag_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AllTags); i {
 			case 0:
 				return &v.state
@@ -931,8 +919,20 @@ func file_service_tag_tag_proto_init() {
 				return nil
 			}
 		}
-		file_service_tag_tag_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_service_tag_tag_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AllTagsByGroupNameResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_service_tag_tag_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UserChooseTagRequest); i {
 			case 0:
 				return &v.state
 			case 1:
