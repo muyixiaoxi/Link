@@ -2,9 +2,13 @@ package logic
 
 import (
 	"Link/internal/jwt"
+	"Link/service/tag/tag"
 	"Link/service/user/user"
 	"context"
+	"fmt"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 
 	"Link/restful/user/internal/svc"
 	"Link/restful/user/internal/types"
@@ -34,6 +38,20 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	if err != nil {
 		logc.Error(context.Background(), "l.svcCtx.UserRpc.UserCreate failed: ", err)
 		return
+	}
+	//注册之后,必须选择一个标签
+	_, err = l.svcCtx.TagRpc.SignUserChooseTag(context.Background(), &tag.UserChooseTagRequest{
+		UserId: response.Id,
+		TagId:  req.StartTagId,
+	})
+	if err != nil {
+		fmt.Println(err)
+		fromErr, _ := status.FromError(err)
+		if fromErr.Code() == codes.AlreadyExists {
+			return nil, err
+		}
+		logc.Error(context.Background(), "l.svcCtx.TagRpc.SignUserChooseTag is failed", err)
+		return nil, status.Error(codes.DeadlineExceeded, "标签选择失败")
 	}
 	auth := l.svcCtx.Config.Auth
 	claims := jwt.UserClaims{

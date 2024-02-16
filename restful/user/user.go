@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"flag"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -25,8 +24,6 @@ func main() {
 	cfg.Mode = "file"
 	cfg.Path = "restful/user/logs"
 	logc.MustSetup(cfg)
-
-	logc.Info(context.Background(), "hello world")
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)

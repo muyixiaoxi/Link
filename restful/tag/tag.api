@@ -64,4 +64,13 @@ service tag-api {
 	post /deleteTag (delteTags)
 }
 
+@server (
+	prefix: /app/tag
+	group:  tagTest
+)
+service tag-api {
+	@handler userTag
+	post /test
+}
+
 // goctl api go -api restful/tag/tag.api -dir restful/tag

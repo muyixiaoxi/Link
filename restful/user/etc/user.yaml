@@ -6,6 +6,11 @@ UserRpc:
     Hosts:
       - 39.101.77.206:2379
     Key: user.rpc
+TagRpc:
+  Etcd:
+    Hosts:
+      - 39.101.77.206:2379
+    Key: tag.rpc
 Auth:
   AccessSecret: linkMarch
   AccessExpire: 360000
