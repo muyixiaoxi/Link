@@ -7,11 +7,19 @@ type CreateTagRequest {
 }
 
 type CreateTagResponse {
-	GroupName string   `json:"groupName"`
-	TagNames  []string `json:"tagNames"`
+	GroupName    string         `json:"groupName"`
+	TagGroupName []TagGroupName `json:"tagGroupName"`
 }
 
-type TagGroupName {}
+type TagGroupName {
+	GroupNameId int    `json:"groupNameId"`
+	Creator     int    `json:"creator"`
+	GroupName   string `json:"groupName"`
+}
+
+type selectUserTagByGroupRequest {
+	GroupName string `json:"groupName" validate:"required"`
+}
 
 @server (
 	prefix: /app/tag
@@ -22,8 +30,11 @@ service tag-api {
 	@handler createTag
 	post /createTag (CreateTagRequest) returns (CreateTagResponse)
 
-	@handler selectGourpTag
-	post /selectGroupTag
+	@handler selectGroupTag
+	post /selectGroupTag returns ([]TagGroupName)
+
+	@handler selectUserTagByGroup
+	post /selectUserTagByGroup (selectUserTagByGroupRequest) returns (CreateTagResponse)
 }
 
 // goctl api go -api restful/tag/tag.api -dir restful/tag

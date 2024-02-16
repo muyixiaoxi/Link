@@ -39,9 +39,19 @@ func (l *CreateTagLogic) CreateTag(req *types.CreateTagRequest) (resp *types.Cre
 	if err != nil {
 		return nil, err
 	}
+	// 转换 LowTags 切片为 TagGroupName 切片
+	var tagGroupNames []types.TagGroupName
+	for _, lowTag := range responseBody.LowTags {
+		tagGroupNames = append(tagGroupNames, types.TagGroupName{
+			GroupNameId: int(lowTag.Id),
+			GroupName:   lowTag.TagName,
+			Creator:     int(lowTag.CreatorId),
+		})
+	}
+
 	resp = &types.CreateTagResponse{
-		GroupName: responseBody.GroupName,
-		TagNames:  responseBody.TagName,
+		GroupName:    responseBody.GroupName,
+		TagGroupName: tagGroupNames,
 	}
 	return
 }

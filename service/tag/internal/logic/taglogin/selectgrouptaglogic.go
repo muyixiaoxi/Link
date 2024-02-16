@@ -1,6 +1,7 @@
 package tagloginlogic
 
 import (
+	"Link/service/tag/internal/types"
 	"context"
 
 	"Link/service/tag/internal/svc"
@@ -25,6 +26,9 @@ func NewSelectGroupTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Se
 
 func (l *SelectGroupTagLogic) SelectGroupTag(in *tag.Empty) (*tag.GroupTagResponse, error) {
 	// todo: add your logic here and delete this line
-
-	return &tag.GroupTagResponse{}, nil
+	var groupTag []*tag.GroupTag
+	err := l.svcCtx.DB.Model(types.Tag{}).Where("type = 'OFFICIAL'").Find(&groupTag).Error
+	return &tag.GroupTagResponse{
+		Tags: groupTag,
+	}, err
 }

@@ -8,9 +8,16 @@ type CreateTagRequest struct {
 }
 
 type CreateTagResponse struct {
-	GroupName string   `json:"groupName"`
-	TagNames  []string `json:"tagNames"`
+	GroupName    string         `json:"groupName"`
+	TagGroupName []TagGroupName `json:"tagGroupName"`
 }
 
 type TagGroupName struct {
+	GroupNameId int    `json:"groupNameId"`
+	Creator     int    `json:"creator"`
+	GroupName   string `json:"groupName"`
+}
+
+type SelectUserTagByGroupRequest struct {
+	GroupName string `json:"groupName" validate:"required"`
 }

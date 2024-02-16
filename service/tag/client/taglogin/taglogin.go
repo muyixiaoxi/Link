@@ -17,6 +17,7 @@ type (
 	AllTagsByGroupNameResponse = tag.AllTagsByGroupNameResponse
 	CreateTagRequest           = tag.CreateTagRequest
 	CreateTagResponse          = tag.CreateTagResponse
+	CreateTagResponse_LowTags  = tag.CreateTagResponse_LowTags
 	DeleteTagRequest           = tag.DeleteTagRequest
 	DeleteTagResponse          = tag.DeleteTagResponse
 	Empty                      = tag.Empty
