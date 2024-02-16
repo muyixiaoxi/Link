@@ -2,10 +2,11 @@
 package types
 
 type UserCreateRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Avatar   string `json:"avatar"`
-	Phone    string `json:"phone"`
+	Username   string `json:"username"`
+	Password   string `json:"password"`
+	Avatar     string `json:"avatar"`
+	Phone      string `json:"phone"`
+	StartTagId uint64 `json:"startTagId"`
 }
 
 type UserCreateResponse struct {

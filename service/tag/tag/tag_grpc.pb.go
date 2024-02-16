@@ -255,3 +255,93 @@ var TagLogin_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service/tag/tag.proto",
 }
+
+const (
+	TagSign_SignUserChooseTag_FullMethodName = "/tag.TagSign/SignUserChooseTag"
+)
+
+// TagSignClient is the client API for TagSign service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type TagSignClient interface {
+	SignUserChooseTag(ctx context.Context, in *UserChooseTagRequest, opts ...grpc.CallOption) (*UserChooseTagRequest, error)
+}
+
+type tagSignClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTagSignClient(cc grpc.ClientConnInterface) TagSignClient {
+	return &tagSignClient{cc}
+}
+
+func (c *tagSignClient) SignUserChooseTag(ctx context.Context, in *UserChooseTagRequest, opts ...grpc.CallOption) (*UserChooseTagRequest, error) {
+	out := new(UserChooseTagRequest)
+	err := c.cc.Invoke(ctx, TagSign_SignUserChooseTag_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TagSignServer is the server API for TagSign service.
+// All implementations must embed UnimplementedTagSignServer
+// for forward compatibility
+type TagSignServer interface {
+	SignUserChooseTag(context.Context, *UserChooseTagRequest) (*UserChooseTagRequest, error)
+	mustEmbedUnimplementedTagSignServer()
+}
+
+// UnimplementedTagSignServer must be embedded to have forward compatible implementations.
+type UnimplementedTagSignServer struct {
+}
+
+func (UnimplementedTagSignServer) SignUserChooseTag(context.Context, *UserChooseTagRequest) (*UserChooseTagRequest, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SignUserChooseTag not implemented")
+}
+func (UnimplementedTagSignServer) mustEmbedUnimplementedTagSignServer() {}
+
+// UnsafeTagSignServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TagSignServer will
+// result in compilation errors.
+type UnsafeTagSignServer interface {
+	mustEmbedUnimplementedTagSignServer()
+}
+
+func RegisterTagSignServer(s grpc.ServiceRegistrar, srv TagSignServer) {
+	s.RegisterService(&TagSign_ServiceDesc, srv)
+}
+
+func _TagSign_SignUserChooseTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserChooseTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagSignServer).SignUserChooseTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TagSign_SignUserChooseTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagSignServer).SignUserChooseTag(ctx, req.(*UserChooseTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TagSign_ServiceDesc is the grpc.ServiceDesc for TagSign service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var TagSign_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "tag.TagSign",
+	HandlerType: (*TagSignServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SignUserChooseTag",
+			Handler:    _TagSign_SignUserChooseTag_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service/tag/tag.proto",
+}

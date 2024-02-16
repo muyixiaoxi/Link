@@ -77,6 +77,11 @@ service TagLogin {
   rpc SelectAllTagsByGroup (SelectAllTagsByGroupName) returns (AllTagsByGroupNameResponse);
 }
 
+// TagSign 登录之前的服务
+service TagSign {
+  rpc SignUserChooseTag(UserChooseTagRequest) returns (UserChooseTagRequest);
+}
+
 
 //  goctl rpc protoc service/tag/tag.proto --go_out=service/tag --go-grpc_out=service/tag --zrpc_out=service/tag -m
 
