@@ -17,6 +17,10 @@ type TagGroupName {
 	GroupName   string `json:"groupName"`
 }
 
+type selectUserTagByGroupRequest {
+	GroupName string `json:"groupName" validate:"required"`
+}
+
 @server (
 	prefix: /app/tag
 	jwt:    Auth
@@ -28,6 +32,9 @@ service tag-api {
 
 	@handler selectGroupTag
 	post /selectGroupTag returns ([]TagGroupName)
+
+	@handler selectUserTagByGroup
+	post /selectUserTagByGroup (selectUserTagByGroupRequest) returns (CreateTagResponse)
 }
 
 // goctl api go -api restful/tag/tag.api -dir restful/tag

@@ -43,14 +43,18 @@ func (l *CreateTagLogic) CreateTag(in *tag.CreateTagRequest) (*tag.CreateTagResp
 	}
 	//如果标签不存在则创建
 	createRequst = types.Tag{
-		Type:      "USER",
+		Type:      in.Type,
 		GroupName: in.GroupName,
 		TagName:   in.TagName,
 		CreatorID: int64(in.CreatorId),
 	}
-	err = tx.Create(&createRequst).Error
+	err = tx.Debug().Create(&createRequst).Error
 	if err != nil {
 		tx.Rollback()
+		return nil, err
+	}
+	err = tx.Commit().Error
+	if err != nil {
 		return nil, err
 	}
 	//根据groupName 查询小标签
@@ -60,7 +64,9 @@ func (l *CreateTagLogic) CreateTag(in *tag.CreateTagRequest) (*tag.CreateTagResp
 		tx.Rollback()
 		return nil, err
 	}
+
 	return &tag.CreateTagResponse{
-		LowTags: lowTags,
+		GroupName: in.GroupName,
+		LowTags:   lowTags,
 	}, err
 }
