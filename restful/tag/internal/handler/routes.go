@@ -23,8 +23,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/selectGroupTag",
 				Handler: tagLogin.SelectGroupTagHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/selectUserTagByGroup",
+				Handler: tagLogin.SelectUserTagByGroupHandler(serverCtx),
+			},
 		},
-		rest.WithJwt(serverCtx.Config.Auth.	AccessSecret),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/app/tag"),
 	)
 }

@@ -17,3 +17,7 @@ type TagGroupName struct {
 	Creator     int    `json:"creator"`
 	GroupName   string `json:"groupName"`
 }
+
+type SelectUserTagByGroupRequest struct {
+	GroupName string `json:"groupName" validate:"required"`
+}
