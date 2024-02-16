@@ -12,6 +12,7 @@ message CreateTagRequest{
   string tag_name = 2;
   string group_name = 3;
   string type = 4;
+  string old_tagName = 5;
 }
 
 message CreateTagResponse{

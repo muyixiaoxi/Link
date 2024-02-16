@@ -20,6 +20,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
+				Path:    "/deleteTag",
+				Handler: tagLogin.DeleteTagsHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/selectGroupTag",
 				Handler: tagLogin.SelectGroupTagHandler(serverCtx),
 			},
@@ -27,6 +32,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/selectUserTagByGroup",
 				Handler: tagLogin.SelectUserTagByGroupHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updateSelfTag",
+				Handler: tagLogin.UpdateSelfTagHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

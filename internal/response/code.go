@@ -10,6 +10,7 @@ const (
 	CodeUserExist
 	CodeUserNotExit
 	CodeSystemNotExist
+	CodeTagNoExist
 )
 
 var codeMsgMap = map[ResCode]string{
@@ -20,6 +21,7 @@ var codeMsgMap = map[ResCode]string{
 	CodeUserExist:      "用户已存在",
 	CodeUserNotExit:    "用户不存在",
 	CodeSystemNotExist: "系统标签不存在",
+	CodeTagNoExist:     "标签不存在",
 }
 
 func (c ResCode) Msg() string {
