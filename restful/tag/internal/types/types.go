@@ -12,12 +12,33 @@ type CreateTagResponse struct {
 	TagGroupName []TagGroupName `json:"tagGroupName"`
 }
 
+type Tag struct {
+	TagId     uint64 `json:"tagId"`
+	CreatorId uint64 `json:"creatorId"`
+	TagName   string `json:"groupName"`
+}
+
 type TagGroupName struct {
 	GroupNameId int    `json:"groupNameId"`
 	Creator     int    `json:"creator"`
 	GroupName   string `json:"groupName"`
 }
 
+type DelteTags struct {
+	TagIds []uint64 `json:"tagIds" validate:"required"`
+}
+
 type SelectUserTagByGroupRequest struct {
 	GroupName string `json:"groupName" validate:"required"`
+}
+
+type SelectUserTagByGroupResponse struct {
+	GroupName string `json:"groupName"`
+	Tags      []Tag  `json:"tags"`
+}
+
+type UpdateSelfTagRequest struct {
+	GroupName string `json:"groupName" validate:"required"`
+	TagName   string `json:"tagName" validate:"required"`
+	OldName   string `json:"oldName" validate:"required"`
 }

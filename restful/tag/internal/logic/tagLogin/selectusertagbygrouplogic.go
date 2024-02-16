@@ -1,12 +1,10 @@
 package tagLogin
 
 import (
-	"Link/service/tag/tag"
-	"context"
-	"fmt"
-
 	"Link/restful/tag/internal/svc"
 	"Link/restful/tag/internal/types"
+	"Link/service/tag/tag"
+	"context"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,9 +23,23 @@ func NewSelectUserTagByGroupLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-func (l *SelectUserTagByGroupLogic) SelectUserTagByGroup(req *types.SelectUserTagByGroupRequest) (resp *types.CreateTagResponse, err error) {
+func (l *SelectUserTagByGroupLogic) SelectUserTagByGroup(req *types.SelectUserTagByGroupRequest) (resp *types.SelectUserTagByGroupResponse, err error) {
 	// todo: add your logic here and delete this line
 	respBody, err := l.svcCtx.TagLogin.SelectAllTagsByGroup(l.ctx, &tag.SelectAllTagsByGroupName{GroupAme: req.GroupName})
-	fmt.Println(respBody)
+	if err != nil {
+		return nil, err
+	}
+	var tags []types.Tag
+	for _, value := range respBody.LowTags {
+		tags = append(tags, types.Tag{
+			TagId:     value.Id,
+			CreatorId: value.CreatorId,
+			TagName:   value.TagName,
+		})
+	}
+	resp = &types.SelectUserTagByGroupResponse{
+		GroupName: req.GroupName,
+		Tags:      tags,
+	}
 	return
 }

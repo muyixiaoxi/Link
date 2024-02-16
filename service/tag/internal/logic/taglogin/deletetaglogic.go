@@ -1,6 +1,7 @@
 package tagloginlogic
 
 import (
+	"Link/service/tag/internal/types"
 	"context"
 
 	"Link/service/tag/internal/svc"
@@ -25,6 +26,9 @@ func NewDeleteTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteT
 
 func (l *DeleteTagLogic) DeleteTag(in *tag.DeleteTagRequest) (*tag.DeleteTagResponse, error) {
 	// todo: add your logic here and delete this line
-
+	err := l.svcCtx.DB.Where("creator_id = ? and id in (?) and type !='OFFICIAL'", in.CreatorId, in.TagId).Delete(&types.Tag{}).Error
+	if err != nil {
+		return nil, err
+	}
 	return &tag.DeleteTagResponse{}, nil
 }

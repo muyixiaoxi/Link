@@ -21,6 +21,27 @@ type selectUserTagByGroupRequest {
 	GroupName string `json:"groupName" validate:"required"`
 }
 
+type Tag {
+	TagId     uint64 `json:"tagId"`
+	CreatorId uint64 `json:"creatorId"`
+	TagName   string `json:"groupName"`
+}
+
+type selectUserTagByGroupResponse {
+	GroupName string `json:"groupName"`
+	Tags      []Tag  `json:"tags"`
+}
+
+type updateSelfTagRequest {
+	GroupName string `json:"groupName" validate:"required"`
+	TagName   string `json:"tagName" validate:"required"`
+	OldName   string `json:"oldName" validate:"required"`
+}
+
+type delteTags {
+	TagIds []uint64 `json:"tagIds" validate:"required"`
+}
+
 @server (
 	prefix: /app/tag
 	jwt:    Auth
@@ -34,7 +55,13 @@ service tag-api {
 	post /selectGroupTag returns ([]TagGroupName)
 
 	@handler selectUserTagByGroup
-	post /selectUserTagByGroup (selectUserTagByGroupRequest) returns (CreateTagResponse)
+	post /selectUserTagByGroup (selectUserTagByGroupRequest) returns (selectUserTagByGroupResponse)
+
+	@handler updateSelfTag
+	post /updateSelfTag (updateSelfTagRequest)
+
+	@handler deleteTags
+	post /deleteTag (delteTags)
 }
 
 // goctl api go -api restful/tag/tag.api -dir restful/tag
