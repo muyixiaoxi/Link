@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func UpdateUserInfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func updateUserInfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.UserUpdateInfoRequest
 		if err := httpx.Parse(r, &req); err != nil {

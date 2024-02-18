@@ -31,12 +31,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodGet,
 				Path:    "/",
-				Handler: GetUserInfoHandler(serverCtx),
+				Handler: getUserInfoHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPut,
 				Path:    "/",
-				Handler: UpdateUserInfoHandler(serverCtx),
+				Handler: updateUserInfoHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/remark",
+				Handler: updateRemarkHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/flowed",
+				Handler: addFlowedHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

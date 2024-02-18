@@ -49,3 +49,14 @@ type UserUpdateInfoRequest struct {
 	Address  string `json:"address"`
 	Phone    string `json:"phone"`
 }
+
+type UserUpdateRemarkRequest struct {
+	Friend uint64 `json:"friend"`
+	Remark string `json:"remark"`
+}
+
+type UserFlowedRequest struct {
+	BeId    uint64 `json:"beId"`
+	Message string `json:"message"`
+	Type    uint64 `json:"type"`
+}

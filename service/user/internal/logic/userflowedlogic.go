@@ -1,4 +1,4 @@
-package usercontactservicelogic
+package logic
 
 import (
 	"Link/service/user/internal/types"
