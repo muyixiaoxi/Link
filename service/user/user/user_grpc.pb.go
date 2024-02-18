@@ -19,12 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	UserService_UserCreate_FullMethodName       = "/user.UserService/UserCreate"
-	UserService_UserLogin_FullMethodName        = "/user.UserService/UserLogin"
-	UserService_UserInfo_FullMethodName         = "/user.UserService/UserInfo"
-	UserService_UserUpdateInfo_FullMethodName   = "/user.UserService/UserUpdateInfo"
-	UserService_UserFlowed_FullMethodName       = "/user.UserService/UserFlowed"
-	UserService_UserUpdateRemark_FullMethodName = "/user.UserService/UserUpdateRemark"
+	UserService_UserCreate_FullMethodName            = "/user.UserService/UserCreate"
+	UserService_UserLogin_FullMethodName             = "/user.UserService/UserLogin"
+	UserService_UserInfo_FullMethodName              = "/user.UserService/UserInfo"
+	UserService_UserUpdateInfo_FullMethodName        = "/user.UserService/UserUpdateInfo"
+	UserService_UserFlowed_FullMethodName            = "/user.UserService/UserFlowed"
+	UserService_UserUpdateRemark_FullMethodName      = "/user.UserService/UserUpdateRemark"
+	UserService_UserCreateGroup_FullMethodName       = "/user.UserService/UserCreateGroup"
+	UserService_UserSelectGroup_FullMethodName       = "/user.UserService/UserSelectGroup"
+	UserService_UserSelectDetailGroup_FullMethodName = "/user.UserService/UserSelectDetailGroup"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -37,6 +40,9 @@ type UserServiceClient interface {
 	UserUpdateInfo(ctx context.Context, in *UserUpdateInfoRequest, opts ...grpc.CallOption) (*Empty, error)
 	UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error)
 	UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
+	UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error)
+	UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
+	UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error)
 }
 
 type userServiceClient struct {
@@ -101,6 +107,33 @@ func (c *userServiceClient) UserUpdateRemark(ctx context.Context, in *UserUpdate
 	return out, nil
 }
 
+func (c *userServiceClient) UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, UserService_UserCreateGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error) {
+	out := new(UserSelectGroupsResponse)
+	err := c.cc.Invoke(ctx, UserService_UserSelectGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error) {
+	out := new(DetailGroupResponse)
+	err := c.cc.Invoke(ctx, UserService_UserSelectDetailGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -111,6 +144,9 @@ type UserServiceServer interface {
 	UserUpdateInfo(context.Context, *UserUpdateInfoRequest) (*Empty, error)
 	UserFlowed(context.Context, *UserAddRequest) (*Empty, error)
 	UserUpdateRemark(context.Context, *UserUpdateRemarkRequest) (*Empty, error)
+	UserCreateGroup(context.Context, *UserCreateGroupRequest) (*Empty, error)
+	UserSelectGroup(context.Context, *UserSelectGroupsRequest) (*UserSelectGroupsResponse, error)
+	UserSelectDetailGroup(context.Context, *DetailGroupRequest) (*DetailGroupResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -135,6 +171,15 @@ func (UnimplementedUserServiceServer) UserFlowed(context.Context, *UserAddReques
 }
 func (UnimplementedUserServiceServer) UserUpdateRemark(context.Context, *UserUpdateRemarkRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserUpdateRemark not implemented")
+}
+func (UnimplementedUserServiceServer) UserCreateGroup(context.Context, *UserCreateGroupRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserCreateGroup not implemented")
+}
+func (UnimplementedUserServiceServer) UserSelectGroup(context.Context, *UserSelectGroupsRequest) (*UserSelectGroupsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserSelectGroup not implemented")
+}
+func (UnimplementedUserServiceServer) UserSelectDetailGroup(context.Context, *DetailGroupRequest) (*DetailGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserSelectDetailGroup not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -257,6 +302,60 @@ func _UserService_UserUpdateRemark_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UserCreateGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserCreateGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserCreateGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserCreateGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserCreateGroup(ctx, req.(*UserCreateGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserSelectGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserSelectGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserSelectGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserSelectGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserSelectGroup(ctx, req.(*UserSelectGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserSelectDetailGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DetailGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserSelectDetailGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserSelectDetailGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserSelectDetailGroup(ctx, req.(*DetailGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -280,132 +379,6 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "UserUpdateInfo",
 			Handler:    _UserService_UserUpdateInfo_Handler,
 		},
-<<<<<<< HEAD
-<<<<<<< HEAD
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "service/user/user.proto",
-}
-
-const (
-	UserContactService_UserFlowed_FullMethodName       = "/user.UserContactService/UserFlowed"
-	UserContactService_UserUpdateRemark_FullMethodName = "/user.UserContactService/UserUpdateRemark"
-)
-
-// UserContactServiceClient is the client API for UserContactService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UserContactServiceClient interface {
-	UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error)
-	UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
-}
-
-type userContactServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewUserContactServiceClient(cc grpc.ClientConnInterface) UserContactServiceClient {
-	return &userContactServiceClient{cc}
-}
-
-func (c *userContactServiceClient) UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserContactService_UserFlowed_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userContactServiceClient) UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserContactService_UserUpdateRemark_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// UserContactServiceServer is the server API for UserContactService service.
-// All implementations must embed UnimplementedUserContactServiceServer
-// for forward compatibility
-type UserContactServiceServer interface {
-	UserFlowed(context.Context, *UserAddRequest) (*Empty, error)
-	UserUpdateRemark(context.Context, *UserUpdateRemarkRequest) (*Empty, error)
-	mustEmbedUnimplementedUserContactServiceServer()
-}
-
-// UnimplementedUserContactServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedUserContactServiceServer struct {
-}
-
-func (UnimplementedUserContactServiceServer) UserFlowed(context.Context, *UserAddRequest) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserFlowed not implemented")
-}
-func (UnimplementedUserContactServiceServer) UserUpdateRemark(context.Context, *UserUpdateRemarkRequest) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserUpdateRemark not implemented")
-}
-func (UnimplementedUserContactServiceServer) mustEmbedUnimplementedUserContactServiceServer() {}
-
-// UnsafeUserContactServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UserContactServiceServer will
-// result in compilation errors.
-type UnsafeUserContactServiceServer interface {
-	mustEmbedUnimplementedUserContactServiceServer()
-}
-
-func RegisterUserContactServiceServer(s grpc.ServiceRegistrar, srv UserContactServiceServer) {
-	s.RegisterService(&UserContactService_ServiceDesc, srv)
-}
-
-func _UserContactService_UserFlowed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserAddRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserContactServiceServer).UserFlowed(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserContactService_UserFlowed_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserContactServiceServer).UserFlowed(ctx, req.(*UserAddRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserContactService_UserUpdateRemark_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserUpdateRemarkRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserContactServiceServer).UserUpdateRemark(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserContactService_UserUpdateRemark_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserContactServiceServer).UserUpdateRemark(ctx, req.(*UserUpdateRemarkRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// UserContactService_ServiceDesc is the grpc.ServiceDesc for UserContactService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var UserContactService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.UserContactService",
-	HandlerType: (*UserContactServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-=======
->>>>>>> aea6025d2fc2a6a17c8bc2f6d4192501ffb119bf
-=======
-
->>>>>>> d8aa09f8a19879ab42d5855bc69e72b7d3140a18
 		{
 			MethodName: "UserFlowed",
 			Handler:    _UserService_UserFlowed_Handler,
@@ -414,95 +387,17 @@ var UserContactService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "UserUpdateRemark",
 			Handler:    _UserService_UserUpdateRemark_Handler,
 		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "service/user/user.proto",
-}
-
-const (
-	UserGroupService_UserCreateGroup_FullMethodName = "/user.UserGroupService/UserCreateGroup"
-)
-
-// UserGroupServiceClient is the client API for UserGroupService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UserGroupServiceClient interface {
-	UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error)
-}
-
-type userGroupServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewUserGroupServiceClient(cc grpc.ClientConnInterface) UserGroupServiceClient {
-	return &userGroupServiceClient{cc}
-}
-
-func (c *userGroupServiceClient) UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserGroupService_UserCreateGroup_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// UserGroupServiceServer is the server API for UserGroupService service.
-// All implementations must embed UnimplementedUserGroupServiceServer
-// for forward compatibility
-type UserGroupServiceServer interface {
-	UserCreateGroup(context.Context, *UserCreateGroupRequest) (*Empty, error)
-	mustEmbedUnimplementedUserGroupServiceServer()
-}
-
-// UnimplementedUserGroupServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedUserGroupServiceServer struct {
-}
-
-func (UnimplementedUserGroupServiceServer) UserCreateGroup(context.Context, *UserCreateGroupRequest) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserCreateGroup not implemented")
-}
-func (UnimplementedUserGroupServiceServer) mustEmbedUnimplementedUserGroupServiceServer() {}
-
-// UnsafeUserGroupServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UserGroupServiceServer will
-// result in compilation errors.
-type UnsafeUserGroupServiceServer interface {
-	mustEmbedUnimplementedUserGroupServiceServer()
-}
-
-func RegisterUserGroupServiceServer(s grpc.ServiceRegistrar, srv UserGroupServiceServer) {
-	s.RegisterService(&UserGroupService_ServiceDesc, srv)
-}
-
-func _UserGroupService_UserCreateGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserCreateGroupRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserGroupServiceServer).UserCreateGroup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserGroupService_UserCreateGroup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserGroupServiceServer).UserCreateGroup(ctx, req.(*UserCreateGroupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// UserGroupService_ServiceDesc is the grpc.ServiceDesc for UserGroupService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var UserGroupService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.UserGroupService",
-	HandlerType: (*UserGroupServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "UserCreateGroup",
-			Handler:    _UserGroupService_UserCreateGroup_Handler,
+			Handler:    _UserService_UserCreateGroup_Handler,
+		},
+		{
+			MethodName: "UserSelectGroup",
+			Handler:    _UserService_UserSelectGroup_Handler,
+		},
+		{
+			MethodName: "UserSelectDetailGroup",
+			Handler:    _UserService_UserSelectDetailGroup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

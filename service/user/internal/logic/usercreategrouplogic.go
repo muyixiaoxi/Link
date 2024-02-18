@@ -1,10 +1,11 @@
-package usergroupservicelogic
+package logic
 
 import (
-	"Link/service/user/internal/svc"
 	"Link/service/user/internal/types"
-	"Link/service/user/user"
 	"context"
+
+	"Link/service/user/internal/svc"
+	"Link/service/user/user"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,6 +31,7 @@ func (l *UserCreateGroupLogic) UserCreateGroup(in *user.UserCreateGroupRequest) 
 		Name:          in.Name,
 		SystemTagId:   in.SystemTagId,
 		UserSelfTagId: in.UserSelfTagId,
+		Avatar:        in.Avatar,
 	}
 	err := l.svcCtx.DB.Create(&groupChat).Error
 	return &user.Empty{}, err

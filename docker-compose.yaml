@@ -31,6 +31,20 @@ services:
     networks:
       - backend
     restart: always #指定容器退出后的重启策略为始终重启
+  chat-rpc:
+    build:
+      context: service/chat
+      dockerfile: Dockerfile
+    environment: #设置环境变量
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports: #设置端口映射
+      - "8083:8083"
+    stdin_open: true #打开标准输入,可以接受外部输入
+    tty: true
+    networks:
+      - backend
+    restart: always #指定容器退出后的重启策略为始终重启
   #api
   tag-api:
     build:
@@ -55,6 +69,20 @@ services:
     privileged: true
     ports:
       - "8887:8887"
+    stdin_open: true
+    tty: true
+    networks:
+      - backend
+    restart: always
+  chat-api:
+    build:
+      context: restful/chat
+      dockerfile: Dockerfile
+    environment:
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports:
+      - "8889:8889"
     stdin_open: true
     tty: true
     networks:

@@ -13,22 +13,17 @@ import (
 )
 
 type (
-	DetailGroupRequest       = user.DetailGroupRequest
-	DetailGroupResponse      = user.DetailGroupResponse
-	Empty                    = user.Empty
-	GroupInformation         = user.GroupInformation
-	UserAddRequest           = user.UserAddRequest
-	UserCreateGroupRequest   = user.UserCreateGroupRequest
-	UserCreateRequest        = user.UserCreateRequest
-	UserCreateResponse       = user.UserCreateResponse
-	UserInfoRequest          = user.UserInfoRequest
-	UserInfoResponse         = user.UserInfoResponse
-	UserLoginRequest         = user.UserLoginRequest
-	UserLoginResponse        = user.UserLoginResponse
-	UserSelectGroupsRequest  = user.UserSelectGroupsRequest
-	UserSelectGroupsResponse = user.UserSelectGroupsResponse
-	UserUpdateInfoRequest    = user.UserUpdateInfoRequest
-	UserUpdateRemarkRequest  = user.UserUpdateRemarkRequest
+	Empty                   = user.Empty
+	UserAddRequest          = user.UserAddRequest
+	UserCreateGroupRequest  = user.UserCreateGroupRequest
+	UserCreateRequest       = user.UserCreateRequest
+	UserCreateResponse      = user.UserCreateResponse
+	UserInfoRequest         = user.UserInfoRequest
+	UserInfoResponse        = user.UserInfoResponse
+	UserLoginRequest        = user.UserLoginRequest
+	UserLoginResponse       = user.UserLoginResponse
+	UserUpdateInfoRequest   = user.UserUpdateInfoRequest
+	UserUpdateRemarkRequest = user.UserUpdateRemarkRequest
 
 	UserService interface {
 		UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
@@ -37,9 +32,6 @@ type (
 		UserUpdateInfo(ctx context.Context, in *UserUpdateInfoRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
-		UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error)
-		UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
-		UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error)
 	}
 
 	defaultUserService struct {
@@ -81,19 +73,4 @@ func (m *defaultUserService) UserFlowed(ctx context.Context, in *UserAddRequest,
 func (m *defaultUserService) UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserUpdateRemark(ctx, in, opts...)
-}
-
-func (m *defaultUserService) UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error) {
-	client := user.NewUserServiceClient(m.cli.Conn())
-	return client.UserCreateGroup(ctx, in, opts...)
-}
-
-func (m *defaultUserService) UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error) {
-	client := user.NewUserServiceClient(m.cli.Conn())
-	return client.UserSelectGroup(ctx, in, opts...)
-}
-
-func (m *defaultUserService) UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error) {
-	client := user.NewUserServiceClient(m.cli.Conn())
-	return client.UserSelectDetailGroup(ctx, in, opts...)
 }

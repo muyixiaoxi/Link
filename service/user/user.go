@@ -1,7 +1,7 @@
 package main
 
 import (
-	server "Link/service/user/internal/server/userservice"
+	"Link/service/user/internal/server"
 	"context"
 	"flag"
 	"fmt"
@@ -38,7 +38,6 @@ func main() {
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		user.RegisterUserServiceServer(grpcServer, server.NewUserServiceServer(ctx))
-
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
 		}
