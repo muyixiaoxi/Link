@@ -7,6 +7,7 @@ type UserCreateRequest {
 	Phone      string `json:"phone"`
 	StartTagId uint64 `json:"startTagId"`
 }
+
 type UserCreateResponse {
 	Token    string `json:"token"`
 	Username string `json:"username"`
@@ -17,6 +18,7 @@ type UserLoginRequest {
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
+
 type UserLoginResponse {
 	Token    string `json:"token"`
 	Username string `json:"username"`
@@ -26,6 +28,7 @@ type UserLoginResponse {
 type UserInfoRequest {
 	Id uint `json:"id"`
 }
+
 type UserInfoResponse {
 	Id       uint   `json:"id"`
 	Username string `json:"username"`
@@ -50,28 +53,39 @@ type UserUpdateRemarkRequest {
 	Friend uint64 `json:"friend"`
 	Remark string `json:"remark"`
 }
+
 type UserFlowedRequest {
 	BeId    uint64 `json:"beId"`
 	Message string `json:"message"`
 	Type    uint64 `json:"type"`
 }
 
-@server(
+//创建群聊 start
+type UserCreateGroupRequset {
+	GroupBossId   uint64 `json:"groupBossId" validate:"required"`
+	SystemTagId   uint64 `json:"systemTagId" validate:"required"`
+	UserSelfTagId uint64 `json:"userSelfTagId" validate:"required"`
+	Name          string `json:"name" validate:"required"`
+	Avatar        string `json:"avatar"`
+}
+
+//创建群聊 end
+@server (
 	prefix: /app/user
 )
 service user {
 	@doc "注册"
 	@handler signUp
-	post / (UserCreateRequest) returns(UserCreateResponse)
+	post / (UserCreateRequest) returns (UserCreateResponse)
 
 	@doc "登录"
 	@handler login
-	post /login (UserLoginRequest) returns(UserLoginResponse)
+	post /login (UserLoginRequest) returns (UserLoginResponse)
 }
 
 @server (
-	prefix:/app/user
-	jwt: Auth
+	prefix: /app/user
+	jwt:    Auth
 )
 service user {
 	@doc "获取用户信息"
@@ -89,6 +103,17 @@ service user {
 	@doc "添加好友/群聊"
 	@handler addFlowed
 	post /flowed (UserFlowedRequest)
+}
+
+@server (
+	prefix: /app/user
+	jwt:    Auth
+	group:  userGroup
+)
+service user {
+	@doc "用户创建群聊"
+	@handler userCreateGroup
+	post /createGroup (UserCreateGroupRequset)
 }
 
 // goctl api go -api user.api -dir .

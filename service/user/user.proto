@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package user;
 option go_package="./user";
+import public "google/protobuf/timestamp.proto";
 
 message Empty {}
 message UserCreateRequest {
@@ -63,6 +64,53 @@ message UserUpdateRemarkRequest {
   string remark = 3;
 }
 
+message UserCreateGroupRequest {
+  uint64 group_boss_id = 1;
+  string name = 2;
+  string avatar = 3;
+  uint64 system_tag_id = 4;
+  uint64 user_self_tag_id = 5;
+}
+
+message UserSelectGroupsRequest{
+  //根据标签查看群聊
+  uint64 system_tag_id = 1;
+  uint64 user_self_tag_id = 2;
+  //我创建的群聊 || 我加入的群聊
+  uint64 boss_id = 3;
+  uint64 user_id = 4;
+}
+
+message GroupInformation {
+  uint64 id = 1;//群id
+  string name = 3; //群聊名称
+  string system_tag_name = 4 ; //群聊所属的系统标签名称
+  string user_self_tag_name = 5 ; //群聊所属的用户自定义标签名称
+  string avatar = 6; //群聊头像
+}
+
+message UserSelectGroupsResponse{
+  repeated GroupInformation groupList = 1;
+}
+
+//查看群详情
+message DetailGroupRequest {
+  uint64 id = 1 ;//群id
+}
+
+message DetailGroupResponse {
+  uint64 id = 1;//群id
+  uint64 count = 2 ; //群聊人数
+  string name = 3; //群聊名称
+  string system_tag_name = 4 ; //群聊所属的系统标签名称
+  string user_self_tag_name = 5 ; //群聊所属的用户自定义标签名称
+  string avatar = 6; //群聊头像
+  google.protobuf.Timestamp created_at = 7; //群创建时间
+  float man = 8; //男生所占比例
+  float woman = 9; //女生所占比例
+  string address = 10 ; //群聊中地区最多的地址
+}
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
@@ -70,19 +118,10 @@ service UserService {
   rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty);
   rpc UserFlowed(UserAddRequest) returns(Empty);
   rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty);
+  rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty); //创建群聊
+  rpc UserSelectGroup(UserSelectGroupsRequest) returns (UserSelectGroupsResponse) ; //查询群聊列表
+  rpc UserSelectDetailGroup(DetailGroupRequest) returns (DetailGroupResponse) ; //查询群聊详情
 }
-
-message UserCreateGroupRequest {
-  uint64 group_boss_id = 1;
-  string name = 2;
-  uint64 system_tag_id = 3;
-  uint64 user_self_tag_id = 4;
-}
-
-service UserGroupService{
-  rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty);
-}
-
 
 
 // goctl rpc protoc user.proto --go_out=. --go-grpc_out=. --zrpc_out=.
