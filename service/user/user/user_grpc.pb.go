@@ -281,6 +281,7 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _UserService_UserUpdateInfo_Handler,
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service/user/user.proto",
@@ -402,6 +403,9 @@ var UserContactService_ServiceDesc = grpc.ServiceDesc{
 	Methods: []grpc.MethodDesc{
 =======
 >>>>>>> aea6025d2fc2a6a17c8bc2f6d4192501ffb119bf
+=======
+
+>>>>>>> d8aa09f8a19879ab42d5855bc69e72b7d3140a18
 		{
 			MethodName: "UserFlowed",
 			Handler:    _UserService_UserFlowed_Handler,
