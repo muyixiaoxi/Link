@@ -30,7 +30,7 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 
-	server := rest.MustNewServer(c.RestConf, rest.WithUnauthorizedCallback(jwt.JwtUnauthorizedResult))
+	server := rest.MustNewServer(c.RestConf, rest.WithUnauthorizedCallback(jwt.JwtUnauthorizedResult), rest.WithCors())
 	defer server.Stop()
 
 	ctx := svc.NewServiceContext(c)
