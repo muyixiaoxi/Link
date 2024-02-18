@@ -72,6 +72,17 @@ service UserService {
   rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty);
 }
 
+message UserCreateGroupRequest {
+  uint64 group_boss_id = 1;
+  string name = 2;
+  uint64 system_tag_id = 3;
+  uint64 user_self_tag_id = 4;
+}
+
+service UserGroupService{
+  rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty);
+}
+
 
 
 // goctl rpc protoc user.proto --go_out=. --go-grpc_out=. --zrpc_out=.

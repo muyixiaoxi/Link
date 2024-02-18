@@ -48,9 +48,11 @@ type delteTags {
 	group:  tagLogin
 )
 service tag-api {
+	@doc "创建用户自定义标签"
 	@handler createTag
 	post /createTag (CreateTagRequest) returns (CreateTagResponse)
 
+	@doc "查看系统bi"
 	@handler selectGroupTag
 	post /selectGroupTag returns ([]TagGroupName)
 
@@ -69,6 +71,7 @@ service tag-api {
 	group:  tagTest
 )
 service tag-api {
+	@doc "测试"
 	@handler userTag
 	post /test
 }
