@@ -7,8 +7,8 @@ message Empty {}
 message UserCreateRequest {
   string username = 1;
   string password = 2;
-  string Avatar = 3;
-  string Phone = 4;
+  string avatar = 3;
+  string phone = 4;
 }
 message UserCreateResponse {
   uint64 id = 1;
@@ -50,12 +50,30 @@ message UserUpdateInfoRequest {
   string phone = 8;
 }
 
-
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
   rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);
-   rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty);
+  rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty);
 }
+
+message UserAddRequest {
+  uint64 id = 1;
+  uint64 beId = 2;
+  string message = 3;
+  uint32 type = 4;
+}
+
+message UserUpdateRemarkRequest {
+  uint64 id = 1;
+  uint64 beId = 2;
+  string remark = 3;
+}
+
+service UserContactService {
+  rpc UserFlowed(UserAddRequest) returns(Empty);
+  rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty);
+}
+
 
 // goctl rpc protoc user.proto --go_out=. --go-grpc_out=. --zrpc_out=.
