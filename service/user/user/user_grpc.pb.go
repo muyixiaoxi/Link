@@ -19,10 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	UserService_UserCreate_FullMethodName     = "/user.UserService/UserCreate"
-	UserService_UserLogin_FullMethodName      = "/user.UserService/UserLogin"
-	UserService_UserInfo_FullMethodName       = "/user.UserService/UserInfo"
-	UserService_UserUpdateInfo_FullMethodName = "/user.UserService/UserUpdateInfo"
+	UserService_UserCreate_FullMethodName       = "/user.UserService/UserCreate"
+	UserService_UserLogin_FullMethodName        = "/user.UserService/UserLogin"
+	UserService_UserInfo_FullMethodName         = "/user.UserService/UserInfo"
+	UserService_UserUpdateInfo_FullMethodName   = "/user.UserService/UserUpdateInfo"
+	UserService_UserFlowed_FullMethodName       = "/user.UserService/UserFlowed"
+	UserService_UserUpdateRemark_FullMethodName = "/user.UserService/UserUpdateRemark"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -33,6 +35,8 @@ type UserServiceClient interface {
 	UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error)
 	UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
 	UserUpdateInfo(ctx context.Context, in *UserUpdateInfoRequest, opts ...grpc.CallOption) (*Empty, error)
+	UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error)
+	UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type userServiceClient struct {
@@ -79,6 +83,24 @@ func (c *userServiceClient) UserUpdateInfo(ctx context.Context, in *UserUpdateIn
 	return out, nil
 }
 
+func (c *userServiceClient) UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, UserService_UserFlowed_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, UserService_UserUpdateRemark_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -87,6 +109,8 @@ type UserServiceServer interface {
 	UserLogin(context.Context, *UserLoginRequest) (*UserLoginResponse, error)
 	UserInfo(context.Context, *UserInfoRequest) (*UserInfoResponse, error)
 	UserUpdateInfo(context.Context, *UserUpdateInfoRequest) (*Empty, error)
+	UserFlowed(context.Context, *UserAddRequest) (*Empty, error)
+	UserUpdateRemark(context.Context, *UserUpdateRemarkRequest) (*Empty, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -105,6 +129,12 @@ func (UnimplementedUserServiceServer) UserInfo(context.Context, *UserInfoRequest
 }
 func (UnimplementedUserServiceServer) UserUpdateInfo(context.Context, *UserUpdateInfoRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserUpdateInfo not implemented")
+}
+func (UnimplementedUserServiceServer) UserFlowed(context.Context, *UserAddRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserFlowed not implemented")
+}
+func (UnimplementedUserServiceServer) UserUpdateRemark(context.Context, *UserUpdateRemarkRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserUpdateRemark not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -191,6 +221,42 @@ func _UserService_UserUpdateInfo_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UserFlowed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserAddRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserFlowed(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserFlowed_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserFlowed(ctx, req.(*UserAddRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserUpdateRemark_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserUpdateRemarkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserUpdateRemark(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserUpdateRemark_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserUpdateRemark(ctx, req.(*UserUpdateRemarkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -214,6 +280,7 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "UserUpdateInfo",
 			Handler:    _UserService_UserUpdateInfo_Handler,
 		},
+<<<<<<< HEAD
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service/user/user.proto",
@@ -333,13 +400,15 @@ var UserContactService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "user.UserContactService",
 	HandlerType: (*UserContactServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+=======
+>>>>>>> aea6025d2fc2a6a17c8bc2f6d4192501ffb119bf
 		{
 			MethodName: "UserFlowed",
-			Handler:    _UserContactService_UserFlowed_Handler,
+			Handler:    _UserService_UserFlowed_Handler,
 		},
 		{
 			MethodName: "UserUpdateRemark",
-			Handler:    _UserContactService_UserUpdateRemark_Handler,
+			Handler:    _UserService_UserUpdateRemark_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

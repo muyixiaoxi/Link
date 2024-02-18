@@ -50,13 +50,6 @@ message UserUpdateInfoRequest {
   string phone = 8;
 }
 
-service UserService {
-  rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
-  rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
-  rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);
-  rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty);
-}
-
 message UserAddRequest {
   uint64 id = 1;
   uint64 beId = 2;
@@ -70,7 +63,11 @@ message UserUpdateRemarkRequest {
   string remark = 3;
 }
 
-service UserContactService {
+service UserService {
+  rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
+  rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
+  rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);
+  rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty);
   rpc UserFlowed(UserAddRequest) returns(Empty);
   rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty);
 }
@@ -85,6 +82,7 @@ message UserCreateGroupRequest {
 service UserGroupService{
   rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty);
 }
+
 
 
 // goctl rpc protoc user.proto --go_out=. --go-grpc_out=. --zrpc_out=.

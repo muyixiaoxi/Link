@@ -46,6 +46,16 @@ type UserUpdateInfoRequest {
 	Phone    string `json:"phone"`
 }
 
+type UserUpdateRemarkRequest {
+	Friend uint64 `json:"friend"`
+	Remark string `json:"remark"`
+}
+type UserFlowedRequest {
+	BeId    uint64 `json:"beId"`
+	Message string `json:"message"`
+	Type    uint64 `json:"type"`
+}
+
 @server(
 	prefix: /app/user
 )
@@ -65,12 +75,20 @@ service user {
 )
 service user {
 	@doc "获取用户信息"
-	@handler GetUserInfo
+	@handler getUserInfo
 	get / (UserInfoRequest) returns (UserInfoResponse)
 
 	@doc "修改用户信息"
-	@handler UpdateUserInfo
+	@handler updateUserInfo
 	put / (UserUpdateInfoRequest)
+
+	@doc "修改备注"
+	@handler updateRemark
+	put /remark (UserUpdateRemarkRequest)
+
+	@doc "添加好友/群聊"
+	@handler addFlowed
+	post /flowed (UserFlowedRequest)
 }
 
 // goctl api go -api user.api -dir .

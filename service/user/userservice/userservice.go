@@ -13,20 +13,24 @@ import (
 )
 
 type (
-	Empty                 = user.Empty
-	UserCreateRequest     = user.UserCreateRequest
-	UserCreateResponse    = user.UserCreateResponse
-	UserInfoRequest       = user.UserInfoRequest
-	UserInfoResponse      = user.UserInfoResponse
-	UserLoginRequest      = user.UserLoginRequest
-	UserLoginResponse     = user.UserLoginResponse
-	UserUpdateInfoRequest = user.UserUpdateInfoRequest
+	Empty                   = user.Empty
+	UserAddRequest          = user.UserAddRequest
+	UserCreateRequest       = user.UserCreateRequest
+	UserCreateResponse      = user.UserCreateResponse
+	UserInfoRequest         = user.UserInfoRequest
+	UserInfoResponse        = user.UserInfoResponse
+	UserLoginRequest        = user.UserLoginRequest
+	UserLoginResponse       = user.UserLoginResponse
+	UserUpdateInfoRequest   = user.UserUpdateInfoRequest
+	UserUpdateRemarkRequest = user.UserUpdateRemarkRequest
 
 	UserService interface {
 		UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
 		UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error)
 		UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
 		UserUpdateInfo(ctx context.Context, in *UserUpdateInfoRequest, opts ...grpc.CallOption) (*Empty, error)
+		UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error)
+		UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
 	}
 
 	defaultUserService struct {
@@ -58,4 +62,14 @@ func (m *defaultUserService) UserInfo(ctx context.Context, in *UserInfoRequest, 
 func (m *defaultUserService) UserUpdateInfo(ctx context.Context, in *UserUpdateInfoRequest, opts ...grpc.CallOption) (*Empty, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserUpdateInfo(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserFlowed(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserUpdateRemark(ctx, in, opts...)
 }
