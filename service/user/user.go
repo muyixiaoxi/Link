@@ -1,7 +1,7 @@
 package main
 
 import (
-	server "Link/service/user/internal/server/userservice"
+	"Link/service/user/internal/server"
 	"context"
 	"flag"
 	"fmt"

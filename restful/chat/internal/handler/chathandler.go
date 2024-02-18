@@ -57,6 +57,7 @@ func handleWebSocket(conn *websocket.Conn, svcCtx *svc.ServiceContext) {
 		conn: conn,
 		send: make(chan []byte),
 	}
+
 	clients[client.Id] = client
 	defer func() {
 		// 当函数返回时，关闭连接并从clients映射中删除客户端

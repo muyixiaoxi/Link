@@ -14,6 +14,7 @@ const (
 	CodeTagSame
 	CodeTagChooseFailed
 	CodeWebSocketLinkFail
+	CodeFriendNotExist
 )
 
 var codeMsgMap = map[ResCode]string{
@@ -28,6 +29,7 @@ var codeMsgMap = map[ResCode]string{
 	CodeTagSame:           "标签被重复选择",
 	CodeTagChooseFailed:   "标签选择失败",
 	CodeWebSocketLinkFail: "WebSocket连接失败",
+	CodeFriendNotExist:    "好友不存在",
 }
 
 func (c ResCode) Msg() string {
