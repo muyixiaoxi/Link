@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"Link/internal/response"
 	"net/http"
 
 	"Link/restful/user/internal/logic"
@@ -20,9 +21,9 @@ func updateRemarkHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := logic.NewUpdateRemarkLogic(r.Context(), svcCtx)
 		err := l.UpdateRemark(&req)
 		if err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
+			response.Response(w, nil, response.CodeFriendNotExist)
 		} else {
-			httpx.Ok(w)
+			response.Response(w, nil, response.CodeSuccess)
 		}
 	}
 }

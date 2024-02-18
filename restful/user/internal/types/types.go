@@ -68,3 +68,9 @@ type UserUpdateRemarkRequest struct {
 	Friend uint64 `json:"friend"`
 	Remark string `json:"remark"`
 }
+
+type UserFlowedRequest struct {
+	BeId    uint64 `json:"beId"`
+	Message string `json:"message"`
+	Type    uint32 `json:"type"`
+}

@@ -25,6 +25,7 @@ func NewUserUpdateRemarkLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *UserUpdateRemarkLogic) UserUpdateRemark(in *user.UserUpdateRemarkRequest) (response *user.Empty, err error) {
+	response = &user.Empty{}
 	model := types.Flowed{
 		UserID:   in.Id,
 		FriendID: in.BeId,
