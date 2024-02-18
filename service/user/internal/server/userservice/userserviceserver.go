@@ -6,7 +6,7 @@ package server
 import (
 	"context"
 
-	"Link/service/user/internal/logic"
+	"Link/service/user/internal/logic/userservice"
 	"Link/service/user/internal/svc"
 	"Link/service/user/user"
 )
@@ -23,21 +23,21 @@ func NewUserServiceServer(svcCtx *svc.ServiceContext) *UserServiceServer {
 }
 
 func (s *UserServiceServer) UserCreate(ctx context.Context, in *user.UserCreateRequest) (*user.UserCreateResponse, error) {
-	l := logic.NewUserCreateLogic(ctx, s.svcCtx)
+	l := userservicelogic.NewUserCreateLogic(ctx, s.svcCtx)
 	return l.UserCreate(in)
 }
 
 func (s *UserServiceServer) UserLogin(ctx context.Context, in *user.UserLoginRequest) (*user.UserLoginResponse, error) {
-	l := logic.NewUserLoginLogic(ctx, s.svcCtx)
+	l := userservicelogic.NewUserLoginLogic(ctx, s.svcCtx)
 	return l.UserLogin(in)
 }
 
 func (s *UserServiceServer) UserInfo(ctx context.Context, in *user.UserInfoRequest) (*user.UserInfoResponse, error) {
-	l := logic.NewUserInfoLogic(ctx, s.svcCtx)
+	l := userservicelogic.NewUserInfoLogic(ctx, s.svcCtx)
 	return l.UserInfo(in)
 }
 
 func (s *UserServiceServer) UserUpdateInfo(ctx context.Context, in *user.UserUpdateInfoRequest) (*user.Empty, error) {
-	l := logic.NewUserUpdateInfoLogic(ctx, s.svcCtx)
+	l := userservicelogic.NewUserUpdateInfoLogic(ctx, s.svcCtx)
 	return l.UserUpdateInfo(in)
 }

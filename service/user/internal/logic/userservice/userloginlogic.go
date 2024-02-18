@@ -1,4 +1,4 @@
-package logic
+package userservicelogic
 
 import (
 	"Link/internal/bcrypt"

@@ -1,6 +1,7 @@
 package main
 
 import (
+	server "Link/service/user/internal/server/userservice"
 	"context"
 	"flag"
 	"fmt"
@@ -8,7 +9,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 
 	"Link/service/user/internal/config"
-	"Link/service/user/internal/server"
 	"Link/service/user/internal/svc"
 	"Link/service/user/user"
 

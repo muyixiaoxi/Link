@@ -17,7 +17,8 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	db := initGorm.InitGorm(c.Mysql.DataSource)
-	db.AutoMigrate(&types.User{})
+	db.AutoMigrate(&types.User{}, &types.GroupChat{}, &types.Flowed{})
+	db.AutoMigrate(&types.ApplyFor{})
 	rc := redis.RedisConf{
 		Host: c.RedisConf.Host,
 		Type: c.RedisConf.Type,
