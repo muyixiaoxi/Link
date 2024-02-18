@@ -8,3 +8,11 @@ type Request struct {
 type Response struct {
 	Message string `json:"message"`
 }
+
+
+type Message struct {
+	From uint64 `json:"from"`
+	To uint64 `json:"to"`
+	Content string `json:"content"`
+	Model uint `json:"model"` // 0 单聊 1 群聊
+}

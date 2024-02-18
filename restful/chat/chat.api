@@ -9,7 +9,7 @@ type Response {
 }
 
 service chat-api {
-	@handler ChatHandler
-	get /from/:name (Request) returns (Response)
+	@handler WebSocketHandler
+	get /link (Request) returns (Response)
 }
 

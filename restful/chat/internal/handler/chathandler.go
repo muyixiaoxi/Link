@@ -2,12 +2,24 @@ package handler
 
 import (
 	"Link/internal/response"
+	"Link/restful/chat/internal/types"
+	"context"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logc"
 	"net/http"
 
 	"Link/restful/chat/internal/svc"
 	"github.com/gorilla/websocket"
 )
+
+type Client struct {
+	Id   uint64
+	conn *websocket.Conn
+	send chan []byte
+}
+
+// 在服务端保存所有客户端连接的地方
+var clients = make(map[uint64]*Client)
 
 func WebSocketHandler(svcCtx *svc.ServiceContext) func(w http.ResponseWriter, r *http.Request) {
 	// Upgrader 用于将Http连接升级为 WebSocket 连接
@@ -32,21 +44,32 @@ func WebSocketHandler(svcCtx *svc.ServiceContext) func(w http.ResponseWriter, r 
 	}
 }
 func handleWebSocket(conn *websocket.Conn, svcCtx *svc.ServiceContext) {
-	defer conn.Close()
+	client := &Client{}
+	// 从连接中读取用户id
+	if err := conn.ReadJSON(&client); err != nil {
+		logc.Error(context.Background(), "conn.ReadJSON(&username) failed: ", err)
+		return
+	}
+	fmt.Println(client.Id)
+	// 将客户端添加到 clients 映射中
+	client = &Client{
+		Id:   client.Id,
+		conn: conn,
+		send: make(chan []byte),
+	}
+	clients[client.Id] = client
+	defer func() {
+		// 当函数返回时，关闭连接并从clients映射中删除客户端
+		conn.Close()
+		delete(clients, client.Id)
+	}()
 	for {
-		// 读取客户端发送的消息
-		_, msg, err := conn.ReadMessage()
-		if err != nil {
-			// 处理连接关闭等错误
+		var msg types.Message
+		// 从连接中读取消息
+		if err := conn.ReadJSON(&msg); err != nil {
+			fmt.Printf("被玩坏了：", err)
 			break
 		}
-		fmt.Println(string(msg))
-
-		// 在这里编写处理客户端消息的逻辑
-		// 例如，调用适当的业务逻辑组件来处理消息
-		// resp, err := l.HandleWebSocketMessage(msg)
-
-		// 处理完逻辑后，可以选择向客户端发送响应消息
-		// conn.WriteMessage(websocket.TextMessage, resp)
+		fmt.Println("信息：", msg)
 	}
 }
