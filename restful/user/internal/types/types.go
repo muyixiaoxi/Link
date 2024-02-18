@@ -58,5 +58,5 @@ type UserUpdateRemarkRequest struct {
 type UserFlowedRequest struct {
 	BeId    uint64 `json:"beId"`
 	Message string `json:"message"`
-	Type    uint64 `json:"type"`
+	Type    uint32 `json:"type"`
 }

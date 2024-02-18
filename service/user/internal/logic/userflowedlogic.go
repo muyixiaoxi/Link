@@ -25,12 +25,19 @@ func NewUserFlowedLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserFl
 }
 
 func (l *UserFlowedLogic) UserFlowed(in *user.UserAddRequest) (response *user.Empty, err error) {
+	response = &user.Empty{}
 	model := types.ApplyFor{
 		UserID:  in.Id,
 		BeId:    in.BeId,
 		Message: in.Message,
 		Type:    in.Type,
 	}
-	err = l.svcCtx.DB.Create(model).Error
-	return
+	// 如果添加过message
+	tmp := types.ApplyFor{}
+	err = l.svcCtx.DB.Where("user_id = ? and be_id = ?", model.UserID, model.BeId).First(&tmp).Error
+	if err != nil {
+		err = l.svcCtx.DB.Create(&model).Error
+		return
+	}
+	return response, l.svcCtx.DB.Where("user_id = ? and be_id = ?", model.UserID, model.BeId).Updates(&model).Error
 }
