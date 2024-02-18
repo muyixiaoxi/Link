@@ -30,7 +30,7 @@ func (l *SignUserChooseTagLogic) SignUserChooseTag(in *tag.UserChooseTagRequest)
 	// todo: add your logic here and delete this line
 	var chooseTag types.UserTagFollow
 	// 用户注册时选择标签
-	err := l.svcCtx.DB.Debug().Take(&chooseTag, "tag_id = ? and user_id = ? and type = 'OFFICIAL'", in.TagId, in.UserId).Error
+	err := l.svcCtx.DB.Take(&chooseTag, "tag_id = ? and user_id = ? and type = 'OFFICIAL'", in.TagId, in.UserId).Error
 	if err == nil {
 		return nil, status.Error(codes.AlreadyExists, "禁止重复选择标签")
 	}
@@ -38,6 +38,6 @@ func (l *SignUserChooseTagLogic) SignUserChooseTag(in *tag.UserChooseTagRequest)
 		TagId:  in.TagId,
 		UserId: in.UserId,
 	}
-	err = l.svcCtx.DB.Debug().Create(&chooseTag).Error
+	err = l.svcCtx.DB.Create(&chooseTag).Error
 	return &tag.UserChooseTagRequest{}, nil
 }
