@@ -1,7 +1,9 @@
 package logic
 
 import (
+	"Link/service/user/user"
 	"context"
+	"encoding/json"
 
 	"Link/restful/user/internal/svc"
 	"Link/restful/user/internal/types"
@@ -23,8 +25,13 @@ func NewUpdateRemarkLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upda
 	}
 }
 
-func (l *UpdateRemarkLogic) UpdateRemark(req *types.UserUpdateRemarkRequest) error {
-	// todo: add your logic here and delete this line
-
-	return nil
+func (l *UpdateRemarkLogic) UpdateRemark(req *types.UserUpdateRemarkRequest) (err error) {
+	jId := l.ctx.Value("user_id").(json.Number)
+	id, _ := jId.Int64()
+	_, err = l.svcCtx.UserRpc.UserUpdateRemark(context.Background(), &user.UserUpdateRemarkRequest{
+		Id:     uint64(id),
+		BeId:   req.Friend,
+		Remark: req.Remark,
+	})
+	return err
 }
