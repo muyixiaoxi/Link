@@ -15,6 +15,7 @@ import (
 type (
 	Empty                   = user.Empty
 	UserAddRequest          = user.UserAddRequest
+	UserCreateGroupRequest  = user.UserCreateGroupRequest
 	UserCreateRequest       = user.UserCreateRequest
 	UserCreateResponse      = user.UserCreateResponse
 	UserInfoRequest         = user.UserInfoRequest
