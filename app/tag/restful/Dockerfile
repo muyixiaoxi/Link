@@ -28,4 +28,4 @@ WORKDIR /app
 COPY --from=builder /app/tag /app/tag
 COPY --from=builder /app/etc /app/etc
 
-CMD ["./tag", "-f", "etc/tag.yaml"]
+CMD ["./tag", "-f", "etc/tag-api.yaml"]
