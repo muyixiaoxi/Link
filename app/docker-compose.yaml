@@ -185,6 +185,19 @@ services:
     networks:
       - backend
 
+  chat-rpc:
+    build:
+      context: chat
+      dockerfile: service/Dockerfile
+    restart: always
+    entrypoint: # 设置环境变量
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports:
+      - "8083:8083"
+    networks:
+      - backend
+
   tag-api: #自定义容器名称
     build:
       context: tag
@@ -213,5 +226,18 @@ services:
     networks:
       - backend
 
+  chat-api: #自定义容器名称
+    build:
+      context: chat
+      dockerfile: restful/Dockerfile
+    container_name: user-api
+    restart: always
+    environment: #设置环境变量
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports: #设置端口映射
+      - "8889:8889"
+    networks:
+      - backend
 
 
