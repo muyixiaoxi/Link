@@ -9,7 +9,7 @@ UserRpc:
 TagRpc:
   Etcd:
     Hosts:
-      - 39.101.77.206:2379
+      - 114.55.135.211:2379
     Key: tag.rpc
 Auth:
   AccessSecret: linkMarch
