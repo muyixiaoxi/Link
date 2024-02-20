@@ -95,7 +95,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - ALLOW_NONE_AUTHENTICATION=yes
-      - ETCD_ADVERTISE_CLIENT_URLS=http://101.37.175.145:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://114.55.135.211:2379
     ports: # 设置端口映射
       - "2379:2379"
     networks:
