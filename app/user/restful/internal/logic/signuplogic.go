@@ -7,6 +7,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"user/common/jwt"
+	"user/service/tag/service/tag"
 
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
@@ -45,10 +46,10 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	//}}
 	//
 	////注册之后,必须选择一个标签
-	//_, err = l.svcCtx.TagRpc.SignUserChooseTag(context.Background(), &tag.UserChooseTagRequest{
-	//	UserId: response.Id,
-	//	TagId:  req.StartTagId,
-	//})
+	_, err = l.svcCtx.TagSignRpc.SignUserChooseTag(l.ctx, &tag.UserChooseTagRequest{
+		UserId: response.Id,
+		TagId:  req.StartTagId,
+	})
 	if err != nil {
 		fmt.Println(err)
 		fromErr, _ := status.FromError(err)
