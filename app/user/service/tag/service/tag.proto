@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package tag;
+option go_package="./tag";
+
+message Empty {}
+
+
+//CreateTagRequest创建标签 start
+message CreateTagRequest{
+  uint64 creatorId = 1;
+  string tag_name = 2;
+  string group_name = 3;
+  string type = 4;
+  string old_tagName = 5;
+}
+
+message CreateTagResponse{
+  string group_name = 2;
+  // 使用 repeated 关键字表示 LowTags 是一个切片
+  repeated LowTags low_tags = 3;
+  message LowTags {
+    uint64 id = 1;
+    uint64 creator_id = 2;
+    string tag_name = 3;
+  }
+}
+// 创建标签end
+
+// 删除标签 start
+message DeleteTagRequest{
+  uint64 creator_id = 1;
+  repeated uint64 tag_id = 2;
+}
+
+message DeleteTagResponse{
+
+}
+//删除标签end
+
+
+
+// 查询全部标签组 start
+message GroupTag {
+  uint64 id = 1;
+  string group_name = 2;
+}
+message GroupTagResponse {
+  repeated GroupTag tags = 1;
+}
+// 查询全部标签组 end
+
+// 根据所选标签组 查询对应小标签
+message SelectAllTagsByGroupName{
+  string group_ame = 1;
+}
+
+message AllTags{
+  uint64 id = 1;
+  string tag_name = 2;
+  uint64 creator_id = 3;
+}
+
+message AllTagsByGroupNameResponse{
+  repeated AllTags low_tags = 1;
+}
+
+// TagLogin 登录之后的服务
+service TagLogin {
+  rpc CreateTag(CreateTagRequest) returns(CreateTagResponse);
+  rpc UpdateTag(CreateTagRequest) returns(CreateTagResponse);
+  rpc DeleteTag(DeleteTagRequest) returns(DeleteTagResponse);
+  rpc SelectGroupTag(Empty) returns (GroupTagResponse);
+  rpc SelectAllTagsByGroup (SelectAllTagsByGroupName) returns (AllTagsByGroupNameResponse);
+}
+
+
+message UserChooseTagRequest{
+  uint64 user_id = 1;
+  uint64 tag_id = 2;
+}
+
+// TagSign 登录之前的服务
+service TagSign {
+  rpc SignUserChooseTag(UserChooseTagRequest) returns (UserChooseTagRequest);
+}
+
+
+//  goctl rpc protoc service/tag/tag.proto --go_out=service/tag --go-grpc_out=service/tag --zrpc_out=service/tag -m
+
+
+
