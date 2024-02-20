@@ -176,6 +176,7 @@ services:
     build:
       context: user
       dockerfile: service/Dockerfile
+    container_name: user-rpc
     restart: always
     environment: #设置环境变量
       - TZ=Asia/Shanghai
@@ -189,6 +190,7 @@ services:
     build:
       context: chat
       dockerfile: service/Dockerfile
+    container_name: chat-rpc
     restart: always
     entrypoint: # 设置环境变量
       - TZ=Asia/Shanghai
@@ -230,7 +232,7 @@ services:
     build:
       context: chat
       dockerfile: restful/Dockerfile
-    container_name: user-api
+    container_name: chat-api
     restart: always
     environment: #设置环境变量
       - TZ=Asia/Shanghai
