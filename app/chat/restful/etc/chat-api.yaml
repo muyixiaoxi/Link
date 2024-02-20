@@ -1,0 +1,11 @@
+Name: chat-api
+Host: 0.0.0.0
+Port: 8889
+Auth:
+  AccessSecret: linkMarch
+  AccessExpire: 360000
+TagRpc:
+  Etcd:
+    Hosts:
+      - 101.37.175.145:2379
+    Key: chat.rpc
