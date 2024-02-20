@@ -72,6 +72,7 @@ func ChatHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 // SingleChat 单聊
 func SingleChat(message types.Message) {
+	// 向redis存储消息
 	if c, has := clients[message.To]; has {
 		c.conn.WriteJSON(message)
 	}
