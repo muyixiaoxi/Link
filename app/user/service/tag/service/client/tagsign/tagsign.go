@@ -28,6 +28,7 @@ type (
 
 	TagSign interface {
 		SignUserChooseTag(ctx context.Context, in *UserChooseTagRequest, opts ...grpc.CallOption) (*UserChooseTagRequest, error)
+		SignUserChooseTagRevert(ctx context.Context, in *UserChooseTagRequest, opts ...grpc.CallOption) (*UserChooseTagRequest, error)
 	}
 
 	defaultTagSign struct {
@@ -44,4 +45,9 @@ func NewTagSign(cli zrpc.Client) TagSign {
 func (m *defaultTagSign) SignUserChooseTag(ctx context.Context, in *UserChooseTagRequest, opts ...grpc.CallOption) (*UserChooseTagRequest, error) {
 	client := tag.NewTagSignClient(m.cli.Conn())
 	return client.SignUserChooseTag(ctx, in, opts...)
+}
+
+func (m *defaultTagSign) SignUserChooseTagRevert(ctx context.Context, in *UserChooseTagRequest, opts ...grpc.CallOption) (*UserChooseTagRequest, error) {
+	client := tag.NewTagSignClient(m.cli.Conn())
+	return client.SignUserChooseTagRevert(ctx, in, opts...)
 }

@@ -2,10 +2,9 @@ package tagloginlogic
 
 import (
 	"context"
-	"tag/service/internal/types"
-
-	"tag/service/internal/svc"
-	"tag/service/tag"
+	"user/service/tag/service/internal/svc"
+	"user/service/tag/service/internal/types"
+	"user/service/tag/service/tag"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

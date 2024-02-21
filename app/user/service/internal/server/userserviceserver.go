@@ -27,6 +27,11 @@ func (s *UserServiceServer) UserCreate(ctx context.Context, in *user.UserCreateR
 	return l.UserCreate(in)
 }
 
+func (s *UserServiceServer) UserCreateRevertLogin(ctx context.Context, in *user.UserCreateRequest) (*user.UserCreateResponse, error) {
+	l := logic.NewUserCreateRevertLoginLogic(ctx, s.svcCtx)
+	return l.UserCreateRevertLogin(in)
+}
+
 func (s *UserServiceServer) UserLogin(ctx context.Context, in *user.UserLoginRequest) (*user.UserLoginResponse, error) {
 	l := logic.NewUserLoginLogic(ctx, s.svcCtx)
 	return l.UserLogin(in)

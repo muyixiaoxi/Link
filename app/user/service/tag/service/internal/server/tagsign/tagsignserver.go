@@ -26,3 +26,8 @@ func (s *TagSignServer) SignUserChooseTag(ctx context.Context, in *tag.UserChoos
 	l := tagsignlogic.NewSignUserChooseTagLogic(ctx, s.svcCtx)
 	return l.SignUserChooseTag(in)
 }
+
+func (s *TagSignServer) SignUserChooseTagRevert(ctx context.Context, in *tag.UserChooseTagRequest) (*tag.UserChooseTagRequest, error) {
+	l := tagsignlogic.NewSignUserChooseTagRevertLogic(ctx, s.svcCtx)
+	return l.SignUserChooseTagRevert(in)
+}
