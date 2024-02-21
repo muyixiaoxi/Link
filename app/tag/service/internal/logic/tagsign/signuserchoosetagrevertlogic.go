@@ -3,7 +3,7 @@ package tagsignlogic
 import (
 	"context"
 	"database/sql"
-	"github.com/dtm-labs/dtmgrpc"
+	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
