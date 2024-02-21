@@ -68,3 +68,11 @@ type UserCreateGroupRequset struct {
 	Name          string `json:"name" validate:"required"`
 	Avatar        string `json:"avatar"`
 }
+
+type Message struct {
+	From    uint64 `json:"from"`
+	To      uint64 `json:"to"`
+	Type    uint8  `json:"type"`
+	Time    string `json:"time"`
+	Content string `json:"content"`
+}

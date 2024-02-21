@@ -69,6 +69,14 @@ type UserCreateGroupRequset {
 	Avatar        string `json:"avatar"`
 }
 
+type Message {
+	From    uint64 `json:"from"`
+	To      uint64 `json:"to"`
+	Type    uint8  `json:"type"`
+	Time    string `json:"time"`
+	Content string `json:"content"`
+}
+
 //创建群聊 end
 @server (
 	prefix: /app/user
@@ -81,6 +89,10 @@ service user {
 	@doc "登录"
 	@handler login
 	post /login (UserLoginRequest) returns (UserLoginResponse)
+
+	@doc "chat 连接"
+	@handler chatWS
+	get /chat returns ()
 }
 
 @server (
