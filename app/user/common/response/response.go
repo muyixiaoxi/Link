@@ -28,3 +28,20 @@ func Response(w http.ResponseWriter, res any, code ResCode) {
 	}
 	httpx.WriteJson(w, http.StatusOK, body)
 }
+
+func InitBody(res any, code ResCode) (body Body) {
+	if code > 1000 {
+		body = Body{
+			Code: code,
+			Data: nil,
+			Msg:  code.Msg(),
+		}
+		return
+	}
+	body = Body{
+		Code: code,
+		Data: res,
+		Msg:  code.Msg(),
+	}
+	return
+}
