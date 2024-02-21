@@ -4,14 +4,25 @@ package handler
 import (
 	"net/http"
 
+	systmeTag "tag/restful/internal/handler/systmeTag"
 	tagLogin "tag/restful/internal/handler/tagLogin"
-	tagTest "tag/restful/internal/handler/tagTest"
 	"tag/restful/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/selectGroupTag",
+				Handler: systmeTag.SelectGroupTagHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/app/tag"),
+	)
+
 	server.AddRoutes(
 		[]rest.Route{
 			{
@@ -26,11 +37,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/selectGroupTag",
-				Handler: tagLogin.SelectGroupTagHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
 				Path:    "/selectUserTagByGroup",
 				Handler: tagLogin.SelectUserTagByGroupHandler(serverCtx),
 			},
@@ -41,17 +47,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/app/tag"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/test",
-				Handler: tagTest.UserTagHandler(serverCtx),
-			},
-		},
 		rest.WithPrefix("/app/tag"),
 	)
 }

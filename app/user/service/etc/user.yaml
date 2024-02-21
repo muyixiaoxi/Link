@@ -10,7 +10,3 @@ RedisConf:
   Host: 39.101.77.206:6379
   Type: node
   Pass: Wksycxy0.0
-MicroService:
-  Driver: 'dtm-driver-gozero' #配置dtm使用go-zero的微服务协议
-  Target: 'etcd://114.55.135.211:2379/dtmservice'
-  EndPoint: '114.55.135.211:36790' #dtm地址

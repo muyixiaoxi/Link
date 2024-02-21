@@ -10,15 +10,15 @@ import (
 )
 
 type ServiceContext struct {
-	Config   config.Config
-	TagLogin taglogin.TagLogin
-	TagTest  tagsign.TagSign
+	Config    config.Config
+	TagLogin  taglogin.TagLogin
+	SystemTag tagsign.TagSign
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
-		Config:   c,
-		TagLogin: taglogin.NewTagLogin(zrpc.MustNewClient(c.TagRpc)),
-		TagTest:  tagsign.NewTagSign(zrpc.MustNewClient(c.TagRpc)),
+		Config:    c,
+		TagLogin:  taglogin.NewTagLogin(zrpc.MustNewClient(c.TagRpc)),
+		SystemTag: tagsign.NewTagSign(zrpc.MustNewClient(c.TagRpc)),
 	}
 }
