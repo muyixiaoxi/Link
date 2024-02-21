@@ -1,14 +1,14 @@
 package handler
 
 import (
-	"chat/common/response"
-	"chat/restful/internal/svc"
-	"chat/restful/internal/types"
 	"context"
 	"github.com/gorilla/websocket"
 	"github.com/zeromicro/go-zero/core/logc"
 	"net/http"
 	"sync"
+	"user/common/response"
+	"user/restful/internal/svc"
+	"user/restful/internal/types"
 )
 
 type Client struct {
@@ -22,7 +22,7 @@ var (
 	clientsLock sync.Mutex
 )
 
-func ChatHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		upgrader := websocket.Upgrader{

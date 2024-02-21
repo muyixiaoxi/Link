@@ -5,11 +5,11 @@ go 1.22.0
 require (
 	github.com/dtm-labs/client v1.18.7
 	github.com/dtm-labs/driver-gozero v0.0.7
-	github.com/dtm-labs/dtmgrpc v1.15.0
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.18.0
 	github.com/golang-jwt/jwt/v4 v4.5.0
+	github.com/gorilla/websocket v1.5.0
 	github.com/zeromicro/go-zero v1.6.2
 	golang.org/x/crypto v0.19.0
 	google.golang.org/grpc v1.61.1
@@ -31,7 +31,6 @@ require (
 	github.com/coreos/go-systemd/v22 v22.5.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/dtm-labs/dtmcli v1.15.0 // indirect
 	github.com/dtm-labs/dtmdriver v0.0.6 // indirect
 	github.com/dtm-labs/dtmdriver-gozero v0.0.7 // indirect
 	github.com/dtm-labs/logger v0.0.1 // indirect
