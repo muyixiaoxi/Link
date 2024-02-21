@@ -113,6 +113,7 @@ message DetailGroupResponse {
 
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
+  rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
   rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
   rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);
   rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty);

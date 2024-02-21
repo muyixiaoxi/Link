@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"tag/service/internal/logic/tagsign"
-	"tag/service/internal/svc"
-	"tag/service/tag"
+	"user/service/tag/service/internal/logic/tagsign"
+	"user/service/tag/service/internal/svc"
+	"user/service/tag/service/tag"
 )
 
 type TagSignServer struct {

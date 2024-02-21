@@ -6,7 +6,7 @@ package tagsign
 import (
 	"context"
 
-	"tag/service/tag"
+	"user/service/tag/service/tag"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

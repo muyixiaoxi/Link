@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.25.2
-// source: app/tag/service/tag.proto
+// source: app/user/service/tag/service/tag.proto
 
 package tag
 
@@ -253,7 +253,7 @@ var TagLogin_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "app/tag/service/tag.proto",
+	Metadata: "app/user/service/tag/service/tag.proto",
 }
 
 const (
@@ -380,5 +380,5 @@ var TagSign_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "app/tag/service/tag.proto",
+	Metadata: "app/user/service/tag/service/tag.proto",
 }

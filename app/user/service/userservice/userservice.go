@@ -32,6 +32,7 @@ type (
 
 	UserService interface {
 		UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
+		UserCreateRevertLogin(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
 		UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error)
 		UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
 		UserUpdateInfo(ctx context.Context, in *UserUpdateInfoRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -56,6 +57,11 @@ func NewUserService(cli zrpc.Client) UserService {
 func (m *defaultUserService) UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserCreate(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserCreateRevertLogin(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserCreateRevertLogin(ctx, in, opts...)
 }
 
 func (m *defaultUserService) UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error) {

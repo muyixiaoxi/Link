@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	UserService_UserCreate_FullMethodName            = "/user.UserService/UserCreate"
+	UserService_UserCreateRevertLogin_FullMethodName = "/user.UserService/UserCreateRevertLogin"
 	UserService_UserLogin_FullMethodName             = "/user.UserService/UserLogin"
 	UserService_UserInfo_FullMethodName              = "/user.UserService/UserInfo"
 	UserService_UserUpdateInfo_FullMethodName        = "/user.UserService/UserUpdateInfo"
@@ -35,6 +36,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
 	UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
+	UserCreateRevertLogin(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
 	UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error)
 	UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
 	UserUpdateInfo(ctx context.Context, in *UserUpdateInfoRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -56,6 +58,15 @@ func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 func (c *userServiceClient) UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error) {
 	out := new(UserCreateResponse)
 	err := c.cc.Invoke(ctx, UserService_UserCreate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserCreateRevertLogin(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error) {
+	out := new(UserCreateResponse)
+	err := c.cc.Invoke(ctx, UserService_UserCreateRevertLogin_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -139,6 +150,7 @@ func (c *userServiceClient) UserSelectDetailGroup(ctx context.Context, in *Detai
 // for forward compatibility
 type UserServiceServer interface {
 	UserCreate(context.Context, *UserCreateRequest) (*UserCreateResponse, error)
+	UserCreateRevertLogin(context.Context, *UserCreateRequest) (*UserCreateResponse, error)
 	UserLogin(context.Context, *UserLoginRequest) (*UserLoginResponse, error)
 	UserInfo(context.Context, *UserInfoRequest) (*UserInfoResponse, error)
 	UserUpdateInfo(context.Context, *UserUpdateInfoRequest) (*Empty, error)
@@ -156,6 +168,9 @@ type UnimplementedUserServiceServer struct {
 
 func (UnimplementedUserServiceServer) UserCreate(context.Context, *UserCreateRequest) (*UserCreateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserCreate not implemented")
+}
+func (UnimplementedUserServiceServer) UserCreateRevertLogin(context.Context, *UserCreateRequest) (*UserCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserCreateRevertLogin not implemented")
 }
 func (UnimplementedUserServiceServer) UserLogin(context.Context, *UserLoginRequest) (*UserLoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserLogin not implemented")
@@ -208,6 +223,24 @@ func _UserService_UserCreate_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).UserCreate(ctx, req.(*UserCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserCreateRevertLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserCreateRevertLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserCreateRevertLogin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserCreateRevertLogin(ctx, req.(*UserCreateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -366,6 +399,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserCreate",
 			Handler:    _UserService_UserCreate_Handler,
+		},
+		{
+			MethodName: "UserCreateRevertLogin",
+			Handler:    _UserService_UserCreateRevertLogin_Handler,
 		},
 		{
 			MethodName: "UserLogin",
