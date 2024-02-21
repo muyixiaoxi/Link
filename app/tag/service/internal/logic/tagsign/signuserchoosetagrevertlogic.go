@@ -16,21 +16,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type SignUserChooseTagLogic struct {
+type SignUserChooseTagRevertLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewSignUserChooseTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SignUserChooseTagLogic {
-	return &SignUserChooseTagLogic{
+func NewSignUserChooseTagRevertLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SignUserChooseTagRevertLogic {
+	return &SignUserChooseTagRevertLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *SignUserChooseTagLogic) SignUserChooseTag(in *tag.UserChooseTagRequest) (*tag.UserChooseTagRequest, error) {
+func (l *SignUserChooseTagRevertLogic) SignUserChooseTagRevert(in *tag.UserChooseTagRequest) (*tag.UserChooseTagRequest, error) {
 	// 获取 RawDB
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
 	if err != nil {

@@ -2,18 +2,13 @@ package logic
 
 import (
 	"context"
-	"fmt"
-	"github.com/zeromicro/go-zero/core/logc"
-	"google.golang.org/grpc/codes"
+	"github.com/dtm-labs/dtmgrpc"
+	"github.com/zeromicro/go-zero/core/logx"
 	"google.golang.org/grpc/status"
-	"user/common/jwt"
-	"user/service/tag/service/tag"
-
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
+	"user/service/tag/service/tag"
 	"user/service/user"
-
-	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type SignUpLogic struct {
@@ -31,44 +26,56 @@ func NewSignUpLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SignUpLogi
 }
 
 func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCreateResponse, err error) {
-	response, err := l.svcCtx.UserRpc.UserCreate(l.ctx, &user.UserCreateRequest{
+	//response, err := l.svcCtx.UserRpc.UserCreate(l.ctx, &user.UserCreateRequest{
+	//	Username: req.Username,
+	//	Password: req.Password,
+	//})
+
+	// 获取UserRpc 的BuildTarget
+	userRpcBuildServer, err := l.svcCtx.Config.UserRpc.BuildTarget()
+	if err != nil {
+		return nil, status.Error(100, "用户注册异常")
+	}
+	// 获取TagRpc 的BuildTarget
+	tagRpcBuildServer, err := l.svcCtx.Config.TagRpc.BuildTarget()
+	if err != nil {
+		return nil, status.Error(100, "标签选择异常")
+	}
+
+	//dtm服务的etcd注册地址
+	var dtmServer = "etcd://114.55.135.211:2379/dtmservice"
+	// 创建一个gid
+	gid := dtmgrpc.MustGenGid(dtmServer)
+	// 创建一个saga协议
+	saga := dtmgrpc.NewSagaGrpc(dtmServer, gid)
+	// 第一个 Add 方法
+	userCreateRequest := &user.UserCreateRequest{
 		Username: req.Username,
 		Password: req.Password,
-	})
-	if err != nil {
-		logc.Error(context.Background(), "l.svcCtx.UserRpc.UserCreate failed: ", err)
-		return
 	}
-	//注册tag_rpc服务
-	//clientconf := zrpc.RpcClientConf{Etcd: discov.EtcdConf{
-	//	Hosts: []string{"39.101.77.206:2379"},
-	//	Key:   "tag.rpc",
-	//}}
-	//
-	////注册之后,必须选择一个标签
-	_, err = l.svcCtx.TagSignRpc.SignUserChooseTag(l.ctx, &tag.UserChooseTagRequest{
-		UserId: response.Id,
+	saga.Add(userRpcBuildServer+"user.UserService/UserCreate", userRpcBuildServer+"user.UserService/UserCreateRevertLogin", userCreateRequest)
+	//第二个add方法
+	saga.Add(tagRpcBuildServer+"tag.TagSign/SignUserChooseTag", tagRpcBuildServer+"tag.TagSign/SignUserChooseTagRevert", &tag.UserChooseTagRequest{
+		UserId: 0,
 		TagId:  req.StartTagId,
 	})
+
+	//事务提交
+	err = saga.Submit()
+
 	if err != nil {
-		fmt.Println(err)
-		fromErr, _ := status.FromError(err)
-		if fromErr.Code() == codes.AlreadyExists {
-			return nil, err
-		}
-		logc.Error(context.Background(), "l.svcCtx.TagRpc.SignUserChooseTag is failed", err)
-		return nil, status.Error(codes.DeadlineExceeded, "标签选择失败")
+		return nil, err
 	}
-	auth := l.svcCtx.Config.Auth
-	claims := jwt.UserClaims{
-		Username: response.Username,
-		UserID:   response.Id,
-	}
-	token, _ := jwts.GenToken(claims, auth.AccessSecret, int64(response.Id))
-	resp = &types.UserCreateResponse{
-		Token:    token,
-		Username: response.Username,
-		Avatar:   response.Avatar,
-	}
+	//auth := l.svcCtx.Config.Auth
+	//claims := jwt.UserClaims{
+	//	Username: response.Username,
+	//	UserID:   response.Id,
+	//}
+	//token, _ := jwts.GenToken(claims, auth.AccessSecret, int64(response.Id))
+	//resp = &types.UserCreateResponse{
+	//	Token:    token,
+	//	Username: response.Username,
+	//	Avatar:   response.Avatar,
+	//}
 	return
 }
