@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 	"github.com/dtm-labs/client/dtmcli"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -46,6 +47,7 @@ func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserC
 		if err := tx.QueryRow("SELECT * FROM users WHERE username = ?", in.Username).Scan(&users); err == nil {
 			return errors.New("用户存在")
 		}
+		fmt.Println("新用户")
 		// 加密密码
 		pwd, _ := bcrypt.GetPwd(in.Password)
 		// 插入用户数据
