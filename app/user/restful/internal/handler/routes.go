@@ -31,7 +31,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/",
+				Path:    "/:id",
 				Handler: getUserInfoHandler(serverCtx),
 			},
 			{
@@ -40,14 +40,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: updateUserInfoHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/flowed",
-				Handler: addFlowedHandler(serverCtx),
-			},
-			{
 				Method:  http.MethodPut,
 				Path:    "/remark",
 				Handler: updateRemarkHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/flowed",
+				Handler: addFlowedHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

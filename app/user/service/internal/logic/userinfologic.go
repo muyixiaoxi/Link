@@ -32,7 +32,6 @@ func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (rp *user.UserInfoRes
 	model := &types.User{}
 	cache, _ := l.svcCtx.RDB.Get(fmt.Sprintf("user:%d", in.Id))
 	if cache == "" {
-		fmt.Println("初始化")
 		err = l.svcCtx.DB.Where("id = ?", in.Id).First(model).Error
 		if err != nil {
 			return
@@ -50,7 +49,6 @@ func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (rp *user.UserInfoRes
 		l.svcCtx.RDB.Set(fmt.Sprintf("user:%d", model.ID), string(js))
 		return
 	}
-	fmt.Println("缓存")
 	json.Unmarshal([]byte(cache), rp)
 	return
 }
