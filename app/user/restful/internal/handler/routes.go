@@ -23,6 +23,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/login",
 				Handler: loginHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/chat",
+				Handler: chatWSHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/app/user"),
 	)
