@@ -157,6 +157,23 @@ services:
       - kafka1
     environment:
       DYNAMIC_CONFIG_ENABLED: "TRUE"
+  dtm:
+    build:
+      context: dtm
+      dockerfile: Dockerfile
+    environment:
+      - TZ=Asia/Shanghai
+    entrypoint:
+      - "app/dtm/dtm"
+      - "-c=/app/dtm/configs/config.yaml"
+    volumes:
+      - ./dtm/config.yaml:/app/dtm/configs/config.yaml
+    ports:
+      - "36789:36789"
+      - "36790:36790"
+    networks:
+      - backend
+    restart: always
   # 服务发现
   tag-rpc: #自定义容器名称
     build:
