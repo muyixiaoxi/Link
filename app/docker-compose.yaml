@@ -159,21 +159,23 @@ services:
       DYNAMIC_CONFIG_ENABLED: "TRUE"
   dtm:
     build:
-      context: dtm
-      dockerfile: Dockerfile
+      context: ./dtm
     environment:
       - TZ=Asia/Shanghai
     entrypoint:
-      - "app/dtm/dtm"
+      - "/app/dtm/dtm"
       - "-c=/app/dtm/configs/config.yaml"
+    privileged: true
     volumes:
-      - ./dtm/config.yaml:/app/dtm/configs/config.yaml
+      - ./dtm/config.yml:/app/dtm/configs/config.yaml # 将 dtm 配置文件挂载到容器里
     ports:
       - "36789:36789"
       - "36790:36790"
     networks:
       - backend
     restart: always
+    depends_on:
+      - etcd
   # 服务发现
   tag-rpc: #自定义容器名称
     build:
@@ -188,6 +190,10 @@ services:
       - "8081:8081"
     networks:
       - backend
+    depends_on:
+      - etcd
+      - kafka1
+      - dtm
 
   user-rpc: #自定义容器名称
     build:
@@ -202,6 +208,10 @@ services:
       - "8082:8082"
     networks:
       - backend
+    depends_on:
+      - etcd
+      - kafka1
+      - dtm
 
   tag-api: #自定义容器名称
     build:
@@ -216,6 +226,10 @@ services:
       - "8888:8888"
     networks:
       - backend
+    depends_on:
+      - etcd
+      - kafka1
+      - dtm
 
   user-api: #自定义容器名称
     build:
@@ -230,5 +244,9 @@ services:
       - "8887:8887"
     networks:
       - backend
+    depends_on:
+      - etcd
+      - kafka1
+      - dtm
 
 

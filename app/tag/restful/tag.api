@@ -52,10 +52,6 @@ service tag-api {
 	@handler createTag
 	post /createTag (CreateTagRequest) returns (CreateTagResponse)
 
-	@doc "查看系统bi"
-	@handler selectGroupTag
-	post /selectGroupTag returns ([]TagGroupName)
-
 	@handler selectUserTagByGroup
 	post /selectUserTagByGroup (selectUserTagByGroupRequest) returns (selectUserTagByGroupResponse)
 
@@ -68,12 +64,12 @@ service tag-api {
 
 @server (
 	prefix: /app/tag
-	group:  tagTest
+	group:  systmeTag
 )
 service tag-api {
-	@doc "测试"
-	@handler userTag
-	post /test
+	@doc "查看系统标签"
+	@handler selectGroupTag
+	post /selectGroupTag returns ([]TagGroupName)
 }
 
 // goctl api go -api restful/tag/tag.api -dir restful/tag
