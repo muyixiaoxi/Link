@@ -2,8 +2,9 @@ package logic
 
 import (
 	"context"
-	"github.com/dtm-labs/dtmgrpc"
+	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/logx"
+
 	"google.golang.org/grpc/status"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
