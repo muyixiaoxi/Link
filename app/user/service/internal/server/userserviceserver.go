@@ -52,6 +52,11 @@ func (s *UserServiceServer) UserFlowed(ctx context.Context, in *user.UserAddRequ
 	return l.UserFlowed(in)
 }
 
+func (s *UserServiceServer) UserDisposeFlowed(ctx context.Context, in *user.DisposeFlowedRequest) (*user.Empty, error) {
+	l := logic.NewUserDisposeFlowedLogic(ctx, s.svcCtx)
+	return l.UserDisposeFlowed(in)
+}
+
 func (s *UserServiceServer) UserUpdateRemark(ctx context.Context, in *user.UserUpdateRemarkRequest) (*user.Empty, error) {
 	l := logic.NewUserUpdateRemarkLogic(ctx, s.svcCtx)
 	return l.UserUpdateRemark(in)
