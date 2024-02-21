@@ -2,11 +2,11 @@ package handler
 
 import (
 	"net/http"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 	"user/restful/internal/logic"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
-
-	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func getUserInfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
