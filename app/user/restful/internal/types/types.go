@@ -70,7 +70,7 @@ type UserCreateGroupRequset struct {
 }
 
 type Message struct {
-	From    uint64 `json:"from"`
+	From    uint64 `json:"from,optional"`
 	To      uint64 `json:"to"`
 	Type    uint8  `json:"type"`
 	Time    string `json:"time"`

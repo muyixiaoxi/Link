@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user;
 option go_package="./user";
-import public "timestamp.proto";
+import public "google/protobuf/timestamp.proto";
 
 message Empty {}
 message UserCreateRequest {
