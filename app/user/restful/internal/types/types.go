@@ -89,7 +89,7 @@ type UserLoginResponse struct {
 
 type UserUpdateInfoRequest struct {
 	Username  string `json:"username"`
-	Password  string `json:"password"`
+	Password  string `json:"password,optional"`
 	Avatar    string `json:"avatar"`
 	Age       uint   `json:"age"`
 	Gender    uint   `json:"gender"`
