@@ -19,14 +19,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: signUpHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/login",
-				Handler: loginHandler(serverCtx),
-			},
-			{
 				Method:  http.MethodGet,
 				Path:    "/chat",
 				Handler: chatWSHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/login",
+				Handler: loginHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/app/user"),
@@ -35,24 +35,29 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
-				Path:    "/:id",
-				Handler: getUserInfoHandler(serverCtx),
-			},
-			{
 				Method:  http.MethodPut,
 				Path:    "/",
 				Handler: updateUserInfoHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPut,
-				Path:    "/remark",
-				Handler: updateRemarkHandler(serverCtx),
+				Method:  http.MethodGet,
+				Path:    "/:id",
+				Handler: getUserInfoHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/flowed",
 				Handler: addFlowedHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/flowed/dispose",
+				Handler: disposeFlowedHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/remark",
+				Handler: updateRemarkHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

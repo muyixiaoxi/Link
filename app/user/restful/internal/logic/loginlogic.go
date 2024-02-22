@@ -47,6 +47,7 @@ func (l *LoginLogic) Login(req *types.UserLoginRequest) (resp *types.UserLoginRe
 	token, _ := jwts.GenToken(claims, auth.AccessSecret, int64(response.Id))
 	resp = &types.UserLoginResponse{
 		Token:    token,
+		Id:       response.Id,
 		Username: response.Username,
 		Avatar:   response.Avatar,
 	}

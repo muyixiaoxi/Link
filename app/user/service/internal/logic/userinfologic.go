@@ -37,13 +37,14 @@ func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (rp *user.UserInfoRes
 			return
 		}
 		rp = &user.UserInfoResponse{
-			Id:       uint64(model.ID),
-			Username: model.Username,
-			Avatar:   model.Avatar,
-			Age:      uint64(model.Age),
-			Gender:   gender[model.Gender],
-			Address:  model.Address,
-			Phone:    model.Phone,
+			Id:        uint64(model.ID),
+			Username:  model.Username,
+			Avatar:    model.Avatar,
+			Age:       uint64(model.Age),
+			Gender:    gender[model.Gender],
+			Address:   model.Address,
+			Phone:     model.Phone,
+			Signature: model.Signature,
 		}
 		js, _ := json.Marshal(rp)
 		l.svcCtx.RDB.Set(fmt.Sprintf("user:%d", model.ID), string(js))

@@ -38,13 +38,14 @@ func (l *GetUserInfoLogic) GetUserInfo(req *types.UserInfoRequest) (resp *types.
 		return nil, err
 	}
 	resp = &types.UserInfoResponse{
-		Id:       uint(response.Id),
-		Username: response.Username,
-		Avatar:   response.Avatar,
-		Age:      uint(response.Age),
-		Gender:   response.Gender,
-		Address:  response.Address,
-		Phone:    response.Phone,
+		Id:        uint(response.Id),
+		Username:  response.Username,
+		Avatar:    response.Avatar,
+		Age:       uint(response.Age),
+		Gender:    response.Gender,
+		Address:   response.Address,
+		Phone:     response.Phone,
+		Signature: response.Signature,
 	}
 	return
 }
