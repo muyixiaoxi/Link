@@ -15,6 +15,8 @@ import (
 type (
 	AllTags                    = tag.AllTags
 	AllTagsByGroupNameResponse = tag.AllTagsByGroupNameResponse
+	ChooseTagsRequest          = tag.ChooseTagsRequest
+	ChooseTagsResponse         = tag.ChooseTagsResponse
 	CreateTagRequest           = tag.CreateTagRequest
 	CreateTagResponse          = tag.CreateTagResponse
 	CreateTagResponse_LowTags  = tag.CreateTagResponse_LowTags
@@ -24,6 +26,9 @@ type (
 	GroupTag                   = tag.GroupTag
 	GroupTagResponse           = tag.GroupTagResponse
 	SelectAllTagsByGroupName   = tag.SelectAllTagsByGroupName
+	SelectLinkTag              = tag.SelectLinkTag
+	SelectLinkTagsRequest      = tag.SelectLinkTagsRequest
+	SelectLinkTagsResponse     = tag.SelectLinkTagsResponse
 	UserChooseTagRequest       = tag.UserChooseTagRequest
 
 	TagLogin interface {
@@ -32,6 +37,8 @@ type (
 		DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
 		SelectGroupTag(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GroupTagResponse, error)
 		SelectAllTagsByGroup(ctx context.Context, in *SelectAllTagsByGroupName, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error)
+		ChooseTags(ctx context.Context, in *ChooseTagsRequest, opts ...grpc.CallOption) (*ChooseTagsResponse, error)
+		SelectLinkTags(ctx context.Context, in *SelectLinkTagsRequest, opts ...grpc.CallOption) (*SelectLinkTagsResponse, error)
 	}
 
 	defaultTagLogin struct {
@@ -68,4 +75,14 @@ func (m *defaultTagLogin) SelectGroupTag(ctx context.Context, in *Empty, opts ..
 func (m *defaultTagLogin) SelectAllTagsByGroup(ctx context.Context, in *SelectAllTagsByGroupName, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error) {
 	client := tag.NewTagLoginClient(m.cli.Conn())
 	return client.SelectAllTagsByGroup(ctx, in, opts...)
+}
+
+func (m *defaultTagLogin) ChooseTags(ctx context.Context, in *ChooseTagsRequest, opts ...grpc.CallOption) (*ChooseTagsResponse, error) {
+	client := tag.NewTagLoginClient(m.cli.Conn())
+	return client.ChooseTags(ctx, in, opts...)
+}
+
+func (m *defaultTagLogin) SelectLinkTags(ctx context.Context, in *SelectLinkTagsRequest, opts ...grpc.CallOption) (*SelectLinkTagsResponse, error) {
+	client := tag.NewTagLoginClient(m.cli.Conn())
+	return client.SelectLinkTags(ctx, in, opts...)
 }
