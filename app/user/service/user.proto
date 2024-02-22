@@ -119,6 +119,7 @@ service UserService {
   rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty);
   rpc UserFlowed(UserAddRequest) returns(Empty);
   rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty);
+  //群聊
   rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty); //创建群聊
   rpc UserSelectGroup(UserSelectGroupsRequest) returns (UserSelectGroupsResponse) ; //查询群聊列表
   rpc UserSelectDetailGroup(DetailGroupRequest) returns (DetailGroupResponse) ; //查询群聊详情

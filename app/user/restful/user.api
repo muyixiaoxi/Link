@@ -69,6 +69,7 @@ type UserCreateGroupRequset {
 	Avatar        string `json:"avatar"`
 }
 
+//创建群聊 end
 type Message {
 	From    uint64 `json:"from"`
 	To      uint64 `json:"to"`
@@ -77,7 +78,23 @@ type Message {
 	Content string `json:"content"`
 }
 
-//创建群聊 end
+// 用户选择标签 Request
+type UserChooseTagRequst {
+	SystemTagId uint64   `json:"systemTagId" validate:"required"'`
+	TagIds      []uint64 `json:"tagIds" validate:"required,max=3"`
+}
+
+// 查询当前登录用户相关的标签 Response
+type QueryLink {
+	Id        uint64 `json:"id"` //标签id
+	CreatorId uint64 `json:"creatorId"` //创作者id
+	TagName   string `json:"tagName"` //标签名称
+}
+
+type QueryLinkTagsResponse {
+	LinkTags []QueryLink `json:"linkTags"`
+}
+
 @server (
 	prefix: /app/user
 )
@@ -92,7 +109,7 @@ service user {
 
 	@doc "chat 连接"
 	@handler chatWS
-	get /chat returns ()
+	get /chat
 }
 
 @server (
@@ -126,6 +143,21 @@ service user {
 	@doc "用户创建群聊"
 	@handler userCreateGroup
 	post /createGroup (UserCreateGroupRequset)
+}
+
+@server (
+	prefix: /app/user
+	jwt:    Auth
+	group:  userTag
+)
+service user {
+	@doc "用户选择标签"
+	@handler userChooseTag
+	post /chooseTag (UserChooseTagRequst)
+
+	@doc "查询和当前登录用户相关的标签"
+	@handler queryLinkTags
+	post /queryLinkTags returns (QueryLinkTagsResponse)
 }
 
 // goctl api go -api user.api -dir .

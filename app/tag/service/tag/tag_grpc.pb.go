@@ -24,6 +24,8 @@ const (
 	TagLogin_DeleteTag_FullMethodName            = "/tag.TagLogin/DeleteTag"
 	TagLogin_SelectGroupTag_FullMethodName       = "/tag.TagLogin/SelectGroupTag"
 	TagLogin_SelectAllTagsByGroup_FullMethodName = "/tag.TagLogin/SelectAllTagsByGroup"
+	TagLogin_ChooseTags_FullMethodName           = "/tag.TagLogin/ChooseTags"
+	TagLogin_SelectLinkTags_FullMethodName       = "/tag.TagLogin/SelectLinkTags"
 )
 
 // TagLoginClient is the client API for TagLogin service.
@@ -35,6 +37,8 @@ type TagLoginClient interface {
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
 	SelectGroupTag(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GroupTagResponse, error)
 	SelectAllTagsByGroup(ctx context.Context, in *SelectAllTagsByGroupName, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error)
+	ChooseTags(ctx context.Context, in *ChooseTagsRequest, opts ...grpc.CallOption) (*ChooseTagsResponse, error)
+	SelectLinkTags(ctx context.Context, in *SelectLinkTagsRequest, opts ...grpc.CallOption) (*SelectLinkTagsResponse, error)
 }
 
 type tagLoginClient struct {
@@ -90,6 +94,24 @@ func (c *tagLoginClient) SelectAllTagsByGroup(ctx context.Context, in *SelectAll
 	return out, nil
 }
 
+func (c *tagLoginClient) ChooseTags(ctx context.Context, in *ChooseTagsRequest, opts ...grpc.CallOption) (*ChooseTagsResponse, error) {
+	out := new(ChooseTagsResponse)
+	err := c.cc.Invoke(ctx, TagLogin_ChooseTags_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagLoginClient) SelectLinkTags(ctx context.Context, in *SelectLinkTagsRequest, opts ...grpc.CallOption) (*SelectLinkTagsResponse, error) {
+	out := new(SelectLinkTagsResponse)
+	err := c.cc.Invoke(ctx, TagLogin_SelectLinkTags_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TagLoginServer is the server API for TagLogin service.
 // All implementations must embed UnimplementedTagLoginServer
 // for forward compatibility
@@ -99,6 +121,8 @@ type TagLoginServer interface {
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
 	SelectGroupTag(context.Context, *Empty) (*GroupTagResponse, error)
 	SelectAllTagsByGroup(context.Context, *SelectAllTagsByGroupName) (*AllTagsByGroupNameResponse, error)
+	ChooseTags(context.Context, *ChooseTagsRequest) (*ChooseTagsResponse, error)
+	SelectLinkTags(context.Context, *SelectLinkTagsRequest) (*SelectLinkTagsResponse, error)
 	mustEmbedUnimplementedTagLoginServer()
 }
 
@@ -120,6 +144,12 @@ func (UnimplementedTagLoginServer) SelectGroupTag(context.Context, *Empty) (*Gro
 }
 func (UnimplementedTagLoginServer) SelectAllTagsByGroup(context.Context, *SelectAllTagsByGroupName) (*AllTagsByGroupNameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SelectAllTagsByGroup not implemented")
+}
+func (UnimplementedTagLoginServer) ChooseTags(context.Context, *ChooseTagsRequest) (*ChooseTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChooseTags not implemented")
+}
+func (UnimplementedTagLoginServer) SelectLinkTags(context.Context, *SelectLinkTagsRequest) (*SelectLinkTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SelectLinkTags not implemented")
 }
 func (UnimplementedTagLoginServer) mustEmbedUnimplementedTagLoginServer() {}
 
@@ -224,6 +254,42 @@ func _TagLogin_SelectAllTagsByGroup_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TagLogin_ChooseTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChooseTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagLoginServer).ChooseTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TagLogin_ChooseTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagLoginServer).ChooseTags(ctx, req.(*ChooseTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagLogin_SelectLinkTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SelectLinkTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagLoginServer).SelectLinkTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TagLogin_SelectLinkTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagLoginServer).SelectLinkTags(ctx, req.(*SelectLinkTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TagLogin_ServiceDesc is the grpc.ServiceDesc for TagLogin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -250,6 +316,14 @@ var TagLogin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SelectAllTagsByGroup",
 			Handler:    _TagLogin_SelectAllTagsByGroup_Handler,
+		},
+		{
+			MethodName: "ChooseTags",
+			Handler:    _TagLogin_ChooseTags_Handler,
+		},
+		{
+			MethodName: "SelectLinkTags",
+			Handler:    _TagLogin_SelectLinkTags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
