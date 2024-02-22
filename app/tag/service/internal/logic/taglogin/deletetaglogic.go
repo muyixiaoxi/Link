@@ -25,10 +25,24 @@ func NewDeleteTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteT
 }
 
 func (l *DeleteTagLogic) DeleteTag(in *tag.DeleteTagRequest) (*tag.DeleteTagResponse, error) {
-	// todo: add your logic here and delete this line
-	err := l.svcCtx.DB.Where("creator_id = ? and id in (?) and type !='OFFICIAL'", in.CreatorId, in.TagId).Delete(&types.Tag{}).Error
+	// 删除用户自己创建的标签,同时,删除tb_user_tag标签中的记录
+	tx := l.svcCtx.DB.Begin()
+	err := tx.Where("creator_id = ? and id in (?) and type !='OFFICIAL'", in.CreatorId, in.TagId).Delete(&types.Tag{}).Error
 	if err != nil {
+		tx.Rollback()
 		return nil, err
 	}
-	return &tag.DeleteTagResponse{}, nil
+	//删除 tb_user_tag 标签中的记录
+	var ids []int
+	err = tx.Where("tag_id in (?)", in.TagId).Model(&types.UserTagFollow{}).Select("id").Find(&ids).Error
+	if err != nil {
+		tx.Rollback()
+		return nil, err
+	}
+	err = tx.Where("id in (?)", ids).Delete(&types.UserTagFollow{}).Error
+	if err != nil {
+		tx.Rollback()
+		return nil, err
+	}
+	return &tag.DeleteTagResponse{}, tx.Commit().Error
 }
