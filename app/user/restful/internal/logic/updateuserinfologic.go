@@ -29,18 +29,18 @@ func (l *UpdateUserInfoLogic) UpdateUserInfo(req *types.UserUpdateInfoRequest) e
 	jid := l.ctx.Value("user_id").(json.Number)
 	id, _ := jid.Int64()
 	_, err := l.svcCtx.UserRpc.UserUpdateInfo(l.ctx, &user.UserUpdateInfoRequest{
-		Id:       uint64(id),
-		Username: req.Username,
-		Password: req.Password,
-		Avatar:   req.Avatar,
-		Age:      uint64(req.Age),
-		Gender:   uint64(req.Gender),
-		Address:  req.Address,
-		Phone:    req.Phone,
+		Id:        uint64(id),
+		Username:  req.Username,
+		Password:  req.Password,
+		Avatar:    req.Avatar,
+		Age:       uint64(req.Age),
+		Gender:    uint64(req.Gender),
+		Address:   req.Address,
+		Phone:     req.Phone,
+		Signature: req.Signature,
 	})
 	if err != nil {
 		logc.Error(context.Background(), "l.svcCtx.UserRpc.UserUpdateInfo failed: ", err)
-		return err
 	}
-	return nil
+	return err
 }

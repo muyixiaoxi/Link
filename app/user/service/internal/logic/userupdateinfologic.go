@@ -37,14 +37,15 @@ func (l *UserUpdateInfoLogic) UserUpdateInfo(in *user.UserUpdateInfoRequest) (rp
 	}
 	pwd, _ := bcrypt.GetPwd(in.Password)
 	model := &types.User{
-		Model:    gorm.Model{ID: uint(in.Id)},
-		Username: in.Username,
-		Password: pwd,
-		Age:      uint(in.Age),
-		Gender:   uint(in.Gender),
-		Address:  in.Address,
-		Phone:    in.Phone,
-		Avatar:   in.Avatar,
+		Model:     gorm.Model{ID: uint(in.Id)},
+		Username:  in.Username,
+		Password:  pwd,
+		Age:       uint(in.Age),
+		Gender:    uint(in.Gender),
+		Address:   in.Address,
+		Phone:     in.Phone,
+		Avatar:    in.Avatar,
+		Signature: in.Signature,
 	}
 	err = l.svcCtx.DB.Updates(model).Error
 	return

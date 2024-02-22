@@ -1,7 +1,10 @@
 package handler
 
 import (
+	"errors"
+	"gorm.io/gorm"
 	"net/http"
+	"user/common/response"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"user/restful/internal/logic"
@@ -20,9 +23,13 @@ func disposeFlowedHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := logic.NewDisposeFlowedLogic(r.Context(), svcCtx)
 		err := l.DisposeFlowed(&req)
 		if err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
+			if errors.Is(err, gorm.ErrRecordNotFound) {
+				response.Response(w, nil, response.CodeApplyRecordNotExist)
+			} else {
+				response.Response(w, nil, response.CodeServerBusy)
+			}
 		} else {
-			httpx.Ok(w)
+			response.Response(w, nil, response.CodeSuccess)
 		}
 	}
 }

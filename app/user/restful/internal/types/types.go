@@ -2,10 +2,12 @@
 package types
 
 type DisposeFlowedRequest struct {
-	From uint64 `json:"id"`
-	To   uint64 `json:"to"`
-	Type uint8  `json:"type"`
-	Res  bool   `json:"res"`
+	From   uint64 `json:"id"`
+	To     uint64 `json:"to"`
+	Type   uint32 `json:"type"`
+	Remark string `json:"remark,optional"`
+	Res    bool   `json:"res"`
+
 }
 
 type Message struct {
@@ -15,6 +17,7 @@ type Message struct {
 	Time    string `json:"time"`
 	Content string `json:"content"`
 }
+
 
 type QueryLink struct {
 	Id        uint64 `json:"id"`        //标签id
@@ -30,6 +33,7 @@ type UserChooseTagRequst struct {
 	SystemTagId uint64   `json:"systemTagId" validate:"required"'`
 	TagIds      []uint64 `json:"tagIds" validate:"required,max=3"`
 }
+
 
 type UserCreateGroupRequset struct {
 	GroupBossId   uint64 `json:"groupBossId" validate:"required"`
@@ -64,13 +68,14 @@ type UserInfoRequest struct {
 }
 
 type UserInfoResponse struct {
-	Id       uint   `json:"id"`
-	Username string `json:"username"`
-	Avatar   string `json:"avatar"`
-	Age      uint   `json:"age"`
-	Gender   string `json:"gender"`
-	Address  string `json:"address"`
-	Phone    string `json:"phone"`
+	Id        uint   `json:"id"`
+	Username  string `json:"username"`
+	Avatar    string `json:"avatar"`
+	Age       uint   `json:"age"`
+	Gender    string `json:"gender"`
+	Address   string `json:"address"`
+	Phone     string `json:"phone"`
+	Signature string `json:"signature"`
 }
 
 type UserLoginRequest struct {
@@ -80,18 +85,21 @@ type UserLoginRequest struct {
 
 type UserLoginResponse struct {
 	Token    string `json:"token"`
+	Id       uint64 `json:"id"`
 	Username string `json:"username"`
 	Avatar   string `json:"avatar"`
 }
 
+
 type UserUpdateInfoRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Avatar   string `json:"avatar"`
-	Age      uint   `json:"age"`
-	Gender   uint   `json:"gender"`
-	Address  string `json:"address"`
-	Phone    string `json:"phone"`
+	Username  string `json:"username"`
+	Password  string `json:"password"`
+	Avatar    string `json:"avatar"`
+	Age       uint   `json:"age"`
+	Gender    uint   `json:"gender"`
+	Address   string `json:"address"`
+	Phone     string `json:"phone"`
+	Signature string `json:"signature"`
 }
 
 type UserUpdateRemarkRequest struct {

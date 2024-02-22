@@ -51,8 +51,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: addFlowedHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodDelete,
-				Path:    "/flowed",
+				Method:  http.MethodPost,
+				Path:    "/flowed/dispose",
 				Handler: disposeFlowedHandler(serverCtx),
 			},
 			{
