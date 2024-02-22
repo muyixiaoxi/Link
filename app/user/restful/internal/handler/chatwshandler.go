@@ -51,6 +51,10 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 				logc.Error(context.Background(), "client.conn.ReadJSON(&message) failed: ", err)
 				continue
 			}
+			// 心跳检测
+			if message.Type == 0 {
+				client.Conn.WriteJSON(message)
+			}
 			if message.Type == 1 {
 				logic.SingleChat(message)
 			}
