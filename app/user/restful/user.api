@@ -69,9 +69,19 @@ type UserCreateGroupRequset {
 	Avatar        string `json:"avatar"`
 }
 
+
 //创建群聊 end
+
+type DisposeFlowedRequest{
+	From uint64 `json:"id"`
+	To uint64  `json:"to"`
+	Type uint8 `json:"type"`
+	Res bool `json:"res"`
+}
+
+
 type Message {
-	From    uint64 `json:"from"`
+	From    uint64 `json:"from,optional"`
 	To      uint64 `json:"to"`
 	Type    uint8  `json:"type"`
 	Time    string `json:"time"`
@@ -131,7 +141,11 @@ service user {
 
 	@doc "添加好友/群聊"
 	@handler addFlowed
-	post /flowed (UserFlowedRequest)
+	post /flowed (Message)
+
+	@doc "处理好友/群聊申请"
+	@handler  disposeFlowed
+	delete /flowed (DisposeFlowedRequest)
 }
 
 @server (

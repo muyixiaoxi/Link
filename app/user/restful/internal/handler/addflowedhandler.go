@@ -3,16 +3,16 @@ package handler
 import (
 	"net/http"
 	"user/common/response"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 	"user/restful/internal/logic"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
-
-	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func addFlowedHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.UserFlowedRequest
+		var req types.Message
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return

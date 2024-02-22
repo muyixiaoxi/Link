@@ -89,6 +89,13 @@ message GroupInformation {
   string avatar = 6; //群聊头像
 }
 
+message DisposeFlowedRequest {
+  uint64 from = 1;
+  uint64 to = 2;
+  uint64 type = 3;  // 好友3 群聊 4
+  bool res = 4; // 结果
+}
+
 message UserSelectGroupsResponse{
   repeated GroupInformation groupList = 1;
 }
@@ -118,6 +125,7 @@ service UserService {
   rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);
   rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty);
   rpc UserFlowed(UserAddRequest) returns(Empty);
+  rpc UserDisposeFlowed(DisposeFlowedRequest) returns(Empty);
   rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty);
   //群聊
   rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty); //创建群聊

@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
 	"user/service/user"
@@ -25,18 +24,24 @@ func NewAddFlowedLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddFlow
 	}
 }
 
-func (l *AddFlowedLogic) AddFlowed(req *types.UserFlowedRequest) (err error) {
+func (l *AddFlowedLogic) AddFlowed(req *types.Message) (err error) {
 	jid := l.ctx.Value("user_id").(json.Number)
 	id, _ := jid.Int64()
-	resp, err := l.svcCtx.UserRpc.UserFlowed(l.ctx, &user.UserAddRequest{
+	req.From = uint64(id)
+	_, err = l.svcCtx.UserRpc.UserFlowed(l.ctx, &user.UserAddRequest{
 		Id:      uint64(id),
-		BeId:    req.BeId,
-		Message: req.Message,
+		BeId:    req.To,
+		Message: req.Content,
 		Type:    uint32(req.Type),
 	})
 	if err != nil {
+		logx.Error("l.svcCtx.UserRpc.UserFlowed failed: ", err)
 		return
 	}
-	fmt.Println(resp)
+
+	// 如果该用户登录
+	if client, has := Clients[req.To]; has {
+		client.Conn.WriteJSON(req)
+	}
 	return
 }
