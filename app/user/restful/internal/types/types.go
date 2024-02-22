@@ -2,12 +2,11 @@
 package types
 
 type DisposeFlowedRequest struct {
-	From   uint64 `json:"id"`
+	From   uint64 `json:"from"`
 	To     uint64 `json:"to"`
 	Type   uint32 `json:"type"`
 	Remark string `json:"remark,optional"`
 	Res    bool   `json:"res"`
-
 }
 
 type Message struct {
@@ -17,7 +16,6 @@ type Message struct {
 	Time    string `json:"time"`
 	Content string `json:"content"`
 }
-
 
 type QueryLink struct {
 	Id        uint64 `json:"id"`        //标签id
@@ -33,7 +31,6 @@ type UserChooseTagRequst struct {
 	SystemTagId uint64   `json:"systemTagId" validate:"required"'`
 	TagIds      []uint64 `json:"tagIds" validate:"required,max=3"`
 }
-
 
 type UserCreateGroupRequset struct {
 	GroupBossId   uint64 `json:"groupBossId" validate:"required"`
@@ -89,7 +86,6 @@ type UserLoginResponse struct {
 	Username string `json:"username"`
 	Avatar   string `json:"avatar"`
 }
-
 
 type UserUpdateInfoRequest struct {
 	Username  string `json:"username"`
