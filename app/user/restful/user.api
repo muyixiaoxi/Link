@@ -72,12 +72,21 @@ type UserCreateGroupRequset {
 	Avatar        string `json:"avatar"`
 }
 
+<<<<<<< HEAD
 type DisposeFlowedRequest {
 	From   uint64 `json:"id"`
 	To     uint64 `json:"to"`
 	Type   uint32 `json:"type"`
 	Remark string `json:"remark,optional"`
 	Res    bool   `json:"res"`
+=======
+//创建群聊 end
+type DisposeFlowedRequest {
+	From uint64 `json:"id"`
+	To   uint64 `json:"to"`
+	Type uint8  `json:"type"`
+	Res  bool   `json:"res"`
+>>>>>>> 9fd9970c0aa7e4eb8b8ecc053a2b23c1bb010967
 }
 
 type Message {
@@ -88,7 +97,23 @@ type Message {
 	Content string `json:"content"`
 }
 
-//创建群聊 end
+// 用户选择标签 Request
+type UserChooseTagRequst {
+	SystemTagId uint64   `json:"systemTagId" validate:"required"'`
+	TagIds      []uint64 `json:"tagIds" validate:"required,max=3"`
+}
+
+// 查询当前登录用户相关的标签 Response
+type QueryLink {
+	Id        uint64 `json:"id"` //标签id
+	CreatorId uint64 `json:"creatorId"` //创作者id
+	TagName   string `json:"tagName"` //标签名称
+}
+
+type QueryLinkTagsResponse {
+	LinkTags []QueryLink `json:"linkTags"`
+}
+
 @server (
 	prefix: /app/user
 )
@@ -129,7 +154,11 @@ service user {
 
 	@doc "处理好友/群聊申请"
 	@handler disposeFlowed
+<<<<<<< HEAD
 	post /flowed/dispose (DisposeFlowedRequest)
+=======
+	delete /flowed (DisposeFlowedRequest)
+>>>>>>> 9fd9970c0aa7e4eb8b8ecc053a2b23c1bb010967
 }
 
 @server (
@@ -141,6 +170,21 @@ service user {
 	@doc "用户创建群聊"
 	@handler userCreateGroup
 	post /createGroup (UserCreateGroupRequset)
+}
+
+@server (
+	prefix: /app/user
+	jwt:    Auth
+	group:  userTag
+)
+service user {
+	@doc "用户选择标签"
+	@handler userChooseTag
+	post /chooseTag (UserChooseTagRequst)
+
+	@doc "查询和当前登录用户相关的标签"
+	@handler queryLinkTags
+	post /queryLinkTags returns (QueryLinkTagsResponse)
 }
 
 // goctl api go -api user.api -dir .

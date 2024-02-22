@@ -48,13 +48,24 @@ func (l *CreateTagLogic) CreateTag(in *tag.CreateTagRequest) (*tag.CreateTagResp
 		TagName:   in.TagName,
 		CreatorID: int64(in.CreatorId),
 	}
-	err = tx.Debug().Create(&createRequst).Error
+	err = tx.Create(&createRequst).Error
 	if err != nil {
 		tx.Rollback()
 		return nil, err
 	}
 	err = tx.Commit().Error
 	if err != nil {
+		return nil, err
+	}
+	//创建完小标签,插入tb_user_tag表中
+	userTag := types.UserTagFollow{
+		TagId:  uint64(createRequst.ID),
+		UserId: in.CreatorId,
+	}
+	//插入
+	err = tx.Create(&userTag).Error
+	if err != nil {
+		tx.Rollback()
 		return nil, err
 	}
 	//根据groupName 查询小标签

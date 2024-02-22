@@ -46,3 +46,13 @@ func (s *TagLoginServer) SelectAllTagsByGroup(ctx context.Context, in *tag.Selec
 	l := tagloginlogic.NewSelectAllTagsByGroupLogic(ctx, s.svcCtx)
 	return l.SelectAllTagsByGroup(in)
 }
+
+func (s *TagLoginServer) ChooseTags(ctx context.Context, in *tag.ChooseTagsRequest) (*tag.ChooseTagsResponse, error) {
+	l := tagloginlogic.NewChooseTagsLogic(ctx, s.svcCtx)
+	return l.ChooseTags(in)
+}
+
+func (s *TagLoginServer) SelectLinkTags(ctx context.Context, in *tag.SelectLinkTagsRequest) (*tag.SelectLinkTagsResponse, error) {
+	l := tagloginlogic.NewSelectLinkTagsLogic(ctx, s.svcCtx)
+	return l.SelectLinkTags(in)
+}

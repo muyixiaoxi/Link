@@ -15,6 +15,8 @@ import (
 type (
 	AllTags                    = tag.AllTags
 	AllTagsByGroupNameResponse = tag.AllTagsByGroupNameResponse
+	ChooseTagsRequest          = tag.ChooseTagsRequest
+	ChooseTagsResponse         = tag.ChooseTagsResponse
 	CreateTagRequest           = tag.CreateTagRequest
 	CreateTagResponse          = tag.CreateTagResponse
 	CreateTagResponse_LowTags  = tag.CreateTagResponse_LowTags
@@ -24,6 +26,9 @@ type (
 	GroupTag                   = tag.GroupTag
 	GroupTagResponse           = tag.GroupTagResponse
 	SelectAllTagsByGroupName   = tag.SelectAllTagsByGroupName
+	SelectLinkTag              = tag.SelectLinkTag
+	SelectLinkTagsRequest      = tag.SelectLinkTagsRequest
+	SelectLinkTagsResponse     = tag.SelectLinkTagsResponse
 	UserChooseTagRequest       = tag.UserChooseTagRequest
 
 	TagSign interface {

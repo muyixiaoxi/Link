@@ -7,6 +7,7 @@ type DisposeFlowedRequest struct {
 	Type   uint32 `json:"type"`
 	Remark string `json:"remark,optional"`
 	Res    bool   `json:"res"`
+
 }
 
 type Message struct {
@@ -16,6 +17,23 @@ type Message struct {
 	Time    string `json:"time"`
 	Content string `json:"content"`
 }
+
+
+type QueryLink struct {
+	Id        uint64 `json:"id"`        //标签id
+	CreatorId uint64 `json:"creatorId"` //创作者id
+	TagName   string `json:"tagName"`   //标签名称
+}
+
+type QueryLinkTagsResponse struct {
+	LinkTags []QueryLink `json:"linkTags"`
+}
+
+type UserChooseTagRequst struct {
+	SystemTagId uint64   `json:"systemTagId" validate:"required"'`
+	TagIds      []uint64 `json:"tagIds" validate:"required,max=3"`
+}
+
 
 type UserCreateGroupRequset struct {
 	GroupBossId   uint64 `json:"groupBossId" validate:"required"`
@@ -71,6 +89,7 @@ type UserLoginResponse struct {
 	Username string `json:"username"`
 	Avatar   string `json:"avatar"`
 }
+
 
 type UserUpdateInfoRequest struct {
 	Username  string `json:"username"`

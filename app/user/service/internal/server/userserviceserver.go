@@ -62,6 +62,7 @@ func (s *UserServiceServer) UserUpdateRemark(ctx context.Context, in *user.UserU
 	return l.UserUpdateRemark(in)
 }
 
+// 群聊
 func (s *UserServiceServer) UserCreateGroup(ctx context.Context, in *user.UserCreateGroupRequest) (*user.Empty, error) {
 	l := logic.NewUserCreateGroupLogic(ctx, s.svcCtx)
 	return l.UserCreateGroup(in)
