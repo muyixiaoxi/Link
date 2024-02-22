@@ -5,21 +5,10 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/zeromicro/go-zero/core/logc"
 	"net/http"
-	"sync"
 	"user/common/response"
+	"user/restful/internal/logic"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
-)
-
-type Client struct {
-	Id       uint64 `json:"id"`
-	Username string `json:"username"`
-	conn     *websocket.Conn
-}
-
-var (
-	clients     = make(map[uint64]*Client)
-	clientsLock sync.Mutex
 )
 
 func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
@@ -39,47 +28,33 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			logc.Error(context.Background(), "websocket link failed: ", err)
 			return
 		}
-		client := &Client{}
+		client := &logic.Client{}
 		err = conn.ReadJSON(client)
 		if err != nil {
 			logc.Error(context.Background(), "websocket init failed: ", err)
 			return
 		}
-		client.conn = conn
-		clientsLock.Lock()
-		clients[client.Id] = client
-		clientsLock.Unlock()
+		client.Conn = conn
+		logic.ClientsLock.Lock()
+		logic.Clients[client.Id] = client
+		logic.ClientsLock.Unlock()
 		conn.WriteJSON(response.InitBody(nil, response.CodeSuccess))
 		defer func() {
 			conn.Close()
-			delete(clients, client.Id)
+			delete(logic.Clients, client.Id)
 		}()
 
 		message := types.Message{}
 		for {
-			err := client.conn.ReadJSON(&message)
+			err := client.Conn.ReadJSON(&message)
 			if err != nil {
 				logc.Error(context.Background(), "client.conn.ReadJSON(&message) failed: ", err)
 				continue
 			}
 			if message.Type == 1 {
-				SingleChat(message)
+				logic.SingleChat(message)
 			}
 		}
 
 	}
-}
-
-// SingleChat 单聊
-func SingleChat(message types.Message) {
-	// 向redis存储消息
-	if c, has := clients[message.To]; has {
-		c.conn.WriteJSON(message)
-	}
-
-}
-
-// GroupChat 群聊
-func GroupChat(message types.Message) {
-
 }
