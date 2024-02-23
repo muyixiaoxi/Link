@@ -30,9 +30,13 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (rp *user.UserInfoResponse, err error) {
 	rp = &user.UserInfoResponse{}
 	model := &types.User{}
-	cache, _ := l.svcCtx.RDB.Get(fmt.Sprintf("link:user:%d", in.Id))
+	id := in.UserId
+	if in.FriendId != 0 {
+		id = in.FriendId
+	}
+	cache, _ := l.svcCtx.RDB.Get(fmt.Sprintf("link:user:%d", id))
 	if cache == "" {
-		err = l.svcCtx.DB.Where("id = ?", in.Id).First(model).Error
+		err = l.svcCtx.DB.Where("id = ?", id).First(model).Error
 		if err != nil {
 			return
 		}
@@ -48,8 +52,15 @@ func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (rp *user.UserInfoRes
 		}
 		js, _ := json.Marshal(rp)
 		l.svcCtx.RDB.Set(fmt.Sprintf("link:user:%d", model.ID), string(js))
-		return
+	} else {
+		json.Unmarshal([]byte(cache), rp)
 	}
-	json.Unmarshal([]byte(cache), rp)
+	if in.FriendId != 0 {
+		friend := &types.Friend{}
+		l.svcCtx.DB.Where("user_id = ? and friend_id = ?", in.UserId, in.FriendId).First(friend)
+		rp.IsFriend = friend.IsFriend
+		rp.Remark = friend.Remark
+	}
+
 	return
 }

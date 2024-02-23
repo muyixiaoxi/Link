@@ -8,4 +8,5 @@ type ApplyFor struct {
 	BeId    uint64 `gorm:"not null"`
 	Message string `gorm:"size:100"`
 	Type    uint32 `gorm:"not null"`
+	Remark  string `gorm:"size:20"`
 }

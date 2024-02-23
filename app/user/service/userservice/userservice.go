@@ -23,6 +23,9 @@ type (
 	UserCreateGroupRequest   = user.UserCreateGroupRequest
 	UserCreateRequest        = user.UserCreateRequest
 	UserCreateResponse       = user.UserCreateResponse
+	UserFriend               = user.UserFriend
+	UserFriendRequest        = user.UserFriendRequest
+	UserFriendResponse       = user.UserFriendResponse
 	UserInfoRequest          = user.UserInfoRequest
 	UserInfoResponse         = user.UserInfoResponse
 	UserLoginRequest         = user.UserLoginRequest
@@ -38,9 +41,11 @@ type (
 		UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error)
 		UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
 		UserUpdateInfo(ctx context.Context, in *UserUpdateInfoRequest, opts ...grpc.CallOption) (*Empty, error)
+		// 好友
 		UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserDisposeFlowed(ctx context.Context, in *DisposeFlowedRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
+		UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
 		NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 		UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
@@ -83,6 +88,7 @@ func (m *defaultUserService) UserUpdateInfo(ctx context.Context, in *UserUpdateI
 	return client.UserUpdateInfo(ctx, in, opts...)
 }
 
+// 好友
 func (m *defaultUserService) UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserFlowed(ctx, in, opts...)
@@ -96,6 +102,11 @@ func (m *defaultUserService) UserDisposeFlowed(ctx context.Context, in *DisposeF
 func (m *defaultUserService) UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserUpdateRemark(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserFriendList(ctx, in, opts...)
 }
 
 func (m *defaultUserService) NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error) {

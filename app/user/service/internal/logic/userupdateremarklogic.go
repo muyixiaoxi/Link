@@ -25,11 +25,14 @@ func NewUserUpdateRemarkLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 func (l *UserUpdateRemarkLogic) UserUpdateRemark(in *user.UserUpdateRemarkRequest) (response *user.Empty, err error) {
 	response = &user.Empty{}
-	model := types.Flowed{
+	model := &types.Friend{
 		UserID:   in.Id,
 		FriendID: in.BeId,
 		Remark:   in.Remark,
 	}
-	err = l.svcCtx.DB.Updates(model).Error
+	n := l.svcCtx.DB.Where("user_id = ? and friend_id = ?", in.Id, in.BeId).Updates(model).RowsAffected
+	if n == 0 {
+		err = l.svcCtx.DB.Create(model).Error
+	}
 	return
 }

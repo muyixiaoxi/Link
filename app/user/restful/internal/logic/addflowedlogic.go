@@ -3,9 +3,10 @@ package logic
 import (
 	"context"
 	"encoding/json"
+	"user/service/user"
+
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
-	"user/service/user"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +25,7 @@ func NewAddFlowedLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddFlow
 	}
 }
 
-func (l *AddFlowedLogic) AddFlowed(req *types.Message) (err error) {
+func (l *AddFlowedLogic) AddFlowed(req *types.UserAppleRequest) (err error) {
 	jid := l.ctx.Value("user_id").(json.Number)
 	id, _ := jid.Int64()
 	req.From = uint64(id)
@@ -33,6 +34,7 @@ func (l *AddFlowedLogic) AddFlowed(req *types.Message) (err error) {
 		BeId:    req.To,
 		Message: req.Content,
 		Type:    uint32(req.Type),
+		Remark:  req.Remark,
 	})
 	if err != nil {
 		logx.Error("l.svcCtx.UserRpc.UserFlowed failed: ", err)
@@ -44,4 +46,5 @@ func (l *AddFlowedLogic) AddFlowed(req *types.Message) (err error) {
 		client.Conn.WriteJSON(req)
 	}
 	return
+	return nil
 }
