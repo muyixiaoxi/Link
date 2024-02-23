@@ -49,9 +49,11 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 		Password: req.Password,
 	}
 	saga.Add(userRpcBuildServer+"/user.UserService/UserCreate", userRpcBuildServer+"/user.UserService/UserCreateRevertLogin", userCreateRequest)
+	//获取redis自增的主键值
+	userId, _ := l.svcCtx.UserRpc.NextUserID(l.ctx, &user.Empty{})
 	//第二个add方法
 	saga.Add(tagRpcBuildServer+"/tag.TagSign/SignUserChooseTag", tagRpcBuildServer+"/tag.TagSign/SignUserChooseTagRevert", &tag.UserChooseTagRequest{
-		UserId: 112,
+		UserId: userId.NextUserId,
 		TagId:  req.StartTagId,
 	})
 	//事务提交

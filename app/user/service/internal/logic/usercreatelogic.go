@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"database/sql"
-	"errors"
 	"fmt"
 	"github.com/dtm-labs/client/dtmcli"
 	"github.com/dtm-labs/client/dtmgrpc"
@@ -14,7 +13,6 @@ import (
 	"time"
 	"user/common/bcrypt"
 	"user/service/internal/svc"
-	"user/service/internal/types"
 	"user/service/user"
 )
 
@@ -33,6 +31,12 @@ func NewUserCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserCr
 }
 
 func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserCreateResponse, err error) {
+	//reids 实现自增主键
+	key := "next_user_id"
+	newID, err := l.svcCtx.RDB.Incr(key)
+	if err != nil {
+		return nil, err
+	}
 	// 获取 RawDB
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
 	// 获取子事务屏障对象
@@ -43,35 +47,33 @@ func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserC
 	// 开启子事务屏障
 	err = barrier.CallWithDB(db, func(tx *sql.Tx) error {
 		// 判断用户是否存在
-		var users types.User
-		if err := tx.QueryRow("SELECT * FROM users WHERE username = ?", in.Username).Scan(&users); err == nil {
-			return errors.New("用户存在")
-		}
-		fmt.Println("新用户")
-		// 加密密码
-		pwd, _ := bcrypt.GetPwd(in.Password)
-		// 插入用户数据
-		stmt, err := tx.Prepare("INSERT INTO users (created_at, updated_at, username, password, avatar, phone) VALUES (?, ?, ?, ?, ?, ?)")
+		var exists bool
+		err = db.QueryRow("SELECT EXISTS(SELECT 1 FROM users WHERE username = ?)", in.Username).Scan(&exists)
 		if err != nil {
 			return err
 		}
-		defer stmt.Close()
-		res, err := stmt.Exec(time.Now(), time.Now(), in.Username, pwd, in.Avatar, in.Phone)
+		if exists {
+			return fmt.Errorf("用户已经存在")
+		}
+		// 加密密码
+		pwd, _ := bcrypt.GetPwd(in.Password)
 
-		//返回子事务执行失败
+		// 插入用户数据
+		stmt, err := tx.Prepare("INSERT INTO users (id , created_at, updated_at, username, password, avatar, phone) VALUES (?,?, ?, ?, ?, ?, ?)")
 		if err != nil {
+			//此处如果发生错误,不再重试,直接回滚
 			return dtmcli.ErrFailure
 		}
-		// 获取刚插入行的 ID
-		lastInsertID, _ := res.LastInsertId()
-		// 返回创建成功的用户信息
-		pd = &user.UserCreateResponse{
-			Id:       uint64(lastInsertID),
-			Username: in.Username,
-			Avatar:   in.Avatar,
+		defer stmt.Close()
+		_, err = stmt.Exec(newID, time.Now(), time.Now(), in.Username, pwd, in.Avatar, in.Phone)
+		//返回子事务执行失败
+		if err != nil {
+			return err
 		}
+
 		return nil
 	})
+	// 失败不再重试,直接回滚
 	if err == dtmcli.ErrFailure {
 		return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
 	}

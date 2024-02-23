@@ -15,10 +15,7 @@ import (
 func signUpHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.UserCreateRequest
-		if err := httpx.Parse(r, &req); err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
-			return
-		}
+		httpx.Parse(r, &req)
 		validatorErr := validate.Validate(&req)
 		if validatorErr != nil {
 			response.Response(w, nil, response.CodeParamsError)
