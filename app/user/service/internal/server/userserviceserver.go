@@ -67,7 +67,6 @@ func (s *UserServiceServer) NextUserID(ctx context.Context, in *user.Empty) (*us
 	return l.NextUserID(in)
 }
 
-// 群聊
 func (s *UserServiceServer) UserCreateGroup(ctx context.Context, in *user.UserCreateGroupRequest) (*user.Empty, error) {
 	l := logic.NewUserCreateGroupLogic(ctx, s.svcCtx)
 	return l.UserCreateGroup(in)

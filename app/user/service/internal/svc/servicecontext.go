@@ -6,6 +6,7 @@ import (
 	initGorm "user/common/gorm"
 	redis2 "user/common/redis"
 	"user/service/internal/config"
+	"user/service/internal/types"
 )
 
 type ServiceContext struct {
@@ -16,6 +17,9 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	db := initGorm.InitGorm(c.Mysql.DataSource)
+	db.AutoMigrate(&types.UserGroupChat{})
+	db.AutoMigrate(&types.User{})
+	db.AutoMigrate(&types.GroupChat{})
 	rc := redis.RedisConf{
 		Host: c.RedisConf.Host,
 		Type: c.RedisConf.Type,

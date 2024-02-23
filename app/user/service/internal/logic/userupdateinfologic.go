@@ -2,7 +2,9 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
+	"fmt"
 	"gorm.io/gorm"
 	"user/common/bcrypt"
 	"user/service/internal/svc"
@@ -35,17 +37,23 @@ func (l *UserUpdateInfoLogic) UserUpdateInfo(in *user.UserUpdateInfoRequest) (rp
 		err = errors.New("用户已存在")
 		return nil, err
 	}
+	l.svcCtx.RDB.Del(fmt.Sprintf("link:user:%d", m.ID))
 	pwd, _ := bcrypt.GetPwd(in.Password)
 	model := &types.User{
-		Model:    gorm.Model{ID: uint(in.Id)},
-		Username: in.Username,
-		Password: pwd,
-		Age:      uint(in.Age),
-		Gender:   uint(in.Gender),
-		Address:  in.Address,
-		Phone:    in.Phone,
-		Avatar:   in.Avatar,
+		Model:     gorm.Model{ID: uint(in.Id)},
+		Username:  in.Username,
+		Password:  pwd,
+		Age:       uint(in.Age),
+		Gender:    uint(in.Gender),
+		Address:   in.Address,
+		Phone:     in.Phone,
+		Avatar:    in.Avatar,
+		Signature: in.Signature,
 	}
 	err = l.svcCtx.DB.Updates(model).Error
+	js, _ := json.Marshal(model)
+	if err == nil {
+		l.svcCtx.RDB.Set(fmt.Sprintf("link:user:%d", model), string(js))
+	}
 	return
 }

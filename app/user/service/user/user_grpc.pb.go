@@ -46,7 +46,6 @@ type UserServiceClient interface {
 	UserDisposeFlowed(ctx context.Context, in *DisposeFlowedRequest, opts ...grpc.CallOption) (*Empty, error)
 	UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
 	NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
-	// 群聊
 	UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error)
 	UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 	UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error)
@@ -181,7 +180,6 @@ type UserServiceServer interface {
 	UserDisposeFlowed(context.Context, *DisposeFlowedRequest) (*Empty, error)
 	UserUpdateRemark(context.Context, *UserUpdateRemarkRequest) (*Empty, error)
 	NextUserID(context.Context, *Empty) (*NextUserIDResponse, error)
-	// 群聊
 	UserCreateGroup(context.Context, *UserCreateGroupRequest) (*Empty, error)
 	UserSelectGroup(context.Context, *UserSelectGroupsRequest) (*UserSelectGroupsResponse, error)
 	UserSelectDetailGroup(context.Context, *DetailGroupRequest) (*DetailGroupResponse, error)

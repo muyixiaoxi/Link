@@ -30,23 +30,24 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (rp *user.UserInfoResponse, err error) {
 	rp = &user.UserInfoResponse{}
 	model := &types.User{}
-	cache, _ := l.svcCtx.RDB.Get(fmt.Sprintf("user:%d", in.Id))
+	cache, _ := l.svcCtx.RDB.Get(fmt.Sprintf("link:user:%d", in.Id))
 	if cache == "" {
 		err = l.svcCtx.DB.Where("id = ?", in.Id).First(model).Error
 		if err != nil {
 			return
 		}
 		rp = &user.UserInfoResponse{
-			Id:       uint64(model.ID),
-			Username: model.Username,
-			Avatar:   model.Avatar,
-			Age:      uint64(model.Age),
-			Gender:   gender[model.Gender],
-			Address:  model.Address,
-			Phone:    model.Phone,
+			Id:        uint64(model.ID),
+			Username:  model.Username,
+			Avatar:    model.Avatar,
+			Age:       uint64(model.Age),
+			Gender:    gender[model.Gender],
+			Address:   model.Address,
+			Phone:     model.Phone,
+			Signature: model.Signature,
 		}
 		js, _ := json.Marshal(rp)
-		l.svcCtx.RDB.Set(fmt.Sprintf("user:%d", model.ID), string(js))
+		l.svcCtx.RDB.Set(fmt.Sprintf("link:user:%d", model.ID), string(js))
 		return
 	}
 	json.Unmarshal([]byte(cache), rp)

@@ -38,6 +38,7 @@ message UserInfoResponse {
   string gender = 5;
   string address = 6;
   string phone = 7;
+  string signature = 8;
 }
 
 message UserUpdateInfoRequest {
@@ -49,6 +50,7 @@ message UserUpdateInfoRequest {
   uint64 gender = 6;
   string address = 7;
   string phone = 8;
+  string signature = 9;
 }
 
 message UserAddRequest {
@@ -90,10 +92,11 @@ message GroupInformation {
 }
 
 message DisposeFlowedRequest {
-  uint64 from = 1;
+  uint64 from =1;
   uint64 to = 2;
-  uint64 type = 3;  // 好友3 群聊 4
-  bool res = 4; // 结果
+  uint32 type = 3;
+  string remark = 4;
+  bool result = 5;
 }
 
 message UserSelectGroupsResponse{
@@ -125,14 +128,17 @@ message NextUserIDResponse {
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
-  rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
-  rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);
-  rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty);
-  rpc UserFlowed(UserAddRequest) returns(Empty);
-  rpc UserDisposeFlowed(DisposeFlowedRequest) returns(Empty);
-  rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty);
+
+  rpc UserLogin(UserLoginRequest) returns(UserLoginResponse); // 登录
+  rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);  // 获取用户信息
+  rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty); // 修改用户信息
+  rpc UserFlowed(UserAddRequest) returns(Empty);  // 添加好友/群聊
+  rpc UserDisposeFlowed(DisposeFlowedRequest) returns(Empty); // 处理好友/群聊申请
+  rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty); // 修改备注
+
   rpc NextUserID(Empty) returns (NextUserIDResponse);
   //群聊
+
   rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty); //创建群聊
   rpc UserSelectGroup(UserSelectGroupsRequest) returns (UserSelectGroupsResponse) ; //查询群聊列表
   rpc UserSelectDetailGroup(DetailGroupRequest) returns (DetailGroupResponse) ; //查询群聊详情

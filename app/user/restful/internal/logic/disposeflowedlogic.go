@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"user/service/user"
 
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
@@ -24,7 +25,14 @@ func NewDisposeFlowedLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Dis
 }
 
 func (l *DisposeFlowedLogic) DisposeFlowed(req *types.DisposeFlowedRequest) error {
-	// todo: add your logic here and delete this line
-
-	return nil
+	_, err := l.svcCtx.UserRpc.UserDisposeFlowed(context.Background(), &user.DisposeFlowedRequest{
+		From:   req.From,
+		To:     req.To,
+		Type:   req.Type,
+		Remark: req.Remark,
+	})
+	if err != nil {
+		logx.Error("l.svcCtx.UserRpc.UserDisposeFlowed failed: ", err)
+	}
+	return err
 }
