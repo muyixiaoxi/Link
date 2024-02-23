@@ -3,11 +3,10 @@ package tagsignlogic
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"tag/service/internal/types"
 	"time"
 
 	"tag/service/internal/svc"
@@ -38,25 +37,25 @@ func (l *SignUserChooseTagLogic) SignUserChooseTag(in *tag.UserChooseTagRequest)
 	}
 	// 获取子事务屏障对象
 	barrier, err := dtmgrpc.BarrierFromGrpc(l.ctx)
-	var chooseTag types.UserTagFollow
 	// 开启子事务屏障
 	err = barrier.CallWithDB(db, func(tx *sql.Tx) (err error) {
 		// 用户注册时选择标签
-		err = tx.QueryRow("SELECT * FROM tb_user_tag WHERE tag_id = ? AND user_id = ?", in.TagId, in.UserId).Scan(&chooseTag)
-		if err == nil {
-			return status.Error(codes.AlreadyExists, "禁止重复选择标签")
-		} else if err != sql.ErrNoRows {
+		var exists bool
+		err = db.QueryRow("SELECT EXISTS(SELECT 1 FROM tb_user_tag WHERE tag_id = ? and user_id = ?)", in.TagId, in.UserId).Scan(&exists)
+		if err != nil {
 			return err
 		}
-		chooseTag = types.UserTagFollow{
-			TagId:  in.TagId,
-			UserId: in.UserId,
+		if exists {
+			return fmt.Errorf("标签重复选择")
 		}
-		_, err = tx.Exec("INSERT INTO tb_user_tag (tb_user_tag.created_at , tb_user_tag.updated_at , tag_id, user_id) VALUES (?,?,?, ?)", time.Now(), time.Now(), chooseTag.TagId, chooseTag.UserId)
-		return err
+		_, err = tx.Exec("INSERT INTO tb_user_tag (tb_user_tag.created_at , tb_user_tag.updated_at , tag_id, user_id) VALUES (?,?,?, ?)", time.Now(), time.Now(), in.TagId, in.UserId)
+		if err != nil {
+			return fmt.Errorf("标签选择失败")
+		}
+		return nil
 	})
 	if err != nil {
-		return nil, err
+		return nil, status.Error(500, err.Error())
 	}
 	return &tag.UserChooseTagRequest{}, nil
 }
