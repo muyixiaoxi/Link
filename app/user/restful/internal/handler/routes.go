@@ -85,8 +85,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: userTag.UserChooseTagHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodPost,
-				Path:    "/queryLinkTags",
+				Method:  http.MethodGet,
+				Path:    "/queryLinkTags/:id",
 				Handler: userTag.QueryLinkTagsHandler(serverCtx),
 			},
 		},
