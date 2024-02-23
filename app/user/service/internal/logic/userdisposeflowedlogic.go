@@ -39,14 +39,17 @@ func (l *UserDisposeFlowedLogic) UserDisposeFlowed(in *user.DisposeFlowedRequest
 	}
 	if in.Result { // 同意
 		if in.Type == 3 { // 3 好友 4 群聊
-			flowed1 := &types.Flowed{
+			flowed1 := &types.Friend{
 				UserID:   in.From,
 				FriendID: in.To,
+				Remark:   apply.Remark,
+				IsFriend: true,
 			}
-			flowed2 := &types.Flowed{
+			flowed2 := &types.Friend{
 				UserID:   in.To,
 				FriendID: in.From,
 				Remark:   in.Remark,
+				IsFriend: true,
 			}
 			if err := tx.Create(flowed1).Error; err != nil {
 				tx.Rollback()

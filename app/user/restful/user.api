@@ -27,7 +27,7 @@ type UserLoginResponse {
 }
 
 type UserInfoRequest {
-	Id uint `path:"id"`
+	Id uint64 `path:"id"`
 }
 
 type UserInfoResponse {
@@ -39,6 +39,8 @@ type UserInfoResponse {
 	Address   string `json:"address"`
 	Phone     string `json:"phone"`
 	Signature string `json:"signature"`
+	IsFriend  bool   `json:"isFriend"`
+	Remark    string `json:"remark"`
 }
 
 type UserUpdateInfoRequest {
@@ -80,6 +82,14 @@ type DisposeFlowedRequest {
 	Res    bool   `json:"res"`
 }
 
+type UserAppleRequest {
+	From    uint64 `json:"from,optional"`
+	To      uint64 `json:"to"`
+	Type    uint8  `json:"type"`
+	Content string `json:"content"`
+	Remark  string `json:"remark"`
+}
+
 type Message {
 	From    uint64 `json:"from,optional"`
 	To      uint64 `json:"to"`
@@ -103,6 +113,17 @@ type QueryLink {
 
 type QueryLinkTagsResponse {
 	LinkTags []QueryLink `json:"linkTags"`
+}
+
+type UserFriendsResponse {
+	Friends []UserFriend `json:"friends"`
+}
+
+type UserFriend {
+	Id       uint64 `json:"id"`
+	username string `json:"username"`
+	avatar   string `json:"avatar"`
+	remark   string `json:"remark"`
 }
 
 @server (
@@ -141,11 +162,15 @@ service user {
 
 	@doc "添加好友/群聊"
 	@handler addFlowed
-	post /flowed (Message)
+	post /flowed (UserAppleRequest)
 
 	@doc "处理好友/群聊申请"
 	@handler disposeFlowed
 	post /flowed/dispose (DisposeFlowedRequest)
+
+	@doc "获取好友列表"
+	@handler GetFriendsList
+	get /friends returns (UserFriendsResponse)
 }
 
 @server (

@@ -28,7 +28,8 @@ message UserLoginResponse {
 }
 
 message UserInfoRequest {
-  uint64 id = 1;
+  uint64 userId = 1;
+  uint64 friendId = 2;
 }
 message UserInfoResponse {
   uint64 id = 1;
@@ -39,6 +40,8 @@ message UserInfoResponse {
   string address = 6;
   string phone = 7;
   string signature = 8;
+  bool isFriend = 9;
+  string remark = 10;
 }
 
 message UserUpdateInfoRequest {
@@ -58,6 +61,7 @@ message UserAddRequest {
   uint64 beId = 2;
   string message = 3;
   uint32 type = 4;
+  string remark = 5;
 }
 
 message UserUpdateRemarkRequest {
@@ -125,6 +129,21 @@ message NextUserIDResponse {
   uint64 next_user_id = 1 ; //新的主键值
 }
 
+message UserFriendRequest {
+  uint64 id = 1;
+}
+
+message UserFriendResponse {
+ repeated UserFriend list = 1;
+}
+
+message UserFriend {
+  uint64 id = 1;
+  string username = 2;
+  string remark = 3;
+  string avatar = 4;
+}
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -132,9 +151,12 @@ service UserService {
   rpc UserLogin(UserLoginRequest) returns(UserLoginResponse); // 登录
   rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);  // 获取用户信息
   rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty); // 修改用户信息
+
+  // 好友
   rpc UserFlowed(UserAddRequest) returns(Empty);  // 添加好友/群聊
   rpc UserDisposeFlowed(DisposeFlowedRequest) returns(Empty); // 处理好友/群聊申请
   rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty); // 修改备注
+  rpc UserFriendList(UserFriendRequest) returns(UserFriendResponse);
 
   rpc NextUserID(Empty) returns (NextUserIDResponse);
   //群聊

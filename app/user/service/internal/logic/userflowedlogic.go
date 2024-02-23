@@ -30,6 +30,7 @@ func (l *UserFlowedLogic) UserFlowed(in *user.UserAddRequest) (response *user.Em
 		BeId:    in.BeId,
 		Message: in.Message,
 		Type:    in.Type,
+		Remark:  in.Remark,
 	}
 	// 如果添加过message
 	tmp := types.ApplyFor{}

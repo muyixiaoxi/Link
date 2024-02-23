@@ -25,13 +25,11 @@ func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 }
 
 func (l *GetUserInfoLogic) GetUserInfo(req *types.UserInfoRequest) (resp *types.UserInfoResponse, err error) {
-	if req.Id == 0 {
-		jid := l.ctx.Value("user_id").(json.Number)
-		id, _ := jid.Int64()
-		req.Id = uint(id)
-	}
+	jid := l.ctx.Value("user_id").(json.Number)
+	userId, _ := jid.Int64()
 	response, err := l.svcCtx.UserRpc.UserInfo(context.Background(), &user.UserInfoRequest{
-		Id: uint64(req.Id),
+		UserId:   uint64(userId),
+		FriendId: req.Id,
 	})
 	if err != nil {
 		logx.Error("l.svcCtx.UserRpc.UserInfo failed: ", err)
@@ -46,6 +44,8 @@ func (l *GetUserInfoLogic) GetUserInfo(req *types.UserInfoRequest) (resp *types.
 		Address:   response.Address,
 		Phone:     response.Phone,
 		Signature: response.Signature,
+		IsFriend:  response.IsFriend,
+		Remark:    response.Remark,
 	}
 	return
 }

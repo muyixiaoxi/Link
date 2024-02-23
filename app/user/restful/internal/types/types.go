@@ -27,6 +27,14 @@ type QueryLinkTagsResponse struct {
 	LinkTags []QueryLink `json:"linkTags"`
 }
 
+type UserAppleRequest struct {
+	From    uint64 `json:"from,optional"`
+	To      uint64 `json:"to"`
+	Type    uint8  `json:"type"`
+	Content string `json:"content"`
+	Remark  string `json:"remark"`
+}
+
 type UserChooseTagRequst struct {
 	SystemTagId uint64   `json:"systemTagId" validate:"required"'`
 	TagIds      []uint64 `json:"tagIds" validate:"required,max=3"`
@@ -60,8 +68,19 @@ type UserFlowedRequest struct {
 	Type    uint64 `json:"type"`
 }
 
+type UserFriend struct {
+	Id       uint64 `json:"id"`
+	Username string `json:"username"`
+	Avatar   string `json:"avatar"`
+	Remark   string `json:"remark"`
+}
+
+type UserFriendsResponse struct {
+	Friends []UserFriend `json:"friends"`
+}
+
 type UserInfoRequest struct {
-	Id uint `path:"id"`
+	Id uint64 `path:"id"`
 }
 
 type UserInfoResponse struct {
@@ -73,6 +92,8 @@ type UserInfoResponse struct {
 	Address   string `json:"address"`
 	Phone     string `json:"phone"`
 	Signature string `json:"signature"`
+	IsFriend  bool   `json:"isFriend"`
+	Remark    string `json:"remark"`
 }
 
 type UserLoginRequest struct {

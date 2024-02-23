@@ -47,6 +47,7 @@ func (s *UserServiceServer) UserUpdateInfo(ctx context.Context, in *user.UserUpd
 	return l.UserUpdateInfo(in)
 }
 
+// 好友
 func (s *UserServiceServer) UserFlowed(ctx context.Context, in *user.UserAddRequest) (*user.Empty, error) {
 	l := logic.NewUserFlowedLogic(ctx, s.svcCtx)
 	return l.UserFlowed(in)
@@ -60,6 +61,11 @@ func (s *UserServiceServer) UserDisposeFlowed(ctx context.Context, in *user.Disp
 func (s *UserServiceServer) UserUpdateRemark(ctx context.Context, in *user.UserUpdateRemarkRequest) (*user.Empty, error) {
 	l := logic.NewUserUpdateRemarkLogic(ctx, s.svcCtx)
 	return l.UserUpdateRemark(in)
+}
+
+func (s *UserServiceServer) UserFriendList(ctx context.Context, in *user.UserFriendRequest) (*user.UserFriendResponse, error) {
+	l := logic.NewUserFriendListLogic(ctx, s.svcCtx)
+	return l.UserFriendList(in)
 }
 
 func (s *UserServiceServer) NextUserID(ctx context.Context, in *user.Empty) (*user.NextUserIDResponse, error) {

@@ -20,6 +20,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	db.AutoMigrate(&types.UserGroupChat{})
 	db.AutoMigrate(&types.User{})
 	db.AutoMigrate(&types.GroupChat{})
+	db.AutoMigrate(&types.ApplyFor{})
+	db.AutoMigrate(&types.Friend{})
+
 	rc := redis.RedisConf{
 		Host: c.RedisConf.Host,
 		Type: c.RedisConf.Type,
