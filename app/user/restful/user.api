@@ -169,9 +169,9 @@ service user {
 	@handler userChooseTag
 	post /chooseTag (UserChooseTagRequst)
 
-	@doc "查询和当前登录用户相关的标签"
+	@doc "查询和当前登录用户或者其它用户相关的标签"
 	@handler queryLinkTags
-	post /queryLinkTags returns (QueryLinkTagsResponse)
+	get /queryLinkTags/:id (UserInfoRequest) returns (QueryLinkTagsResponse)
 }
 
 // goctl api go -api user.api -dir .
