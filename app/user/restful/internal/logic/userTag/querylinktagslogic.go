@@ -25,10 +25,15 @@ func NewQueryLinkTagsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Que
 	}
 }
 
-func (l *QueryLinkTagsLogic) QueryLinkTags() (resp *types.QueryLinkTagsResponse, err error) {
-	// 查询和当前登录用户相关的标签
-	jUserId := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jUserId.Int64()
+func (l *QueryLinkTagsLogic) QueryLinkTags(req *types.UserInfoRequest) (resp *types.QueryLinkTagsResponse, err error) {
+	var userId int64
+	if req.Id == 0 {
+		// 查询和当前登录用户相关的标签
+		jUserId := l.ctx.Value("user_id").(json.Number)
+		userId, _ = jUserId.Int64()
+	} else {
+		userId = int64(req.Id)
+	}
 	//查询
 	var temps []types.QueryLink
 	rpcResp, err := l.svcCtx.TagLoginRpc.SelectLinkTags(l.ctx, &tag.SelectLinkTagsRequest{Id: uint64(userId)})
