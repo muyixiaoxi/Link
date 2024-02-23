@@ -1,9 +1,8 @@
 package handler
 
 import (
-	"errors"
-	"gorm.io/gorm"
 	"net/http"
+	"strings"
 	"user/common/response"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
@@ -23,7 +22,7 @@ func disposeFlowedHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := logic.NewDisposeFlowedLogic(r.Context(), svcCtx)
 		err := l.DisposeFlowed(&req)
 		if err != nil {
-			if errors.Is(err, gorm.ErrRecordNotFound) {
+			if strings.Contains(err.Error(), "record not found") {
 				response.Response(w, nil, response.CodeApplyRecordNotExist)
 			} else {
 				response.Response(w, nil, response.CodeServerBusy)
