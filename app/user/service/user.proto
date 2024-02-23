@@ -118,6 +118,10 @@ message DetailGroupResponse {
   string address = 10 ; //群聊中地区最多的地址
 }
 
+message NextUserIDResponse {
+  uint64 next_user_id = 1 ; //新的主键值
+}
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -127,6 +131,7 @@ service UserService {
   rpc UserFlowed(UserAddRequest) returns(Empty);
   rpc UserDisposeFlowed(DisposeFlowedRequest) returns(Empty);
   rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty);
+  rpc NextUserID(Empty) returns (NextUserIDResponse);
   //群聊
   rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty); //创建群聊
   rpc UserSelectGroup(UserSelectGroupsRequest) returns (UserSelectGroupsResponse) ; //查询群聊列表

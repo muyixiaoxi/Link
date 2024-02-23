@@ -5,11 +5,7 @@ import (
 	"database/sql"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"tag/service/internal/types"
-	"time"
-
 	"tag/service/internal/svc"
 	"tag/service/tag"
 
@@ -31,6 +27,12 @@ func NewSignUserChooseTagRevertLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *SignUserChooseTagRevertLogic) SignUserChooseTagRevert(in *tag.UserChooseTagRequest) (*tag.UserChooseTagRequest, error) {
+	//reids 实现自增主键减一,如果补偿了
+	key := "next_user_id"
+	_, err := l.svcCtx.RDB.Decr(key)
+	if err != nil {
+		return nil, err
+	}
 	// 获取 RawDB
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
 	if err != nil {
@@ -38,21 +40,10 @@ func (l *SignUserChooseTagRevertLogic) SignUserChooseTagRevert(in *tag.UserChoos
 	}
 	// 获取子事务屏障对象
 	barrier, err := dtmgrpc.BarrierFromGrpc(l.ctx)
-	var chooseTag types.UserTagFollow
 	// 开启子事务屏障
 	err = barrier.CallWithDB(db, func(tx *sql.Tx) (err error) {
-		// 用户注册时选择标签
-		err = tx.QueryRow("SELECT * FROM tb_user_tag WHERE tag_id = ? AND user_id = ?", in.TagId, in.UserId).Scan(&chooseTag)
-		if err == nil {
-			return status.Error(codes.AlreadyExists, "禁止重复选择标签")
-		} else if err != sql.ErrNoRows {
-			return err
-		}
-		chooseTag = types.UserTagFollow{
-			TagId:  in.TagId,
-			UserId: in.UserId,
-		}
-		_, err = tx.Exec("INSERT INTO tb_user_tag (tb_user_tag.created_at , tb_user_tag.updated_at , tag_id, user_id) VALUES (?,?,?, ?)", time.Now(), time.Now(), chooseTag.TagId, chooseTag.UserId)
+		//删除记录
+		_, err = tx.Exec("DELETE FROM tb_user_tag where tag_id = ? and user_id = ?", in.TagId, in.UserId)
 		return err
 	})
 	if err != nil {

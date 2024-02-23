@@ -3,14 +3,10 @@ package logic
 import (
 	"context"
 	"database/sql"
-	"errors"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"google.golang.org/grpc/status"
-	"time"
 	"user/common/bcrypt"
-	"user/service/internal/types"
-
 	"user/service/internal/svc"
 	"user/service/user"
 
@@ -32,13 +28,9 @@ func NewUserCreateRevertLoginLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *UserCreateRevertLoginLogic) UserCreateRevertLogin(in *user.UserCreateRequest) (pd *user.UserCreateResponse, err error) {
+	// 在UserCreate方法中,插入了一条记录 , 在这里给它删除
 	// 获取 RawDB
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
-	// 判断用户是否存在
-	var users types.User
-	if err := db.QueryRow("SELECT * FROM users WHERE username = ?", in.Username).Scan(&users); err == nil {
-		return nil, errors.New("用户存在")
-	}
 	// 加密密码
 	pwd, _ := bcrypt.GetPwd(in.Password)
 	// 获取子事务屏障对象
@@ -48,26 +40,22 @@ func (l *UserCreateRevertLoginLogic) UserCreateRevertLogin(in *user.UserCreateRe
 	}
 	// 开启子事务屏障
 	err = barrier.CallWithDB(db, func(tx *sql.Tx) error {
-		// 插入用户数据
-		stmt, err := tx.Prepare("INSERT INTO users (created_at, updated_at, username, password, avatar, phone) VALUES (?, ?, ?, ?, ?, ?)")
+		//删除用户数据
+		stmt, err := tx.Prepare("DELETE FROM users where username = ? and password = ?")
+		//返回事务执行失败
 		if err != nil {
 			return err
 		}
 		defer stmt.Close()
-		res, err := stmt.Exec(time.Now(), time.Now(), in.Username, pwd, in.Avatar, in.Phone)
+		_, err = stmt.Exec(in.Username, pwd)
 		//返回子事务执行失败
 		if err != nil {
 			return err
 		}
-		// 获取刚插入行的 ID
-		lastInsertID, _ := res.LastInsertId()
-		// 返回创建成功的用户信息
-		pd = &user.UserCreateResponse{
-			Id:       uint64(lastInsertID),
-			Username: in.Username,
-			Avatar:   in.Avatar,
-		}
 		return nil
 	})
+	if err != nil {
+		return nil, err
+	}
 	return
 }

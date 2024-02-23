@@ -18,6 +18,7 @@ type (
 	DisposeFlowedRequest     = user.DisposeFlowedRequest
 	Empty                    = user.Empty
 	GroupInformation         = user.GroupInformation
+	NextUserIDResponse       = user.NextUserIDResponse
 	UserAddRequest           = user.UserAddRequest
 	UserCreateGroupRequest   = user.UserCreateGroupRequest
 	UserCreateRequest        = user.UserCreateRequest
@@ -40,6 +41,7 @@ type (
 		UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserDisposeFlowed(ctx context.Context, in *DisposeFlowedRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
+		NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 		// 群聊
 		UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
@@ -95,6 +97,11 @@ func (m *defaultUserService) UserDisposeFlowed(ctx context.Context, in *DisposeF
 func (m *defaultUserService) UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserUpdateRemark(ctx, in, opts...)
+}
+
+func (m *defaultUserService) NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.NextUserID(ctx, in, opts...)
 }
 
 // 群聊
