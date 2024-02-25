@@ -46,7 +46,10 @@ type (
 		UserDisposeFlowed(ctx context.Context, in *DisposeFlowedRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
+		// redis自增id
 		NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
+		AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+		DecUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 		UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 		UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error)
@@ -109,9 +112,20 @@ func (m *defaultUserService) UserFriendList(ctx context.Context, in *UserFriendR
 	return client.UserFriendList(ctx, in, opts...)
 }
 
+// redis自增id
 func (m *defaultUserService) NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.NextUserID(ctx, in, opts...)
+}
+
+func (m *defaultUserService) AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.AddUserId(ctx, in, opts...)
+}
+
+func (m *defaultUserService) DecUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.DecUserID(ctx, in, opts...)
 }
 
 func (m *defaultUserService) UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error) {

@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -23,6 +24,7 @@ func signUpHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		}
 		l := logic.NewSignUpLogic(r.Context(), svcCtx)
 		resp, err := l.SignUp(&req)
+		fmt.Println("@@", err)
 		if err != nil {
 			formErr, _ := status.FromError(err)
 			switch formErr.Code() {

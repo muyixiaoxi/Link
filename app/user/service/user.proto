@@ -10,6 +10,7 @@ message UserCreateRequest {
   string password = 2;
   string avatar = 3;
   string phone = 4;
+  uint64 id = 5;
 }
 message UserCreateResponse {
   uint64 id = 1;
@@ -158,7 +159,10 @@ service UserService {
   rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty); // 修改备注
   rpc UserFriendList(UserFriendRequest) returns(UserFriendResponse);
 
-  rpc NextUserID(Empty) returns (NextUserIDResponse);
+  //redis自增id
+  rpc NextUserID(Empty) returns (NextUserIDResponse); //查询id
+  rpc AddUserId(Empty) returns (Empty);//生成id
+  rpc DecUserID(Empty) returns (Empty);//id减少1
   //群聊
 
   rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty); //创建群聊

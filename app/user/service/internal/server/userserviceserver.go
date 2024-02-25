@@ -68,9 +68,20 @@ func (s *UserServiceServer) UserFriendList(ctx context.Context, in *user.UserFri
 	return l.UserFriendList(in)
 }
 
+// redis自增id
 func (s *UserServiceServer) NextUserID(ctx context.Context, in *user.Empty) (*user.NextUserIDResponse, error) {
 	l := logic.NewNextUserIDLogic(ctx, s.svcCtx)
 	return l.NextUserID(in)
+}
+
+func (s *UserServiceServer) AddUserId(ctx context.Context, in *user.Empty) (*user.Empty, error) {
+	l := logic.NewAddUserIdLogic(ctx, s.svcCtx)
+	return l.AddUserId(in)
+}
+
+func (s *UserServiceServer) DecUserID(ctx context.Context, in *user.Empty) (*user.Empty, error) {
+	l := logic.NewDecUserIDLogic(ctx, s.svcCtx)
+	return l.DecUserID(in)
 }
 
 func (s *UserServiceServer) UserCreateGroup(ctx context.Context, in *user.UserCreateGroupRequest) (*user.Empty, error) {

@@ -31,12 +31,7 @@ func NewUserCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserCr
 }
 
 func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserCreateResponse, err error) {
-	//reids 实现自增主键
-	key := "next_user_id"
-	newID, err := l.svcCtx.RDB.Incr(key)
-	if err != nil {
-		return nil, err
-	}
+	fmt.Println("@@@@@@@@@@@", in.Id)
 	// 获取 RawDB
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
 	// 获取子事务屏障对象
@@ -57,7 +52,6 @@ func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserC
 		}
 		// 加密密码
 		pwd, _ := bcrypt.GetPwd(in.Password)
-
 		// 插入用户数据
 		stmt, err := tx.Prepare("INSERT INTO users (id , created_at, updated_at, username, password, avatar, phone) VALUES (?,?, ?, ?, ?, ?, ?)")
 		if err != nil {
@@ -65,20 +59,19 @@ func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserC
 			return dtmcli.ErrFailure
 		}
 		defer stmt.Close()
-		_, err = stmt.Exec(newID, time.Now(), time.Now(), in.Username, pwd, in.Avatar, in.Phone)
+		_, err = stmt.Exec(in.Id, time.Now(), time.Now(), in.Username, pwd, in.Avatar, in.Phone)
 		//返回子事务执行失败
 		if err != nil {
 			return err
 		}
-
 		return nil
 	})
-	// 失败不再重试,直接回滚
+	// 这种情况是库存不足，不再重试，走回滚
 	if err == dtmcli.ErrFailure {
 		return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
 	}
 	if err != nil {
-		return nil, err
+		return nil, status.Error(500, err.Error())
 	}
 	return
 }
