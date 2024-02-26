@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"user/service/user"
@@ -46,7 +45,6 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	//创建一个自增id
 	l.svcCtx.UserRpc.AddUserId(l.ctx, &empty)
 	userID, _ := l.svcCtx.UserRpc.NextUserID(l.ctx, &empty)
-	fmt.Println("@@@", userID.NextUserId)
 	// 创建一个saga协议
 	userCreateRequest := &user.UserCreateRequest{
 		Username: req.Username,
@@ -55,11 +53,11 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 		Phone:    req.Phone,
 		Id:       userID.NextUserId,
 	}
-	saga := dtmgrpc.NewSagaGrpc(dtmServer, gid).Add(tagRpcBuildServer+"/tag.TagSign/SignUserChooseTag", tagRpcBuildServer+"/tag.TagSign/SignUserChooseTagRevert", &tag.UserChooseTagRequest{
-		UserId: userID.NextUserId,
-		TagId:  req.StartTagId,
-	}).
-		Add(userRpcBuildServer+"/user.UserService/UserCreate", userRpcBuildServer+"/user.UserService/UserCreateRevertLogin", userCreateRequest)
+	saga := dtmgrpc.NewSagaGrpc(dtmServer, gid).Add(userRpcBuildServer+"/user.UserService/UserCreate", userRpcBuildServer+"/user.UserService/UserCreateRevertLogin", userCreateRequest).
+		Add(tagRpcBuildServer+"/tag.TagSign/SignUserChooseTag", tagRpcBuildServer+"/tag.TagSign/SignUserChooseTagRevert", &tag.UserChooseTagRequest{
+			UserId: userID.NextUserId,
+			TagId:  req.StartTagId,
+		})
 	//事务提交
 	err = saga.Submit()
 	if err != nil {
