@@ -53,10 +53,6 @@ func (l *CreateTagLogic) CreateTag(in *tag.CreateTagRequest) (*tag.CreateTagResp
 		tx.Rollback()
 		return nil, err
 	}
-	err = tx.Commit().Error
-	if err != nil {
-		return nil, err
-	}
 	//创建完小标签,插入tb_user_tag表中
 	userTag := types.UserTagFollow{
 		TagId:  uint64(createRequst.ID),
@@ -70,7 +66,7 @@ func (l *CreateTagLogic) CreateTag(in *tag.CreateTagRequest) (*tag.CreateTagResp
 	}
 	//根据groupName 查询小标签
 	var lowTags []*tag.CreateTagResponse_LowTags
-	err = l.svcCtx.DB.Where("group_name = ? and type != 'OFFICIAL'", in.GroupName).Model(&types.Tag{}).Find(&lowTags).Error
+	err = tx.Where("group_name = ? and type != 'OFFICIAL'", in.GroupName).Model(&types.Tag{}).Find(&lowTags).Error
 	if err != nil {
 		tx.Rollback()
 		return nil, err
@@ -79,5 +75,5 @@ func (l *CreateTagLogic) CreateTag(in *tag.CreateTagRequest) (*tag.CreateTagResp
 	return &tag.CreateTagResponse{
 		GroupName: in.GroupName,
 		LowTags:   lowTags,
-	}, err
+	}, tx.Commit().Error
 }
