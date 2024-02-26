@@ -26,7 +26,7 @@ func NewNextUserIDLogic(ctx context.Context, svcCtx *svc.ServiceContext) *NextUs
 
 func (l *NextUserIDLogic) NextUserID(in *user.Empty) (*user.NextUserIDResponse, error) {
 	// 获取redis自增主键的值
-	key := "next_user_id"
+	key := "next_userId"
 	currentIDStr, err := l.svcCtx.RDB.Get(key)
 	if err != nil {
 		return nil, err

@@ -27,12 +27,6 @@ func NewSignUserChooseTagRevertLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *SignUserChooseTagRevertLogic) SignUserChooseTagRevert(in *tag.UserChooseTagRequest) (*tag.UserChooseTagRequest, error) {
-	//reids 实现自增主键减一,如果补偿了
-	key := "next_user_id"
-	_, err := l.svcCtx.RDB.Decr(key)
-	if err != nil {
-		return nil, err
-	}
 	// 获取 RawDB
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
 	if err != nil {

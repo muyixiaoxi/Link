@@ -4,12 +4,12 @@ import (
 	"context"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"user/service/user"
 
 	"google.golang.org/grpc/status"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
 	"user/service/tag/service/tag"
-	"user/service/user"
 )
 
 type SignUpLogic struct {
@@ -37,28 +37,32 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	if err != nil {
 		return nil, status.Error(100, "标签选择异常")
 	}
+	empty := user.Empty{}
 	//dtm服务的etcd注册地址
 	var dtmServer = "etcd://114.55.135.211:2379/dtmservice"
 	// 创建一个gid
 	gid := dtmgrpc.MustGenGid(dtmServer)
+	//创建一个自增id
+	l.svcCtx.UserRpc.AddUserId(l.ctx, &empty)
+	userID, _ := l.svcCtx.UserRpc.NextUserID(l.ctx, &empty)
 	// 创建一个saga协议
-	saga := dtmgrpc.NewSagaGrpc(dtmServer, gid)
-	// 第一个 Add 方法
 	userCreateRequest := &user.UserCreateRequest{
 		Username: req.Username,
 		Password: req.Password,
+		Avatar:   req.Avatar,
+		Phone:    req.Phone,
+		Id:       userID.NextUserId,
 	}
-	saga.Add(userRpcBuildServer+"/user.UserService/UserCreate", userRpcBuildServer+"/user.UserService/UserCreateRevertLogin", userCreateRequest)
-	//获取redis自增的主键值
-	userId, _ := l.svcCtx.UserRpc.NextUserID(l.ctx, &user.Empty{})
-	//第二个add方法
-	saga.Add(tagRpcBuildServer+"/tag.TagSign/SignUserChooseTag", tagRpcBuildServer+"/tag.TagSign/SignUserChooseTagRevert", &tag.UserChooseTagRequest{
-		UserId: userId.NextUserId,
-		TagId:  req.StartTagId,
-	})
+	saga := dtmgrpc.NewSagaGrpc(dtmServer, gid).Add(userRpcBuildServer+"/user.UserService/UserCreate", userRpcBuildServer+"/user.UserService/UserCreateRevertLogin", userCreateRequest).
+		Add(tagRpcBuildServer+"/tag.TagSign/SignUserChooseTag", tagRpcBuildServer+"/tag.TagSign/SignUserChooseTagRevert", &tag.UserChooseTagRequest{
+			UserId: userID.NextUserId,
+			TagId:  req.StartTagId,
+		})
 	//事务提交
 	err = saga.Submit()
 	if err != nil {
+		//自增主键减少1
+		l.svcCtx.UserRpc.DecUserID(l.ctx, &empty)
 		return nil, err
 	}
 	return
