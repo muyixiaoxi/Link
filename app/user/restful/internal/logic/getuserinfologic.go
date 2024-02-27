@@ -40,7 +40,7 @@ func (l *GetUserInfoLogic) GetUserInfo(req *types.UserInfoRequest) (resp *types.
 		Username:  response.Username,
 		Avatar:    response.Avatar,
 		Age:       uint(response.Age),
-		Gender:    response.Gender,
+		Gender:    uint(response.Gender),
 		Address:   response.Address,
 		Phone:     response.Phone,
 		Signature: response.Signature,

@@ -45,7 +45,7 @@ func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (rp *user.UserInfoRes
 			Username:  model.Username,
 			Avatar:    model.Avatar,
 			Age:       uint64(model.Age),
-			Gender:    gender[model.Gender],
+			Gender:    uint64(model.Gender),
 			Address:   model.Address,
 			Phone:     model.Phone,
 			Signature: model.Signature,
