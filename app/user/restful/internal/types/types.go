@@ -41,7 +41,6 @@ type UserChooseTagRequst struct {
 }
 
 type UserCreateGroupRequset struct {
-	GroupBossId   uint64 `json:"groupBossId" validate:"required"`
 	SystemTagId   uint64 `json:"systemTagId" validate:"required"`
 	UserSelfTagId uint64 `json:"userSelfTagId" validate:"required"`
 	Name          string `json:"name" validate:"required"`

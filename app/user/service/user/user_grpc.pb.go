@@ -33,6 +33,7 @@ const (
 	UserService_DecUserID_FullMethodName             = "/user.UserService/DecUserID"
 	UserService_UserCreateGroup_FullMethodName       = "/user.UserService/UserCreateGroup"
 	UserService_UserSelectGroup_FullMethodName       = "/user.UserService/UserSelectGroup"
+	UserService_UserUserSelfGroup_FullMethodName     = "/user.UserService/UserUserSelfGroup"
 	UserService_UserSelectDetailGroup_FullMethodName = "/user.UserService/UserSelectDetailGroup"
 )
 
@@ -54,8 +55,10 @@ type UserServiceClient interface {
 	NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 	AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 	DecUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	// 群聊
 	UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error)
 	UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
+	UserUserSelfGroup(ctx context.Context, in *UserSelfGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 	UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error)
 }
 
@@ -193,6 +196,15 @@ func (c *userServiceClient) UserSelectGroup(ctx context.Context, in *UserSelectG
 	return out, nil
 }
 
+func (c *userServiceClient) UserUserSelfGroup(ctx context.Context, in *UserSelfGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error) {
+	out := new(UserSelectGroupsResponse)
+	err := c.cc.Invoke(ctx, UserService_UserUserSelfGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userServiceClient) UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error) {
 	out := new(DetailGroupResponse)
 	err := c.cc.Invoke(ctx, UserService_UserSelectDetailGroup_FullMethodName, in, out, opts...)
@@ -220,8 +232,10 @@ type UserServiceServer interface {
 	NextUserID(context.Context, *Empty) (*NextUserIDResponse, error)
 	AddUserId(context.Context, *Empty) (*Empty, error)
 	DecUserID(context.Context, *Empty) (*Empty, error)
+	// 群聊
 	UserCreateGroup(context.Context, *UserCreateGroupRequest) (*Empty, error)
 	UserSelectGroup(context.Context, *UserSelectGroupsRequest) (*UserSelectGroupsResponse, error)
+	UserUserSelfGroup(context.Context, *UserSelfGroupRequest) (*UserSelectGroupsResponse, error)
 	UserSelectDetailGroup(context.Context, *DetailGroupRequest) (*DetailGroupResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
@@ -271,6 +285,9 @@ func (UnimplementedUserServiceServer) UserCreateGroup(context.Context, *UserCrea
 }
 func (UnimplementedUserServiceServer) UserSelectGroup(context.Context, *UserSelectGroupsRequest) (*UserSelectGroupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserSelectGroup not implemented")
+}
+func (UnimplementedUserServiceServer) UserUserSelfGroup(context.Context, *UserSelfGroupRequest) (*UserSelectGroupsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserUserSelfGroup not implemented")
 }
 func (UnimplementedUserServiceServer) UserSelectDetailGroup(context.Context, *DetailGroupRequest) (*DetailGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserSelectDetailGroup not implemented")
@@ -540,6 +557,24 @@ func _UserService_UserSelectGroup_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UserUserSelfGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserSelfGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserUserSelfGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserUserSelfGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserUserSelfGroup(ctx, req.(*UserSelfGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _UserService_UserSelectDetailGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DetailGroupRequest)
 	if err := dec(in); err != nil {
@@ -620,6 +655,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserSelectGroup",
 			Handler:    _UserService_UserSelectGroup_Handler,
+		},
+		{
+			MethodName: "UserUserSelfGroup",
+			Handler:    _UserService_UserUserSelfGroup_Handler,
 		},
 		{
 			MethodName: "UserSelectDetailGroup",

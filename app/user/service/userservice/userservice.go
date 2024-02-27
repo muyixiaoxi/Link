@@ -33,6 +33,7 @@ type (
 	UserLoginResponse        = user.UserLoginResponse
 	UserSelectGroupsRequest  = user.UserSelectGroupsRequest
 	UserSelectGroupsResponse = user.UserSelectGroupsResponse
+	UserSelfGroupRequest     = user.UserSelfGroupRequest
 	UserUpdateInfoRequest    = user.UserUpdateInfoRequest
 	UserUpdateRemarkRequest  = user.UserUpdateRemarkRequest
 
@@ -51,8 +52,10 @@ type (
 		NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 		AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 		DecUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+		// 群聊
 		UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
+		UserUserSelfGroup(ctx context.Context, in *UserSelfGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 		UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error)
 	}
 
@@ -129,6 +132,7 @@ func (m *defaultUserService) DecUserID(ctx context.Context, in *Empty, opts ...g
 	return client.DecUserID(ctx, in, opts...)
 }
 
+// 群聊
 func (m *defaultUserService) UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserCreateGroup(ctx, in, opts...)
@@ -137,6 +141,11 @@ func (m *defaultUserService) UserCreateGroup(ctx context.Context, in *UserCreate
 func (m *defaultUserService) UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserSelectGroup(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserUserSelfGroup(ctx context.Context, in *UserSelfGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserUserSelfGroup(ctx, in, opts...)
 }
 
 func (m *defaultUserService) UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error) {
