@@ -87,7 +87,7 @@ type UserInfoResponse struct {
 	Username  string `json:"username"`
 	Avatar    string `json:"avatar"`
 	Age       uint   `json:"age"`
-	Gender    string `json:"gender"`
+	Gender    uint   `json:"gender"`
 	Address   string `json:"address"`
 	Phone     string `json:"phone"`
 	Signature string `json:"signature"`
