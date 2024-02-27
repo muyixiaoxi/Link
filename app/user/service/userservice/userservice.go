@@ -17,6 +17,7 @@ type (
 	DetailGroupResponse      = user.DetailGroupResponse
 	DisposeFlowedRequest     = user.DisposeFlowedRequest
 	Empty                    = user.Empty
+	GroupChat                = user.GroupChat
 	GroupInformation         = user.GroupInformation
 	NextUserIDResponse       = user.NextUserIDResponse
 	UserAddRequest           = user.UserAddRequest
