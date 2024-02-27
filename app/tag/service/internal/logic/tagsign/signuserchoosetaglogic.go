@@ -31,6 +31,7 @@ func NewSignUserChooseTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *SignUserChooseTagLogic) SignUserChooseTag(in *tag.UserChooseTagRequest) (*tag.UserChooseTagRequest, error) {
 	// 获取 RawDB
+	// 注册账号时,选择标签
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
 	if err != nil {
 		return nil, status.Error(500, err.Error())

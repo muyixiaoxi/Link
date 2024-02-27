@@ -2,6 +2,7 @@ package userGroup
 
 import (
 	"context"
+	"encoding/json"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
 	"user/service/user"
@@ -24,10 +25,12 @@ func NewUserCreateGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 }
 
 func (l *UserCreateGroupLogic) UserCreateGroup(req *types.UserCreateGroupRequset) error {
-	// 用户创建群组
+	//获取当前登录用户的id
+	jid := l.ctx.Value("user_id").(json.Number)
+	userId, _ := jid.Int64()
 	// 封装请求参数
 	createGroupParams := user.UserCreateGroupRequest{
-		GroupBossId:   req.GroupBossId,
+		GroupBossId:   uint64(userId),
 		Name:          req.Name,
 		SystemTagId:   req.SystemTagId,
 		UserSelfTagId: req.UserSelfTagId,

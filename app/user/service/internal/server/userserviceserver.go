@@ -84,6 +84,7 @@ func (s *UserServiceServer) DecUserID(ctx context.Context, in *user.Empty) (*use
 	return l.DecUserID(in)
 }
 
+// 群聊
 func (s *UserServiceServer) UserCreateGroup(ctx context.Context, in *user.UserCreateGroupRequest) (*user.Empty, error) {
 	l := logic.NewUserCreateGroupLogic(ctx, s.svcCtx)
 	return l.UserCreateGroup(in)
@@ -92,6 +93,11 @@ func (s *UserServiceServer) UserCreateGroup(ctx context.Context, in *user.UserCr
 func (s *UserServiceServer) UserSelectGroup(ctx context.Context, in *user.UserSelectGroupsRequest) (*user.UserSelectGroupsResponse, error) {
 	l := logic.NewUserSelectGroupLogic(ctx, s.svcCtx)
 	return l.UserSelectGroup(in)
+}
+
+func (s *UserServiceServer) UserUserSelfGroup(ctx context.Context, in *user.UserSelfGroupRequest) (*user.UserSelectGroupsResponse, error) {
+	l := logic.NewUserUserSelfGroupLogic(ctx, s.svcCtx)
+	return l.UserUserSelfGroup(in)
 }
 
 func (s *UserServiceServer) UserSelectDetailGroup(ctx context.Context, in *user.DetailGroupRequest) (*user.DetailGroupResponse, error) {

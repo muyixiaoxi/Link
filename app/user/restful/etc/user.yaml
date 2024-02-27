@@ -13,4 +13,4 @@ TagRpc:
     Key: tag.rpc
 Auth:
   AccessSecret: linkMarch
-  AccessExpire: 360000
+  AccessExpire: 336
