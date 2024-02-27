@@ -31,9 +31,10 @@ func NewUserUpdateInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Us
 func (l *UserUpdateInfoLogic) UserUpdateInfo(in *user.UserUpdateInfoRequest) (rp *user.Empty, err error) {
 	rp = &user.Empty{}
 	// 判断用户是否存在
+	id := in.Id
 	m := &types.User{}
 	l.svcCtx.DB.Where("username = ?", in.Username).First(m)
-	if m.ID != 0 {
+	if m.ID != 0 && m.ID != uint(id) {
 		err = errors.New("用户已存在")
 		return nil, err
 	}
@@ -51,9 +52,10 @@ func (l *UserUpdateInfoLogic) UserUpdateInfo(in *user.UserUpdateInfoRequest) (rp
 		Signature: in.Signature,
 	}
 	err = l.svcCtx.DB.Updates(model).Error
+	model.Password = ""
 	js, _ := json.Marshal(model)
 	if err == nil {
-		l.svcCtx.RDB.Set(fmt.Sprintf("link:user:%d", model), string(js))
+		l.svcCtx.RDB.Set(fmt.Sprintf("link:user:%d", model.ID), string(js))
 	}
 	return
 }
