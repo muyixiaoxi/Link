@@ -25,7 +25,7 @@ func NewSelectGroupTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Se
 }
 
 func (l *SelectGroupTagLogic) SelectGroupTag() (resp []types.TagGroupName, err error) {
-	// todo: add your logic here and delete this line
+	// 查询系统标签
 	empty := &tag.Empty{}
 	respBody, err := l.svcCtx.TagLogin.SelectGroupTag(l.ctx, empty)
 	if err != nil {
