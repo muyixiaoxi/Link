@@ -24,6 +24,7 @@ func NewUserCreateGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 }
 
 func (l *UserCreateGroupLogic) UserCreateGroup(in *user.UserCreateGroupRequest) (*user.Empty, error) {
+	tx := l.svcCtx.DB.Begin()
 	// 用户创建群聊
 	groupChat := types.GroupChat{
 		GroupBossID:   in.GroupBossId,
@@ -32,6 +33,17 @@ func (l *UserCreateGroupLogic) UserCreateGroup(in *user.UserCreateGroupRequest) 
 		UserSelfTagId: in.UserSelfTagId,
 		Avatar:        in.Avatar,
 	}
-	err := l.svcCtx.DB.Create(&groupChat).Error
-	return &user.Empty{}, err
+	//插入群聊信息
+	err := tx.Create(&groupChat).Error
+	//向中间表中插入一条信息
+	userGroup := types.UserGroupChat{
+		GroupChatID: uint64(groupChat.ID),
+		UserID:      in.GroupBossId,
+	}
+	err = tx.Create(&userGroup).Error
+	if err != nil {
+		tx.Rollback()
+		return nil, err
+	}
+	return &user.Empty{}, tx.Commit().Error
 }

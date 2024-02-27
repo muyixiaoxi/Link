@@ -53,11 +53,11 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 		Phone:    req.Phone,
 		Id:       userID.NextUserId,
 	}
-	saga := dtmgrpc.NewSagaGrpc(dtmServer, gid).Add(userRpcBuildServer+"/user.UserService/UserCreate", userRpcBuildServer+"/user.UserService/UserCreateRevertLogin", userCreateRequest).
-		Add(tagRpcBuildServer+"/tag.TagSign/SignUserChooseTag", tagRpcBuildServer+"/tag.TagSign/SignUserChooseTagRevert", &tag.UserChooseTagRequest{
-			UserId: userID.NextUserId,
-			TagId:  req.StartTagId,
-		})
+	saga := dtmgrpc.NewSagaGrpc(dtmServer, gid).Add(tagRpcBuildServer+"/tag.TagSign/SignUserChooseTag", tagRpcBuildServer+"/tag.TagSign/SignUserChooseTagRevert", &tag.UserChooseTagRequest{
+		UserId: userID.NextUserId,
+		TagId:  req.StartTagId,
+	}).
+		Add(userRpcBuildServer+"/user.UserService/UserCreate", userRpcBuildServer+"/user.UserService/UserCreateRevertLogin", userCreateRequest)
 	//事务提交
 	err = saga.Submit()
 	if err != nil {

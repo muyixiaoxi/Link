@@ -3,7 +3,7 @@ Host: 0.0.0.0
 Port: 8888
 Auth:
   AccessSecret: linkMarch
-  AccessExpire: 360000
+  AccessExpire: 336
 TagRpc:
   Etcd:
     Hosts:

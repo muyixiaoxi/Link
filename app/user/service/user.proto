@@ -83,9 +83,9 @@ message UserSelectGroupsRequest{
   //根据标签查看群聊
   uint64 system_tag_id = 1;
   uint64 user_self_tag_id = 2;
-  //我创建的群聊 || 我加入的群聊
-  uint64 boss_id = 3;
-  uint64 user_id = 4;
+  //分页数据
+  uint64 page_no = 5;
+  uint64 page_size = 6;
 }
 
 message GroupInformation {
@@ -106,6 +106,7 @@ message DisposeFlowedRequest {
 
 message UserSelectGroupsResponse{
   repeated GroupInformation groupList = 1;
+  uint64 total = 2; //总条数
 }
 
 //查看群详情
@@ -145,6 +146,13 @@ message UserFriend {
   string avatar = 4;
 }
 
+message UserSelfGroupRequest{
+  //查询和自己相关的群聊 1.自己加入的群聊 2.自己创建的群聊
+  uint64 page_now = 1;
+  uint64 page_size = 2;
+  uint64 user_id = 3 ;
+}
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -163,10 +171,11 @@ service UserService {
   rpc NextUserID(Empty) returns (NextUserIDResponse); //查询id
   rpc AddUserId(Empty) returns (Empty);//生成id
   rpc DecUserID(Empty) returns (Empty);//id减少1
-  //群聊
 
+  //群聊
   rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty); //创建群聊
-  rpc UserSelectGroup(UserSelectGroupsRequest) returns (UserSelectGroupsResponse) ; //查询群聊列表
+  rpc UserSelectGroup(UserSelectGroupsRequest) returns (UserSelectGroupsResponse) ; //首页根据标签推荐群聊
+  rpc UserUserSelfGroup(UserSelfGroupRequest) returns(UserSelectGroupsResponse) ; //查询和自己相关的群聊
   rpc UserSelectDetailGroup(DetailGroupRequest) returns (DetailGroupResponse) ; //查询群聊详情
 }
 

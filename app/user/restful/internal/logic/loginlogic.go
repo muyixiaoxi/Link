@@ -44,7 +44,8 @@ func (l *LoginLogic) Login(req *types.UserLoginRequest) (resp *types.UserLoginRe
 		Username: response.Username,
 	}
 	auth := l.svcCtx.Config.Auth
-	token, _ := jwts.GenToken(claims, auth.AccessSecret, int64(response.Id))
+	expries := auth.AccessExpire //过期时间
+	token, _ := jwts.GenToken(claims, auth.AccessSecret, expries)
 	resp = &types.UserLoginResponse{
 		Token:    token,
 		Id:       response.Id,
