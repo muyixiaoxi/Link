@@ -42,6 +42,14 @@ type delteTags {
 	TagIds []uint64 `json:"tagIds" validate:"required"`
 }
 
+//一次查询出全部标签
+type SelectAllTagsResponse {
+	GroupNameId int64  `json:"groupNameId"`
+	GroupName   string `json:"groupName"`
+	Tags        []Tag  `json:"tags"`
+}
+
+//一次查询出全部标签
 @server (
 	prefix: /app/tag
 	jwt:    Auth
@@ -60,6 +68,10 @@ service tag-api {
 
 	@handler deleteTags
 	post /deleteTag (delteTags)
+
+	@doc "一次查询全部标签"
+	@handler selectAllTags
+	post /selectAllTags returns ([]SelectAllTagsResponse)
 }
 
 @server (

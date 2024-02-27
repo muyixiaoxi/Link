@@ -12,6 +12,12 @@ type CreateTagResponse struct {
 	TagGroupName []TagGroupName `json:"tagGroupName"`
 }
 
+type SelectAllTagsResponse struct {
+	GroupNameId int64  `json:"groupNameId"`
+	GroupName   string `json:"groupName"`
+	Tags        []Tag  `json:"tags"`
+}
+
 type Tag struct {
 	TagId     uint64 `json:"tagId"`
 	CreatorId uint64 `json:"creatorId"`
