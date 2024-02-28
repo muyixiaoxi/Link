@@ -66,15 +66,11 @@ func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserC
 		}
 		return nil
 	})
-<<<<<<< HEAD
-	// 走回滚
-=======
-	// 这种情况是库存不足，不再重试，走回滚
-	if err == dtmcli.ErrFailure {
-		return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
-	}
 
->>>>>>> 64cb6d9d38e5020a3c7ef65a29272e1cfcd7adef
+	// 不再重试，走回滚
+	//if err == dtmcli.ErrFailure {
+	//	return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
+	//}
 	if err != nil {
 		return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
 	}
