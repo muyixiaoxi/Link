@@ -37,6 +37,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
+				Path:    "/selectAllTags",
+				Handler: tagLogin.SelectAllTagsHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/selectUserTagByGroup",
 				Handler: tagLogin.SelectUserTagByGroupHandler(serverCtx),
 			},

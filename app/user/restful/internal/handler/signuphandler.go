@@ -23,7 +23,7 @@ func signUpHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 		l := logic.NewSignUpLogic(r.Context(), svcCtx)
-		resp, err := l.SignUp(&req)
+		_, err := l.SignUp(&req)
 		fmt.Println("@@", err)
 		if err != nil {
 			formErr, _ := status.FromError(err)
@@ -38,9 +38,9 @@ func signUpHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 				return
 
 			}
-			response.Response(w, resp, response.CodeUserExist)
+			response.Response(w, nil, response.CodeUserExist)
 			return
 		}
-		response.Response(w, resp, response.CodeSuccess)
+		response.Response(w, nil, response.CodeSuccess)
 	}
 }

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"user/service/user"
@@ -43,8 +44,12 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	// 创建一个gid
 	gid := dtmgrpc.MustGenGid(dtmServer)
 	//创建一个自增id
-	l.svcCtx.UserRpc.AddUserId(l.ctx, &empty)
+	if _, err := l.svcCtx.UserRpc.AddUserId(l.ctx, &empty); err != nil {
+		logx.Error(err)
+		return nil, fmt.Errorf("CREATE user id error:%v", err)
+	}
 	userID, _ := l.svcCtx.UserRpc.NextUserID(l.ctx, &empty)
+
 	// 创建一个saga协议
 	userCreateRequest := &user.UserCreateRequest{
 		Username: req.Username,
@@ -58,12 +63,15 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 		TagId:  req.StartTagId,
 	}).
 		Add(userRpcBuildServer+"/user.UserService/UserCreate", userRpcBuildServer+"/user.UserService/UserCreateRevertLogin", userCreateRequest)
+
 	//事务提交
-	err = saga.Submit()
-	if err != nil {
+	if err := saga.Submit(); err != nil {
 		//自增主键减少1
-		l.svcCtx.UserRpc.DecUserID(l.ctx, &empty)
-		return nil, err
+		if _, err := l.svcCtx.UserRpc.DecUserID(l.ctx, &empty); err != nil {
+			logx.Error(err)
+		}
+		logx.Error(err)
+		return nil, fmt.Errorf("saga submit error:%v", err)
 	}
-	return
+	return &types.UserCreateResponse{}, nil
 }
