@@ -77,6 +77,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/createGroup",
 				Handler: userGroup.UserCreateGroupHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/selectHomeGroup",
+				Handler: userGroup.HomeGroupHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/app/user"),
