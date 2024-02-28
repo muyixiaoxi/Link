@@ -41,11 +41,11 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	empty := user.Empty{}
 	//dtm服务的etcd注册地址
 	var dtmServer = l.svcCtx.Config.Dtm
+	fmt.Println(dtmServer)
 	// 创建一个gid
 	gid := dtmgrpc.MustGenGid(dtmServer)
 	//创建一个自增id
 	if _, err := l.svcCtx.UserRpc.AddUserId(l.ctx, &empty); err != nil {
-		logx.Error(err)
 		return nil, fmt.Errorf("CREATE user id error:%v", err)
 	}
 	userID, _ := l.svcCtx.UserRpc.NextUserID(l.ctx, &empty)

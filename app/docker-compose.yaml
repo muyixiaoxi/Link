@@ -1,0 +1,252 @@
+#version: '3'
+#
+#networks:
+#  backend:
+#    driver: bridge
+#
+#
+######### 项目依赖的环境，启动项目之前要先启动此环境 #######
+#services:
+#  etcd:
+#    build:
+#      context: etcd
+#    environment:
+#      - TZ=Asia/Shanghai
+#      - ALLOW_NONE_AUTHENTICATION=yes
+#      - ETCD_ADVERTISE_CLIENT_URLS=http://101.37.175.145:2379
+#    ports: # 设置端口映射
+#      - "2379:2379"
+#    networks:
+#      - backend
+#    restart: always
+#  etcd-manage:
+#    build:
+#      context: etcd-manage
+#    environment:
+#      - TZ=Asia/Shanghai
+#    ports:
+#      - "7000:8080"                    # 设置容器8080端口映射指定宿主机端口，用于宿主机访问可视化web
+#    depends_on:                                       # 依赖容器
+#      - etcd                                          # 在 etcd 服务容器启动后启动
+#    networks:
+#      - backend
+#    restart: always
+#  # 服务发现
+#  tag-rpc: #自定义容器名称
+#    image: tag-rpc:0.0.1
+#    container_name: tag-rpc
+#    restart: always
+#    environment: #设置环境变量
+#      - TZ=Asia/Shanghai
+#    privileged: true
+#    ports: #设置端口映射
+#      - "8081:8081"
+#    networks:
+#      - backend
+#
+#  user-rpc: #自定义容器名称
+#    image: user-rpc:0.0.1
+#    container_name: user-rpc
+#    restart: always
+#    environment: #设置环境变量
+#      - TZ=Asia/Shanghai
+#    privileged: true
+#    ports: #设置端口映射
+#      - "8082:8082"
+#    networks:
+#      - backend
+#
+#  tag-api: #自定义容器名称
+#    image: tag-api:0.0.1
+#    container_name: tag-api
+#    restart: always
+#    environment: #设置环境变量
+#      - TZ=Asia/Shanghai
+#    privileged: true
+#    ports: #设置端口映射
+#      - "8888:8888"
+#    networks:
+#      - backend
+#
+#  user-api: #自定义容器名称
+#    image: user-api:0.0.1
+#    container_name: user-api
+#    restart: always
+#    environment: #设置环境变量
+#      - TZ=Asia/Shanghai
+#    privileged: true
+#    ports: #设置端口映射
+#      - "8887:8887"
+#    networks:
+#      - backend
+
+version: '3'
+
+networks:
+  backend:
+    driver: bridge
+
+
+######## 项目依赖的环境，启动项目之前要先启动此环境 #######
+services:
+  etcd:
+    build:
+      context: etcd
+    environment:
+      - TZ=Asia/Shanghai
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://114.55.135.211:2379
+    ports: # 设置端口映射
+      - "2379:2379"
+    networks:
+      - backend
+    restart: always
+  etcd-manage:
+    build:
+      context: etcd-manage
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "7000:8080"                    # 设置容器8080端口映射指定宿主机端口，用于宿主机访问可视化web
+    depends_on:                                       # 依赖容器
+      - etcd                                          # 在 etcd 服务容器启动后启动
+    networks:
+      - backend
+    restart: always
+  zoo1:
+    image: confluentinc/cp-zookeeper:7.3.2
+    hostname: zoo1
+    container_name: zoo1
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_SERVERS: zoo1:2888:3888
+
+  kafka1:
+    image: confluentinc/cp-kafka:7.3.2
+    hostname: kafka1
+    container_name: kafka1
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+      - "9999:9999"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092,DOCKER://host.docker.internal:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_JMX_PORT: 9999
+      KAFKA_JMX_HOSTNAME: ${DOCKER_HOST_IP:-127.0.0.1}
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
+    depends_on:
+      - zoo1
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - kafka1
+    environment:
+      DYNAMIC_CONFIG_ENABLED: "TRUE"
+  dtm:
+    build:
+      context: ./dtm
+    environment:
+      - TZ=Asia/Shanghai
+    entrypoint:
+      - "/app/dtm/dtm"
+      - "-c=/app/dtm/configs/config.yaml"
+    privileged: true
+    volumes:
+      - ./dtm/config.yml:/app/dtm/configs/config.yaml # 将 dtm 配置文件挂载到容器里
+    ports:
+      - "36789:36789"
+      - "36790:36790"
+    networks:
+      - backend
+    restart: always
+    depends_on:
+      - etcd
+  # 服务发现
+  tag-rpc: #自定义容器名称
+    build:
+      context: tag
+      dockerfile: service/Dockerfile
+    container_name: tag-rpc
+    restart: always
+    environment: #设置环境变量
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports: #设置端口映射
+      - "8081:8081"
+    networks:
+      - backend
+    depends_on:
+      - etcd
+      - kafka1
+      - dtm
+
+  user-rpc: #自定义容器名称
+    build:
+      context: user
+      dockerfile: service/Dockerfile
+    container_name: user-rpc
+    restart: always
+    environment: #设置环境变量
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports: #设置端口映射
+      - "8082:8082"
+    networks:
+      - backend
+    depends_on:
+      - etcd
+      - kafka1
+      - dtm
+
+  tag-api: #自定义容器名称
+    build:
+      context: tag
+      dockerfile: restful/Dockerfile
+    container_name: tag-api
+    restart: always
+    environment: #设置环境变量
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports: #设置端口映射
+      - "8888:8888"
+    networks:
+      - backend
+    depends_on:
+      - etcd
+      - kafka1
+      - dtm
+
+  user-api: #自定义容器名称
+    build:
+      context: user
+      dockerfile: restful/Dockerfile
+    container_name: user-api
+    restart: always
+    environment: #设置环境变量
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports: #设置端口映射
+      - "8887:8887"
+    networks:
+      - backend
+    depends_on:
+      - etcd
+      - kafka1
+      - dtm
+
+
