@@ -70,6 +70,7 @@ func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserC
 	if err == dtmcli.ErrFailure {
 		return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
 	}
+
 	if err != nil {
 		return nil, status.Error(500, err.Error())
 	}
