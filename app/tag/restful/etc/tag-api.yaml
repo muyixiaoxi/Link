@@ -20,5 +20,5 @@ Auth:
 TagRpc:
   Etcd:
     Hosts:
-      - 101.37.175.145:2379
+      - 114.55.135.211:2379
     Key: tag.rpc
