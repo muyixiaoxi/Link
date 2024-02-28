@@ -40,7 +40,7 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	}
 	empty := user.Empty{}
 	//dtm服务的etcd注册地址
-	var dtmServer = "etcd://114.55.135.211:2379/dtmservice"
+	var dtmServer = l.svcCtx.Config.Dtm
 	// 创建一个gid
 	gid := dtmgrpc.MustGenGid(dtmServer)
 	//创建一个自增id
