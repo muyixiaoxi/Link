@@ -41,13 +41,13 @@ func (l *UserCreateRevertLoginLogic) UserCreateRevertLogin(in *user.UserCreateRe
 	// 开启子事务屏障
 	err = barrier.CallWithDB(db, func(tx *sql.Tx) error {
 		//删除用户数据
-		stmt, err := tx.Prepare("DELETE FROM users where username = ? and password = ?")
+		stmt, err := tx.Prepare("DELETE FROM users where phone = ? and password = ?")
 		//返回事务执行失败
 		if err != nil {
 			return err
 		}
 		defer stmt.Close()
-		_, err = stmt.Exec(in.Username, pwd)
+		_, err = stmt.Exec(in.Phone, pwd)
 		//返回子事务执行失败
 		if err != nil {
 			return err

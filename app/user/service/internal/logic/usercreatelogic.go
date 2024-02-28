@@ -43,7 +43,7 @@ func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserC
 	err = barrier.CallWithDB(db, func(tx *sql.Tx) error {
 		// 判断用户是否存在
 		var exists bool
-		err = db.QueryRow("SELECT EXISTS(SELECT 1 FROM users WHERE username = ?)", in.Username).Scan(&exists)
+		err = db.QueryRow("SELECT EXISTS(SELECT 1 FROM users WHERE phone = ?)", in.Phone).Scan(&exists)
 		if err != nil {
 			return err
 		}
