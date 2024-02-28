@@ -33,9 +33,9 @@ func (l *UserUpdateInfoLogic) UserUpdateInfo(in *user.UserUpdateInfoRequest) (rp
 	// 判断用户是否存在
 	id := in.Id
 	m := &types.User{}
-	l.svcCtx.DB.Where("username = ?", in.Username).First(m)
+	l.svcCtx.DB.Where("phone = ?", in.Phone).First(m)
 	if m.ID != 0 && m.ID != uint(id) {
-		err = errors.New("用户已存在")
+		err = errors.New("该手机号已被注册")
 		return nil, err
 	}
 	l.svcCtx.RDB.Del(fmt.Sprintf("link:user:%d", m.ID))

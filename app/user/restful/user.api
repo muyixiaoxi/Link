@@ -172,13 +172,12 @@ service user {
 	get /friends returns (UserFriendsResponse)
 }
 
-type homeGroupRequest{
-	PageNo uint64 `json:"pageNo" validate:"required"` //当前页
-	PageSize uint64 `json:"pageSize" validate:"required"` //每页显示条数
-	SystemTagId uint64 `json:"systemTagId"` //系统标签
+type homeGroupRequest {
+	PageNo        uint64 `json:"pageNo" validate:"required"` //当前页
+	PageSize      uint64 `json:"pageSize" validate:"required"` //每页显示条数
+	SystemTagId   uint64 `json:"systemTagId"` //系统标签
 	UserSelfTagId uint64 `json:"userSelfTagId"` //用户自定义标签
 }
-
 
 @server (
 	prefix: /app/user
@@ -192,7 +191,7 @@ service user {
 
 	@doc "首页推荐群聊"
 	@handler homeGroup
-	post /selectHomeGroup()
+	post /selectHomeGroup
 }
 
 @server (
