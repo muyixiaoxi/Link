@@ -1,0 +1,24 @@
+#Name: tag-api
+#Host: 0.0.0.0
+#Port: 8888
+#Auth:
+#  AccessSecret: linkMarch
+#  AccessExpire: 336
+#TagRpc:
+#  Etcd:
+#    Hosts:
+#      - 127.0.0.1:2379
+#    Key: tag.rpc
+
+
+Name: tag-api
+Host: 0.0.0.0
+Port: 8888
+Auth:
+  AccessSecret: linkMarch
+  AccessExpire: 336
+TagRpc:
+  Etcd:
+    Hosts:
+      - 101.37.175.145:2379
+    Key: tag.rpc

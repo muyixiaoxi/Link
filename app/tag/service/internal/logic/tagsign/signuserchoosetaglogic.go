@@ -4,8 +4,10 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"github.com/dtm-labs/client/dtmcli"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"time"
 
@@ -56,7 +58,7 @@ func (l *SignUserChooseTagLogic) SignUserChooseTag(in *tag.UserChooseTagRequest)
 		return nil
 	})
 	if err != nil {
-		return nil, status.Error(500, err.Error())
+		return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
 	}
 	return &tag.UserChooseTagRequest{}, nil
 }
