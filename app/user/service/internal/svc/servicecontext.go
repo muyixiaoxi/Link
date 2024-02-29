@@ -22,7 +22,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	db.AutoMigrate(&types.GroupChat{})
 	db.AutoMigrate(&types.ApplyFor{})
 	db.AutoMigrate(&types.Friend{})
-
+	db.AutoMigrate(&types.ChatHistory{})
 	rc := redis.RedisConf{
 		Host: c.RedisConf.Host,
 		Type: c.RedisConf.Type,

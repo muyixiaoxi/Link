@@ -28,6 +28,13 @@ func NewSignUpLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SignUpLogi
 }
 
 func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCreateResponse, err error) {
+	//首先判断用户是否存在
+	_, err = l.svcCtx.UserRpc.UserIsExists(l.ctx, &user.UserCreateRequest{
+		Phone: req.Phone,
+	})
+	if err != nil {
+		return nil, err
+	}
 	// 获取UserRpc 的BuildTarget
 	userRpcBuildServer, err := l.svcCtx.Config.UserRpc.BuildTarget()
 	if err != nil {
@@ -41,6 +48,7 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	empty := user.Empty{}
 	//dtm服务的etcd注册地址
 	var dtmServer = l.svcCtx.Config.Dtm
+	//dtmServer := "etcd://etcd:2379/dtmservice"
 	fmt.Println(dtmServer)
 	// 创建一个gid
 	gid := dtmgrpc.MustGenGid(dtmServer)
@@ -50,20 +58,16 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	}
 	userID, _ := l.svcCtx.UserRpc.NextUserID(l.ctx, &empty)
 
-	// 创建一个saga协议
-	userCreateRequest := &user.UserCreateRequest{
+	saga := dtmgrpc.NewSagaGrpc(dtmServer, gid).Add(tagRpcBuildServer+"/tag.TagSign/SignUserChooseTag", tagRpcBuildServer+"/tag.TagSign/SignUserChooseTagRevert", &tag.UserChooseTagRequest{
+		UserId: userID.NextUserId,
+		TagId:  req.StartTagId,
+	}).Add(userRpcBuildServer+"/user.UserService/UserCreate", userRpcBuildServer+"/user.UserService/UserCreateRevertLogin", &user.UserCreateRequest{
 		Username: req.Username,
 		Password: req.Password,
 		Avatar:   req.Avatar,
 		Phone:    req.Phone,
 		Id:       userID.NextUserId,
-	}
-	saga := dtmgrpc.NewSagaGrpc(dtmServer, gid).Add(tagRpcBuildServer+"/tag.TagSign/SignUserChooseTag", tagRpcBuildServer+"/tag.TagSign/SignUserChooseTagRevert", &tag.UserChooseTagRequest{
-		UserId: userID.NextUserId,
-		TagId:  req.StartTagId,
-	}).
-		Add(userRpcBuildServer+"/user.UserService/UserCreate", userRpcBuildServer+"/user.UserService/UserCreateRevertLogin", userCreateRequest)
-
+	})
 	//事务提交
 	if err := saga.Submit(); err != nil {
 		//自增主键减少1

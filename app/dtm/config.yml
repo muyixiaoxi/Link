@@ -42,6 +42,11 @@ MicroService:
   Target: 'etcd://114.55.135.211:2379/dtmservice' # 注册 dtm 服务的 etcd 地址
   EndPoint: '114.55.135.211:36790'
 
+#MicroService:
+#  Driver: 'dtm-driver-gozero'           # 要处理注册/发现的驱动程序的名称
+#  Target: 'etcd://etcd:2379/dtmservice' # 注册 dtm 服务的 etcd 地址
+#  EndPoint: '172.30.0.1:36790'
+
 # 以下配置的单位为'秒'
 # TransCronInterval: 3
 # TimeoutToFail: 35

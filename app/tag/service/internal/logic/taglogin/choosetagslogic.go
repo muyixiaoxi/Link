@@ -41,7 +41,8 @@ func (l *ChooseTagsLogic) ChooseTags(in *tag.ChooseTagsRequest) (resp *tag.Choos
 	}
 	//插入用户选择的小标签
 	for _, tagId := range in.TagIds {
-		err = tx.Create(&types.UserTagFollow{
+		//存在则忽略,不存在则插入
+		err = tx.FirstOrCreate(&types.UserTagFollow{
 			TagId:  tagId,
 			UserId: in.Id,
 		}).Error

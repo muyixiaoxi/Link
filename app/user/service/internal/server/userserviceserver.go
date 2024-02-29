@@ -32,6 +32,11 @@ func (s *UserServiceServer) UserCreateRevertLogin(ctx context.Context, in *user.
 	return l.UserCreateRevertLogin(in)
 }
 
+func (s *UserServiceServer) UserIsExists(ctx context.Context, in *user.UserCreateRequest) (*user.Empty, error) {
+	l := logic.NewUserIsExistsLogic(ctx, s.svcCtx)
+	return l.UserIsExists(in)
+}
+
 func (s *UserServiceServer) UserLogin(ctx context.Context, in *user.UserLoginRequest) (*user.UserLoginResponse, error) {
 	l := logic.NewUserLoginLogic(ctx, s.svcCtx)
 	return l.UserLogin(in)
@@ -61,6 +66,11 @@ func (s *UserServiceServer) UserDisposeFlowed(ctx context.Context, in *user.Disp
 func (s *UserServiceServer) UserUpdateRemark(ctx context.Context, in *user.UserUpdateRemarkRequest) (*user.Empty, error) {
 	l := logic.NewUserUpdateRemarkLogic(ctx, s.svcCtx)
 	return l.UserUpdateRemark(in)
+}
+
+func (s *UserServiceServer) RecommendUsers(ctx context.Context, in *user.RecommendUsersRequest) (*user.RecommendUsersResponse, error) {
+	l := logic.NewRecommendUsersLogic(ctx, s.svcCtx)
+	return l.RecommendUsers(in)
 }
 
 func (s *UserServiceServer) UserFriendList(ctx context.Context, in *user.UserFriendRequest) (*user.UserFriendResponse, error) {

@@ -20,6 +20,9 @@ type (
 	GroupChat                = user.GroupChat
 	GroupInformation         = user.GroupInformation
 	NextUserIDResponse       = user.NextUserIDResponse
+	RecommendUser            = user.RecommendUser
+	RecommendUsersRequest    = user.RecommendUsersRequest
+	RecommendUsersResponse   = user.RecommendUsersResponse
 	UserAddRequest           = user.UserAddRequest
 	UserCreateGroupRequest   = user.UserCreateGroupRequest
 	UserCreateRequest        = user.UserCreateRequest
@@ -44,6 +47,7 @@ type (
 	UserService interface {
 		UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
 		UserCreateRevertLogin(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
+		UserIsExists(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error)
 		UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
 		UserUpdateInfo(ctx context.Context, in *UserUpdateInfoRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -51,6 +55,7 @@ type (
 		UserFlowed(ctx context.Context, in *UserAddRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserDisposeFlowed(ctx context.Context, in *DisposeFlowedRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
+		RecommendUsers(ctx context.Context, in *RecommendUsersRequest, opts ...grpc.CallOption) (*RecommendUsersResponse, error)
 		UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
 		UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
 		UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error)
@@ -87,6 +92,11 @@ func (m *defaultUserService) UserCreateRevertLogin(ctx context.Context, in *User
 	return client.UserCreateRevertLogin(ctx, in, opts...)
 }
 
+func (m *defaultUserService) UserIsExists(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserIsExists(ctx, in, opts...)
+}
+
 func (m *defaultUserService) UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserLogin(ctx, in, opts...)
@@ -116,6 +126,11 @@ func (m *defaultUserService) UserDisposeFlowed(ctx context.Context, in *DisposeF
 func (m *defaultUserService) UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserUpdateRemark(ctx, in, opts...)
+}
+
+func (m *defaultUserService) RecommendUsers(ctx context.Context, in *RecommendUsersRequest, opts ...grpc.CallOption) (*RecommendUsersResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.RecommendUsers(ctx, in, opts...)
 }
 
 func (m *defaultUserService) UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error) {
