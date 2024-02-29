@@ -3,12 +3,10 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"user/service/user"
-
+	"github.com/zeromicro/go-zero/core/logx"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
-
-	"github.com/zeromicro/go-zero/core/logx"
+	"user/service/user"
 )
 
 type GetFriendsListLogic struct {
@@ -34,10 +32,12 @@ func (l *GetFriendsListLogic) GetFriendsList() (resp *types.UserFriendsResponse,
 	resp = &types.UserFriendsResponse{}
 	for _, u := range response.List {
 		resp.Friends = append(resp.Friends, types.UserFriend{
-			Id:       u.Id,
-			Username: u.Username,
-			Avatar:   u.Avatar,
-			Remark:   u.Remark,
+			Id:        u.Id,
+			Username:  u.Username,
+			Avatar:    u.Avatar,
+			Remark:    u.Remark,
+			Signature: u.Signature,
+			TagName:   u.TagName,
 		})
 	}
 

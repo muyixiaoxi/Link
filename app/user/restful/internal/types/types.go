@@ -68,10 +68,12 @@ type UserFlowedRequest struct {
 }
 
 type UserFriend struct {
-	Id       uint64 `json:"id"`
-	Username string `json:"username"`
-	Avatar   string `json:"avatar"`
-	Remark   string `json:"remark"`
+	Id        uint64   `json:"id"`
+	Username  string   `json:"username"`
+	Avatar    string   `json:"avatar"`
+	Remark    string   `json:"remark"`
+	Signature string   `json:"signature"`
+	TagName   []string `json:"tagName"`
 }
 
 type UserFriendsResponse struct {
@@ -105,6 +107,23 @@ type UserLoginResponse struct {
 	Id       uint64 `json:"id"`
 	Username string `json:"username"`
 	Avatar   string `json:"avatar"`
+}
+
+type UserQueryFriendRequest struct {
+	Param string `json:"param"`
+}
+
+type UserQueryPhoneRequest struct {
+	Phone string `json:"phone"`
+}
+
+type UserQueryPhoneResponse struct {
+	Id        uint64   `json:"id"`
+	Username  string   `json:"username"`
+	Avatar    string   `json:"avatar"`
+	Address   string   `json:"address"`
+	Signature string   `json:"signature"`
+	TagName   []string `json:"tagName"`
 }
 
 type UserUpdateInfoRequest struct {

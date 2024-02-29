@@ -68,6 +68,16 @@ func (s *UserServiceServer) UserFriendList(ctx context.Context, in *user.UserFri
 	return l.UserFriendList(in)
 }
 
+func (s *UserServiceServer) UserQueryFriend(ctx context.Context, in *user.UserQueryFriendRequest) (*user.UserFriendResponse, error) {
+	l := logic.NewUserQueryFriendLogic(ctx, s.svcCtx)
+	return l.UserQueryFriend(in)
+}
+
+func (s *UserServiceServer) UserQueryPhone(ctx context.Context, in *user.UserQueryPhoneRequest) (*user.UserQueryPhoneResponse, error) {
+	l := logic.NewUserQueryPhoneLogic(ctx, s.svcCtx)
+	return l.UserQueryPhone(in)
+}
+
 // redis自增id
 func (s *UserServiceServer) NextUserID(ctx context.Context, in *user.Empty) (*user.NextUserIDResponse, error) {
 	l := logic.NewNextUserIDLogic(ctx, s.svcCtx)

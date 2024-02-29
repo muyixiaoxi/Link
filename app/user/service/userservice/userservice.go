@@ -31,6 +31,9 @@ type (
 	UserInfoResponse         = user.UserInfoResponse
 	UserLoginRequest         = user.UserLoginRequest
 	UserLoginResponse        = user.UserLoginResponse
+	UserQueryFriendRequest   = user.UserQueryFriendRequest
+	UserQueryPhoneRequest    = user.UserQueryPhoneRequest
+	UserQueryPhoneResponse   = user.UserQueryPhoneResponse
 	UserSelectGroupsRequest  = user.UserSelectGroupsRequest
 	UserSelectGroupsResponse = user.UserSelectGroupsResponse
 	UserSelfGroupRequest     = user.UserSelfGroupRequest
@@ -48,6 +51,8 @@ type (
 		UserDisposeFlowed(ctx context.Context, in *DisposeFlowedRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
+		UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
+		UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error)
 		// redis自增id
 		NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 		AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
@@ -114,6 +119,16 @@ func (m *defaultUserService) UserUpdateRemark(ctx context.Context, in *UserUpdat
 func (m *defaultUserService) UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserFriendList(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserQueryFriend(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserQueryPhone(ctx, in, opts...)
 }
 
 // redis自增id

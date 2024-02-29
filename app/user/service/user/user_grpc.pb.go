@@ -28,6 +28,8 @@ const (
 	UserService_UserDisposeFlowed_FullMethodName     = "/user.UserService/UserDisposeFlowed"
 	UserService_UserUpdateRemark_FullMethodName      = "/user.UserService/UserUpdateRemark"
 	UserService_UserFriendList_FullMethodName        = "/user.UserService/UserFriendList"
+	UserService_UserQueryFriend_FullMethodName       = "/user.UserService/UserQueryFriend"
+	UserService_UserQueryPhone_FullMethodName        = "/user.UserService/UserQueryPhone"
 	UserService_NextUserID_FullMethodName            = "/user.UserService/NextUserID"
 	UserService_AddUserId_FullMethodName             = "/user.UserService/AddUserId"
 	UserService_DecUserID_FullMethodName             = "/user.UserService/DecUserID"
@@ -51,6 +53,8 @@ type UserServiceClient interface {
 	UserDisposeFlowed(ctx context.Context, in *DisposeFlowedRequest, opts ...grpc.CallOption) (*Empty, error)
 	UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
 	UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
+	UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
+	UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error)
 	// redis自增id
 	NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 	AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
@@ -151,6 +155,24 @@ func (c *userServiceClient) UserFriendList(ctx context.Context, in *UserFriendRe
 	return out, nil
 }
 
+func (c *userServiceClient) UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error) {
+	out := new(UserFriendResponse)
+	err := c.cc.Invoke(ctx, UserService_UserQueryFriend_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error) {
+	out := new(UserQueryPhoneResponse)
+	err := c.cc.Invoke(ctx, UserService_UserQueryPhone_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userServiceClient) NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error) {
 	out := new(NextUserIDResponse)
 	err := c.cc.Invoke(ctx, UserService_NextUserID_FullMethodName, in, out, opts...)
@@ -228,6 +250,8 @@ type UserServiceServer interface {
 	UserDisposeFlowed(context.Context, *DisposeFlowedRequest) (*Empty, error)
 	UserUpdateRemark(context.Context, *UserUpdateRemarkRequest) (*Empty, error)
 	UserFriendList(context.Context, *UserFriendRequest) (*UserFriendResponse, error)
+	UserQueryFriend(context.Context, *UserQueryFriendRequest) (*UserFriendResponse, error)
+	UserQueryPhone(context.Context, *UserQueryPhoneRequest) (*UserQueryPhoneResponse, error)
 	// redis自增id
 	NextUserID(context.Context, *Empty) (*NextUserIDResponse, error)
 	AddUserId(context.Context, *Empty) (*Empty, error)
@@ -270,6 +294,12 @@ func (UnimplementedUserServiceServer) UserUpdateRemark(context.Context, *UserUpd
 }
 func (UnimplementedUserServiceServer) UserFriendList(context.Context, *UserFriendRequest) (*UserFriendResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserFriendList not implemented")
+}
+func (UnimplementedUserServiceServer) UserQueryFriend(context.Context, *UserQueryFriendRequest) (*UserFriendResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserQueryFriend not implemented")
+}
+func (UnimplementedUserServiceServer) UserQueryPhone(context.Context, *UserQueryPhoneRequest) (*UserQueryPhoneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserQueryPhone not implemented")
 }
 func (UnimplementedUserServiceServer) NextUserID(context.Context, *Empty) (*NextUserIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NextUserID not implemented")
@@ -467,6 +497,42 @@ func _UserService_UserFriendList_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UserQueryFriend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserQueryFriendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserQueryFriend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserQueryFriend_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserQueryFriend(ctx, req.(*UserQueryFriendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserQueryPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserQueryPhoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserQueryPhone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserQueryPhone_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserQueryPhone(ctx, req.(*UserQueryPhoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _UserService_NextUserID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Empty)
 	if err := dec(in); err != nil {
@@ -635,6 +701,14 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserFriendList",
 			Handler:    _UserService_UserFriendList_Handler,
+		},
+		{
+			MethodName: "UserQueryFriend",
+			Handler:    _UserService_UserQueryFriend_Handler,
+		},
+		{
+			MethodName: "UserQueryPhone",
+			Handler:    _UserService_UserQueryPhone_Handler,
 		},
 		{
 			MethodName: "NextUserID",

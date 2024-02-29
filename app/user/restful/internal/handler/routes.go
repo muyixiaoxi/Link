@@ -61,6 +61,16 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: GetFriendsListHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodPost,
+				Path:    "/friends/query",
+				Handler: QueryFriendsHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/query/phone",
+				Handler: QueryPhoneHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodPut,
 				Path:    "/remark",
 				Handler: updateRemarkHandler(serverCtx),
