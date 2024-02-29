@@ -144,7 +144,10 @@ message UserFriend {
   string username = 2;
   string remark = 3;
   string avatar = 4;
+  string signature = 5;
+  repeated string tag_name = 6;
 }
+
 message GroupChat {
   
 }
@@ -154,6 +157,24 @@ message UserSelfGroupRequest{
   uint64 page_now = 1;
   uint64 page_size = 2;
   uint64 user_id = 3 ;
+}
+
+message UserQueryFriendRequest{
+  uint64 userId = 1;
+  string param = 2; // 可能为用户名、备注
+}
+
+message UserQueryPhoneRequest{
+  string phone = 1;
+}
+
+message UserQueryPhoneResponse{
+  uint64 Id = 1;
+  string username = 2;
+  string avatar = 3;
+  string address = 4;
+  string signature = 5;
+  repeated string tag_name = 6;
 }
 
 service UserService {
@@ -168,7 +189,9 @@ service UserService {
   rpc UserFlowed(UserAddRequest) returns(Empty);  // 添加好友/群聊
   rpc UserDisposeFlowed(DisposeFlowedRequest) returns(Empty); // 处理好友/群聊申请
   rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty); // 修改备注
-  rpc UserFriendList(UserFriendRequest) returns(UserFriendResponse);
+  rpc UserFriendList(UserFriendRequest) returns(UserFriendResponse); // 获取好友列表
+  rpc UserQueryFriend(UserQueryFriendRequest)returns(UserFriendResponse); // 在好友列表中搜索
+  rpc UserQueryPhone(UserQueryPhoneRequest)returns(UserQueryPhoneResponse); // 通过手机号搜索（包括陌生人）
 
   //redis自增id
   rpc NextUserID(Empty) returns (NextUserIDResponse); //查询id
