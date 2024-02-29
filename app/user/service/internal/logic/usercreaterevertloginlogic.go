@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"google.golang.org/grpc/status"
-	"user/common/bcrypt"
 	"user/service/internal/svc"
 	"user/service/user"
 
@@ -28,11 +28,9 @@ func NewUserCreateRevertLoginLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *UserCreateRevertLoginLogic) UserCreateRevertLogin(in *user.UserCreateRequest) (pd *user.UserCreateResponse, err error) {
-	// 在UserCreate方法中,插入了一条记录 , 在这里给它删除
+	fmt.Println("用户标签回滚开始--->")
 	// 获取 RawDB
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
-	// 加密密码
-	pwd, _ := bcrypt.GetPwd(in.Password)
 	// 获取子事务屏障对象
 	barrier, err := dtmgrpc.BarrierFromGrpc(l.ctx)
 	if err != nil {
@@ -40,14 +38,10 @@ func (l *UserCreateRevertLoginLogic) UserCreateRevertLogin(in *user.UserCreateRe
 	}
 	// 开启子事务屏障
 	err = barrier.CallWithDB(db, func(tx *sql.Tx) error {
-		//删除用户数据
-		stmt, err := tx.Prepare("DELETE FROM users where phone = ? and password = ?")
-		//返回事务执行失败
-		if err != nil {
-			return err
-		}
-		defer stmt.Close()
-		_, err = stmt.Exec(in.Phone, pwd)
+		fmt.Println("注册事务走入了补偿")
+		//删除插入的标签数据 和 用户数据
+		_, err = tx.Exec("DELETE FROM tb_user_tag where user_id = ?", in.Id)
+		_, err = tx.Exec("DELETE FROM users where id = ?", in.Id)
 		//返回子事务执行失败
 		if err != nil {
 			return err
@@ -55,7 +49,10 @@ func (l *UserCreateRevertLoginLogic) UserCreateRevertLogin(in *user.UserCreateRe
 		return nil
 	})
 	if err != nil {
+		fmt.Println("failed---->", err)
 		return nil, err
 	}
-	return
+	fmt.Println("删除成功")
+	fmt.Println("用户标签回滚结束--->")
+	return &user.UserCreateResponse{}, nil
 }

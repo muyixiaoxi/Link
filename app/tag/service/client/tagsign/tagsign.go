@@ -29,6 +29,7 @@ type (
 	SelectLinkTag              = tag.SelectLinkTag
 	SelectLinkTagsRequest      = tag.SelectLinkTagsRequest
 	SelectLinkTagsResponse     = tag.SelectLinkTagsResponse
+	SelectMyTagsRequest        = tag.SelectMyTagsRequest
 	UserChooseTagRequest       = tag.UserChooseTagRequest
 
 	TagSign interface {

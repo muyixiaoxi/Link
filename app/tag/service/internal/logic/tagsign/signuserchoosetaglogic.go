@@ -44,13 +44,14 @@ func (l *SignUserChooseTagLogic) SignUserChooseTag(in *tag.UserChooseTagRequest)
 	err = barrier.CallWithDB(db, func(tx *sql.Tx) (err error) {
 		// 用户注册时选择标签
 		var exists bool
-		err = db.QueryRow("SELECT EXISTS(SELECT 1 FROM tb_user_tag WHERE tag_id = ? and user_id = ?)", in.TagId, in.UserId).Scan(&exists)
+		err = tx.QueryRow("SELECT EXISTS(SELECT 1 FROM tb_user_tag WHERE tag_id = ? and user_id = ?)", in.TagId, in.UserId).Scan(&exists)
 		if err != nil {
 			return err
 		}
 		if exists {
 			return fmt.Errorf("标签重复选择")
 		}
+		fmt.Println("开始插入标签")
 		_, err = tx.Exec("INSERT INTO tb_user_tag (tb_user_tag.created_at , tb_user_tag.updated_at , tag_id, user_id) VALUES (?,?,?, ?)", time.Now(), time.Now(), in.TagId, in.UserId)
 		if err != nil {
 			return fmt.Errorf("标签选择失败")

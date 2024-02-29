@@ -1,32 +1,33 @@
-package userGroup
+package userTag
 
 import (
 	"context"
 	"encoding/json"
-	"user/restful/internal/svc"
-	"user/restful/internal/types"
 	"user/service/tag/service/tag"
 	"user/service/user"
+
+	"user/restful/internal/svc"
+	"user/restful/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type HomeGroupLogic struct {
+type RecommendUserListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *HomeGroupLogic {
-	return &HomeGroupLogic{
+func NewRecommendUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RecommendUserListLogic {
+	return &RecommendUserListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *HomeGroupLogic) HomeGroup(req *types.RecommendGroupByTagRequest) (resp *types.RecommendGroupByTagResponse, err error) {
-	// 首页推荐群聊
+func (l *RecommendUserListLogic) RecommendUserList(req *types.RecommendGroupByTagRequest) (resp *types.RecommendUserListResponse, err error) {
+	// 根据标签推荐人员列表
 	// 获取用户id
 	//获取当前登录用户的id
 	jid := l.ctx.Value("user_id").(json.Number)
@@ -51,29 +52,27 @@ func (l *HomeGroupLogic) HomeGroup(req *types.RecommendGroupByTagRequest) (resp 
 		systemIds = append(systemIds, req.SystemTagId...)
 		selfIds = append(selfIds, req.UserSelfTagId...)
 	}
-	//查询相关群聊
-	respGroup, err := l.svcCtx.UserRpc.UserSelectGroup(l.ctx, &user.UserSelectGroupsRequest{
+	//查询人员列列表
+	rpcUserList, err := l.svcCtx.UserRpc.RecommendUsers(l.ctx, &user.RecommendUsersRequest{
+		PageNo:        int64(req.PageNo),
+		PageSize:      int64(req.PageSize),
 		SystemTagId:   systemIds,
 		UserSelfTagId: selfIds,
-		PageNo:        req.PageNo,
-		PageSize:      req.PageSize,
+		UserId:        uint64(userId),
 	})
-	if err != nil {
-		return nil, err
-	}
-	var groupList []types.GroupList
-	for _, groupInfo := range respGroup.GroupList {
-		temp := types.GroupList{
-			Id:              groupInfo.Id,
-			Name:            groupInfo.Name,
-			SystemTagName:   groupInfo.SystemTagName,
-			UserSelfTagName: groupInfo.UserSelfTagName,
-			Avatar:          groupInfo.Avatar,
+	var userList []types.RecommendUser
+	for _, userRpc := range rpcUserList.RecommendUserList {
+		temp := types.RecommendUser{
+			Id:        userRpc.Id,
+			Username:  userRpc.Username,
+			Avatar:    userRpc.Avatar,
+			Signature: userRpc.Signature,
 		}
-		groupList = append(groupList, temp)
+		userList = append(userList, temp)
 	}
-	return &types.RecommendGroupByTagResponse{
-		GroupList: groupList,
-		Total:     int64(respGroup.Total),
-	}, nil
+	resp = &types.RecommendUserListResponse{
+		RecommendUserList: userList,
+		Total:             rpcUserList.Total,
+	}
+	return
 }

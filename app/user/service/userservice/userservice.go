@@ -20,6 +20,9 @@ type (
 	GroupChat                = user.GroupChat
 	GroupInformation         = user.GroupInformation
 	NextUserIDResponse       = user.NextUserIDResponse
+	RecommendUser            = user.RecommendUser
+	RecommendUsersRequest    = user.RecommendUsersRequest
+	RecommendUsersResponse   = user.RecommendUsersResponse
 	UserAddRequest           = user.UserAddRequest
 	UserCreateGroupRequest   = user.UserCreateGroupRequest
 	UserCreateRequest        = user.UserCreateRequest
@@ -40,6 +43,7 @@ type (
 	UserService interface {
 		UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
 		UserCreateRevertLogin(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
+		UserIsExists(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error)
 		UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
 		UserUpdateInfo(ctx context.Context, in *UserUpdateInfoRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -48,6 +52,7 @@ type (
 		UserDisposeFlowed(ctx context.Context, in *DisposeFlowedRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
 		UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
+		RecommendUsers(ctx context.Context, in *RecommendUsersRequest, opts ...grpc.CallOption) (*RecommendUsersResponse, error)
 		// redis自增id
 		NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 		AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
@@ -78,6 +83,11 @@ func (m *defaultUserService) UserCreate(ctx context.Context, in *UserCreateReque
 func (m *defaultUserService) UserCreateRevertLogin(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserCreateRevertLogin(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserIsExists(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserIsExists(ctx, in, opts...)
 }
 
 func (m *defaultUserService) UserLogin(ctx context.Context, in *UserLoginRequest, opts ...grpc.CallOption) (*UserLoginResponse, error) {
@@ -114,6 +124,11 @@ func (m *defaultUserService) UserUpdateRemark(ctx context.Context, in *UserUpdat
 func (m *defaultUserService) UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserFriendList(ctx, in, opts...)
+}
+
+func (m *defaultUserService) RecommendUsers(ctx context.Context, in *RecommendUsersRequest, opts ...grpc.CallOption) (*RecommendUsersResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.RecommendUsers(ctx, in, opts...)
 }
 
 // redis自增id

@@ -91,6 +91,11 @@ message SelectLinkTagsResponse {
   repeated SelectLinkTag linkTags = 1 ; //数据
 }
 
+// 查询我创建的标签
+message SelectMyTagsRequest{
+  uint64 user_id = 1; //用户id
+}
+
 
 // TagLogin 登录之后的服务
 service TagLogin {
@@ -101,6 +106,7 @@ service TagLogin {
   rpc SelectAllTagsByGroup (SelectAllTagsByGroupName) returns (AllTagsByGroupNameResponse);
   rpc ChooseTags(ChooseTagsRequest) returns (ChooseTagsResponse);
   rpc SelectLinkTags(SelectLinkTagsRequest) returns (SelectLinkTagsResponse);
+  rpc SelectMyTags(SelectMyTagsRequest) returns (AllTagsByGroupNameResponse);
 }
 
 

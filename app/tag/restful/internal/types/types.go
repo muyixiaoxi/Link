@@ -18,6 +18,11 @@ type SelectAllTagsResponse struct {
 	Tags        []Tag  `json:"tags"`
 }
 
+type SelectMyTagsResponse struct {
+	Id      uint64 `json:"id"`
+	TagName string `json:"tagName"`
+}
+
 type Tag struct {
 	TagId     uint64 `json:"tagId"`
 	CreatorId uint64 `json:"creatorId"`

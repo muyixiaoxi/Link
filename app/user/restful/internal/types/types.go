@@ -9,6 +9,14 @@ type DisposeFlowedRequest struct {
 	Res    bool   `json:"res"`
 }
 
+type GroupList struct {
+	Id              uint64 `json:"id"`              //群id
+	Name            string `json:"name"`            //群聊名称
+	SystemTagName   string `json:"systemTagName"`   //群聊所带的系统标签名称
+	UserSelfTagName string `json:"userSelfTagName"` //用户自定义标签
+	Avatar          string `json:"avatar"`          //用户头像
+}
+
 type Message struct {
 	From    uint64 `json:"from,optional"`
 	To      uint64 `json:"to"`
@@ -25,6 +33,30 @@ type QueryLink struct {
 
 type QueryLinkTagsResponse struct {
 	LinkTags []QueryLink `json:"linkTags"`
+}
+
+type RecommendGroupByTagRequest struct {
+	PageNo        uint64   `json:"pageNo" validate:"required"`
+	PageSize      uint64   `json:"pageSize" validate:"required"`
+	SystemTagId   []uint64 `json:"systemTagId"`   //系统标签 最多只能选择一个
+	UserSelfTagId []uint64 `json:"userSelfTagId"` //用户自定义标签 最多只能选择一个
+}
+
+type RecommendGroupByTagResponse struct {
+	GroupList []GroupList `json:"groupList"`
+	Total     int64       `json:"total"`
+}
+
+type RecommendUser struct {
+	Id        uint64 `json:"id"`        //人员Id
+	Username  string `json:"username"`  //用户名
+	Avatar    string `json:"avatar"`    //用户头像
+	Signature string `json:"signature"` //个性签名
+}
+
+type RecommendUserListResponse struct {
+	RecommendUserList []RecommendUser `json:"recommendUserList"`
+	Total             int64           `json:"total"`
 }
 
 type UserAppleRequest struct {
@@ -121,11 +153,4 @@ type UserUpdateInfoRequest struct {
 type UserUpdateRemarkRequest struct {
 	Friend uint64 `json:"friend"`
 	Remark string `json:"remark"`
-}
-
-type HomeGroupRequest struct {
-	PageNo        uint64 `json:"pageNo" validate:"required"`   //当前页
-	PageSize      uint64 `json:"pageSize" validate:"required"` //每页显示条数
-	SystemTagId   uint64 `json:"systemTagId"`                  //系统标签
-	UserSelfTagId uint64 `json:"userSelfTagId"`                //用户自定义标签
 }
