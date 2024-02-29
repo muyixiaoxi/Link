@@ -24,6 +24,7 @@ type (
 	UserCreateGroupRequest   = user.UserCreateGroupRequest
 	UserCreateRequest        = user.UserCreateRequest
 	UserCreateResponse       = user.UserCreateResponse
+	UserDeleteFriendRequest  = user.UserDeleteFriendRequest
 	UserFriend               = user.UserFriend
 	UserFriendRequest        = user.UserFriendRequest
 	UserFriendResponse       = user.UserFriendResponse
@@ -53,6 +54,7 @@ type (
 		UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
 		UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
 		UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error)
+		UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error)
 		// redis自增id
 		NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 		AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
@@ -129,6 +131,11 @@ func (m *defaultUserService) UserQueryFriend(ctx context.Context, in *UserQueryF
 func (m *defaultUserService) UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserQueryPhone(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserDeleteFriend(ctx, in, opts...)
 }
 
 // redis自增id

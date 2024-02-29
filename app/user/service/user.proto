@@ -177,6 +177,11 @@ message UserQueryPhoneResponse{
   repeated string tag_name = 6;
 }
 
+message UserDeleteFriendRequest {
+  uint64 user_id = 1;
+  uint64 friend_id = 2;
+}
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -192,6 +197,7 @@ service UserService {
   rpc UserFriendList(UserFriendRequest) returns(UserFriendResponse); // 获取好友列表
   rpc UserQueryFriend(UserQueryFriendRequest)returns(UserFriendResponse); // 在好友列表中搜索
   rpc UserQueryPhone(UserQueryPhoneRequest)returns(UserQueryPhoneResponse); // 通过手机号搜索（包括陌生人）
+  rpc UserDeleteFriend(UserDeleteFriendRequest)returns(Empty); // 用户删除好友
 
   //redis自增id
   rpc NextUserID(Empty) returns (NextUserIDResponse); //查询id

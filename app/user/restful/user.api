@@ -144,6 +144,11 @@ type UserQueryPhoneRequest {
 	Phone string `json:"phone"`
 }
 
+type UserDeleteFriendRequest {
+	UserId   uint64 `json:"userId,optional"`
+	FriendId uint64 `json:"friendId"`
+}
+
 @server (
 	prefix: /app/user
 )
@@ -197,6 +202,10 @@ service user {
 	@doc "根据手机号搜索"
 	@handler QueryPhone
 	post /query/phone (UserQueryPhoneRequest) returns (UserQueryPhoneResponse)
+
+	@doc "删除好友"
+	@handler DeleteFriend
+	delete /friend (UserDeleteFriendRequest)
 }
 
 type homeGroupRequest {

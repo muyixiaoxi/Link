@@ -61,6 +61,11 @@ type UserCreateResponse struct {
 	Avatar   string `json:"avatar"`
 }
 
+type UserDeleteFriendRequest struct {
+	UserId   uint64 `json:"userId,optional"`
+	FriendId uint64 `json:"friendId"`
+}
+
 type UserFlowedRequest struct {
 	BeId    uint64 `json:"beId"`
 	Message string `json:"message"`
