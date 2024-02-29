@@ -73,9 +73,25 @@ func (s *UserServiceServer) UserFriendList(ctx context.Context, in *user.UserFri
 	return l.UserFriendList(in)
 }
 
+<<<<<<< HEAD
 func (s *UserServiceServer) RecommendUsers(ctx context.Context, in *user.RecommendUsersRequest) (*user.RecommendUsersResponse, error) {
 	l := logic.NewRecommendUsersLogic(ctx, s.svcCtx)
 	return l.RecommendUsers(in)
+=======
+func (s *UserServiceServer) UserQueryFriend(ctx context.Context, in *user.UserQueryFriendRequest) (*user.UserFriendResponse, error) {
+	l := logic.NewUserQueryFriendLogic(ctx, s.svcCtx)
+	return l.UserQueryFriend(in)
+}
+
+func (s *UserServiceServer) UserQueryPhone(ctx context.Context, in *user.UserQueryPhoneRequest) (*user.UserQueryPhoneResponse, error) {
+	l := logic.NewUserQueryPhoneLogic(ctx, s.svcCtx)
+	return l.UserQueryPhone(in)
+}
+
+func (s *UserServiceServer) UserDeleteFriend(ctx context.Context, in *user.UserDeleteFriendRequest) (*user.Empty, error) {
+	l := logic.NewUserDeleteFriendLogic(ctx, s.svcCtx)
+	return l.UserDeleteFriend(in)
+>>>>>>> 247a6a5d4fc4533cee991a747895dcef7b1a10e6
 }
 
 // redis自增id

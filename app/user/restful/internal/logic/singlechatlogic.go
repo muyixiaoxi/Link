@@ -6,8 +6,10 @@ import (
 
 // SingleChat 单聊
 func SingleChat(message types.Message) {
-	// 向redis存储消息
+	// 在线直接转发
 	if c, has := Clients[message.To]; has {
 		c.Conn.WriteJSON(message)
 	}
+	// 离线存储消息队列
+
 }

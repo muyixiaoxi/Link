@@ -1,0 +1,2771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GoORMHelperCache">
+    <option name="schemaMapping">
+      <map>
+        <entry key="AddFlowedLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/addflowedlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AddUserIdLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/adduseridlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AllTags">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AllTagsByGroupNameResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ApplyFor">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/types/apply_for.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Body">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/common/response/response.go" />
+              <option value="file://$PROJECT_DIR$/app/user/common/response/response.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ChatHistory">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/types/chatHistory.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ChatWSLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/chatwslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ChooseTagsLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/choosetagslogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/choosetagslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ChooseTagsRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ChooseTagsResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Client">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/chatwslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Config">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/config/config.go" />
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/config/config.go" />
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/config/config.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/config/config.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/config/config.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateTagLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/createtaglogic.go" />
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/createtaglogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/createtaglogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateTagRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateTagResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateTagResponse_LowTags">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CustomClaims">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/common/jwt/jwt.go" />
+              <option value="file://$PROJECT_DIR$/app/user/common/jwt/jwt.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DecUserIDLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/decuseridlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DeleteTagLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/deletetaglogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/deletetaglogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DeleteTagRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DeleteTagResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DeleteTagsLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/deletetagslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DelteTags">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DetailGroupRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DetailGroupResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DisposeFlowedLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/disposeflowedlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DisposeFlowedRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Empty">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Friend">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/types/friend.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetFriendsListLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/getfriendslistlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetUserInfoLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/getuserinfologic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GroupChat">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/types/group_chat.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GroupInformation">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GroupList">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GroupTag">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GroupTagResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="HomeGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/homegrouplogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="JWT">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/common/jwt/jwt.go" />
+              <option value="file://$PROJECT_DIR$/app/user/common/jwt/jwt.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LoginLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/loginlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Message">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="NextUserIDLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/nextuseridlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="NextUserIDResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="QueryLink">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="QueryLinkTagsLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/querylinktagslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="QueryLinkTagsResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RecommendGroupByTagRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RecommendGroupByTagResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RecommendUser">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RecommendUserListLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/recommenduserlistlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RecommendUserListResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RecommendUsersLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/recommenduserslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RecommendUsersRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RecommendUsersResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectAllTagsByGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/selectalltagsbygrouplogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/selectalltagsbygrouplogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectAllTagsByGroupName">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectAllTagsLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/selectalltagslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectAllTagsResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectGroupTagLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/logic/systmeTag/selectgrouptaglogic.go" />
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/selectgrouptaglogic.go" />
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/selectgrouptaglogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/selectgrouptaglogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectLinkTag">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectLinkTagsLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/selectlinktagslogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/selectlinktagslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectLinkTagsRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectLinkTagsResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectMyTagsLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/selectmytagslogic.go" />
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/selectmytagslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectMyTagsRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectMyTagsResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectUserTagByGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/selectusertagbygrouplogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectUserTagByGroupRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectUserTagByGroupResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ServiceContext">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/svc/servicecontext.go" />
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/svc/servicecontext.go" />
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/svc/servicecontext.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/svc/servicecontext.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/svc/servicecontext.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SignUpLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/signuplogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SignUserChooseTagLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/tagsign/signuserchoosetaglogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/tagsign/signuserchoosetaglogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SignUserChooseTagRevertLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/tagsign/signuserchoosetagrevertlogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/tagsign/signuserchoosetagrevertlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Tag">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/types/tbTag.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/types/tbTag.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TagGroupName">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TagLoginServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/server/taglogin/tagloginserver.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/server/taglogin/tagloginserver.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TagSignServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/server/tagsign/tagsignserver.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/server/tagsign/tagsignserver.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UnimplementedTagLoginServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag_grpc.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UnimplementedTagSignServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag_grpc.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UnimplementedUserServiceServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdateRemarkLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/updateremarklogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdateSelfTagLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/updateselftaglogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdateSelfTagRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdateTagLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/updatetaglogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/updatetaglogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdateUserInfoLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/updateuserinfologic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/types/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserAddRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserAppleRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserChooseTagLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/userchoosetaglogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserChooseTagRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserChooseTagRequst">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserClaims">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/common/jwt/jwt.go" />
+              <option value="file://$PROJECT_DIR$/app/user/common/jwt/jwt.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserCreateGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/usercreategrouplogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/usercreategrouplogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserCreateGroupRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserCreateGroupRequset">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserCreateLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/usercreatelogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserCreateRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserCreateResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserCreateRevertLoginLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/usercreaterevertloginlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserDisposeFlowedLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userdisposeflowedlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserFlowedLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userflowedlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserFlowedRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserFriend">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserFriendListLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userfriendlistlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserFriendRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserFriendResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserFriendsResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserGroupChat">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/types/user_group_chat.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserInfoLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userinfologic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserInfoRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserInfoResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserIsExistsLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userisexistslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserLoginLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userloginlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserLoginRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserLoginResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserSelectDetailGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userselectdetailgrouplogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserSelectGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userselectgrouplogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserSelectGroupsRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserSelectGroupsResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserSelfGroupRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserServiceServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/server/userserviceserver.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserTagFollow">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/types/userTag.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/internal/types/userTag.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserUpdateInfoLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userupdateinfologic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserUpdateInfoRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserUpdateRemarkLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userupdateremarklogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserUpdateRemarkRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserUserSelfGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/useruserselfgrouplogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="defaultTagLogin">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/client/taglogin/taglogin.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/client/taglogin/taglogin.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="defaultTagSign">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/client/tagsign/tagsign.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/client/tagsign/tagsign.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="defaultUserService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/userservice/userservice.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="tagLoginClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag_grpc.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="tagSignClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag_grpc.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="userServiceClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="x">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="scannedPathMapping">
+      <map>
+        <entry key="file://$PROJECT_DIR$/app/tag/common/bcrypt/bcrypt.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1706776583377" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/common/gorm/initGorm.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708063813420" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/common/jwt/jwt.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708266882198" />
+              <option name="schema">
+                <list>
+                  <option value="JWT" />
+                  <option value="UserClaims" />
+                  <option value="CustomClaims" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/common/redis/initRedis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1706758323121" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/common/response/code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708254197730" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/common/response/response.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1706772300510" />
+              <option name="schema">
+                <list>
+                  <option value="Body" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/common/validate/validate.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708043005387" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/config/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708078208691" />
+              <option name="schema">
+                <list>
+                  <option value="Config" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/handler/routes.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709122797487" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/handler/systmeTag/selectgrouptaghandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708519705935" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/handler/tagLogin/createtaghandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708270275297" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/handler/tagLogin/deletetagshandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708270275310" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/handler/tagLogin/selectalltagshandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709038422686" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/handler/tagLogin/selectgrouptaghandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708270275276" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/handler/tagLogin/selectmytagshandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709124037370" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/handler/tagLogin/selectusertagbygrouphandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708270275281" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/handler/tagLogin/updateselftaghandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708270275322" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/systmeTag/selectgrouptaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708519705940" />
+              <option name="schema">
+                <list>
+                  <option value="SelectGroupTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/createtaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708270275314" />
+              <option name="schema">
+                <list>
+                  <option value="CreateTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/deletetagslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708270275330" />
+              <option name="schema">
+                <list>
+                  <option value="DeleteTagsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/selectalltagslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709038347822" />
+              <option name="schema">
+                <list>
+                  <option value="SelectAllTagsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/selectgrouptaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709037977305" />
+              <option name="schema">
+                <list>
+                  <option value="SelectGroupTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/selectmytagslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709124037483" />
+              <option name="schema">
+                <list>
+                  <option value="SelectMyTagsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/selectusertagbygrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708270275272" />
+              <option name="schema">
+                <list>
+                  <option value="SelectUserTagByGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/updateselftaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708270275306" />
+              <option name="schema">
+                <list>
+                  <option value="UpdateSelfTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/svc/servicecontext.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708519554305" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceContext" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709122797486" />
+              <option name="schema">
+                <list>
+                  <option value="CreateTagRequest" />
+                  <option value="CreateTagResponse" />
+                  <option value="SelectAllTagsResponse" />
+                  <option value="SelectMyTagsResponse" />
+                  <option value="Tag" />
+                  <option value="TagGroupName" />
+                  <option value="DelteTags" />
+                  <option value="SelectUserTagByGroupRequest" />
+                  <option value="SelectUserTagByGroupResponse" />
+                  <option value="UpdateSelfTagRequest" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/restful/tag.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708325899942" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/client/taglogin/taglogin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709122164930" />
+              <option name="schema">
+                <list>
+                  <option value="defaultTagLogin" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/client/tagsign/tagsign.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709122164932" />
+              <option name="schema">
+                <list>
+                  <option value="defaultTagSign" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/config/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958611" />
+              <option name="schema">
+                <list>
+                  <option value="Config" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/choosetagslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709199909217" />
+              <option name="schema">
+                <list>
+                  <option value="ChooseTagsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/createtaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708927191752" />
+              <option name="schema">
+                <list>
+                  <option value="CreateTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/deletetaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708579748161" />
+              <option name="schema">
+                <list>
+                  <option value="DeleteTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/selectalltagsbygrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958573" />
+              <option name="schema">
+                <list>
+                  <option value="SelectAllTagsByGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/selectgrouptaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958582" />
+              <option name="schema">
+                <list>
+                  <option value="SelectGroupTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/selectlinktagslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708651234529" />
+              <option name="schema">
+                <list>
+                  <option value="SelectLinkTagsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/selectmytagslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709167845311" />
+              <option name="schema">
+                <list>
+                  <option value="SelectMyTagsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/updatetaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958601" />
+              <option name="schema">
+                <list>
+                  <option value="UpdateTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/tagsign/signuserchoosetaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709117082864" />
+              <option name="schema">
+                <list>
+                  <option value="SignUserChooseTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/tagsign/signuserchoosetagrevertlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709117207185" />
+              <option name="schema">
+                <list>
+                  <option value="SignUserChooseTagRevertLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/server/taglogin/tagloginserver.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709122164927" />
+              <option name="schema">
+                <list>
+                  <option value="TagLoginServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/server/tagsign/tagsignserver.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709122164928" />
+              <option name="schema">
+                <list>
+                  <option value="TagSignServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/svc/servicecontext.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709111138546" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceContext" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/types/tbTag.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958585" />
+              <option name="schema">
+                <list>
+                  <option value="Tag" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/types/userTag.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958584" />
+              <option name="schema">
+                <list>
+                  <option value="UserTagFollow" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/tag.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958580" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/tag/tag.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709122164912" />
+              <option name="schema">
+                <list>
+                  <option value="Empty" />
+                  <option value="CreateTagRequest" />
+                  <option value="CreateTagResponse" />
+                  <option value="DeleteTagRequest" />
+                  <option value="DeleteTagResponse" />
+                  <option value="GroupTag" />
+                  <option value="GroupTagResponse" />
+                  <option value="SelectAllTagsByGroupName" />
+                  <option value="AllTags" />
+                  <option value="AllTagsByGroupNameResponse" />
+                  <option value="ChooseTagsRequest" />
+                  <option value="ChooseTagsResponse" />
+                  <option value="SelectLinkTagsRequest" />
+                  <option value="SelectLinkTag" />
+                  <option value="SelectLinkTagsResponse" />
+                  <option value="SelectMyTagsRequest" />
+                  <option value="UserChooseTagRequest" />
+                  <option value="CreateTagResponse_LowTags" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/tag/tag_grpc.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709122164913" />
+              <option name="schema">
+                <list>
+                  <option value="tagLoginClient" />
+                  <option value="UnimplementedTagLoginServer" />
+                  <option value="tagSignClient" />
+                  <option value="UnimplementedTagSignServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/common/bcrypt/bcrypt.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1706776583377" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/common/gorm/initGorm.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708063813420" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/common/jwt/jwt.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708269780852" />
+              <option name="schema">
+                <list>
+                  <option value="JWT" />
+                  <option value="UserClaims" />
+                  <option value="CustomClaims" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/common/redis/initRedis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1706758323121" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/common/response/code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708649824588" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/common/response/response.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708509320611" />
+              <option name="schema">
+                <list>
+                  <option value="Body" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/common/validate/validate.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708043005387" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/config/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709094327443" />
+              <option name="schema">
+                <list>
+                  <option value="Config" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/addflowedhandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708821962073" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/chatwshandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708577972641" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/disposeflowedhandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708651255974" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/getfriendslisthandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708821962074" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/getuserinfohandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708500192757" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/loginhandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708268117253" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/routes.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709176681294" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/signuphandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709120457235" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/updateremarkhandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708268117504" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/updateuserinfohandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708268116824" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/homegrouphandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709130491160" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/usercreategrouphandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708268116463" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userTag/querylinktagshandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708650588442" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userTag/recommenduserlisthandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709175511565" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userTag/userchoosetaghandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708569101890" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/addflowedlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708821962075" />
+              <option name="schema">
+                <list>
+                  <option value="AddFlowedLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/chatwslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708577972642" />
+              <option name="schema">
+                <list>
+                  <option value="ChatWSLogic" />
+                  <option value="Client" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/disposeflowedlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708649824592" />
+              <option name="schema">
+                <list>
+                  <option value="DisposeFlowedLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/getfriendslistlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708821962075" />
+              <option name="schema">
+                <list>
+                  <option value="GetFriendsListLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/getuserinfologic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709039623802" />
+              <option name="schema">
+                <list>
+                  <option value="GetUserInfoLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/groupchatlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708577972643" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/loginlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709019057959" />
+              <option name="schema">
+                <list>
+                  <option value="LoginLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/signuplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709120457090" />
+              <option name="schema">
+                <list>
+                  <option value="SignUpLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/singlechatlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708577972643" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/updateremarklogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708268117403" />
+              <option name="schema">
+                <list>
+                  <option value="UpdateRemarkLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/updateuserinfologic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708649824595" />
+              <option name="schema">
+                <list>
+                  <option value="UpdateUserInfoLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/homegrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709166492119" />
+              <option name="schema">
+                <list>
+                  <option value="HomeGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/usercreategrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709017523428" />
+              <option name="schema">
+                <list>
+                  <option value="UserCreateGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/querylinktagslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708650748176" />
+              <option name="schema">
+                <list>
+                  <option value="QueryLinkTagsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/recommenduserlistlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709202825815" />
+              <option name="schema">
+                <list>
+                  <option value="RecommendUserListLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/tagCommon.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709175619942" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/userchoosetaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708568490160" />
+              <option name="schema">
+                <list>
+                  <option value="UserChooseTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/svc/servicecontext.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708568490405" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceContext" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709176681292" />
+              <option name="schema">
+                <list>
+                  <option value="DisposeFlowedRequest" />
+                  <option value="GroupList" />
+                  <option value="Message" />
+                  <option value="QueryLink" />
+                  <option value="QueryLinkTagsResponse" />
+                  <option value="RecommendGroupByTagRequest" />
+                  <option value="RecommendGroupByTagResponse" />
+                  <option value="RecommendUser" />
+                  <option value="RecommendUserListResponse" />
+                  <option value="UserAppleRequest" />
+                  <option value="UserChooseTagRequst" />
+                  <option value="UserCreateGroupRequset" />
+                  <option value="UserCreateRequest" />
+                  <option value="UserCreateResponse" />
+                  <option value="UserFlowedRequest" />
+                  <option value="UserFriend" />
+                  <option value="UserFriendsResponse" />
+                  <option value="UserInfoRequest" />
+                  <option value="UserInfoResponse" />
+                  <option value="UserLoginRequest" />
+                  <option value="UserLoginResponse" />
+                  <option value="UserUpdateInfoRequest" />
+                  <option value="UserUpdateRemarkRequest" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709018020561" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/config/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1706758323127" />
+              <option name="schema">
+                <list>
+                  <option value="Config" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/adduseridlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708853261417" />
+              <option name="schema">
+                <list>
+                  <option value="AddUserIdLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/decuseridlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708852594725" />
+              <option name="schema">
+                <list>
+                  <option value="DecUserIDLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/nextuseridlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708852594733" />
+              <option name="schema">
+                <list>
+                  <option value="NextUserIDLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/recommenduserslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709205328790" />
+              <option name="schema">
+                <list>
+                  <option value="RecommendUsersLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/usercreategrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709017190068" />
+              <option name="schema">
+                <list>
+                  <option value="UserCreateGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/usercreatelogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709120080313" />
+              <option name="schema">
+                <list>
+                  <option value="UserCreateLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/usercreaterevertloginlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709118148732" />
+              <option name="schema">
+                <list>
+                  <option value="UserCreateRevertLoginLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userdisposeflowedlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708821962079" />
+              <option name="schema">
+                <list>
+                  <option value="UserDisposeFlowedLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userflowedlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708821962080" />
+              <option name="schema">
+                <list>
+                  <option value="UserFlowedLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userfriendlistlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708821962080" />
+              <option name="schema">
+                <list>
+                  <option value="UserFriendListLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userinfologic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709039623804" />
+              <option name="schema">
+                <list>
+                  <option value="UserInfoLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userisexistslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709120080365" />
+              <option name="schema">
+                <list>
+                  <option value="UserIsExistsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userloginlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708267672702" />
+              <option name="schema">
+                <list>
+                  <option value="UserLoginLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userselectdetailgrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708267672713" />
+              <option name="schema">
+                <list>
+                  <option value="UserSelectDetailGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userselectgrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709172358519" />
+              <option name="schema">
+                <list>
+                  <option value="UserSelectGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userupdateinfologic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084305861" />
+              <option name="schema">
+                <list>
+                  <option value="UserUpdateInfoLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userupdateremarklogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708821962082" />
+              <option name="schema">
+                <list>
+                  <option value="UserUpdateRemarkLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/useruserselfgrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708948185216" />
+              <option name="schema">
+                <list>
+                  <option value="UserUserSelfGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/server/userserviceserver.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709174906038" />
+              <option name="schema">
+                <list>
+                  <option value="UserServiceServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/svc/servicecontext.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709169724333" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceContext" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/types/apply_for.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708821962084" />
+              <option name="schema">
+                <list>
+                  <option value="ApplyFor" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/types/chatHistory.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709169724329" />
+              <option name="schema">
+                <list>
+                  <option value="ChatHistory" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/types/friend.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708821962084" />
+              <option name="schema">
+                <list>
+                  <option value="Friend" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/types/group_chat.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708649824600" />
+              <option name="schema">
+                <list>
+                  <option value="GroupChat" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/types/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708649824601" />
+              <option name="schema">
+                <list>
+                  <option value="User" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/types/user_group_chat.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708649824602" />
+              <option name="schema">
+                <list>
+                  <option value="UserGroupChat" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/client/taglogin/taglogin.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120571" />
+              <option name="schema">
+                <list>
+                  <option value="defaultTagLogin" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/client/tagsign/tagsign.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120573" />
+              <option name="schema">
+                <list>
+                  <option value="defaultTagSign" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/config/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958611" />
+              <option name="schema">
+                <list>
+                  <option value="Config" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/choosetagslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120564" />
+              <option name="schema">
+                <list>
+                  <option value="ChooseTagsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/createtaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120561" />
+              <option name="schema">
+                <list>
+                  <option value="CreateTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/deletetaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120562" />
+              <option name="schema">
+                <list>
+                  <option value="DeleteTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/selectalltagsbygrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120563" />
+              <option name="schema">
+                <list>
+                  <option value="SelectAllTagsByGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/selectgrouptaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120563" />
+              <option name="schema">
+                <list>
+                  <option value="SelectGroupTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/selectlinktagslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120565" />
+              <option name="schema">
+                <list>
+                  <option value="SelectLinkTagsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/taglogin/updatetaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120561" />
+              <option name="schema">
+                <list>
+                  <option value="UpdateTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/tagsign/signuserchoosetaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120565" />
+              <option name="schema">
+                <list>
+                  <option value="SignUserChooseTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/logic/tagsign/signuserchoosetagrevertlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120566" />
+              <option name="schema">
+                <list>
+                  <option value="SignUserChooseTagRevertLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/server/taglogin/tagloginserver.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120567" />
+              <option name="schema">
+                <list>
+                  <option value="TagLoginServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/server/tagsign/tagsignserver.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120568" />
+              <option name="schema">
+                <list>
+                  <option value="TagSignServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/svc/servicecontext.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708493177980" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceContext" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/types/tbTag.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958585" />
+              <option name="schema">
+                <list>
+                  <option value="Tag" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/internal/types/userTag.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958584" />
+              <option name="schema">
+                <list>
+                  <option value="UserTagFollow" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/tag.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708492958580" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120552" />
+              <option name="schema">
+                <list>
+                  <option value="Empty" />
+                  <option value="CreateTagRequest" />
+                  <option value="CreateTagResponse" />
+                  <option value="DeleteTagRequest" />
+                  <option value="DeleteTagResponse" />
+                  <option value="GroupTag" />
+                  <option value="GroupTagResponse" />
+                  <option value="SelectAllTagsByGroupName" />
+                  <option value="AllTags" />
+                  <option value="AllTagsByGroupNameResponse" />
+                  <option value="ChooseTagsRequest" />
+                  <option value="ChooseTagsResponse" />
+                  <option value="SelectLinkTagsRequest" />
+                  <option value="SelectLinkTag" />
+                  <option value="SelectLinkTagsResponse" />
+                  <option value="UserChooseTagRequest" />
+                  <option value="CreateTagResponse_LowTags" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/tag/service/tag/tag_grpc.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709084120552" />
+              <option name="schema">
+                <list>
+                  <option value="tagLoginClient" />
+                  <option value="UnimplementedTagLoginServer" />
+                  <option value="tagSignClient" />
+                  <option value="UnimplementedTagSignServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1708851408808" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/user/user.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709174906024" />
+              <option name="schema">
+                <list>
+                  <option value="Empty" />
+                  <option value="UserCreateRequest" />
+                  <option value="UserCreateResponse" />
+                  <option value="UserLoginRequest" />
+                  <option value="UserLoginResponse" />
+                  <option value="UserInfoRequest" />
+                  <option value="UserInfoResponse" />
+                  <option value="UserUpdateInfoRequest" />
+                  <option value="UserAddRequest" />
+                  <option value="UserUpdateRemarkRequest" />
+                  <option value="UserCreateGroupRequest" />
+                  <option value="UserSelectGroupsRequest" />
+                  <option value="GroupInformation" />
+                  <option value="DisposeFlowedRequest" />
+                  <option value="UserSelectGroupsResponse" />
+                  <option value="DetailGroupRequest" />
+                  <option value="DetailGroupResponse" />
+                  <option value="NextUserIDResponse" />
+                  <option value="UserFriendRequest" />
+                  <option value="UserFriendResponse" />
+                  <option value="UserFriend" />
+                  <option value="GroupChat" />
+                  <option value="UserSelfGroupRequest" />
+                  <option value="RecommendUsersRequest" />
+                  <option value="RecommendUser" />
+                  <option value="RecommendUsersResponse" />
+                  <option value="x" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/user/user_grpc.pb.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709174906024" />
+              <option name="schema">
+                <list>
+                  <option value="userServiceClient" />
+                  <option value="UnimplementedUserServiceServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/userservice/userservice.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709174906042" />
+              <option name="schema">
+                <list>
+                  <option value="defaultUserService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="tableStructMapping">
+      <map>
+        <entry key="add_flowed_logic" value="AddFlowedLogic" />
+        <entry key="add_user_id_logic" value="AddUserIdLogic" />
+        <entry key="all_tags" value="AllTags" />
+        <entry key="all_tags_by_group_name_response" value="AllTagsByGroupNameResponse" />
+        <entry key="apply_for" value="ApplyFor" />
+        <entry key="body" value="Body" />
+        <entry key="chat_history" value="ChatHistory" />
+        <entry key="chat_ws_logic" value="ChatWSLogic" />
+        <entry key="choose_tags_logic" value="ChooseTagsLogic" />
+        <entry key="choose_tags_request" value="ChooseTagsRequest" />
+        <entry key="choose_tags_response" value="ChooseTagsResponse" />
+        <entry key="client" value="Client" />
+        <entry key="config" value="Config" />
+        <entry key="create_tag_logic" value="CreateTagLogic" />
+        <entry key="create_tag_request" value="CreateTagRequest" />
+        <entry key="create_tag_response" value="CreateTagResponse" />
+        <entry key="create_tag_response__low_tags" value="CreateTagResponse_LowTags" />
+        <entry key="custom_claims" value="CustomClaims" />
+        <entry key="dec_user_id_logic" value="DecUserIDLogic" />
+        <entry key="default_tag_login" value="defaultTagLogin" />
+        <entry key="default_tag_sign" value="defaultTagSign" />
+        <entry key="default_user_service" value="defaultUserService" />
+        <entry key="delete_tag_logic" value="DeleteTagLogic" />
+        <entry key="delete_tag_request" value="DeleteTagRequest" />
+        <entry key="delete_tag_response" value="DeleteTagResponse" />
+        <entry key="delete_tags_logic" value="DeleteTagsLogic" />
+        <entry key="delte_tags" value="DelteTags" />
+        <entry key="detail_group_request" value="DetailGroupRequest" />
+        <entry key="detail_group_response" value="DetailGroupResponse" />
+        <entry key="dispose_flowed_logic" value="DisposeFlowedLogic" />
+        <entry key="dispose_flowed_request" value="DisposeFlowedRequest" />
+        <entry key="empty" value="Empty" />
+        <entry key="friend" value="Friend" />
+        <entry key="get_friends_list_logic" value="GetFriendsListLogic" />
+        <entry key="get_user_info_logic" value="GetUserInfoLogic" />
+        <entry key="group_chat" value="GroupChat" />
+        <entry key="group_information" value="GroupInformation" />
+        <entry key="group_list" value="GroupList" />
+        <entry key="group_tag" value="GroupTag" />
+        <entry key="group_tag_response" value="GroupTagResponse" />
+        <entry key="home_group_logic" value="HomeGroupLogic" />
+        <entry key="jwt" value="JWT" />
+        <entry key="login_logic" value="LoginLogic" />
+        <entry key="message" value="Message" />
+        <entry key="next_user_id_logic" value="NextUserIDLogic" />
+        <entry key="next_user_id_response" value="NextUserIDResponse" />
+        <entry key="query_link" value="QueryLink" />
+        <entry key="query_link_tags_logic" value="QueryLinkTagsLogic" />
+        <entry key="query_link_tags_response" value="QueryLinkTagsResponse" />
+        <entry key="recommend_group_by_tag_request" value="RecommendGroupByTagRequest" />
+        <entry key="recommend_group_by_tag_response" value="RecommendGroupByTagResponse" />
+        <entry key="recommend_user" value="RecommendUser" />
+        <entry key="recommend_user_list_logic" value="RecommendUserListLogic" />
+        <entry key="recommend_user_list_response" value="RecommendUserListResponse" />
+        <entry key="recommend_users_logic" value="RecommendUsersLogic" />
+        <entry key="recommend_users_request" value="RecommendUsersRequest" />
+        <entry key="recommend_users_response" value="RecommendUsersResponse" />
+        <entry key="select_all_tags_by_group_logic" value="SelectAllTagsByGroupLogic" />
+        <entry key="select_all_tags_by_group_name" value="SelectAllTagsByGroupName" />
+        <entry key="select_all_tags_logic" value="SelectAllTagsLogic" />
+        <entry key="select_all_tags_response" value="SelectAllTagsResponse" />
+        <entry key="select_group_tag_logic" value="SelectGroupTagLogic" />
+        <entry key="select_link_tag" value="SelectLinkTag" />
+        <entry key="select_link_tags_logic" value="SelectLinkTagsLogic" />
+        <entry key="select_link_tags_request" value="SelectLinkTagsRequest" />
+        <entry key="select_link_tags_response" value="SelectLinkTagsResponse" />
+        <entry key="select_my_tags_logic" value="SelectMyTagsLogic" />
+        <entry key="select_my_tags_request" value="SelectMyTagsRequest" />
+        <entry key="select_my_tags_response" value="SelectMyTagsResponse" />
+        <entry key="select_user_tag_by_group_logic" value="SelectUserTagByGroupLogic" />
+        <entry key="select_user_tag_by_group_request" value="SelectUserTagByGroupRequest" />
+        <entry key="select_user_tag_by_group_response" value="SelectUserTagByGroupResponse" />
+        <entry key="service_context" value="ServiceContext" />
+        <entry key="sign_up_logic" value="SignUpLogic" />
+        <entry key="sign_user_choose_tag_logic" value="SignUserChooseTagLogic" />
+        <entry key="sign_user_choose_tag_revert_logic" value="SignUserChooseTagRevertLogic" />
+        <entry key="tag" value="Tag" />
+        <entry key="tag_group_name" value="TagGroupName" />
+        <entry key="tag_login_client" value="tagLoginClient" />
+        <entry key="tag_login_server" value="TagLoginServer" />
+        <entry key="tag_sign_client" value="tagSignClient" />
+        <entry key="tag_sign_server" value="TagSignServer" />
+        <entry key="unimplemented_tag_login_server" value="UnimplementedTagLoginServer" />
+        <entry key="unimplemented_tag_sign_server" value="UnimplementedTagSignServer" />
+        <entry key="unimplemented_user_service_server" value="UnimplementedUserServiceServer" />
+        <entry key="update_remark_logic" value="UpdateRemarkLogic" />
+        <entry key="update_self_tag_logic" value="UpdateSelfTagLogic" />
+        <entry key="update_self_tag_request" value="UpdateSelfTagRequest" />
+        <entry key="update_tag_logic" value="UpdateTagLogic" />
+        <entry key="update_user_info_logic" value="UpdateUserInfoLogic" />
+        <entry key="user" value="User" />
+        <entry key="user_add_request" value="UserAddRequest" />
+        <entry key="user_apple_request" value="UserAppleRequest" />
+        <entry key="user_choose_tag_logic" value="UserChooseTagLogic" />
+        <entry key="user_choose_tag_request" value="UserChooseTagRequest" />
+        <entry key="user_choose_tag_requst" value="UserChooseTagRequst" />
+        <entry key="user_claims" value="UserClaims" />
+        <entry key="user_create_group_logic" value="UserCreateGroupLogic" />
+        <entry key="user_create_group_request" value="UserCreateGroupRequest" />
+        <entry key="user_create_group_requset" value="UserCreateGroupRequset" />
+        <entry key="user_create_logic" value="UserCreateLogic" />
+        <entry key="user_create_request" value="UserCreateRequest" />
+        <entry key="user_create_response" value="UserCreateResponse" />
+        <entry key="user_create_revert_login_logic" value="UserCreateRevertLoginLogic" />
+        <entry key="user_dispose_flowed_logic" value="UserDisposeFlowedLogic" />
+        <entry key="user_flowed_logic" value="UserFlowedLogic" />
+        <entry key="user_flowed_request" value="UserFlowedRequest" />
+        <entry key="user_friend" value="UserFriend" />
+        <entry key="user_friend_list_logic" value="UserFriendListLogic" />
+        <entry key="user_friend_request" value="UserFriendRequest" />
+        <entry key="user_friend_response" value="UserFriendResponse" />
+        <entry key="user_friends_response" value="UserFriendsResponse" />
+        <entry key="user_group_chat" value="UserGroupChat" />
+        <entry key="user_info_logic" value="UserInfoLogic" />
+        <entry key="user_info_request" value="UserInfoRequest" />
+        <entry key="user_info_response" value="UserInfoResponse" />
+        <entry key="user_is_exists_logic" value="UserIsExistsLogic" />
+        <entry key="user_login_logic" value="UserLoginLogic" />
+        <entry key="user_login_request" value="UserLoginRequest" />
+        <entry key="user_login_response" value="UserLoginResponse" />
+        <entry key="user_select_detail_group_logic" value="UserSelectDetailGroupLogic" />
+        <entry key="user_select_group_logic" value="UserSelectGroupLogic" />
+        <entry key="user_select_groups_request" value="UserSelectGroupsRequest" />
+        <entry key="user_select_groups_response" value="UserSelectGroupsResponse" />
+        <entry key="user_self_group_request" value="UserSelfGroupRequest" />
+        <entry key="user_service_client" value="userServiceClient" />
+        <entry key="user_service_server" value="UserServiceServer" />
+        <entry key="user_tag_follow" value="UserTagFollow" />
+        <entry key="user_update_info_logic" value="UserUpdateInfoLogic" />
+        <entry key="user_update_info_request" value="UserUpdateInfoRequest" />
+        <entry key="user_update_remark_logic" value="UserUpdateRemarkLogic" />
+        <entry key="user_update_remark_request" value="UserUpdateRemarkRequest" />
+        <entry key="user_user_self_group_logic" value="UserUserSelfGroupLogic" />
+        <entry key="x" value="x" />
+      </map>
+    </option>
+    <option name="lastTimeChecked" value="1709170814784" />
+  </component>
+</project>

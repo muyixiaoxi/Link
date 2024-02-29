@@ -29,7 +29,13 @@ const (
 	UserService_UserDisposeFlowed_FullMethodName     = "/user.UserService/UserDisposeFlowed"
 	UserService_UserUpdateRemark_FullMethodName      = "/user.UserService/UserUpdateRemark"
 	UserService_UserFriendList_FullMethodName        = "/user.UserService/UserFriendList"
+<<<<<<< HEAD
 	UserService_RecommendUsers_FullMethodName        = "/user.UserService/RecommendUsers"
+=======
+	UserService_UserQueryFriend_FullMethodName       = "/user.UserService/UserQueryFriend"
+	UserService_UserQueryPhone_FullMethodName        = "/user.UserService/UserQueryPhone"
+	UserService_UserDeleteFriend_FullMethodName      = "/user.UserService/UserDeleteFriend"
+>>>>>>> 247a6a5d4fc4533cee991a747895dcef7b1a10e6
 	UserService_NextUserID_FullMethodName            = "/user.UserService/NextUserID"
 	UserService_AddUserId_FullMethodName             = "/user.UserService/AddUserId"
 	UserService_DecUserID_FullMethodName             = "/user.UserService/DecUserID"
@@ -54,7 +60,13 @@ type UserServiceClient interface {
 	UserDisposeFlowed(ctx context.Context, in *DisposeFlowedRequest, opts ...grpc.CallOption) (*Empty, error)
 	UserUpdateRemark(ctx context.Context, in *UserUpdateRemarkRequest, opts ...grpc.CallOption) (*Empty, error)
 	UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
+<<<<<<< HEAD
 	RecommendUsers(ctx context.Context, in *RecommendUsersRequest, opts ...grpc.CallOption) (*RecommendUsersResponse, error)
+=======
+	UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
+	UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error)
+	UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error)
+>>>>>>> 247a6a5d4fc4533cee991a747895dcef7b1a10e6
 	// redis自增id
 	NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 	AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
@@ -164,9 +176,33 @@ func (c *userServiceClient) UserFriendList(ctx context.Context, in *UserFriendRe
 	return out, nil
 }
 
+<<<<<<< HEAD
 func (c *userServiceClient) RecommendUsers(ctx context.Context, in *RecommendUsersRequest, opts ...grpc.CallOption) (*RecommendUsersResponse, error) {
 	out := new(RecommendUsersResponse)
 	err := c.cc.Invoke(ctx, UserService_RecommendUsers_FullMethodName, in, out, opts...)
+=======
+func (c *userServiceClient) UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error) {
+	out := new(UserFriendResponse)
+	err := c.cc.Invoke(ctx, UserService_UserQueryFriend_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error) {
+	out := new(UserQueryPhoneResponse)
+	err := c.cc.Invoke(ctx, UserService_UserQueryPhone_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, UserService_UserDeleteFriend_FullMethodName, in, out, opts...)
+>>>>>>> 247a6a5d4fc4533cee991a747895dcef7b1a10e6
 	if err != nil {
 		return nil, err
 	}
@@ -251,7 +287,13 @@ type UserServiceServer interface {
 	UserDisposeFlowed(context.Context, *DisposeFlowedRequest) (*Empty, error)
 	UserUpdateRemark(context.Context, *UserUpdateRemarkRequest) (*Empty, error)
 	UserFriendList(context.Context, *UserFriendRequest) (*UserFriendResponse, error)
+<<<<<<< HEAD
 	RecommendUsers(context.Context, *RecommendUsersRequest) (*RecommendUsersResponse, error)
+=======
+	UserQueryFriend(context.Context, *UserQueryFriendRequest) (*UserFriendResponse, error)
+	UserQueryPhone(context.Context, *UserQueryPhoneRequest) (*UserQueryPhoneResponse, error)
+	UserDeleteFriend(context.Context, *UserDeleteFriendRequest) (*Empty, error)
+>>>>>>> 247a6a5d4fc4533cee991a747895dcef7b1a10e6
 	// redis自增id
 	NextUserID(context.Context, *Empty) (*NextUserIDResponse, error)
 	AddUserId(context.Context, *Empty) (*Empty, error)
@@ -298,8 +340,19 @@ func (UnimplementedUserServiceServer) UserUpdateRemark(context.Context, *UserUpd
 func (UnimplementedUserServiceServer) UserFriendList(context.Context, *UserFriendRequest) (*UserFriendResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserFriendList not implemented")
 }
+<<<<<<< HEAD
 func (UnimplementedUserServiceServer) RecommendUsers(context.Context, *RecommendUsersRequest) (*RecommendUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RecommendUsers not implemented")
+=======
+func (UnimplementedUserServiceServer) UserQueryFriend(context.Context, *UserQueryFriendRequest) (*UserFriendResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserQueryFriend not implemented")
+}
+func (UnimplementedUserServiceServer) UserQueryPhone(context.Context, *UserQueryPhoneRequest) (*UserQueryPhoneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserQueryPhone not implemented")
+}
+func (UnimplementedUserServiceServer) UserDeleteFriend(context.Context, *UserDeleteFriendRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserDeleteFriend not implemented")
+>>>>>>> 247a6a5d4fc4533cee991a747895dcef7b1a10e6
 }
 func (UnimplementedUserServiceServer) NextUserID(context.Context, *Empty) (*NextUserIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NextUserID not implemented")
@@ -515,12 +568,18 @@ func _UserService_UserFriendList_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+<<<<<<< HEAD
 func _UserService_RecommendUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RecommendUsersRequest)
+=======
+func _UserService_UserQueryFriend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserQueryFriendRequest)
+>>>>>>> 247a6a5d4fc4533cee991a747895dcef7b1a10e6
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
+<<<<<<< HEAD
 		return srv.(UserServiceServer).RecommendUsers(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
@@ -529,6 +588,52 @@ func _UserService_RecommendUsers_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).RecommendUsers(ctx, req.(*RecommendUsersRequest))
+=======
+		return srv.(UserServiceServer).UserQueryFriend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserQueryFriend_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserQueryFriend(ctx, req.(*UserQueryFriendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserQueryPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserQueryPhoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserQueryPhone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserQueryPhone_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserQueryPhone(ctx, req.(*UserQueryPhoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserDeleteFriend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserDeleteFriendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserDeleteFriend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserDeleteFriend_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserDeleteFriend(ctx, req.(*UserDeleteFriendRequest))
+>>>>>>> 247a6a5d4fc4533cee991a747895dcef7b1a10e6
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -707,8 +812,21 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _UserService_UserFriendList_Handler,
 		},
 		{
+<<<<<<< HEAD
 			MethodName: "RecommendUsers",
 			Handler:    _UserService_RecommendUsers_Handler,
+=======
+			MethodName: "UserQueryFriend",
+			Handler:    _UserService_UserQueryFriend_Handler,
+		},
+		{
+			MethodName: "UserQueryPhone",
+			Handler:    _UserService_UserQueryPhone_Handler,
+		},
+		{
+			MethodName: "UserDeleteFriend",
+			Handler:    _UserService_UserDeleteFriend_Handler,
+>>>>>>> 247a6a5d4fc4533cee991a747895dcef7b1a10e6
 		},
 		{
 			MethodName: "NextUserID",

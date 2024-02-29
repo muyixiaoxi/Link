@@ -56,9 +56,24 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: disposeFlowedHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodDelete,
+				Path:    "/friend",
+				Handler: DeleteFriendHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodGet,
 				Path:    "/friends",
 				Handler: GetFriendsListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/friends/query",
+				Handler: QueryFriendsHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/query/phone",
+				Handler: QueryPhoneHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPut,

@@ -10,20 +10,20 @@ import (
 	"user/restful/internal/types"
 )
 
-func getUserInfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DeleteFriendHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.UserInfoRequest
+		var req types.UserDeleteFriendRequest
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := logic.NewGetUserInfoLogic(r.Context(), svcCtx)
-		resp, err := l.GetUserInfo(&req)
+		l := logic.NewDeleteFriendLogic(r.Context(), svcCtx)
+		err := l.DeleteFriend(&req)
 		if err != nil {
-			response.Response(w, nil, response.CodeUserNotExit)
+			response.Response(w, nil, response.CodeServerBusy)
 		} else {
-			response.Response(w, resp, response.CodeSuccess)
+			response.Response(w, nil, response.CodeSuccess)
 		}
 	}
 }

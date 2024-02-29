@@ -10,18 +10,18 @@ import (
 	"user/restful/internal/types"
 )
 
-func getUserInfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func QueryFriendsHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.UserInfoRequest
+		var req types.UserQueryFriendRequest
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := logic.NewGetUserInfoLogic(r.Context(), svcCtx)
-		resp, err := l.GetUserInfo(&req)
+		l := logic.NewQueryFriendsLogic(r.Context(), svcCtx)
+		resp, err := l.QueryFriends(&req)
 		if err != nil {
-			response.Response(w, nil, response.CodeUserNotExit)
+			response.Response(w, nil, response.CodeServerBusy)
 		} else {
 			response.Response(w, resp, response.CodeSuccess)
 		}

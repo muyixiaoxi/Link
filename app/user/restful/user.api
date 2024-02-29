@@ -119,10 +119,34 @@ type UserFriendsResponse {
 }
 
 type UserFriend {
-	Id       uint64 `json:"id"`
-	username string `json:"username"`
-	avatar   string `json:"avatar"`
-	remark   string `json:"remark"`
+	Id        uint64   `json:"id"`
+	Username  string   `json:"username"`
+	Avatar    string   `json:"avatar"`
+	Remark    string   `json:"remark"`
+	Signature string   `json:"signature"`
+	TagName   []string `json:"tagName"`
+}
+
+type UserQueryPhoneResponse {
+	Id        uint64   `json:"id"`
+	Username  string   `json:"username"`
+	Avatar    string   `json:"avatar"`
+	Address   string   `json:"address"`
+	Signature string   `json:"signature"`
+	TagName   []string `json:"tagName"`
+}
+
+type UserQueryFriendRequest {
+	Param string `json:"param"`
+}
+
+type UserQueryPhoneRequest {
+	Phone string `json:"phone"`
+}
+
+type UserDeleteFriendRequest {
+	UserId   uint64 `json:"userId,optional"`
+	FriendId uint64 `json:"friendId"`
 }
 
 @server (
@@ -170,6 +194,18 @@ service user {
 	@doc "获取好友列表"
 	@handler GetFriendsList
 	get /friends returns (UserFriendsResponse)
+
+	@doc "搜索好友"
+	@handler QueryFriends
+	post /friends/query (UserQueryFriendRequest) returns (UserFriendsResponse)
+
+	@doc "根据手机号搜索"
+	@handler QueryPhone
+	post /query/phone (UserQueryPhoneRequest) returns (UserQueryPhoneResponse)
+
+	@doc "删除好友"
+	@handler DeleteFriend
+	delete /friend (UserDeleteFriendRequest)
 }
 
 //首页根据标签推荐群聊

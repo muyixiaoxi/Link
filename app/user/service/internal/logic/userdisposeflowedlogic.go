@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 	"user/service/internal/svc"
 	"user/service/internal/types"
 	"user/service/user"
@@ -39,6 +40,11 @@ func (l *UserDisposeFlowedLogic) UserDisposeFlowed(in *user.DisposeFlowedRequest
 	}
 	if in.Result { // 同意
 		if in.Type == 3 { // 3 好友 4 群聊
+
+			// 删除双方好友缓存
+			l.svcCtx.RDB.Del(fmt.Sprintf("link:user:friend:list:%d", in.From))
+			l.svcCtx.RDB.Del(fmt.Sprintf("link:user:friend:list:%d", in.To))
+
 			flowed1 := &types.Friend{
 				UserID:   in.From,
 				FriendID: in.To,
