@@ -1,42 +1,40 @@
-Name: user
-Host: 0.0.0.0
-Port: 8887
-UserRpc:
-  Etcd:
-    Hosts:
-      - 172.30.0.1:2379
-    Key: user.rpc
-TagRpc:
-  Etcd:
-    Hosts:
-      - 172.30.0.1:2379
-    Key: tag.rpc
-Auth:
-  AccessSecret: linkMarch
-  AccessExpire: 336
-<<<<<<< HEAD
-Dtm: "etcd://172.30.0.1:2379/dtmservice"
-
-
 #Name: user
 #Host: 0.0.0.0
 #Port: 8887
 #UserRpc:
 #  Etcd:
 #    Hosts:
-#      - 114.55.135.211:2379
+#      - 172.30.0.1:2379
 #    Key: user.rpc
 #TagRpc:
 #  Etcd:
 #    Hosts:
-#      - 114.55.135.211:2379
+#      - 172.30.0.1:2379
 #    Key: tag.rpc
 #Auth:
 #  AccessSecret: linkMarch
 #  AccessExpire: 336
-#Dtm: "etcd://114.55.135.211:2379/dtmservice"
-=======
+#Dtm: "etcd://172.30.0.1:2379/dtmservice"
+
+
+Name: user
+Host: 0.0.0.0
+Port: 8887
+UserRpc:
+  Etcd:
+    Hosts:
+      - 114.55.135.211:2379
+    Key: user.rpc
+TagRpc:
+  Etcd:
+    Hosts:
+      - 114.55.135.211:2379
+    Key: tag.rpc
+Auth:
+  AccessSecret: linkMarch
+  AccessExpire: 336
 Dtm: "etcd://114.55.135.211:2379/dtmservice"
 
 
->>>>>>> 247a6a5d4fc4533cee991a747895dcef7b1a10e6
+
+
