@@ -30,6 +30,7 @@ const (
 	UserService_UserFriendList_FullMethodName        = "/user.UserService/UserFriendList"
 	UserService_UserQueryFriend_FullMethodName       = "/user.UserService/UserQueryFriend"
 	UserService_UserQueryPhone_FullMethodName        = "/user.UserService/UserQueryPhone"
+	UserService_UserDeleteFriend_FullMethodName      = "/user.UserService/UserDeleteFriend"
 	UserService_NextUserID_FullMethodName            = "/user.UserService/NextUserID"
 	UserService_AddUserId_FullMethodName             = "/user.UserService/AddUserId"
 	UserService_DecUserID_FullMethodName             = "/user.UserService/DecUserID"
@@ -55,6 +56,7 @@ type UserServiceClient interface {
 	UserFriendList(ctx context.Context, in *UserFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
 	UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
 	UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error)
+	UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error)
 	// redis自增id
 	NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 	AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
@@ -173,6 +175,15 @@ func (c *userServiceClient) UserQueryPhone(ctx context.Context, in *UserQueryPho
 	return out, nil
 }
 
+func (c *userServiceClient) UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, UserService_UserDeleteFriend_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userServiceClient) NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error) {
 	out := new(NextUserIDResponse)
 	err := c.cc.Invoke(ctx, UserService_NextUserID_FullMethodName, in, out, opts...)
@@ -252,6 +263,7 @@ type UserServiceServer interface {
 	UserFriendList(context.Context, *UserFriendRequest) (*UserFriendResponse, error)
 	UserQueryFriend(context.Context, *UserQueryFriendRequest) (*UserFriendResponse, error)
 	UserQueryPhone(context.Context, *UserQueryPhoneRequest) (*UserQueryPhoneResponse, error)
+	UserDeleteFriend(context.Context, *UserDeleteFriendRequest) (*Empty, error)
 	// redis自增id
 	NextUserID(context.Context, *Empty) (*NextUserIDResponse, error)
 	AddUserId(context.Context, *Empty) (*Empty, error)
@@ -300,6 +312,9 @@ func (UnimplementedUserServiceServer) UserQueryFriend(context.Context, *UserQuer
 }
 func (UnimplementedUserServiceServer) UserQueryPhone(context.Context, *UserQueryPhoneRequest) (*UserQueryPhoneResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserQueryPhone not implemented")
+}
+func (UnimplementedUserServiceServer) UserDeleteFriend(context.Context, *UserDeleteFriendRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserDeleteFriend not implemented")
 }
 func (UnimplementedUserServiceServer) NextUserID(context.Context, *Empty) (*NextUserIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NextUserID not implemented")
@@ -533,6 +548,24 @@ func _UserService_UserQueryPhone_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UserDeleteFriend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserDeleteFriendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserDeleteFriend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserDeleteFriend_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserDeleteFriend(ctx, req.(*UserDeleteFriendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _UserService_NextUserID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Empty)
 	if err := dec(in); err != nil {
@@ -709,6 +742,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserQueryPhone",
 			Handler:    _UserService_UserQueryPhone_Handler,
+		},
+		{
+			MethodName: "UserDeleteFriend",
+			Handler:    _UserService_UserDeleteFriend_Handler,
 		},
 		{
 			MethodName: "NextUserID",

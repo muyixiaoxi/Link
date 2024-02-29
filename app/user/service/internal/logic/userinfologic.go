@@ -51,7 +51,7 @@ func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (rp *user.UserInfoRes
 			Signature: model.Signature,
 		}
 		js, _ := json.Marshal(rp)
-		l.svcCtx.RDB.Set(fmt.Sprintf("link:user:%d", model.ID), string(js))
+		l.svcCtx.RDB.Setex(fmt.Sprintf("link:user:%d", model.ID), string(js), 12*60*60)
 	} else {
 		json.Unmarshal([]byte(cache), rp)
 	}
