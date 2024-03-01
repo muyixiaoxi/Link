@@ -104,6 +104,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
+				Path:    "/queryGroupList",
+				Handler: userGroup.QueryGroupListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/quitGroup",
 				Handler: userGroup.QuitGroupHandler(serverCtx),
 			},
@@ -116,6 +121,16 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/selectHomeGroup",
 				Handler: userGroup.HomeGroupHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updateGroupInfo",
+				Handler: userGroup.UpdateGroupInfoHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updateGroupRemark",
+				Handler: userGroup.UpdateGroupRemarkHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

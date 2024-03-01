@@ -24,7 +24,7 @@ func NewUserSelectGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 }
 
 func (l *UserSelectGroupLogic) UserSelectGroup(in *user.UserSelectGroupsRequest) (resp *user.UserSelectGroupsResponse, err error) {
-	// 根据标签查询群聊 首先根据小标签推选群聊 , 如果小标签不存在,则根据大标签推荐
+	// 根据标签查询群聊
 	var groupInformations []*user.GroupInformation
 	var groupChat []types.GroupChat
 	var total int64

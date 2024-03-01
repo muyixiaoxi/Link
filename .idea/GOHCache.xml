@@ -396,6 +396,13 @@
             </set>
           </value>
         </entry>
+        <entry key="QueryGroupListLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/querygrouplistlogic.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="QueryLink">
           <value>
             <set>
@@ -414,6 +421,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="QueryMyGroupListLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/querymygrouplistlogic.go" />
             </set>
           </value>
         </entry>
@@ -697,6 +711,28 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/user/service/user/user_grpc.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdateGroupInfoLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/updategroupinfologic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdateGroupInformationLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/updategroupinformationlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdateGroupRemarkLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/updategroupremarklogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/updategroupremarklogic.go" />
             </set>
           </value>
         </entry>
@@ -1977,6 +2013,13 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/querygrouplisthandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709293827585" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/quitgrouphandler.go">
           <value>
             <ScannedPath>
@@ -1988,6 +2031,20 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1709276842605" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/updategroupinfohandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709294190558" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/updategroupremarkhandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709293827415" />
             </ScannedPath>
           </value>
         </entry>
@@ -2193,7 +2250,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/homegrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709260413825" />
+              <option name="lastModified" value="1709287435921" />
               <option name="schema">
                 <list>
                   <option value="HomeGroupLogic" />
@@ -2209,6 +2266,18 @@
               <option name="schema">
                 <list>
                   <option value="KickOutUserLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/querygrouplistlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709295052042" />
+              <option name="schema">
+                <list>
+                  <option value="QueryGroupListLogic" />
                 </list>
               </option>
             </ScannedPath>
@@ -2233,6 +2302,30 @@
               <option name="schema">
                 <list>
                   <option value="SelectDetailGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/updategroupinfologic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709296340499" />
+              <option name="schema">
+                <list>
+                  <option value="UpdateGroupInfoLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/updategroupremarklogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709293480260" />
+              <option name="schema">
+                <list>
+                  <option value="UpdateGroupRemarkLogic" />
                 </list>
               </option>
             </ScannedPath>
@@ -2265,7 +2358,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/recommenduserlistlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709202825815" />
+              <option name="lastModified" value="1709287769779" />
               <option name="schema">
                 <list>
                   <option value="RecommendUserListLogic" />
@@ -2410,6 +2503,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/querymygrouplistlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709295313900" />
+              <option name="schema">
+                <list>
+                  <option value="QueryMyGroupListLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/quitgrouplogic.go">
           <value>
             <ScannedPath>
@@ -2425,10 +2530,34 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/recommenduserslogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709205328790" />
+              <option name="lastModified" value="1709287960490" />
               <option name="schema">
                 <list>
                   <option value="RecommendUsersLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/updategroupinformationlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709296486508" />
+              <option name="schema">
+                <list>
+                  <option value="UpdateGroupInformationLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/updategroupremarklogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709292134932" />
+              <option name="schema">
+                <list>
+                  <option value="UpdateGroupRemarkLogic" />
                 </list>
               </option>
             </ScannedPath>
@@ -2606,7 +2735,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userselectgrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709172358519" />
+              <option name="lastModified" value="1709292134886" />
               <option name="schema">
                 <list>
                   <option value="UserSelectGroupLogic" />
@@ -3135,9 +3264,11 @@
         <entry key="next_user_id_response" value="NextUserIDResponse" />
         <entry key="node154" value="Node154" />
         <entry key="query_friends_logic" value="QueryFriendsLogic" />
+        <entry key="query_group_list_logic" value="QueryGroupListLogic" />
         <entry key="query_link" value="QueryLink" />
         <entry key="query_link_tags_logic" value="QueryLinkTagsLogic" />
         <entry key="query_link_tags_response" value="QueryLinkTagsResponse" />
+        <entry key="query_my_group_list_logic" value="QueryMyGroupListLogic" />
         <entry key="query_phone_logic" value="QueryPhoneLogic" />
         <entry key="quit_group_logic" value="QuitGroupLogic" />
         <entry key="recommend_group_by_tag_request" value="RecommendGroupByTagRequest" />
@@ -3177,6 +3308,9 @@
         <entry key="unimplemented_tag_login_server" value="UnimplementedTagLoginServer" />
         <entry key="unimplemented_tag_sign_server" value="UnimplementedTagSignServer" />
         <entry key="unimplemented_user_service_server" value="UnimplementedUserServiceServer" />
+        <entry key="update_group_info_logic" value="UpdateGroupInfoLogic" />
+        <entry key="update_group_information_logic" value="UpdateGroupInformationLogic" />
+        <entry key="update_group_remark_logic" value="UpdateGroupRemarkLogic" />
         <entry key="update_remark_logic" value="UpdateRemarkLogic" />
         <entry key="update_self_tag_logic" value="UpdateSelfTagLogic" />
         <entry key="update_self_tag_request" value="UpdateSelfTagRequest" />
