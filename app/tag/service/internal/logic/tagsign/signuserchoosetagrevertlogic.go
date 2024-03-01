@@ -3,7 +3,9 @@ package tagsignlogic
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/dtm-labs/client/dtmgrpc"
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"google.golang.org/grpc/status"
 	"tag/service/internal/svc"
@@ -27,6 +29,8 @@ func NewSignUserChooseTagRevertLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *SignUserChooseTagRevertLogic) SignUserChooseTagRevert(in *tag.UserChooseTagRequest) (*tag.UserChooseTagRequest, error) {
+
+	fmt.Println("用户标签SignUserChooseTagRevert--->开始")
 	// 获取 RawDB
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
 	if err != nil {
@@ -36,6 +40,8 @@ func (l *SignUserChooseTagRevertLogic) SignUserChooseTagRevert(in *tag.UserChoos
 	barrier, err := dtmgrpc.BarrierFromGrpc(l.ctx)
 	// 开启子事务屏障
 	err = barrier.CallWithDB(db, func(tx *sql.Tx) (err error) {
+		fmt.Println("注册时选择标签进入了补偿")
+		logc.Info(l.ctx)
 		//删除记录
 		_, err = tx.Exec("DELETE FROM tb_user_tag where tag_id = ? and user_id = ?", in.TagId, in.UserId)
 		return err
@@ -43,5 +49,7 @@ func (l *SignUserChooseTagRevertLogic) SignUserChooseTagRevert(in *tag.UserChoos
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("用户标签SignUserChooseTagRevert--->结束")
+
 	return &tag.UserChooseTagRequest{}, nil
 }

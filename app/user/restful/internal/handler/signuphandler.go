@@ -1,7 +1,9 @@
 package handler
 
 import (
+	"context"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -26,19 +28,13 @@ func signUpHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		_, err := l.SignUp(&req)
 		fmt.Println("@@", err)
 		if err != nil {
-			formErr, _ := status.FromError(err)
-			switch formErr.Code() {
-			case codes.AlreadyExists:
-				//标签被重复选择
-				response.Response(w, nil, response.CodeTagSame)
+			formError, _ := status.FromError(err)
+			if formError.Code() == codes.AlreadyExists {
+				response.Response(w, nil, response.CodeUserExist)
 				return
-			case codes.DeadlineExceeded:
-				//标签选择失败
-				response.Response(w, nil, response.CodeTagChooseFailed)
-				return
-
 			}
-			response.Response(w, nil, response.CodeUserExist)
+			logc.Error(context.Background(), "signUpHandler is failed", err)
+			response.Response(w, nil, response.CodeServerBusy)
 			return
 		}
 		response.Response(w, nil, response.CodeSuccess)

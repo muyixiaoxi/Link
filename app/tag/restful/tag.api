@@ -50,6 +50,12 @@ type SelectAllTagsResponse {
 }
 
 //一次查询出全部标签
+//查询出我创建的标签
+type SelectMyTagsResponse {
+	Id      uint64 `json:"id"`
+	TagName string `json:"tagName"`
+}
+
 @server (
 	prefix: /app/tag
 	jwt:    Auth
@@ -72,6 +78,10 @@ service tag-api {
 	@doc "一次查询全部标签"
 	@handler selectAllTags
 	post /selectAllTags returns ([]SelectAllTagsResponse)
+
+	@doc "查询我创建的标签"
+	@handler selectMyTags
+	post /selectMyTags returns ([]SelectMyTagsResponse)
 }
 
 @server (

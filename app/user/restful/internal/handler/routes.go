@@ -114,6 +114,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/queryLinkTags/:id",
 				Handler: userTag.QueryLinkTagsHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/recommendUserList",
+				Handler: userTag.RecommendUserListHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/app/user"),

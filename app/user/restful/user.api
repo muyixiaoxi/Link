@@ -208,13 +208,42 @@ service user {
 	delete /friend (UserDeleteFriendRequest)
 }
 
-type homeGroupRequest {
-	PageNo        uint64 `json:"pageNo" validate:"required"` //当前页
-	PageSize      uint64 `json:"pageSize" validate:"required"` //每页显示条数
-	SystemTagId   uint64 `json:"systemTagId"` //系统标签
-	UserSelfTagId uint64 `json:"userSelfTagId"` //用户自定义标签
+//首页根据标签推荐群聊
+type RecommendGroupByTagRequest {
+	PageNo        uint64   `json:"pageNo" validate:"required"`
+	PageSize      uint64   `json:"pageSize" validate:"required"`
+	SystemTagId   []uint64 `json:"systemTagId"` //系统标签
+	UserSelfTagId []uint64 `json:"userSelfTagId"` //用户自定义标签
 }
 
+type GroupList {
+	Id              uint64 `json:"id"` //群id
+	Name            string `json:"name"` //群聊名称
+	SystemTagName   string `json:"systemTagName"` //群聊所带的系统标签名称
+	UserSelfTagName string `json:"userSelfTagName"` //用户自定义标签
+	Avatar          string `json:"avatar"` //用户头像
+}
+
+type RecommendGroupByTagResponse {
+	GroupList []GroupList `json:"groupList"`
+	Total     int64       `json:"total"`
+}
+
+//首页根据标签推荐群聊
+//首页根据标签推荐人员列表
+type RecommendUser {
+	Id        uint64 `json:"id"` //人员Id
+	Username  string `json:"username"` //用户名
+	Avatar    string `json:"avatar"` //用户头像
+	Signature string `json:"signature"` //个性签名
+}
+
+type RecommendUserListResponse {
+	RecommendUserList []RecommendUser `json:"recommendUserList"`
+	Total             int64           `json:"total"`
+}
+
+//首页根据标签推荐人员列表
 @server (
 	prefix: /app/user
 	jwt:    Auth
@@ -227,7 +256,7 @@ service user {
 
 	@doc "首页推荐群聊"
 	@handler homeGroup
-	post /selectHomeGroup
+	post /selectHomeGroup (RecommendGroupByTagRequest) returns (RecommendGroupByTagResponse)
 }
 
 @server (
@@ -243,6 +272,10 @@ service user {
 	@doc "查询和当前登录用户或者其它用户相关的标签"
 	@handler queryLinkTags
 	get /queryLinkTags/:id (UserInfoRequest) returns (QueryLinkTagsResponse)
+
+	@doc "根据标签推荐人员列表"
+	@handler recommendUserList
+	post /recommendUserList (RecommendGroupByTagRequest) returns (RecommendUserListResponse)
 }
 
 // goctl api go -api user.api -dir .
