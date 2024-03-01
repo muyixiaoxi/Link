@@ -16,6 +16,12 @@ type UserSelectDetailGroupLogic struct {
 	logx.Logger
 }
 
+// AddressCount 统计人数最多的地址
+type AddressCount struct {
+	Address string
+	Count   int64
+}
+
 func NewUserSelectDetailGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserSelectDetailGroupLogic {
 	return &UserSelectDetailGroupLogic{
 		ctx:    ctx,
@@ -43,8 +49,8 @@ func (l *UserSelectDetailGroupLogic) UserSelectDetailGroup(in *user.DetailGroupR
 		return nil, err
 	}
 	//统计群聊中的人数
-	var userIds []uint64
-	if err := l.svcCtx.DB.Model(&types.UserGroupChat{}).Where("group_chat_id = ?", groupInfo.ID).Find(&userIds).Error; err != nil {
+	var userIds []int64
+	if err := l.svcCtx.DB.Model(&types.UserGroupChat{}).Select("user_id").Where("group_chat_id = ?", groupInfo.ID).Find(&userIds).Error; err != nil {
 		return nil, err
 	}
 	if err := l.svcCtx.DB.Model(&types.UserGroupChat{}).Where("group_chat_id = ?", groupInfo.ID).Count(&totalPeople).Error; err != nil {
@@ -54,24 +60,31 @@ func (l *UserSelectDetailGroupLogic) UserSelectDetailGroup(in *user.DetailGroupR
 	var (
 		manCount   int64
 		womanCount int64
-		address    string //人数最多的地区
 	)
 	if err := l.svcCtx.DB.Model(&types.User{}).Where("id in (?) AND gender = 1", userIds).Count(&manCount).Error; err != nil {
 		return nil, err
 	}
-	if err := l.svcCtx.DB.Model(&types.User{}).Where("id int (?) AND gender = 2", userIds).Count(&womanCount).Error; err != nil {
+	if err := l.svcCtx.DB.Model(&types.User{}).Where("id in (?) AND gender = 2", userIds).Count(&womanCount).Error; err != nil {
 		return nil, err
 	}
 	//统计人数最多的地址
-	if err := l.svcCtx.DB.Model(&types.User{}).Select("address").First(&address).Group("address").Error; err != nil {
+	var mostPopularAddress AddressCount
+	if err := l.svcCtx.DB.Model(&types.User{}).
+		Select("address, count(*) as count").
+		Where("id IN (?) AND address IS NOT NULL", userIds).
+		Group("address").
+		Order("count DESC").
+		Limit(1).
+		Find(&mostPopularAddress).
+		Error; err != nil {
 		return nil, err
 	}
-
 	// 创建一个 *timestamppb.Timestamp 对象
 	timestampProto := timestamppb.New(groupInfo.CreatedAt)
 	return &user.DetailGroupResponse{
 		Id:              uint64(groupInfo.ID),
 		Count:           uint64(totalPeople),
+		GroupBossId:     groupInfo.GroupBossID,
 		Name:            groupInfo.Name,
 		SystemTagName:   groupName,
 		UserSelfTagName: tagName,
@@ -79,6 +92,6 @@ func (l *UserSelectDetailGroupLogic) UserSelectDetailGroup(in *user.DetailGroupR
 		CreatedAt:       timestampProto,
 		Man:             float32(manCount) / float32(totalPeople),
 		Woman:           float32(womanCount) / float32(totalPeople),
-		Address:         address,
+		Address:         mostPopularAddress.Address,
 	}, nil
 }

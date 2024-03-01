@@ -7,10 +7,10 @@
 #TagRpc:
 #  Etcd:
 #    Hosts:
-#      - 172.30.0.1:2379
+#      - 172.27.80.1:2379
 #    Key: tag.rpc
 
-#
+
 Name: tag-api
 Host: 0.0.0.0
 Port: 8888

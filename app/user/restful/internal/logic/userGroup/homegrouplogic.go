@@ -27,7 +27,6 @@ func NewHomeGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *HomeGro
 
 func (l *HomeGroupLogic) HomeGroup(req *types.RecommendGroupByTagRequest) (resp *types.RecommendGroupByTagResponse, err error) {
 	// 首页推荐群聊
-	// 获取用户id
 	//获取当前登录用户的id
 	jid := l.ctx.Value("user_id").(json.Number)
 	userId, _ := jid.Int64()

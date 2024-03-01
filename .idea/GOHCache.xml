@@ -17,6 +17,13 @@
             </set>
           </value>
         </entry>
+        <entry key="AddressCount">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userselectdetailgrouplogic.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="AllTags">
           <value>
             <set>
@@ -59,6 +66,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/chatwslogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CheckTagCountLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/checktagcountlogic.go" />
             </set>
           </value>
         </entry>
@@ -151,6 +165,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/decuseridlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DeleteFriendLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/deletefriendlogic.go" />
             </set>
           </value>
         </entry>
@@ -289,6 +310,13 @@
             </set>
           </value>
         </entry>
+        <entry key="GroupUserListLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/groupuserlistlogic.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="HomeGroupLogic">
           <value>
             <set>
@@ -301,6 +329,20 @@
             <set>
               <option value="file://$PROJECT_DIR$/app/tag/common/jwt/jwt.go" />
               <option value="file://$PROJECT_DIR$/app/user/common/jwt/jwt.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="KickOutUserGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/kickoutusergrouplogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="KickOutUserLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/kickoutuserlogic.go" />
             </set>
           </value>
         </entry>
@@ -332,6 +374,20 @@
             </set>
           </value>
         </entry>
+        <entry key="Node154">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR154.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="QueryFriendsLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/queryfriendslogic.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="QueryLink">
           <value>
             <set>
@@ -350,6 +406,21 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="QueryPhoneLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/queryphonelogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="QuitGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/quitgrouplogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/quitgrouplogic.go" />
             </set>
           </value>
         </entry>
@@ -437,6 +508,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/tag/restful/internal/types/types.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SelectDetailGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/selectdetailgrouplogic.go" />
             </set>
           </value>
         </entry>
@@ -753,6 +831,21 @@
             </set>
           </value>
         </entry>
+        <entry key="UserDeleteFriendLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userdeletefriendlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserDeleteFriendRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="UserDisposeFlowedLogic">
           <value>
             <set>
@@ -847,6 +940,13 @@
             </set>
           </value>
         </entry>
+        <entry key="UserListByGroupLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userlistbygrouplogic.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="UserLoginLogic">
           <value>
             <set>
@@ -863,6 +963,44 @@
           </value>
         </entry>
         <entry key="UserLoginResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserQueryFriendLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userqueryfriendlogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserQueryFriendRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserQueryPhoneLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/userqueryphonelogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserQueryPhoneRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/user/user.pb.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UserQueryPhoneResponse">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
@@ -1016,6 +1154,53 @@
     </option>
     <option name="scannedPathMapping">
       <map>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR123.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709266381543" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR136.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709269427508" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR140.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709270022941" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR141.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709268173367" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR142.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709271567774" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR154.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709268058206" />
+              <option name="schema">
+                <list>
+                  <option value="Node154" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/tag/common/bcrypt/bcrypt.go">
           <value>
             <ScannedPath>
@@ -1054,7 +1239,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/common/response/code.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708254197730" />
+              <option name="lastModified" value="1709281136022" />
             </ScannedPath>
           </value>
         </entry>
@@ -1106,7 +1291,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/handler/tagLogin/createtaghandler.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708270275297" />
+              <option name="lastModified" value="1709281135869" />
             </ScannedPath>
           </value>
         </entry>
@@ -1167,7 +1352,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/createtaglogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708270275314" />
+              <option name="lastModified" value="1709282101436" />
               <option name="schema">
                 <list>
                   <option value="CreateTagLogic" />
@@ -1319,6 +1504,18 @@
               <option name="schema">
                 <list>
                   <option value="Config" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/checktagcountlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709279946372" />
+              <option name="schema">
+                <list>
+                  <option value="CheckTagCountLogic" />
                 </list>
               </option>
             </ScannedPath>
@@ -1594,7 +1791,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/common/response/code.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708649824588" />
+              <option name="lastModified" value="1709281260799" />
             </ScannedPath>
           </value>
         </entry>
@@ -1643,6 +1840,13 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/deletefriendhandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709216396480" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/disposeflowedhandler.go">
           <value>
             <ScannedPath>
@@ -1660,7 +1864,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/getuserinfohandler.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708500192757" />
+              <option name="lastModified" value="1709216396481" />
             </ScannedPath>
           </value>
         </entry>
@@ -1671,10 +1875,24 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/queryfriendshandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709216396483" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/queryphonehandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709216396484" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/routes.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709176681294" />
+              <option name="lastModified" value="1709216396486" />
             </ScannedPath>
           </value>
         </entry>
@@ -1699,17 +1917,45 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/groupuserlisthandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709276842769" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/homegrouphandler.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709130491160" />
+              <option name="lastModified" value="1709276842468" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/kickoutuserhandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709276842318" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/quitgrouphandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709276842880" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/selectdetailgrouphandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709276842605" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userGroup/usercreategrouphandler.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708268116463" />
+              <option name="lastModified" value="1709276842956" />
             </ScannedPath>
           </value>
         </entry>
@@ -1730,7 +1976,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userTag/userchoosetaghandler.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708569101890" />
+              <option name="lastModified" value="1709281260653" />
             </ScannedPath>
           </value>
         </entry>
@@ -1759,6 +2005,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/deletefriendlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709216396487" />
+              <option name="schema">
+                <list>
+                  <option value="DeleteFriendLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/disposeflowedlogic.go">
           <value>
             <ScannedPath>
@@ -1774,7 +2032,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/getfriendslistlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708821962075" />
+              <option name="lastModified" value="1709216396489" />
               <option name="schema">
                 <list>
                   <option value="GetFriendsListLogic" />
@@ -1814,6 +2072,30 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/queryfriendslogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709216396491" />
+              <option name="schema">
+                <list>
+                  <option value="QueryFriendsLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/queryphonelogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709216396492" />
+              <option name="schema">
+                <list>
+                  <option value="QueryPhoneLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/signuplogic.go">
           <value>
             <ScannedPath>
@@ -1829,7 +2111,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/singlechatlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708577972643" />
+              <option name="lastModified" value="1709216396494" />
             </ScannedPath>
           </value>
         </entry>
@@ -1857,13 +2139,61 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/groupuserlistlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709278659259" />
+              <option name="schema">
+                <list>
+                  <option value="GroupUserListLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/homegrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709166492119" />
+              <option name="lastModified" value="1709260413825" />
               <option name="schema">
                 <list>
                   <option value="HomeGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/kickoutuserlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709277000847" />
+              <option name="schema">
+                <list>
+                  <option value="KickOutUserLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/quitgrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709260527134" />
+              <option name="schema">
+                <list>
+                  <option value="QuitGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/selectdetailgrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709258685602" />
+              <option name="schema">
+                <list>
+                  <option value="SelectDetailGroupLogic" />
                 </list>
               </option>
             </ScannedPath>
@@ -1915,7 +2245,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/userchoosetaglogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708568490160" />
+              <option name="lastModified" value="1709281135811" />
               <option name="schema">
                 <list>
                   <option value="UserChooseTagLogic" />
@@ -1939,7 +2269,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709176681292" />
+              <option name="lastModified" value="1709216396496" />
               <option name="schema">
                 <list>
                   <option value="DisposeFlowedRequest" />
@@ -1956,6 +2286,7 @@
                   <option value="UserCreateGroupRequset" />
                   <option value="UserCreateRequest" />
                   <option value="UserCreateResponse" />
+                  <option value="UserDeleteFriendRequest" />
                   <option value="UserFlowedRequest" />
                   <option value="UserFriend" />
                   <option value="UserFriendsResponse" />
@@ -1963,6 +2294,9 @@
                   <option value="UserInfoResponse" />
                   <option value="UserLoginRequest" />
                   <option value="UserLoginResponse" />
+                  <option value="UserQueryFriendRequest" />
+                  <option value="UserQueryPhoneRequest" />
+                  <option value="UserQueryPhoneResponse" />
                   <option value="UserUpdateInfoRequest" />
                   <option value="UserUpdateRemarkRequest" />
                 </list>
@@ -2013,6 +2347,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/kickoutusergrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709278791000" />
+              <option name="schema">
+                <list>
+                  <option value="KickOutUserGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/nextuseridlogic.go">
           <value>
             <ScannedPath>
@@ -2020,6 +2366,18 @@
               <option name="schema">
                 <list>
                   <option value="NextUserIDLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/quitgrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709260739933" />
+              <option name="schema">
+                <list>
+                  <option value="QuitGroupLogic" />
                 </list>
               </option>
             </ScannedPath>
@@ -2073,10 +2431,22 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userdeletefriendlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709216396500" />
+              <option name="schema">
+                <list>
+                  <option value="UserDeleteFriendLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userdisposeflowedlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708821962079" />
+              <option name="lastModified" value="1709216396502" />
               <option name="schema">
                 <list>
                   <option value="UserDisposeFlowedLogic" />
@@ -2100,7 +2470,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userfriendlistlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708821962080" />
+              <option name="lastModified" value="1709216396504" />
               <option name="schema">
                 <list>
                   <option value="UserFriendListLogic" />
@@ -2112,7 +2482,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userinfologic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709039623804" />
+              <option name="lastModified" value="1709216396506" />
               <option name="schema">
                 <list>
                   <option value="UserInfoLogic" />
@@ -2133,6 +2503,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userlistbygrouplogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709277870897" />
+              <option name="schema">
+                <list>
+                  <option value="UserListByGroupLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userloginlogic.go">
           <value>
             <ScannedPath>
@@ -2145,13 +2527,38 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userqueryfriendlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709216396508" />
+              <option name="schema">
+                <list>
+                  <option value="UserQueryFriendLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userqueryphonelogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709216396509" />
+              <option name="schema">
+                <list>
+                  <option value="UserQueryPhoneLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userselectdetailgrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708267672713" />
+              <option name="lastModified" value="1709261298357" />
               <option name="schema">
                 <list>
                   <option value="UserSelectDetailGroupLogic" />
+                  <option value="AddressCount" />
                 </list>
               </option>
             </ScannedPath>
@@ -2208,7 +2615,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/server/userserviceserver.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709174906038" />
+              <option name="lastModified" value="1709216565810" />
               <option name="schema">
                 <list>
                   <option value="UserServiceServer" />
@@ -2566,7 +2973,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/user/user.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709174906024" />
+              <option name="lastModified" value="1709216565779" />
               <option name="schema">
                 <list>
                   <option value="Empty" />
@@ -2595,6 +3002,10 @@
                   <option value="RecommendUsersRequest" />
                   <option value="RecommendUser" />
                   <option value="RecommendUsersResponse" />
+                  <option value="UserQueryFriendRequest" />
+                  <option value="UserQueryPhoneRequest" />
+                  <option value="UserQueryPhoneResponse" />
+                  <option value="UserDeleteFriendRequest" />
                   <option value="x" />
                 </list>
               </option>
@@ -2604,7 +3015,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/user/user_grpc.pb.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709174906024" />
+              <option name="lastModified" value="1709216565779" />
               <option name="schema">
                 <list>
                   <option value="userServiceClient" />
@@ -2617,7 +3028,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/userservice/userservice.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709174906042" />
+              <option name="lastModified" value="1709216565818" />
               <option name="schema">
                 <list>
                   <option value="defaultUserService" />
@@ -2632,12 +3043,14 @@
       <map>
         <entry key="add_flowed_logic" value="AddFlowedLogic" />
         <entry key="add_user_id_logic" value="AddUserIdLogic" />
+        <entry key="address_count" value="AddressCount" />
         <entry key="all_tags" value="AllTags" />
         <entry key="all_tags_by_group_name_response" value="AllTagsByGroupNameResponse" />
         <entry key="apply_for" value="ApplyFor" />
         <entry key="body" value="Body" />
         <entry key="chat_history" value="ChatHistory" />
         <entry key="chat_ws_logic" value="ChatWSLogic" />
+        <entry key="check_tag_count_logic" value="CheckTagCountLogic" />
         <entry key="choose_tags_logic" value="ChooseTagsLogic" />
         <entry key="choose_tags_request" value="ChooseTagsRequest" />
         <entry key="choose_tags_response" value="ChooseTagsResponse" />
@@ -2652,6 +3065,7 @@
         <entry key="default_tag_login" value="defaultTagLogin" />
         <entry key="default_tag_sign" value="defaultTagSign" />
         <entry key="default_user_service" value="defaultUserService" />
+        <entry key="delete_friend_logic" value="DeleteFriendLogic" />
         <entry key="delete_tag_logic" value="DeleteTagLogic" />
         <entry key="delete_tag_request" value="DeleteTagRequest" />
         <entry key="delete_tag_response" value="DeleteTagResponse" />
@@ -2670,15 +3084,22 @@
         <entry key="group_list" value="GroupList" />
         <entry key="group_tag" value="GroupTag" />
         <entry key="group_tag_response" value="GroupTagResponse" />
+        <entry key="group_user_list_logic" value="GroupUserListLogic" />
         <entry key="home_group_logic" value="HomeGroupLogic" />
         <entry key="jwt" value="JWT" />
+        <entry key="kick_out_user_group_logic" value="KickOutUserGroupLogic" />
+        <entry key="kick_out_user_logic" value="KickOutUserLogic" />
         <entry key="login_logic" value="LoginLogic" />
         <entry key="message" value="Message" />
         <entry key="next_user_id_logic" value="NextUserIDLogic" />
         <entry key="next_user_id_response" value="NextUserIDResponse" />
+        <entry key="node154" value="Node154" />
+        <entry key="query_friends_logic" value="QueryFriendsLogic" />
         <entry key="query_link" value="QueryLink" />
         <entry key="query_link_tags_logic" value="QueryLinkTagsLogic" />
         <entry key="query_link_tags_response" value="QueryLinkTagsResponse" />
+        <entry key="query_phone_logic" value="QueryPhoneLogic" />
+        <entry key="quit_group_logic" value="QuitGroupLogic" />
         <entry key="recommend_group_by_tag_request" value="RecommendGroupByTagRequest" />
         <entry key="recommend_group_by_tag_response" value="RecommendGroupByTagResponse" />
         <entry key="recommend_user" value="RecommendUser" />
@@ -2691,6 +3112,7 @@
         <entry key="select_all_tags_by_group_name" value="SelectAllTagsByGroupName" />
         <entry key="select_all_tags_logic" value="SelectAllTagsLogic" />
         <entry key="select_all_tags_response" value="SelectAllTagsResponse" />
+        <entry key="select_detail_group_logic" value="SelectDetailGroupLogic" />
         <entry key="select_group_tag_logic" value="SelectGroupTagLogic" />
         <entry key="select_link_tag" value="SelectLinkTag" />
         <entry key="select_link_tags_logic" value="SelectLinkTagsLogic" />
@@ -2734,6 +3156,8 @@
         <entry key="user_create_request" value="UserCreateRequest" />
         <entry key="user_create_response" value="UserCreateResponse" />
         <entry key="user_create_revert_login_logic" value="UserCreateRevertLoginLogic" />
+        <entry key="user_delete_friend_logic" value="UserDeleteFriendLogic" />
+        <entry key="user_delete_friend_request" value="UserDeleteFriendRequest" />
         <entry key="user_dispose_flowed_logic" value="UserDisposeFlowedLogic" />
         <entry key="user_flowed_logic" value="UserFlowedLogic" />
         <entry key="user_flowed_request" value="UserFlowedRequest" />
@@ -2747,9 +3171,15 @@
         <entry key="user_info_request" value="UserInfoRequest" />
         <entry key="user_info_response" value="UserInfoResponse" />
         <entry key="user_is_exists_logic" value="UserIsExistsLogic" />
+        <entry key="user_list_by_group_logic" value="UserListByGroupLogic" />
         <entry key="user_login_logic" value="UserLoginLogic" />
         <entry key="user_login_request" value="UserLoginRequest" />
         <entry key="user_login_response" value="UserLoginResponse" />
+        <entry key="user_query_friend_logic" value="UserQueryFriendLogic" />
+        <entry key="user_query_friend_request" value="UserQueryFriendRequest" />
+        <entry key="user_query_phone_logic" value="UserQueryPhoneLogic" />
+        <entry key="user_query_phone_request" value="UserQueryPhoneRequest" />
+        <entry key="user_query_phone_response" value="UserQueryPhoneResponse" />
         <entry key="user_select_detail_group_logic" value="UserSelectDetailGroupLogic" />
         <entry key="user_select_group_logic" value="UserSelectGroupLogic" />
         <entry key="user_select_groups_request" value="UserSelectGroupsRequest" />

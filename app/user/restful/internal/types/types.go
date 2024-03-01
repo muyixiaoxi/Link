@@ -17,6 +17,26 @@ type GroupList struct {
 	Avatar          string `json:"avatar"`          //用户头像
 }
 
+type GroupUserList struct {
+	ID       uint64 `json:"id"`
+	Avatar   string `json:"avatar"`
+	UserName string `json:"userName"`
+}
+
+type GroupUserListRequest struct {
+	GroupID uint64 `json:"groupId" validate:"required"` //群聊id
+}
+
+type GroupUserListResponse struct {
+	GroupBossId   uint64          `json:"groupBossId"`
+	GroupUserList []GroupUserList `json:"groupUserList"`
+}
+
+type KickOutGroupRequest struct {
+	GroupId uint64   `json:"groupId"`                     //群id
+	UserIDs []uint64 `json:"userIDs" validate:"required"` //被踢出群聊的人员id
+}
+
 type Message struct {
 	From    uint64 `json:"from,optional"`
 	To      uint64 `json:"to"`
@@ -35,11 +55,15 @@ type QueryLinkTagsResponse struct {
 	LinkTags []QueryLink `json:"linkTags"`
 }
 
+type QuitGroupRequest struct {
+	GroupId uint64 `json:"groupId" validate:"required"`
+}
+
 type RecommendGroupByTagRequest struct {
 	PageNo        uint64   `json:"pageNo" validate:"required"`
 	PageSize      uint64   `json:"pageSize" validate:"required"`
-	SystemTagId   []uint64 `json:"systemTagId"`   //系统标签 最多只能选择一个
-	UserSelfTagId []uint64 `json:"userSelfTagId"` //用户自定义标签 最多只能选择一个
+	SystemTagId   []uint64 `json:"systemTagId"`   //系统标签
+	UserSelfTagId []uint64 `json:"userSelfTagId"` //用户自定义标签
 }
 
 type RecommendGroupByTagResponse struct {
@@ -57,6 +81,23 @@ type RecommendUser struct {
 type RecommendUserListResponse struct {
 	RecommendUserList []RecommendUser `json:"recommendUserList"`
 	Total             int64           `json:"total"`
+}
+
+type SelectGroupDeatilRequest struct {
+	ID uint64 `json:"id" validate:"required"`
+}
+
+type SelectGroupDeatilResponse struct {
+	ID              uint64  `json:"id"`
+	Count           uint64  `json:"count"`
+	GroupBossId     uint64  `json:"groupBossId"`
+	Name            string  `json:"name"`
+	UserSelfTagName string  `json:"userSelfTagName"`
+	Avatar          string  `json:"avatar"`
+	CreatedAt       string  `json:"createdAt"`
+	Man             float32 `json:"man"`
+	WoMan           float32 `json:"woMan"`
+	Address         string  `json:"address"`
 }
 
 type UserAppleRequest struct {

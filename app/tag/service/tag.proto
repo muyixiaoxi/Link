@@ -96,6 +96,14 @@ message SelectMyTagsRequest{
   uint64 user_id = 1; //用户id
 }
 
+//检查标签数量
+message CheckTagCountRequest{
+  uint64 user_id = 1;//当前登录用户的id
+}
+message CheckTagCountResponse {
+  uint64 count = 2; //标签数
+}
+//检查标签数量
 
 // TagLogin 登录之后的服务
 service TagLogin {
@@ -104,9 +112,10 @@ service TagLogin {
   rpc DeleteTag(DeleteTagRequest) returns(DeleteTagResponse);
   rpc SelectGroupTag(Empty) returns (GroupTagResponse);
   rpc SelectAllTagsByGroup (SelectAllTagsByGroupName) returns (AllTagsByGroupNameResponse);
-  rpc ChooseTags(ChooseTagsRequest) returns (ChooseTagsResponse);
+  rpc ChooseTags(ChooseTagsRequest) returns (ChooseTagsResponse); //用户选择标签
   rpc SelectLinkTags(SelectLinkTagsRequest) returns (SelectLinkTagsResponse);
   rpc SelectMyTags(SelectMyTagsRequest) returns (AllTagsByGroupNameResponse);
+  rpc CheckTagCount(CheckTagCountRequest) returns(CheckTagCountResponse);
 }
 
 
@@ -117,8 +126,8 @@ message UserChooseTagRequest{
 
 // TagSign 登录之前的服务
 service TagSign {
-  rpc SignUserChooseTag(UserChooseTagRequest) returns (UserChooseTagRequest);
-  rpc SignUserChooseTagRevert(UserChooseTagRequest) returns (UserChooseTagRequest);
+  rpc SignUserChooseTag(UserChooseTagRequest) returns (UserChooseTagRequest); //注册时强制选择一个标签
+  rpc SignUserChooseTagRevert(UserChooseTagRequest) returns (UserChooseTagRequest); //注册时选择一个标签的补偿方法
 }
 
 

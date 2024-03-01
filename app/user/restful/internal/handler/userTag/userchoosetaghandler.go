@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/rest/httpx"
+	"google.golang.org/grpc/status"
 	"net/http"
 	"user/common/response"
 	"user/common/validate"
@@ -27,6 +28,11 @@ func UserChooseTagHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := userTag.NewUserChooseTagLogic(r.Context(), svcCtx)
 		err := l.UserChooseTag(&req)
 		if err != nil {
+			fromErr, _ := status.FromError(err)
+			if fromErr.Code() == 899 {
+				response.Response(w, nil, response.CodeTagMoreMax)
+				return
+			}
 			response.Response(w, nil, response.CodeServerBusy)
 		} else {
 			response.Response(w, nil, response.CodeSuccess)

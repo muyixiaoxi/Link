@@ -13,23 +13,23 @@ import (
 	"user/restful/internal/types"
 )
 
-func HomeGroupHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func QuitGroupHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.RecommendGroupByTagRequest
+		var req types.QuitGroupRequest
 		httpx.Parse(r, &req)
 		validateErr := validate.Validate(req)
 		if validateErr != nil {
+			logc.Error(context.Background(), "QuitGroupHandler Params is error", validateErr)
 			response.Response(w, nil, response.CodeParamsError)
-			logc.Error(context.Background(), "HomeGroupHandler params is error", validateErr)
 			return
 		}
-		l := userGroup.NewHomeGroupLogic(r.Context(), svcCtx)
-		resp, err := l.HomeGroup(&req)
+		l := userGroup.NewQuitGroupLogic(r.Context(), svcCtx)
+		err := l.QuitGroup(&req)
 		if err != nil {
-			logc.Error(context.Background(), " userGroup.NewHomeGroupLogic(r.Context(), svcCtx) is failed", err)
+			logc.Error(context.Background(), "userGroup.NewQuitGroupLogic(r.Context(), svcCtx) is failed", err)
 			response.Response(w, nil, response.CodeServerBusy)
 		} else {
-			response.Response(w, resp, response.CodeSuccess)
+			response.Response(w, nil, response.CodeSuccess)
 		}
 	}
 }
