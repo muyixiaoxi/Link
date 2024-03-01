@@ -103,6 +103,7 @@
         <entry key="Client">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/IM/client.go" />
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/chatwslogic.go" />
             </set>
           </value>
@@ -321,6 +322,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/homegrouplogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Hub">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/IM/hub.go" />
             </set>
           </value>
         </entry>
@@ -1154,6 +1162,30 @@
     </option>
     <option name="scannedPathMapping">
       <map>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/IM/client.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709283232003" />
+              <option name="schema">
+                <list>
+                  <option value="Client" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/IM/hub.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709283244523" />
+              <option name="schema">
+                <list>
+                  <option value="Hub" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR123.go">
           <value>
             <ScannedPath>
@@ -1198,6 +1230,13 @@
                   <option value="Node154" />
                 </list>
               </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709283297580" />
             </ScannedPath>
           </value>
         </entry>
@@ -3086,6 +3125,7 @@
         <entry key="group_tag_response" value="GroupTagResponse" />
         <entry key="group_user_list_logic" value="GroupUserListLogic" />
         <entry key="home_group_logic" value="HomeGroupLogic" />
+        <entry key="hub" value="Hub" />
         <entry key="jwt" value="JWT" />
         <entry key="kick_out_user_group_logic" value="KickOutUserGroupLogic" />
         <entry key="kick_out_user_logic" value="KickOutUserLogic" />
