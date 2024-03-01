@@ -60,10 +60,9 @@ type QuitGroupRequest struct {
 }
 
 type RecommendGroupByTagRequest struct {
-	PageNo        uint64   `json:"pageNo" validate:"required"`
-	PageSize      uint64   `json:"pageSize" validate:"required"`
-	SystemTagId   []uint64 `json:"systemTagId"`   //系统标签
-	UserSelfTagId []uint64 `json:"userSelfTagId"` //用户自定义标签
+	PageNo   uint64   `json:"pageNo" validate:"required"`
+	PageSize uint64   `json:"pageSize" validate:"required"`
+	TagIds   []uint64 `json:"tagIds" validate:"max=5"` //标签id
 }
 
 type RecommendGroupByTagResponse struct {

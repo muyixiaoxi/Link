@@ -32,33 +32,24 @@ func (l *RecommendUserListLogic) RecommendUserList(req *types.RecommendGroupByTa
 	//获取当前登录用户的id
 	jid := l.ctx.Value("user_id").(json.Number)
 	userId, _ := jid.Int64()
-	var (
-		selfIds   []uint64
-		systemIds []uint64
-	)
+	var tagIds []uint64
+
 	//如果用户没有选择标签
-	if len(req.UserSelfTagId) == 0 && len(req.SystemTagId) == 0 {
+	if len(req.TagIds) == 0 {
 		//查询出用户自己相关的标签
 		respRpc, _ := l.svcCtx.TagLoginRpc.SelectLinkTags(l.ctx, &tag.SelectLinkTagsRequest{Id: uint64(userId)})
 		for _, value := range respRpc.LinkTags {
-			if value.CreatorId != 0 {
-				//我加入或者创建的标签
-				selfIds = append(selfIds, value.Id)
-			} else {
-				systemIds = append(systemIds, value.Id)
-			}
+			tagIds = append(tagIds, value.Id)
 		}
 	} else {
-		systemIds = append(systemIds, req.SystemTagId...)
-		selfIds = append(selfIds, req.UserSelfTagId...)
+		tagIds = append(tagIds, req.TagIds...)
 	}
 	//查询人员列列表
 	rpcUserList, err := l.svcCtx.UserRpc.RecommendUsers(l.ctx, &user.RecommendUsersRequest{
-		PageNo:        int64(req.PageNo),
-		PageSize:      int64(req.PageSize),
-		SystemTagId:   systemIds,
-		UserSelfTagId: selfIds,
-		UserId:        uint64(userId),
+		PageNo:   int64(req.PageNo),
+		PageSize: int64(req.PageSize),
+		TagId:    tagIds,
+		UserId:   uint64(userId),
 	})
 	var userList []types.RecommendUser
 	for _, userRpc := range rpcUserList.RecommendUserList {

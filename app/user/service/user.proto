@@ -81,11 +81,10 @@ message UserCreateGroupRequest {
 
 message UserSelectGroupsRequest{
   //根据标签查看群聊
-  repeated uint64 system_tag_id = 1;
-  repeated uint64 user_self_tag_id = 2;
+  repeated uint64 tag_id = 1;
   //分页数据
-  uint64 page_no = 5;
-  uint64 page_size = 6;
+  uint64 page_no = 2;
+  uint64 page_size = 3;
 }
 
 message GroupInformation {
@@ -166,8 +165,7 @@ message RecommendUsersRequest{
   uint64 user_id = 1 ; //用户id, 防止将自己查询出来
   int64 page_no = 2; //当前页
   int64 page_size = 3 ; //每页显示条数
-  repeated uint64 system_tag_id = 4; //系统标签
-  repeated uint64 user_self_tag_id = 5 ; //用户自定义标签
+  repeated uint64 tag_id = 4; //标签
 }
 
 message RecommendUser{
@@ -257,6 +255,9 @@ message SetOffsetRequest{
 }
 
 
+//用户修改群聊信息
+//message Update
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -270,8 +271,6 @@ service UserService {
   rpc UserFlowed(UserAddRequest) returns(Empty);  // 添加好友/群聊
   rpc UserDisposeFlowed(DisposeFlowedRequest) returns(Empty); // 处理好友/群聊申请
   rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty); // 修改备注
-
-
   rpc RecommendUsers(RecommendUsersRequest) returns (RecommendUsersResponse); //推荐人员列表
   rpc UserFriendList(UserFriendRequest) returns(UserFriendResponse); // 获取好友列表
   rpc UserQueryFriend(UserQueryFriendRequest)returns(UserFriendResponse); // 在好友列表中搜索
@@ -298,6 +297,8 @@ service UserService {
   rpc QuitGroup(QuitGroupRequest) returns (QuitGroupResponse); //退出群聊 解散群聊
   rpc UserListByGroup(SelectUserListByGroupRequest) returns (SelectUserListByGroupResponse) ; //查询群聊中的人员信息
   rpc KickOutUserGroup(KickOutUserGroupRequest) returns (KickOutUserGroupResponse); //踢出群聊
+//  rpc UpdateGroupInformation() returns ();//修改群聊信息
+//  rpc UpdateGroupRemark() returns (); //用户修改自己加入的群聊的备注
 }
 
 
