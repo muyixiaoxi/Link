@@ -13,36 +13,43 @@ import (
 )
 
 type (
-	DetailGroupRequest       = user.DetailGroupRequest
-	DetailGroupResponse      = user.DetailGroupResponse
-	DisposeFlowedRequest     = user.DisposeFlowedRequest
-	Empty                    = user.Empty
-	GroupChat                = user.GroupChat
-	GroupInformation         = user.GroupInformation
-	NextUserIDResponse       = user.NextUserIDResponse
-	RecommendUser            = user.RecommendUser
-	RecommendUsersRequest    = user.RecommendUsersRequest
-	RecommendUsersResponse   = user.RecommendUsersResponse
-	UserAddRequest           = user.UserAddRequest
-	UserCreateGroupRequest   = user.UserCreateGroupRequest
-	UserCreateRequest        = user.UserCreateRequest
-	UserCreateResponse       = user.UserCreateResponse
-	UserDeleteFriendRequest  = user.UserDeleteFriendRequest
-	UserFriend               = user.UserFriend
-	UserFriendRequest        = user.UserFriendRequest
-	UserFriendResponse       = user.UserFriendResponse
-	UserInfoRequest          = user.UserInfoRequest
-	UserInfoResponse         = user.UserInfoResponse
-	UserLoginRequest         = user.UserLoginRequest
-	UserLoginResponse        = user.UserLoginResponse
-	UserQueryFriendRequest   = user.UserQueryFriendRequest
-	UserQueryPhoneRequest    = user.UserQueryPhoneRequest
-	UserQueryPhoneResponse   = user.UserQueryPhoneResponse
-	UserSelectGroupsRequest  = user.UserSelectGroupsRequest
-	UserSelectGroupsResponse = user.UserSelectGroupsResponse
-	UserSelfGroupRequest     = user.UserSelfGroupRequest
-	UserUpdateInfoRequest    = user.UserUpdateInfoRequest
-	UserUpdateRemarkRequest  = user.UserUpdateRemarkRequest
+	DetailGroupRequest            = user.DetailGroupRequest
+	DetailGroupResponse           = user.DetailGroupResponse
+	DisposeFlowedRequest          = user.DisposeFlowedRequest
+	Empty                         = user.Empty
+	GroupChat                     = user.GroupChat
+	GroupInformation              = user.GroupInformation
+	KickOutUserGroupRequest       = user.KickOutUserGroupRequest
+	KickOutUserGroupResponse      = user.KickOutUserGroupResponse
+	NextUserIDResponse            = user.NextUserIDResponse
+	QuitGroupRequest              = user.QuitGroupRequest
+	QuitGroupResponse             = user.QuitGroupResponse
+	RecommendUser                 = user.RecommendUser
+	RecommendUsersRequest         = user.RecommendUsersRequest
+	RecommendUsersResponse        = user.RecommendUsersResponse
+	SelectUserListByGroup         = user.SelectUserListByGroup
+	SelectUserListByGroupRequest  = user.SelectUserListByGroupRequest
+	SelectUserListByGroupResponse = user.SelectUserListByGroupResponse
+	UserAddRequest                = user.UserAddRequest
+	UserCreateGroupRequest        = user.UserCreateGroupRequest
+	UserCreateRequest             = user.UserCreateRequest
+	UserCreateResponse            = user.UserCreateResponse
+	UserDeleteFriendRequest       = user.UserDeleteFriendRequest
+	UserFriend                    = user.UserFriend
+	UserFriendRequest             = user.UserFriendRequest
+	UserFriendResponse            = user.UserFriendResponse
+	UserInfoRequest               = user.UserInfoRequest
+	UserInfoResponse              = user.UserInfoResponse
+	UserLoginRequest              = user.UserLoginRequest
+	UserLoginResponse             = user.UserLoginResponse
+	UserQueryFriendRequest        = user.UserQueryFriendRequest
+	UserQueryPhoneRequest         = user.UserQueryPhoneRequest
+	UserQueryPhoneResponse        = user.UserQueryPhoneResponse
+	UserSelectGroupsRequest       = user.UserSelectGroupsRequest
+	UserSelectGroupsResponse      = user.UserSelectGroupsResponse
+	UserSelfGroupRequest          = user.UserSelfGroupRequest
+	UserUpdateInfoRequest         = user.UserUpdateInfoRequest
+	UserUpdateRemarkRequest       = user.UserUpdateRemarkRequest
 
 	UserService interface {
 		UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
@@ -69,6 +76,9 @@ type (
 		UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 		UserUserSelfGroup(ctx context.Context, in *UserSelfGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 		UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error)
+		QuitGroup(ctx context.Context, in *QuitGroupRequest, opts ...grpc.CallOption) (*QuitGroupResponse, error)
+		UserListByGroup(ctx context.Context, in *SelectUserListByGroupRequest, opts ...grpc.CallOption) (*SelectUserListByGroupResponse, error)
+		KickOutUserGroup(ctx context.Context, in *KickOutUserGroupRequest, opts ...grpc.CallOption) (*KickOutUserGroupResponse, error)
 	}
 
 	defaultUserService struct {
@@ -188,4 +198,19 @@ func (m *defaultUserService) UserUserSelfGroup(ctx context.Context, in *UserSelf
 func (m *defaultUserService) UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserSelectDetailGroup(ctx, in, opts...)
+}
+
+func (m *defaultUserService) QuitGroup(ctx context.Context, in *QuitGroupRequest, opts ...grpc.CallOption) (*QuitGroupResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.QuitGroup(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserListByGroup(ctx context.Context, in *SelectUserListByGroupRequest, opts ...grpc.CallOption) (*SelectUserListByGroupResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserListByGroup(ctx, in, opts...)
+}
+
+func (m *defaultUserService) KickOutUserGroup(ctx context.Context, in *KickOutUserGroupRequest, opts ...grpc.CallOption) (*KickOutUserGroupResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.KickOutUserGroup(ctx, in, opts...)
 }

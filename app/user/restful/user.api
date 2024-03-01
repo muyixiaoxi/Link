@@ -244,6 +244,55 @@ type RecommendUserListResponse {
 }
 
 //首页根据标签推荐人员列表
+//查询群详情
+type SelectGroupDeatilRequest {
+	ID uint64 `json:"id" validate:"required"`
+}
+
+type SelectGroupDeatilResponse {
+	ID              uint64  `json:"id"`
+	Count           uint64  `json:"count"`
+	GroupBossId     uint64  `json:"groupBossId"`
+	Name            string  `json:"name"`
+	UserSelfTagName string  `json:"userSelfTagName"`
+	Avatar          string  `json:"avatar"`
+	CreatedAt       string  `json:"createdAt"`
+	Man             float32 `json:"man"`
+	WoMan           float32 `json:"woMan"`
+	Address         string  `json:"address"`
+}
+
+//查询群详情
+//退出群聊 解散群聊
+type QuitGroupRequest {
+	GroupId uint64 `json:"groupId" validate:"required"`
+}
+
+//退出群聊 解散群聊
+//查询群聊列表中的人员信息
+type GroupUserListRequest {
+	GroupID uint64 `json:"groupId" validate:"required"` //群聊id
+}
+
+type GroupUserList {
+	ID       uint64 `json:"id"`
+	Avatar   string `json:"avatar"`
+	UserName string `json:"userName"`
+}
+
+type GroupUserListResponse {
+	GroupBossId   uint64          `json:"groupBossId"`
+	GroupUserList []GroupUserList `json:"groupUserList"`
+}
+
+//查询群聊列表中的人员信息
+//踢出群聊
+type KickOutGroupRequest {
+	GroupId uint64   `json:"groupId"` //群id
+	UserIDs []uint64 `json:"userIDs" validate:"required"` //被踢出群聊的人员id
+}
+
+//踢出群聊
 @server (
 	prefix: /app/user
 	jwt:    Auth
@@ -257,6 +306,22 @@ service user {
 	@doc "首页推荐群聊"
 	@handler homeGroup
 	post /selectHomeGroup (RecommendGroupByTagRequest) returns (RecommendGroupByTagResponse)
+
+	@doc "查询群聊详情"
+	@handler selectDetailGroup
+	post /selectDeatilGroup (SelectGroupDeatilRequest) returns (SelectGroupDeatilResponse)
+
+	@doc "解散或退出群聊"
+	@handler quitGroup
+	post /quitGroup (QuitGroupRequest)
+
+	@doc "查询群聊中的人员列表"
+	@handler GroupUserList
+	post /groupUserList (GroupUserListRequest) returns (GroupUserListResponse)
+
+	@doc "踢出群聊"
+	@handler kickOutUser
+	post /kickOut (KickOutGroupRequest)
 }
 
 @server (

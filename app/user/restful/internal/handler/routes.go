@@ -94,6 +94,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
+				Path:    "/groupUserList",
+				Handler: userGroup.GroupUserListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/kickOut",
+				Handler: userGroup.KickOutUserHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/quitGroup",
+				Handler: userGroup.QuitGroupHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/selectDeatilGroup",
+				Handler: userGroup.SelectDetailGroupHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/selectHomeGroup",
 				Handler: userGroup.HomeGroupHandler(serverCtx),
 			},

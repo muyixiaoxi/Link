@@ -4,17 +4,17 @@
 #UserRpc:
 #  Etcd:
 #    Hosts:
-#      - 172.30.0.1:2379
+#      - 172.27.80.1:2379
 #    Key: user.rpc
 #TagRpc:
 #  Etcd:
 #    Hosts:
-#      - 172.30.0.1:2379
+#      - 172.27.80.1:2379
 #    Key: tag.rpc
 #Auth:
 #  AccessSecret: linkMarch
 #  AccessExpire: 336
-#Dtm: "etcd://172.30.0.1:2379/dtmservice"
+#Dtm: "etcd://172.27.80.1:2379/dtmservice"
 
 
 Name: user

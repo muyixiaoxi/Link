@@ -117,6 +117,7 @@ message DetailGroupRequest {
 message DetailGroupResponse {
   uint64 id = 1;//群id
   uint64 count = 2 ; //群聊人数
+  uint64 group_boss_id = 11; //群主id
   string name = 3; //群聊名称
   string system_tag_name = 4 ; //群聊所属的系统标签名称
   string user_self_tag_name = 5 ; //群聊所属的用户自定义标签名称
@@ -205,6 +206,42 @@ message UserDeleteFriendRequest {
   uint64 friend_id = 2;
 }
 
+//退出群聊 解散群聊
+message QuitGroupRequest{
+  uint64 user_id = 1;
+  uint64 group_id = 2;
+}
+message QuitGroupResponse{
+
+}
+//退出群聊 解散群聊
+
+//查询出群聊中的人员信息
+message SelectUserListByGroupRequest {
+  uint64 group_id = 1;
+}
+message SelectUserListByGroup {
+  uint64 id = 1;//用户id
+  string avatar = 2; //头像
+  string username = 3; //用户名
+}
+message SelectUserListByGroupResponse{
+  uint64 groupBossId = 1; //群主id
+  repeated SelectUserListByGroup userList = 2;
+}
+//查询出群聊中的人员信息
+
+//群主将人踢出群聊
+message KickOutUserGroupRequest{
+  uint64 user_id = 1; //当前登录用户的id
+  uint64 group_id = 2; //群id
+  repeated uint64 kick_out_usersId = 3;//想要踢出群聊的用户
+}
+message KickOutUserGroupResponse{
+
+}
+//群主将人踢出群聊
+
 
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
@@ -238,6 +275,9 @@ service UserService {
   rpc UserSelectGroup(UserSelectGroupsRequest) returns (UserSelectGroupsResponse) ; //首页根据标签推荐群聊
   rpc UserUserSelfGroup(UserSelfGroupRequest) returns(UserSelectGroupsResponse) ; //查询和自己相关的群聊
   rpc UserSelectDetailGroup(DetailGroupRequest) returns (DetailGroupResponse) ; //查询群聊详情
+  rpc QuitGroup(QuitGroupRequest) returns (QuitGroupResponse); //退出群聊 解散群聊
+  rpc UserListByGroup(SelectUserListByGroupRequest) returns (SelectUserListByGroupResponse) ; //查询群聊中的人员信息
+  rpc KickOutUserGroup(KickOutUserGroupRequest) returns (KickOutUserGroupResponse); //踢出群聊
 }
 
 

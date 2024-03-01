@@ -13,20 +13,20 @@ import (
 	"user/restful/internal/types"
 )
 
-func HomeGroupHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func SelectDetailGroupHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.RecommendGroupByTagRequest
+		var req types.SelectGroupDeatilRequest
 		httpx.Parse(r, &req)
 		validateErr := validate.Validate(req)
 		if validateErr != nil {
+			logc.Error(context.Background(), "SelectDetailGroupHandler Params is error", validateErr)
 			response.Response(w, nil, response.CodeParamsError)
-			logc.Error(context.Background(), "HomeGroupHandler params is error", validateErr)
 			return
 		}
-		l := userGroup.NewHomeGroupLogic(r.Context(), svcCtx)
-		resp, err := l.HomeGroup(&req)
+		l := userGroup.NewSelectDetailGroupLogic(r.Context(), svcCtx)
+		resp, err := l.SelectDetailGroup(&req)
 		if err != nil {
-			logc.Error(context.Background(), " userGroup.NewHomeGroupLogic(r.Context(), svcCtx) is failed", err)
+			logc.Error(context.Background(), "userGroup.NewSelectDetailGroupLogic(r.Context(), svcCtx) is failed", err)
 			response.Response(w, nil, response.CodeServerBusy)
 		} else {
 			response.Response(w, resp, response.CodeSuccess)

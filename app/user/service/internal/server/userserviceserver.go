@@ -129,3 +129,18 @@ func (s *UserServiceServer) UserSelectDetailGroup(ctx context.Context, in *user.
 	l := logic.NewUserSelectDetailGroupLogic(ctx, s.svcCtx)
 	return l.UserSelectDetailGroup(in)
 }
+
+func (s *UserServiceServer) QuitGroup(ctx context.Context, in *user.QuitGroupRequest) (*user.QuitGroupResponse, error) {
+	l := logic.NewQuitGroupLogic(ctx, s.svcCtx)
+	return l.QuitGroup(in)
+}
+
+func (s *UserServiceServer) UserListByGroup(ctx context.Context, in *user.SelectUserListByGroupRequest) (*user.SelectUserListByGroupResponse, error) {
+	l := logic.NewUserListByGroupLogic(ctx, s.svcCtx)
+	return l.UserListByGroup(in)
+}
+
+func (s *UserServiceServer) KickOutUserGroup(ctx context.Context, in *user.KickOutUserGroupRequest) (*user.KickOutUserGroupResponse, error) {
+	l := logic.NewKickOutUserGroupLogic(ctx, s.svcCtx)
+	return l.KickOutUserGroup(in)
+}

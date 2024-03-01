@@ -16,6 +16,8 @@ const (
 	CodeWebSocketLinkFail
 	CodeFriendNotExist
 	CodeApplyRecordNotExist
+	CodeNoKick
+	CodeTagMoreMax
 )
 
 var codeMsgMap = map[ResCode]string{
@@ -32,6 +34,8 @@ var codeMsgMap = map[ResCode]string{
 	CodeWebSocketLinkFail:   "WebSocket连接失败",
 	CodeFriendNotExist:      "好友不存在",
 	CodeApplyRecordNotExist: "好友/群聊申请记录不存在",
+	CodeNoKick:              "无权操作",
+	CodeTagMoreMax:          "标签超过最大数量限制",
 }
 
 func (c ResCode) Msg() string {
