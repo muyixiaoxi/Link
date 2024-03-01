@@ -243,6 +243,20 @@ message KickOutUserGroupResponse{
 //群主将人踢出群聊
 
 
+message GetOffsetRequest{
+  uint64 user_id = 1;
+}
+
+message GetOffsetResponse{
+  uint64 offset = 1;
+}
+
+message SetOffsetRequest{
+  uint64 user_id = 1;
+  uint64 offset = 2;
+}
+
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -263,6 +277,12 @@ service UserService {
   rpc UserQueryFriend(UserQueryFriendRequest)returns(UserFriendResponse); // 在好友列表中搜索
   rpc UserQueryPhone(UserQueryPhoneRequest)returns(UserQueryPhoneResponse); // 通过手机号搜索（包括陌生人）
   rpc UserDeleteFriend(UserDeleteFriendRequest)returns(Empty); // 用户删除好友
+
+
+  // 偏移量
+  rpc GetOffset(GetOffsetRequest)returns(GetOffsetResponse);
+  rpc SetOffset(SetOffsetRequest)returns(Empty);
+
 
 
   //redis自增id

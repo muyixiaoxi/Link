@@ -17,6 +17,8 @@ type (
 	DetailGroupResponse           = user.DetailGroupResponse
 	DisposeFlowedRequest          = user.DisposeFlowedRequest
 	Empty                         = user.Empty
+	GetOffsetRequest              = user.GetOffsetRequest
+	GetOffsetResponse             = user.GetOffsetResponse
 	GroupChat                     = user.GroupChat
 	GroupInformation              = user.GroupInformation
 	KickOutUserGroupRequest       = user.KickOutUserGroupRequest
@@ -30,6 +32,7 @@ type (
 	SelectUserListByGroup         = user.SelectUserListByGroup
 	SelectUserListByGroupRequest  = user.SelectUserListByGroupRequest
 	SelectUserListByGroupResponse = user.SelectUserListByGroupResponse
+	SetOffsetRequest              = user.SetOffsetRequest
 	UserAddRequest                = user.UserAddRequest
 	UserCreateGroupRequest        = user.UserCreateGroupRequest
 	UserCreateRequest             = user.UserCreateRequest
@@ -67,6 +70,9 @@ type (
 		UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
 		UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error)
 		UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error)
+		// 偏移量
+		GetOffset(ctx context.Context, in *GetOffsetRequest, opts ...grpc.CallOption) (*GetOffsetResponse, error)
+		SetOffset(ctx context.Context, in *SetOffsetRequest, opts ...grpc.CallOption) (*Empty, error)
 		// redis自增id
 		NextUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*NextUserIDResponse, error)
 		AddUserId(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
@@ -161,6 +167,17 @@ func (m *defaultUserService) UserQueryPhone(ctx context.Context, in *UserQueryPh
 func (m *defaultUserService) UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserDeleteFriend(ctx, in, opts...)
+}
+
+// 偏移量
+func (m *defaultUserService) GetOffset(ctx context.Context, in *GetOffsetRequest, opts ...grpc.CallOption) (*GetOffsetResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.GetOffset(ctx, in, opts...)
+}
+
+func (m *defaultUserService) SetOffset(ctx context.Context, in *SetOffsetRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.SetOffset(ctx, in, opts...)
 }
 
 // redis自增id

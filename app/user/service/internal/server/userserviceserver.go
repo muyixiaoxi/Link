@@ -93,6 +93,17 @@ func (s *UserServiceServer) UserDeleteFriend(ctx context.Context, in *user.UserD
 	return l.UserDeleteFriend(in)
 }
 
+// 偏移量
+func (s *UserServiceServer) GetOffset(ctx context.Context, in *user.GetOffsetRequest) (*user.GetOffsetResponse, error) {
+	l := logic.NewGetOffsetLogic(ctx, s.svcCtx)
+	return l.GetOffset(in)
+}
+
+func (s *UserServiceServer) SetOffset(ctx context.Context, in *user.SetOffsetRequest) (*user.Empty, error) {
+	l := logic.NewSetOffsetLogic(ctx, s.svcCtx)
+	return l.SetOffset(in)
+}
+
 // redis自增id
 func (s *UserServiceServer) NextUserID(ctx context.Context, in *user.Empty) (*user.NextUserIDResponse, error) {
 	l := logic.NewNextUserIDLogic(ctx, s.svcCtx)
