@@ -24,6 +24,7 @@ type (
 	KickOutUserGroupRequest       = user.KickOutUserGroupRequest
 	KickOutUserGroupResponse      = user.KickOutUserGroupResponse
 	NextUserIDResponse            = user.NextUserIDResponse
+	QueryMyGroupListRequest       = user.QueryMyGroupListRequest
 	QuitGroupRequest              = user.QuitGroupRequest
 	QuitGroupResponse             = user.QuitGroupResponse
 	RecommendUser                 = user.RecommendUser
@@ -33,6 +34,10 @@ type (
 	SelectUserListByGroupRequest  = user.SelectUserListByGroupRequest
 	SelectUserListByGroupResponse = user.SelectUserListByGroupResponse
 	SetOffsetRequest              = user.SetOffsetRequest
+	UpdateGroupInfoRequest        = user.UpdateGroupInfoRequest
+	UpdateGroupInfoResponse       = user.UpdateGroupInfoResponse
+	UpdateGroupRemarkRequest      = user.UpdateGroupRemarkRequest
+	UpdateGroupRemarkResponse     = user.UpdateGroupRemarkResponse
 	UserAddRequest                = user.UserAddRequest
 	UserCreateGroupRequest        = user.UserCreateGroupRequest
 	UserCreateRequest             = user.UserCreateRequest
@@ -85,6 +90,9 @@ type (
 		QuitGroup(ctx context.Context, in *QuitGroupRequest, opts ...grpc.CallOption) (*QuitGroupResponse, error)
 		UserListByGroup(ctx context.Context, in *SelectUserListByGroupRequest, opts ...grpc.CallOption) (*SelectUserListByGroupResponse, error)
 		KickOutUserGroup(ctx context.Context, in *KickOutUserGroupRequest, opts ...grpc.CallOption) (*KickOutUserGroupResponse, error)
+		UpdateGroupInformation(ctx context.Context, in *UpdateGroupInfoRequest, opts ...grpc.CallOption) (*UpdateGroupInfoResponse, error)
+		UpdateGroupRemark(ctx context.Context, in *UpdateGroupRemarkRequest, opts ...grpc.CallOption) (*UpdateGroupRemarkResponse, error)
+		QueryMyGroupList(ctx context.Context, in *QueryMyGroupListRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 	}
 
 	defaultUserService struct {
@@ -230,4 +238,19 @@ func (m *defaultUserService) UserListByGroup(ctx context.Context, in *SelectUser
 func (m *defaultUserService) KickOutUserGroup(ctx context.Context, in *KickOutUserGroupRequest, opts ...grpc.CallOption) (*KickOutUserGroupResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.KickOutUserGroup(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UpdateGroupInformation(ctx context.Context, in *UpdateGroupInfoRequest, opts ...grpc.CallOption) (*UpdateGroupInfoResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UpdateGroupInformation(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UpdateGroupRemark(ctx context.Context, in *UpdateGroupRemarkRequest, opts ...grpc.CallOption) (*UpdateGroupRemarkResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UpdateGroupRemark(ctx, in, opts...)
+}
+
+func (m *defaultUserService) QueryMyGroupList(ctx context.Context, in *QueryMyGroupListRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.QueryMyGroupList(ctx, in, opts...)
 }

@@ -221,6 +221,7 @@ type GroupList {
 	SystemTagName   string `json:"systemTagName"` //群聊所带的系统标签名称
 	UserSelfTagName string `json:"userSelfTagName"` //用户自定义标签
 	Avatar          string `json:"avatar"` //用户头像
+	Remark          string `json:"remark"` //群聊备注
 }
 
 type RecommendGroupByTagResponse {
@@ -292,6 +293,30 @@ type KickOutGroupRequest {
 }
 
 //踢出群聊
+//修改群聊信息
+type UpdateGroupInfoRequest {
+	GroupId       uint64 `json:"groupId" validate:"required"` //群聊id
+	SystemTagId   uint64 `json:"systemTagId"` //系统标签
+	UserSelfTagId uint64 `json:"userSelfTagId"` //用户自定义标签
+	Name          string `json:"name"` //群聊名称
+	Avatar        string `json:"avatar"` //群头像
+}
+
+//修改群聊信息
+// 获取群聊列表
+type QueryGroupListRequest {
+	PageNo   uint64 `json:"pageNo" validate:"required"`
+	PageSize uint64 `json:"pageSize" validate:"required"`
+}
+
+// 获取群聊列表
+//修改当前登录用户对此群聊的备注
+type UpdateGroupRemarkRequest {
+	GroupId uint64 `json:"groupId" validate:"required"`
+	Remark  string `json:"remark" validate:"required"`
+}
+
+//修改当前登录用户对此群聊的备注
 @server (
 	prefix: /app/user
 	jwt:    Auth
@@ -321,6 +346,18 @@ service user {
 	@doc "踢出群聊"
 	@handler kickOutUser
 	post /kickOut (KickOutGroupRequest)
+
+	@doc "修改群聊信息"
+	@handler updateGroupInfo
+	post /updateGroupInfo (UpdateGroupInfoRequest) returns (SelectGroupDeatilResponse)
+
+	@doc "修改当前用户对此群聊的备注"
+	@handler updateGroupRemark
+	post /updateGroupRemark (UpdateGroupRemarkRequest)
+
+	@doc "获取当前登录用户群聊列表"
+	@handler queryGroupList
+	post /queryGroupList (QueryGroupListRequest) returns (RecommendGroupByTagResponse)
 }
 
 @server (

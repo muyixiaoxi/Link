@@ -19,32 +19,35 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	UserService_UserCreate_FullMethodName            = "/user.UserService/UserCreate"
-	UserService_UserCreateRevertLogin_FullMethodName = "/user.UserService/UserCreateRevertLogin"
-	UserService_UserIsExists_FullMethodName          = "/user.UserService/UserIsExists"
-	UserService_UserLogin_FullMethodName             = "/user.UserService/UserLogin"
-	UserService_UserInfo_FullMethodName              = "/user.UserService/UserInfo"
-	UserService_UserUpdateInfo_FullMethodName        = "/user.UserService/UserUpdateInfo"
-	UserService_UserFlowed_FullMethodName            = "/user.UserService/UserFlowed"
-	UserService_UserDisposeFlowed_FullMethodName     = "/user.UserService/UserDisposeFlowed"
-	UserService_UserUpdateRemark_FullMethodName      = "/user.UserService/UserUpdateRemark"
-	UserService_RecommendUsers_FullMethodName        = "/user.UserService/RecommendUsers"
-	UserService_UserFriendList_FullMethodName        = "/user.UserService/UserFriendList"
-	UserService_UserQueryFriend_FullMethodName       = "/user.UserService/UserQueryFriend"
-	UserService_UserQueryPhone_FullMethodName        = "/user.UserService/UserQueryPhone"
-	UserService_UserDeleteFriend_FullMethodName      = "/user.UserService/UserDeleteFriend"
-	UserService_GetOffset_FullMethodName             = "/user.UserService/GetOffset"
-	UserService_SetOffset_FullMethodName             = "/user.UserService/SetOffset"
-	UserService_NextUserID_FullMethodName            = "/user.UserService/NextUserID"
-	UserService_AddUserId_FullMethodName             = "/user.UserService/AddUserId"
-	UserService_DecUserID_FullMethodName             = "/user.UserService/DecUserID"
-	UserService_UserCreateGroup_FullMethodName       = "/user.UserService/UserCreateGroup"
-	UserService_UserSelectGroup_FullMethodName       = "/user.UserService/UserSelectGroup"
-	UserService_UserUserSelfGroup_FullMethodName     = "/user.UserService/UserUserSelfGroup"
-	UserService_UserSelectDetailGroup_FullMethodName = "/user.UserService/UserSelectDetailGroup"
-	UserService_QuitGroup_FullMethodName             = "/user.UserService/QuitGroup"
-	UserService_UserListByGroup_FullMethodName       = "/user.UserService/UserListByGroup"
-	UserService_KickOutUserGroup_FullMethodName      = "/user.UserService/KickOutUserGroup"
+	UserService_UserCreate_FullMethodName             = "/user.UserService/UserCreate"
+	UserService_UserCreateRevertLogin_FullMethodName  = "/user.UserService/UserCreateRevertLogin"
+	UserService_UserIsExists_FullMethodName           = "/user.UserService/UserIsExists"
+	UserService_UserLogin_FullMethodName              = "/user.UserService/UserLogin"
+	UserService_UserInfo_FullMethodName               = "/user.UserService/UserInfo"
+	UserService_UserUpdateInfo_FullMethodName         = "/user.UserService/UserUpdateInfo"
+	UserService_UserFlowed_FullMethodName             = "/user.UserService/UserFlowed"
+	UserService_UserDisposeFlowed_FullMethodName      = "/user.UserService/UserDisposeFlowed"
+	UserService_UserUpdateRemark_FullMethodName       = "/user.UserService/UserUpdateRemark"
+	UserService_RecommendUsers_FullMethodName         = "/user.UserService/RecommendUsers"
+	UserService_UserFriendList_FullMethodName         = "/user.UserService/UserFriendList"
+	UserService_UserQueryFriend_FullMethodName        = "/user.UserService/UserQueryFriend"
+	UserService_UserQueryPhone_FullMethodName         = "/user.UserService/UserQueryPhone"
+	UserService_UserDeleteFriend_FullMethodName       = "/user.UserService/UserDeleteFriend"
+	UserService_GetOffset_FullMethodName              = "/user.UserService/GetOffset"
+	UserService_SetOffset_FullMethodName              = "/user.UserService/SetOffset"
+	UserService_NextUserID_FullMethodName             = "/user.UserService/NextUserID"
+	UserService_AddUserId_FullMethodName              = "/user.UserService/AddUserId"
+	UserService_DecUserID_FullMethodName              = "/user.UserService/DecUserID"
+	UserService_UserCreateGroup_FullMethodName        = "/user.UserService/UserCreateGroup"
+	UserService_UserSelectGroup_FullMethodName        = "/user.UserService/UserSelectGroup"
+	UserService_UserUserSelfGroup_FullMethodName      = "/user.UserService/UserUserSelfGroup"
+	UserService_UserSelectDetailGroup_FullMethodName  = "/user.UserService/UserSelectDetailGroup"
+	UserService_QuitGroup_FullMethodName              = "/user.UserService/QuitGroup"
+	UserService_UserListByGroup_FullMethodName        = "/user.UserService/UserListByGroup"
+	UserService_KickOutUserGroup_FullMethodName       = "/user.UserService/KickOutUserGroup"
+	UserService_UpdateGroupInformation_FullMethodName = "/user.UserService/UpdateGroupInformation"
+	UserService_UpdateGroupRemark_FullMethodName      = "/user.UserService/UpdateGroupRemark"
+	UserService_QueryMyGroupList_FullMethodName       = "/user.UserService/QueryMyGroupList"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -81,6 +84,9 @@ type UserServiceClient interface {
 	QuitGroup(ctx context.Context, in *QuitGroupRequest, opts ...grpc.CallOption) (*QuitGroupResponse, error)
 	UserListByGroup(ctx context.Context, in *SelectUserListByGroupRequest, opts ...grpc.CallOption) (*SelectUserListByGroupResponse, error)
 	KickOutUserGroup(ctx context.Context, in *KickOutUserGroupRequest, opts ...grpc.CallOption) (*KickOutUserGroupResponse, error)
+	UpdateGroupInformation(ctx context.Context, in *UpdateGroupInfoRequest, opts ...grpc.CallOption) (*UpdateGroupInfoResponse, error)
+	UpdateGroupRemark(ctx context.Context, in *UpdateGroupRemarkRequest, opts ...grpc.CallOption) (*UpdateGroupRemarkResponse, error)
+	QueryMyGroupList(ctx context.Context, in *QueryMyGroupListRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 }
 
 type userServiceClient struct {
@@ -325,6 +331,33 @@ func (c *userServiceClient) KickOutUserGroup(ctx context.Context, in *KickOutUse
 	return out, nil
 }
 
+func (c *userServiceClient) UpdateGroupInformation(ctx context.Context, in *UpdateGroupInfoRequest, opts ...grpc.CallOption) (*UpdateGroupInfoResponse, error) {
+	out := new(UpdateGroupInfoResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdateGroupInformation_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateGroupRemark(ctx context.Context, in *UpdateGroupRemarkRequest, opts ...grpc.CallOption) (*UpdateGroupRemarkResponse, error) {
+	out := new(UpdateGroupRemarkResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdateGroupRemark_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) QueryMyGroupList(ctx context.Context, in *QueryMyGroupListRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error) {
+	out := new(UserSelectGroupsResponse)
+	err := c.cc.Invoke(ctx, UserService_QueryMyGroupList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -359,6 +392,9 @@ type UserServiceServer interface {
 	QuitGroup(context.Context, *QuitGroupRequest) (*QuitGroupResponse, error)
 	UserListByGroup(context.Context, *SelectUserListByGroupRequest) (*SelectUserListByGroupResponse, error)
 	KickOutUserGroup(context.Context, *KickOutUserGroupRequest) (*KickOutUserGroupResponse, error)
+	UpdateGroupInformation(context.Context, *UpdateGroupInfoRequest) (*UpdateGroupInfoResponse, error)
+	UpdateGroupRemark(context.Context, *UpdateGroupRemarkRequest) (*UpdateGroupRemarkResponse, error)
+	QueryMyGroupList(context.Context, *QueryMyGroupListRequest) (*UserSelectGroupsResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -443,6 +479,15 @@ func (UnimplementedUserServiceServer) UserListByGroup(context.Context, *SelectUs
 }
 func (UnimplementedUserServiceServer) KickOutUserGroup(context.Context, *KickOutUserGroupRequest) (*KickOutUserGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method KickOutUserGroup not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateGroupInformation(context.Context, *UpdateGroupInfoRequest) (*UpdateGroupInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGroupInformation not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateGroupRemark(context.Context, *UpdateGroupRemarkRequest) (*UpdateGroupRemarkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGroupRemark not implemented")
+}
+func (UnimplementedUserServiceServer) QueryMyGroupList(context.Context, *QueryMyGroupListRequest) (*UserSelectGroupsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMyGroupList not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -925,6 +970,60 @@ func _UserService_KickOutUserGroup_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UpdateGroupInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGroupInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateGroupInformation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateGroupInformation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateGroupInformation(ctx, req.(*UpdateGroupInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateGroupRemark_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGroupRemarkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateGroupRemark(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateGroupRemark_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateGroupRemark(ctx, req.(*UpdateGroupRemarkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_QueryMyGroupList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMyGroupListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).QueryMyGroupList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_QueryMyGroupList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).QueryMyGroupList(ctx, req.(*QueryMyGroupListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1035,6 +1134,18 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "KickOutUserGroup",
 			Handler:    _UserService_KickOutUserGroup_Handler,
+		},
+		{
+			MethodName: "UpdateGroupInformation",
+			Handler:    _UserService_UpdateGroupInformation_Handler,
+		},
+		{
+			MethodName: "UpdateGroupRemark",
+			Handler:    _UserService_UpdateGroupRemark_Handler,
+		},
+		{
+			MethodName: "QueryMyGroupList",
+			Handler:    _UserService_QueryMyGroupList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

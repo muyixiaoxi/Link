@@ -15,6 +15,7 @@ type GroupList struct {
 	SystemTagName   string `json:"systemTagName"`   //群聊所带的系统标签名称
 	UserSelfTagName string `json:"userSelfTagName"` //用户自定义标签
 	Avatar          string `json:"avatar"`          //用户头像
+	Remark          string `json:"remark"`          //群聊备注
 }
 
 type GroupUserList struct {
@@ -43,6 +44,11 @@ type Message struct {
 	Type    uint8  `json:"type"`
 	Time    string `json:"time"`
 	Content string `json:"content"`
+}
+
+type QueryGroupListRequest struct {
+	PageNo   uint64 `json:"pageNo" validate:"required"`
+	PageSize uint64 `json:"pageSize" validate:"required"`
 }
 
 type QueryLink struct {
@@ -97,6 +103,19 @@ type SelectGroupDeatilResponse struct {
 	Man             float32 `json:"man"`
 	WoMan           float32 `json:"woMan"`
 	Address         string  `json:"address"`
+}
+
+type UpdateGroupInfoRequest struct {
+	GroupId       uint64 `json:"groupId" validate:"required"` //群聊id
+	SystemTagId   uint64 `json:"systemTagId"`                 //系统标签
+	UserSelfTagId uint64 `json:"userSelfTagId"`               //用户自定义标签
+	Name          string `json:"name"`                        //群聊名称
+	Avatar        string `json:"avatar"`                      //群头像
+}
+
+type UpdateGroupRemarkRequest struct {
+	GroupId uint64 `json:"groupId" validate:"required"`
+	Remark  string `json:"remark" validate:"required"`
 }
 
 type UserAppleRequest struct {

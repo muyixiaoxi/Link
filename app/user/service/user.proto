@@ -93,6 +93,7 @@ message GroupInformation {
   string system_tag_name = 4 ; //群聊所属的系统标签名称
   string user_self_tag_name = 5 ; //群聊所属的用户自定义标签名称
   string avatar = 6; //群聊头像
+  string remark = 7; //群聊备注
 }
 
 message DisposeFlowedRequest {
@@ -256,7 +257,37 @@ message SetOffsetRequest{
 
 
 //用户修改群聊信息
-//message Update
+message UpdateGroupInfoRequest {
+  uint64 id = 1; //群聊id
+  uint64 user_id = 2; //当前用户id
+  uint64 system_tag_id = 3 ; //系统标签id
+  uint64 user_self_tag_id = 4 ; //用户自定义标签
+  string name = 5; //新的群聊名称
+  string avatar = 6 ; //群头像
+}
+message UpdateGroupInfoResponse {
+
+}
+//用户修改群聊信息
+
+//用户修改自己加入的群聊的备注
+message UpdateGroupRemarkRequest{
+  uint64 id = 1; //群id
+  uint64 user_id = 2 ; //当前用户id
+  string remark = 3; //备注名称
+}
+message UpdateGroupRemarkResponse{
+
+}
+//用户修改自己加入的群聊的备注
+
+//获取群列表
+message QueryMyGroupListRequest{
+  uint64 user_id = 1;
+  uint64 page_no = 2;
+  uint64 page_size = 3;
+}
+//获取群列表
 
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
@@ -297,8 +328,9 @@ service UserService {
   rpc QuitGroup(QuitGroupRequest) returns (QuitGroupResponse); //退出群聊 解散群聊
   rpc UserListByGroup(SelectUserListByGroupRequest) returns (SelectUserListByGroupResponse) ; //查询群聊中的人员信息
   rpc KickOutUserGroup(KickOutUserGroupRequest) returns (KickOutUserGroupResponse); //踢出群聊
-//  rpc UpdateGroupInformation() returns ();//修改群聊信息
-//  rpc UpdateGroupRemark() returns (); //用户修改自己加入的群聊的备注
+  rpc UpdateGroupInformation(UpdateGroupInfoRequest) returns (UpdateGroupInfoResponse);//修改群聊信息
+  rpc UpdateGroupRemark(UpdateGroupRemarkRequest) returns (UpdateGroupRemarkResponse); //用户修改自己加入的群聊的备注
+  rpc QueryMyGroupList(QueryMyGroupListRequest) returns (UserSelectGroupsResponse) ; //获取群列表
 }
 
 
