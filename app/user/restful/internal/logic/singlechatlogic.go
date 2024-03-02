@@ -22,9 +22,9 @@ func (l *ChatWSLogic) SingleChat(message types.Message) {
 
 // WriteByConn 基于conn发送消息
 func (l *ChatWSLogic) WriteByConn(message types.Message) {
-	topic := fmt.Sprintf("user_%d", message.To)
+	topic := "user"
 	host := "114.55.135.211:9092"
-	partition := 0
+	partition := int(message.To)
 
 	conn, _ := kafka.DialLeader(context.Background(), "tcp", host, topic, partition)
 	conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
@@ -39,14 +39,15 @@ func (l *ChatWSLogic) WriteByConn(message types.Message) {
 
 // ReadByConn 连接至kafka后接收消息
 func (l *ChatWSLogic) ReadByConn(id uint64) (messages []*types.Message) {
-	topic := fmt.Sprintf("user_%d", id)
+	topic := "user"
 	brokers := []string{"114.55.135.211:9092"}
+	partition := int(id)
 
 	r := kafka.NewReader(kafka.ReaderConfig{
 		Brokers:   brokers,
 		GroupID:   "link",
 		Topic:     topic,
-		Partition: 0,
+		Partition: partition,
 		MaxBytes:  10e6,
 		MaxWait:   10 * time.Second,
 	})
