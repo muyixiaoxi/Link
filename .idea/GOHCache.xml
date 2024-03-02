@@ -80,6 +80,7 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/groupchatlogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/groupchatsublogic.go" />
             </set>
           </value>
         </entry>
@@ -310,6 +311,13 @@
             </set>
           </value>
         </entry>
+        <entry key="GroupChatSubLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/groupchatsublogic.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="GroupInformation">
           <value>
             <set>
@@ -394,6 +402,8 @@
         <entry key="Message">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR121.go" />
+              <option value="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/main.go" />
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
               <option value="file://$PROJECT_DIR$/app/user/service/internal/types/model/groupChat.go" />
             </set>
@@ -1253,6 +1263,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR121.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709363197069" />
+              <option name="schema">
+                <list>
+                  <option value="Message" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR123.go">
           <value>
             <ScannedPath>
@@ -1303,7 +1325,12 @@
         <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709283297580" />
+              <option name="lastModified" value="1709363293059" />
+              <option name="schema">
+                <list>
+                  <option value="Message" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
@@ -1968,7 +1995,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/chatwshandler.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708577972641" />
+              <option name="lastModified" value="1709361840032" />
             </ScannedPath>
           </value>
         </entry>
@@ -2216,7 +2243,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/groupchatlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708577972643" />
+              <option name="lastModified" value="1709360993705" />
             </ScannedPath>
           </value>
         </entry>
@@ -2558,11 +2585,10 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/groupchatlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709350204428" />
+              <option name="lastModified" value="1709354704631" />
               <option name="schema">
                 <list>
                   <option value="GroupChatLogic" />
-                  <option value="ChatService" />
                 </list>
               </option>
             </ScannedPath>
@@ -2572,6 +2598,19 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1709346464516" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/groupchatsublogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709354704624" />
+              <option name="schema">
+                <list>
+                  <option value="GroupChatSubLogic" />
+                  <option value="ChatService" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
@@ -2891,7 +2930,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/svc/servicecontext.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709348978985" />
+              <option name="lastModified" value="1709355030232" />
               <option name="schema">
                 <list>
                   <option value="ServiceContext" />
@@ -3362,6 +3401,7 @@
         <entry key="get_user_info_logic" value="GetUserInfoLogic" />
         <entry key="group_chat" value="GroupChat" />
         <entry key="group_chat_logic" value="GroupChatLogic" />
+        <entry key="group_chat_sub_logic" value="GroupChatSubLogic" />
         <entry key="group_information" value="GroupInformation" />
         <entry key="group_list" value="GroupList" />
         <entry key="group_tag" value="GroupTag" />

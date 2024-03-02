@@ -43,11 +43,13 @@ type KickOutGroupRequest struct {
 }
 
 type Message struct {
-	From    uint64 `json:"from,optional"`
-	To      uint64 `json:"to"`
-	Type    uint8  `json:"type"`
-	Time    string `json:"time"`
-	Content string `json:"content"`
+	From         uint64 `json:"from,optional"`
+	To           uint64 `json:"to"`
+	Type         uint8  `json:"type"`
+	Time         string `json:"time"`
+	Content      string `json:"content"`
+	FromAvatar   string `json:"fromAvatar"`
+	FromUsername string `json:"fromUsername"`
 }
 
 type QueryGroupListRequest struct {

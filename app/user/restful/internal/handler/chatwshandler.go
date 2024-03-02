@@ -67,6 +67,10 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			if message.Type == 1 {
 				l.SingleChat(message)
 			}
+			if message.Type == 2 {
+				//群聊
+				l.GroupChat(message)
+			}
 		}
 
 	}
