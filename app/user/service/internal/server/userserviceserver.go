@@ -170,3 +170,8 @@ func (s *UserServiceServer) QueryMyGroupList(ctx context.Context, in *user.Query
 	l := logic.NewQueryMyGroupListLogic(ctx, s.svcCtx)
 	return l.QueryMyGroupList(in)
 }
+
+func (s *UserServiceServer) GroupChat(ctx context.Context, in *user.GroupChatRequest) (*user.Empty, error) {
+	l := logic.NewGroupChatLogic(ctx, s.svcCtx)
+	return l.GroupChat(in)
+}

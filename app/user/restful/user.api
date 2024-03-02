@@ -317,6 +317,11 @@ type UpdateGroupRemarkRequest {
 }
 
 //修改当前登录用户对此群聊的备注
+//取消选择标签
+type CancelRequest {
+	TagIds []uint64 `json:"tagIds" validate:"required"`
+}
+
 @server (
 	prefix: /app/user
 	jwt:    Auth
@@ -377,6 +382,10 @@ service user {
 	@doc "根据标签推荐人员列表"
 	@handler recommendUserList
 	post /recommendUserList (RecommendGroupByTagRequest) returns (RecommendUserListResponse)
+
+	@doc "用户取消选择标签"
+	@handler cancelTag
+	post /cancelTag (CancelRequest)
 }
 
 // goctl api go -api user.api -dir .

@@ -19,8 +19,9 @@ type SelectAllTagsResponse struct {
 }
 
 type SelectMyTagsResponse struct {
-	Id      uint64 `json:"id"`
-	TagName string `json:"tagName"`
+	Id        uint64 `json:"id"`
+	TagName   string `json:"tagName"`
+	GroupName string `json:"groupName"`
 }
 
 type Tag struct {

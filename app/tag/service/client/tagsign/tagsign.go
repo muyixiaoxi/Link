@@ -15,6 +15,7 @@ import (
 type (
 	AllTags                    = tag.AllTags
 	AllTagsByGroupNameResponse = tag.AllTagsByGroupNameResponse
+	CancelRequest              = tag.CancelRequest
 	CheckTagCountRequest       = tag.CheckTagCountRequest
 	CheckTagCountResponse      = tag.CheckTagCountResponse
 	ChooseTagsRequest          = tag.ChooseTagsRequest
