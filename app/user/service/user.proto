@@ -289,6 +289,12 @@ message QueryMyGroupListRequest{
 }
 //获取群列表
 
+//群聊天
+message GroupChatRequest {
+  string content = 1;
+  string type = 2;
+}
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -331,6 +337,7 @@ service UserService {
   rpc UpdateGroupInformation(UpdateGroupInfoRequest) returns (UpdateGroupInfoResponse);//修改群聊信息
   rpc UpdateGroupRemark(UpdateGroupRemarkRequest) returns (UpdateGroupRemarkResponse); //用户修改自己加入的群聊的备注
   rpc QueryMyGroupList(QueryMyGroupListRequest) returns (UserSelectGroupsResponse) ; //获取群列表
+  rpc GroupChat(GroupChatRequest) returns (Empty);
 }
 
 

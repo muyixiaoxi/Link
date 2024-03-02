@@ -66,3 +66,8 @@ func (s *TagLoginServer) CheckTagCount(ctx context.Context, in *tag.CheckTagCoun
 	l := tagloginlogic.NewCheckTagCountLogic(ctx, s.svcCtx)
 	return l.CheckTagCount(in)
 }
+
+func (s *TagLoginServer) CancelUserTag(ctx context.Context, in *tag.CancelRequest) (*tag.Empty, error) {
+	l := tagloginlogic.NewCancelUserTagLogic(ctx, s.svcCtx)
+	return l.CancelUserTag(in)
+}

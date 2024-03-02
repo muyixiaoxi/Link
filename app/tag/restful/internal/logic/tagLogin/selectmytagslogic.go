@@ -35,8 +35,9 @@ func (l *SelectMyTagsLogic) SelectMyTags() (resp []types.SelectMyTagsResponse, e
 	}
 	for _, myTag := range myTagList.LowTags {
 		temp := types.SelectMyTagsResponse{
-			Id:      myTag.Id,
-			TagName: myTag.TagName,
+			Id:        myTag.Id,
+			TagName:   myTag.TagName,
+			GroupName: myTag.GroupName,
 		}
 		resp = append(resp, temp)
 	}

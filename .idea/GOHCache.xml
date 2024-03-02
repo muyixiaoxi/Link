@@ -55,10 +55,31 @@
             </set>
           </value>
         </entry>
+        <entry key="CancelTagLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/canceltaglogic.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CancelUserTagLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/cancelusertaglogic.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="ChatHistory">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/user/service/internal/types/chatHistory.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ChatService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/groupchatlogic.go" />
             </set>
           </value>
         </entry>
@@ -105,6 +126,7 @@
             <set>
               <option value="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/IM/client.go" />
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/logic/chatwslogic.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/types/model/groupChat.go" />
             </set>
           </value>
         </entry>
@@ -281,6 +303,13 @@
             </set>
           </value>
         </entry>
+        <entry key="GroupChatLogic">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/logic/groupchatlogic.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="GroupInformation">
           <value>
             <set>
@@ -329,6 +358,7 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/IM/hub.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/types/model/groupChat.go" />
             </set>
           </value>
         </entry>
@@ -365,6 +395,7 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/types/types.go" />
+              <option value="file://$PROJECT_DIR$/app/user/service/internal/types/model/groupChat.go" />
             </set>
           </value>
         </entry>
@@ -1475,7 +1506,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/selectmytagslogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709124037483" />
+              <option name="lastModified" value="1709351394763" />
               <option name="schema">
                 <list>
                   <option value="SelectMyTagsLogic" />
@@ -1584,6 +1615,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/cancelusertaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709351041919" />
+              <option name="schema">
+                <list>
+                  <option value="CancelUserTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/checktagcountlogic.go">
           <value>
             <ScannedPath>
@@ -1671,7 +1714,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/taglogin/selectmytagslogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709167845311" />
+              <option name="lastModified" value="1709351203704" />
               <option name="schema">
                 <list>
                   <option value="SelectMyTagsLogic" />
@@ -1860,6 +1903,20 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1706758323121" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/common/redis2/initRedis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709348841370" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/common/redis2/redis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709348473035" />
             </ScannedPath>
           </value>
         </entry>
@@ -2052,6 +2109,13 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1709276842956" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/userTag/canceltaghandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709351879620" />
             </ScannedPath>
           </value>
         </entry>
@@ -2343,6 +2407,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/canceltaglogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709351879787" />
+              <option name="schema">
+                <list>
+                  <option value="CancelTagLogic" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/querylinktagslogic.go">
           <value>
             <ScannedPath>
@@ -2476,6 +2552,26 @@
                   <option value="DecUserIDLogic" />
                 </list>
               </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/groupchatlogic.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709350204428" />
+              <option name="schema">
+                <list>
+                  <option value="GroupChatLogic" />
+                  <option value="ChatService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/groupchatlogic1.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709346464516" />
             </ScannedPath>
           </value>
         </entry>
@@ -2795,7 +2891,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/svc/servicecontext.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709169724333" />
+              <option name="lastModified" value="1709348978985" />
               <option name="schema">
                 <list>
                   <option value="ServiceContext" />
@@ -2847,6 +2943,20 @@
               <option name="schema">
                 <list>
                   <option value="GroupChat" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/user/service/internal/types/model/groupChat.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709344874621" />
+              <option name="schema">
+                <list>
+                  <option value="Message" />
+                  <option value="Client" />
+                  <option value="Hub" />
                 </list>
               </option>
             </ScannedPath>
@@ -3216,7 +3326,10 @@
         <entry key="all_tags_by_group_name_response" value="AllTagsByGroupNameResponse" />
         <entry key="apply_for" value="ApplyFor" />
         <entry key="body" value="Body" />
+        <entry key="cancel_tag_logic" value="CancelTagLogic" />
+        <entry key="cancel_user_tag_logic" value="CancelUserTagLogic" />
         <entry key="chat_history" value="ChatHistory" />
+        <entry key="chat_service" value="ChatService" />
         <entry key="chat_ws_logic" value="ChatWSLogic" />
         <entry key="check_tag_count_logic" value="CheckTagCountLogic" />
         <entry key="choose_tags_logic" value="ChooseTagsLogic" />
@@ -3248,6 +3361,7 @@
         <entry key="get_friends_list_logic" value="GetFriendsListLogic" />
         <entry key="get_user_info_logic" value="GetUserInfoLogic" />
         <entry key="group_chat" value="GroupChat" />
+        <entry key="group_chat_logic" value="GroupChatLogic" />
         <entry key="group_information" value="GroupInformation" />
         <entry key="group_list" value="GroupList" />
         <entry key="group_tag" value="GroupTag" />

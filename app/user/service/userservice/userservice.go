@@ -20,6 +20,7 @@ type (
 	GetOffsetRequest              = user.GetOffsetRequest
 	GetOffsetResponse             = user.GetOffsetResponse
 	GroupChat                     = user.GroupChat
+	GroupChatRequest              = user.GroupChatRequest
 	GroupInformation              = user.GroupInformation
 	KickOutUserGroupRequest       = user.KickOutUserGroupRequest
 	KickOutUserGroupResponse      = user.KickOutUserGroupResponse
@@ -93,6 +94,7 @@ type (
 		UpdateGroupInformation(ctx context.Context, in *UpdateGroupInfoRequest, opts ...grpc.CallOption) (*UpdateGroupInfoResponse, error)
 		UpdateGroupRemark(ctx context.Context, in *UpdateGroupRemarkRequest, opts ...grpc.CallOption) (*UpdateGroupRemarkResponse, error)
 		QueryMyGroupList(ctx context.Context, in *QueryMyGroupListRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
+		GroupChat(ctx context.Context, in *GroupChatRequest, opts ...grpc.CallOption) (*Empty, error)
 	}
 
 	defaultUserService struct {
@@ -253,4 +255,9 @@ func (m *defaultUserService) UpdateGroupRemark(ctx context.Context, in *UpdateGr
 func (m *defaultUserService) QueryMyGroupList(ctx context.Context, in *QueryMyGroupListRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.QueryMyGroupList(ctx, in, opts...)
+}
+
+func (m *defaultUserService) GroupChat(ctx context.Context, in *GroupChatRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.GroupChat(ctx, in, opts...)
 }

@@ -141,6 +141,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
+				Path:    "/cancelTag",
+				Handler: userTag.CancelTagHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/chooseTag",
 				Handler: userTag.UserChooseTagHandler(serverCtx),
 			},
