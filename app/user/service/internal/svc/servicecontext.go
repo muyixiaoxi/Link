@@ -1,6 +1,7 @@
 package svc
 
 import (
+	redis3 "github.com/go-redis/redis/v8"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"gorm.io/gorm"
 	initGorm "user/common/gorm"
@@ -13,6 +14,7 @@ type ServiceContext struct {
 	Config config.Config
 	DB     *gorm.DB
 	RDB    *redis.Redis
+	RDB2   *redis3.Client
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -29,9 +31,15 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Pass: c.RedisConf.Pass,
 	}
 	red := redis2.InitRedis(rc)
+	options := redis3.Options{
+		Addr:     c.RedisConf.Host,
+		Password: c.RedisConf.Pass,
+	}
+	red2 := redis3.NewClient(&options)
 	return &ServiceContext{
 		Config: c,
 		DB:     db,
 		RDB:    red,
+		RDB2:   red2,
 	}
 }

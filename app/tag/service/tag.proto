@@ -58,6 +58,7 @@ message SelectAllTagsByGroupName{
 message AllTags{
   uint64 id = 1;
   string tag_name = 2;
+  string group_name = 4;
   uint64 creator_id = 3;
 }
 
@@ -96,17 +97,33 @@ message SelectMyTagsRequest{
   uint64 user_id = 1; //用户id
 }
 
+//检查标签数量
+message CheckTagCountRequest{
+  uint64 user_id = 1;//当前登录用户的id
+}
+message CheckTagCountResponse {
+  uint64 count = 2; //标签数
+}
+//检查标签数量
+
+//取消选择标签
+message CancelRequest {
+  uint64 user_id = 1;
+  repeated uint64 tag_ids = 2;
+}
 
 // TagLogin 登录之后的服务
 service TagLogin {
-  rpc CreateTag(CreateTagRequest) returns(CreateTagResponse);
-  rpc UpdateTag(CreateTagRequest) returns(CreateTagResponse);
-  rpc DeleteTag(DeleteTagRequest) returns(DeleteTagResponse);
-  rpc SelectGroupTag(Empty) returns (GroupTagResponse);
-  rpc SelectAllTagsByGroup (SelectAllTagsByGroupName) returns (AllTagsByGroupNameResponse);
-  rpc ChooseTags(ChooseTagsRequest) returns (ChooseTagsResponse);
-  rpc SelectLinkTags(SelectLinkTagsRequest) returns (SelectLinkTagsResponse);
-  rpc SelectMyTags(SelectMyTagsRequest) returns (AllTagsByGroupNameResponse);
+  rpc CreateTag(CreateTagRequest) returns(CreateTagResponse); //用户创建标签
+  rpc UpdateTag(CreateTagRequest) returns(CreateTagResponse); //用户修改标签
+  rpc DeleteTag(DeleteTagRequest) returns(DeleteTagResponse); //用户删除标签
+  rpc SelectGroupTag(Empty) returns (GroupTagResponse); //查询系统标签
+  rpc SelectAllTagsByGroup (SelectAllTagsByGroupName) returns (AllTagsByGroupNameResponse); //根据系统标签查询所有用户自定义标签
+  rpc ChooseTags(ChooseTagsRequest) returns (ChooseTagsResponse); //用户选择标签
+  rpc SelectLinkTags(SelectLinkTagsRequest) returns (SelectLinkTagsResponse); //查询当前用户选择以及创建的标签
+  rpc SelectMyTags(SelectMyTagsRequest) returns (AllTagsByGroupNameResponse); //查询我创建的标签
+  rpc CheckTagCount(CheckTagCountRequest) returns(CheckTagCountResponse); //查询标签数量
+  rpc CancelUserTag (CancelRequest) returns (Empty) ; //取消选择标签
 }
 
 
@@ -117,8 +134,8 @@ message UserChooseTagRequest{
 
 // TagSign 登录之前的服务
 service TagSign {
-  rpc SignUserChooseTag(UserChooseTagRequest) returns (UserChooseTagRequest);
-  rpc SignUserChooseTagRevert(UserChooseTagRequest) returns (UserChooseTagRequest);
+  rpc SignUserChooseTag(UserChooseTagRequest) returns (UserChooseTagRequest); //注册时强制选择一个标签
+  rpc SignUserChooseTagRevert(UserChooseTagRequest) returns (UserChooseTagRequest); //注册时选择一个标签的补偿方法
 }
 
 

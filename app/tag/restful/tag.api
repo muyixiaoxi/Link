@@ -52,8 +52,9 @@ type SelectAllTagsResponse {
 //一次查询出全部标签
 //查询出我创建的标签
 type SelectMyTagsResponse {
-	Id      uint64 `json:"id"`
-	TagName string `json:"tagName"`
+	Id        uint64 `json:"id"`
+	TagName   string `json:"tagName"`
+	GroupName string `json:"groupName"`
 }
 
 @server (

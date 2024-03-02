@@ -15,6 +15,9 @@ import (
 type (
 	AllTags                    = tag.AllTags
 	AllTagsByGroupNameResponse = tag.AllTagsByGroupNameResponse
+	CancelRequest              = tag.CancelRequest
+	CheckTagCountRequest       = tag.CheckTagCountRequest
+	CheckTagCountResponse      = tag.CheckTagCountResponse
 	ChooseTagsRequest          = tag.ChooseTagsRequest
 	ChooseTagsResponse         = tag.ChooseTagsResponse
 	CreateTagRequest           = tag.CreateTagRequest
@@ -29,6 +32,7 @@ type (
 	SelectLinkTag              = tag.SelectLinkTag
 	SelectLinkTagsRequest      = tag.SelectLinkTagsRequest
 	SelectLinkTagsResponse     = tag.SelectLinkTagsResponse
+	SelectMyTagsRequest        = tag.SelectMyTagsRequest
 	UserChooseTagRequest       = tag.UserChooseTagRequest
 
 	TagLogin interface {
@@ -39,6 +43,9 @@ type (
 		SelectAllTagsByGroup(ctx context.Context, in *SelectAllTagsByGroupName, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error)
 		ChooseTags(ctx context.Context, in *ChooseTagsRequest, opts ...grpc.CallOption) (*ChooseTagsResponse, error)
 		SelectLinkTags(ctx context.Context, in *SelectLinkTagsRequest, opts ...grpc.CallOption) (*SelectLinkTagsResponse, error)
+		SelectMyTags(ctx context.Context, in *SelectMyTagsRequest, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error)
+		CheckTagCount(ctx context.Context, in *CheckTagCountRequest, opts ...grpc.CallOption) (*CheckTagCountResponse, error)
+		CancelUserTag(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*Empty, error)
 	}
 
 	defaultTagLogin struct {
@@ -85,4 +92,19 @@ func (m *defaultTagLogin) ChooseTags(ctx context.Context, in *ChooseTagsRequest,
 func (m *defaultTagLogin) SelectLinkTags(ctx context.Context, in *SelectLinkTagsRequest, opts ...grpc.CallOption) (*SelectLinkTagsResponse, error) {
 	client := tag.NewTagLoginClient(m.cli.Conn())
 	return client.SelectLinkTags(ctx, in, opts...)
+}
+
+func (m *defaultTagLogin) SelectMyTags(ctx context.Context, in *SelectMyTagsRequest, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error) {
+	client := tag.NewTagLoginClient(m.cli.Conn())
+	return client.SelectMyTags(ctx, in, opts...)
+}
+
+func (m *defaultTagLogin) CheckTagCount(ctx context.Context, in *CheckTagCountRequest, opts ...grpc.CallOption) (*CheckTagCountResponse, error) {
+	client := tag.NewTagLoginClient(m.cli.Conn())
+	return client.CheckTagCount(ctx, in, opts...)
+}
+
+func (m *defaultTagLogin) CancelUserTag(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := tag.NewTagLoginClient(m.cli.Conn())
+	return client.CancelUserTag(ctx, in, opts...)
 }

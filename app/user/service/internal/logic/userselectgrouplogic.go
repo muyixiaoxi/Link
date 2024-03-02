@@ -24,7 +24,7 @@ func NewUserSelectGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 }
 
 func (l *UserSelectGroupLogic) UserSelectGroup(in *user.UserSelectGroupsRequest) (resp *user.UserSelectGroupsResponse, err error) {
-	// 根据标签查询群聊 首先根据小标签推选群聊 , 如果小标签不存在,则根据大标签推荐
+	// 根据标签查询群聊
 	var groupInformations []*user.GroupInformation
 	var groupChat []types.GroupChat
 	var total int64
@@ -33,12 +33,8 @@ func (l *UserSelectGroupLogic) UserSelectGroup(in *user.UserSelectGroupsRequest)
 	pageSize := int(in.PageSize)
 	offset := (page - 1) * pageSize
 	query := db.Model(&types.GroupChat{})
-	if len(in.UserSelfTagId) == 0 {
-		// 只查询与大标签相关的群聊
-		query = query.Where("system_tag_id in (?)", in.SystemTagId)
-	} else {
-		query = query.Where("user_self_tag_id in (?)", in.UserSelfTagId)
-	}
+	//把用户选择的大标签和小标签的数据全部查询出来
+	query = query.Where("system_tag_id in (?) or user_self_tag_id in (?)", in.TagId, in.TagId)
 	// 查询当前页的数据
 	err = query.Offset(offset).Limit(pageSize).Find(&groupChat).Error
 	if err != nil {

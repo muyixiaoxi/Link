@@ -61,3 +61,13 @@ func (s *TagLoginServer) SelectMyTags(ctx context.Context, in *tag.SelectMyTagsR
 	l := tagloginlogic.NewSelectMyTagsLogic(ctx, s.svcCtx)
 	return l.SelectMyTags(in)
 }
+
+func (s *TagLoginServer) CheckTagCount(ctx context.Context, in *tag.CheckTagCountRequest) (*tag.CheckTagCountResponse, error) {
+	l := tagloginlogic.NewCheckTagCountLogic(ctx, s.svcCtx)
+	return l.CheckTagCount(in)
+}
+
+func (s *TagLoginServer) CancelUserTag(ctx context.Context, in *tag.CancelRequest) (*tag.Empty, error) {
+	l := tagloginlogic.NewCancelUserTagLogic(ctx, s.svcCtx)
+	return l.CancelUserTag(in)
+}

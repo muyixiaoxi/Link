@@ -210,10 +210,9 @@ service user {
 
 //首页根据标签推荐群聊
 type RecommendGroupByTagRequest {
-	PageNo        uint64   `json:"pageNo" validate:"required"`
-	PageSize      uint64   `json:"pageSize" validate:"required"`
-	SystemTagId   []uint64 `json:"systemTagId"` //系统标签
-	UserSelfTagId []uint64 `json:"userSelfTagId"` //用户自定义标签
+	PageNo   uint64   `json:"pageNo" validate:"required"`
+	PageSize uint64   `json:"pageSize" validate:"required"`
+	TagIds   []uint64 `json:"tagIds" validate:"max=5"` //标签id
 }
 
 type GroupList {
@@ -222,6 +221,7 @@ type GroupList {
 	SystemTagName   string `json:"systemTagName"` //群聊所带的系统标签名称
 	UserSelfTagName string `json:"userSelfTagName"` //用户自定义标签
 	Avatar          string `json:"avatar"` //用户头像
+	Remark          string `json:"remark"` //群聊备注
 }
 
 type RecommendGroupByTagResponse {
@@ -244,6 +244,84 @@ type RecommendUserListResponse {
 }
 
 //首页根据标签推荐人员列表
+//查询群详情
+type SelectGroupDeatilRequest {
+	ID uint64 `json:"id" validate:"required"`
+}
+
+type SelectGroupDeatilResponse {
+	ID              uint64  `json:"id"`
+	Count           uint64  `json:"count"`
+	GroupBossId     uint64  `json:"groupBossId"`
+	Name            string  `json:"name"`
+	UserSelfTagName string  `json:"userSelfTagName"`
+	Avatar          string  `json:"avatar"`
+	CreatedAt       string  `json:"createdAt"`
+	Man             float32 `json:"man"`
+	WoMan           float32 `json:"woMan"`
+	Address         string  `json:"address"`
+}
+
+//查询群详情
+//退出群聊 解散群聊
+type QuitGroupRequest {
+	GroupId uint64 `json:"groupId" validate:"required"`
+}
+
+//退出群聊 解散群聊
+//查询群聊列表中的人员信息
+type GroupUserListRequest {
+	GroupID uint64 `json:"groupId" validate:"required"` //群聊id
+}
+
+type GroupUserList {
+	ID       uint64 `json:"id"`
+	Avatar   string `json:"avatar"`
+	UserName string `json:"userName"`
+}
+
+type GroupUserListResponse {
+	GroupBossId   uint64          `json:"groupBossId"`
+	GroupUserList []GroupUserList `json:"groupUserList"`
+}
+
+//查询群聊列表中的人员信息
+//踢出群聊
+type KickOutGroupRequest {
+	GroupId uint64   `json:"groupId"` //群id
+	UserIDs []uint64 `json:"userIDs" validate:"required"` //被踢出群聊的人员id
+}
+
+//踢出群聊
+//修改群聊信息
+type UpdateGroupInfoRequest {
+	GroupId       uint64 `json:"groupId" validate:"required"` //群聊id
+	SystemTagId   uint64 `json:"systemTagId"` //系统标签
+	UserSelfTagId uint64 `json:"userSelfTagId"` //用户自定义标签
+	Name          string `json:"name"` //群聊名称
+	Avatar        string `json:"avatar"` //群头像
+}
+
+//修改群聊信息
+// 获取群聊列表
+type QueryGroupListRequest {
+	PageNo   uint64 `json:"pageNo" validate:"required"`
+	PageSize uint64 `json:"pageSize" validate:"required"`
+}
+
+// 获取群聊列表
+//修改当前登录用户对此群聊的备注
+type UpdateGroupRemarkRequest {
+	GroupId uint64 `json:"groupId" validate:"required"`
+	Remark  string `json:"remark" validate:"required"`
+}
+
+//修改当前登录用户对此群聊的备注
+//取消选择标签
+type CancelRequest {
+	TagIds []uint64 `json:"tagIds" validate:"required"`
+}
+
 @server (
 	prefix: /app/user
 	jwt:    Auth
@@ -257,6 +335,34 @@ service user {
 	@doc "首页推荐群聊"
 	@handler homeGroup
 	post /selectHomeGroup (RecommendGroupByTagRequest) returns (RecommendGroupByTagResponse)
+
+	@doc "查询群聊详情"
+	@handler selectDetailGroup
+	post /selectDeatilGroup (SelectGroupDeatilRequest) returns (SelectGroupDeatilResponse)
+
+	@doc "解散或退出群聊"
+	@handler quitGroup
+	post /quitGroup (QuitGroupRequest)
+
+	@doc "查询群聊中的人员列表"
+	@handler GroupUserList
+	post /groupUserList (GroupUserListRequest) returns (GroupUserListResponse)
+
+	@doc "踢出群聊"
+	@handler kickOutUser
+	post /kickOut (KickOutGroupRequest)
+
+	@doc "修改群聊信息"
+	@handler updateGroupInfo
+	post /updateGroupInfo (UpdateGroupInfoRequest) returns (SelectGroupDeatilResponse)
+
+	@doc "修改当前用户对此群聊的备注"
+	@handler updateGroupRemark
+	post /updateGroupRemark (UpdateGroupRemarkRequest)
+
+	@doc "获取当前登录用户群聊列表"
+	@handler queryGroupList
+	post /queryGroupList (QueryGroupListRequest) returns (RecommendGroupByTagResponse)
 }
 
 @server (
@@ -276,6 +382,10 @@ service user {
 	@doc "根据标签推荐人员列表"
 	@handler recommendUserList
 	post /recommendUserList (RecommendGroupByTagRequest) returns (RecommendUserListResponse)
+
+	@doc "用户取消选择标签"
+	@handler cancelTag
+	post /cancelTag (CancelRequest)
 }
 
 // goctl api go -api user.api -dir .

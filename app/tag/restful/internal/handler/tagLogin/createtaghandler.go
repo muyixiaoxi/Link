@@ -34,6 +34,10 @@ func CreateTagHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 				response.Response(w, nil, response.CodeSystemNotExist)
 				return
 			}
+			if formError.Code() == 899 {
+				response.Response(w, nil, response.CodeTagMoreMax)
+				return
+			}
 			logc.Error(context.Background(), "tagLogin.NewCreateTagLogic(r.Context(), svcCtx) is failed", err)
 			response.Response(w, nil, response.CodeServerBusy)
 			return

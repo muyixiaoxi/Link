@@ -26,6 +26,9 @@ const (
 	TagLogin_SelectAllTagsByGroup_FullMethodName = "/tag.TagLogin/SelectAllTagsByGroup"
 	TagLogin_ChooseTags_FullMethodName           = "/tag.TagLogin/ChooseTags"
 	TagLogin_SelectLinkTags_FullMethodName       = "/tag.TagLogin/SelectLinkTags"
+	TagLogin_SelectMyTags_FullMethodName         = "/tag.TagLogin/SelectMyTags"
+	TagLogin_CheckTagCount_FullMethodName        = "/tag.TagLogin/CheckTagCount"
+	TagLogin_CancelUserTag_FullMethodName        = "/tag.TagLogin/CancelUserTag"
 )
 
 // TagLoginClient is the client API for TagLogin service.
@@ -39,6 +42,9 @@ type TagLoginClient interface {
 	SelectAllTagsByGroup(ctx context.Context, in *SelectAllTagsByGroupName, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error)
 	ChooseTags(ctx context.Context, in *ChooseTagsRequest, opts ...grpc.CallOption) (*ChooseTagsResponse, error)
 	SelectLinkTags(ctx context.Context, in *SelectLinkTagsRequest, opts ...grpc.CallOption) (*SelectLinkTagsResponse, error)
+	SelectMyTags(ctx context.Context, in *SelectMyTagsRequest, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error)
+	CheckTagCount(ctx context.Context, in *CheckTagCountRequest, opts ...grpc.CallOption) (*CheckTagCountResponse, error)
+	CancelUserTag(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type tagLoginClient struct {
@@ -112,6 +118,33 @@ func (c *tagLoginClient) SelectLinkTags(ctx context.Context, in *SelectLinkTagsR
 	return out, nil
 }
 
+func (c *tagLoginClient) SelectMyTags(ctx context.Context, in *SelectMyTagsRequest, opts ...grpc.CallOption) (*AllTagsByGroupNameResponse, error) {
+	out := new(AllTagsByGroupNameResponse)
+	err := c.cc.Invoke(ctx, TagLogin_SelectMyTags_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagLoginClient) CheckTagCount(ctx context.Context, in *CheckTagCountRequest, opts ...grpc.CallOption) (*CheckTagCountResponse, error) {
+	out := new(CheckTagCountResponse)
+	err := c.cc.Invoke(ctx, TagLogin_CheckTagCount_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagLoginClient) CancelUserTag(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, TagLogin_CancelUserTag_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TagLoginServer is the server API for TagLogin service.
 // All implementations must embed UnimplementedTagLoginServer
 // for forward compatibility
@@ -123,6 +156,9 @@ type TagLoginServer interface {
 	SelectAllTagsByGroup(context.Context, *SelectAllTagsByGroupName) (*AllTagsByGroupNameResponse, error)
 	ChooseTags(context.Context, *ChooseTagsRequest) (*ChooseTagsResponse, error)
 	SelectLinkTags(context.Context, *SelectLinkTagsRequest) (*SelectLinkTagsResponse, error)
+	SelectMyTags(context.Context, *SelectMyTagsRequest) (*AllTagsByGroupNameResponse, error)
+	CheckTagCount(context.Context, *CheckTagCountRequest) (*CheckTagCountResponse, error)
+	CancelUserTag(context.Context, *CancelRequest) (*Empty, error)
 	mustEmbedUnimplementedTagLoginServer()
 }
 
@@ -150,6 +186,15 @@ func (UnimplementedTagLoginServer) ChooseTags(context.Context, *ChooseTagsReques
 }
 func (UnimplementedTagLoginServer) SelectLinkTags(context.Context, *SelectLinkTagsRequest) (*SelectLinkTagsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SelectLinkTags not implemented")
+}
+func (UnimplementedTagLoginServer) SelectMyTags(context.Context, *SelectMyTagsRequest) (*AllTagsByGroupNameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SelectMyTags not implemented")
+}
+func (UnimplementedTagLoginServer) CheckTagCount(context.Context, *CheckTagCountRequest) (*CheckTagCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckTagCount not implemented")
+}
+func (UnimplementedTagLoginServer) CancelUserTag(context.Context, *CancelRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelUserTag not implemented")
 }
 func (UnimplementedTagLoginServer) mustEmbedUnimplementedTagLoginServer() {}
 
@@ -290,6 +335,60 @@ func _TagLogin_SelectLinkTags_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TagLogin_SelectMyTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SelectMyTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagLoginServer).SelectMyTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TagLogin_SelectMyTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagLoginServer).SelectMyTags(ctx, req.(*SelectMyTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagLogin_CheckTagCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckTagCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagLoginServer).CheckTagCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TagLogin_CheckTagCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagLoginServer).CheckTagCount(ctx, req.(*CheckTagCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagLogin_CancelUserTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagLoginServer).CancelUserTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TagLogin_CancelUserTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagLoginServer).CancelUserTag(ctx, req.(*CancelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TagLogin_ServiceDesc is the grpc.ServiceDesc for TagLogin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -324,6 +423,18 @@ var TagLogin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SelectLinkTags",
 			Handler:    _TagLogin_SelectLinkTags_Handler,
+		},
+		{
+			MethodName: "SelectMyTags",
+			Handler:    _TagLogin_SelectMyTags_Handler,
+		},
+		{
+			MethodName: "CheckTagCount",
+			Handler:    _TagLogin_CheckTagCount_Handler,
+		},
+		{
+			MethodName: "CancelUserTag",
+			Handler:    _TagLogin_CancelUserTag_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

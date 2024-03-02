@@ -26,6 +26,7 @@ func HomeGroupHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := userGroup.NewHomeGroupLogic(r.Context(), svcCtx)
 		resp, err := l.HomeGroup(&req)
 		if err != nil {
+			logc.Error(context.Background(), " userGroup.NewHomeGroupLogic(r.Context(), svcCtx) is failed", err)
 			response.Response(w, nil, response.CodeServerBusy)
 		} else {
 			response.Response(w, resp, response.CodeSuccess)

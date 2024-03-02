@@ -3,6 +3,7 @@ package tagloginlogic
 import (
 	"context"
 	"tag/service/internal/svc"
+	"tag/service/internal/types"
 	"tag/service/tag"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -25,10 +26,7 @@ func NewSelectMyTagsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Sele
 func (l *SelectMyTagsLogic) SelectMyTags(in *tag.SelectMyTagsRequest) (*tag.AllTagsByGroupNameResponse, error) {
 	// 查询我创建的标签
 	var lowTags []*tag.AllTags
-	err := l.svcCtx.DB.Table("tb_tag").
-		Joins("LEFT JOIN tb_user_tag ON tb_tag.id = tb_user_tag.tag_id AND tb_tag.type != 'OFFICIAL' AND tb_tag.creator_id = ? WHERE tb_user_tag.user_id = ?", in.UserId, in.UserId).
-		Select("tb_tag.*").
-		Scan(&lowTags).Error
+	err := l.svcCtx.DB.Model(&types.Tag{}).Where("creator_id = ?", in.UserId).Find(&lowTags).Error
 	return &tag.AllTagsByGroupNameResponse{
 		LowTags: lowTags}, err
 }

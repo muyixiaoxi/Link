@@ -140,3 +140,38 @@ func (s *UserServiceServer) UserSelectDetailGroup(ctx context.Context, in *user.
 	l := logic.NewUserSelectDetailGroupLogic(ctx, s.svcCtx)
 	return l.UserSelectDetailGroup(in)
 }
+
+func (s *UserServiceServer) QuitGroup(ctx context.Context, in *user.QuitGroupRequest) (*user.QuitGroupResponse, error) {
+	l := logic.NewQuitGroupLogic(ctx, s.svcCtx)
+	return l.QuitGroup(in)
+}
+
+func (s *UserServiceServer) UserListByGroup(ctx context.Context, in *user.SelectUserListByGroupRequest) (*user.SelectUserListByGroupResponse, error) {
+	l := logic.NewUserListByGroupLogic(ctx, s.svcCtx)
+	return l.UserListByGroup(in)
+}
+
+func (s *UserServiceServer) KickOutUserGroup(ctx context.Context, in *user.KickOutUserGroupRequest) (*user.KickOutUserGroupResponse, error) {
+	l := logic.NewKickOutUserGroupLogic(ctx, s.svcCtx)
+	return l.KickOutUserGroup(in)
+}
+
+func (s *UserServiceServer) UpdateGroupInformation(ctx context.Context, in *user.UpdateGroupInfoRequest) (*user.UpdateGroupInfoResponse, error) {
+	l := logic.NewUpdateGroupInformationLogic(ctx, s.svcCtx)
+	return l.UpdateGroupInformation(in)
+}
+
+func (s *UserServiceServer) UpdateGroupRemark(ctx context.Context, in *user.UpdateGroupRemarkRequest) (*user.UpdateGroupRemarkResponse, error) {
+	l := logic.NewUpdateGroupRemarkLogic(ctx, s.svcCtx)
+	return l.UpdateGroupRemark(in)
+}
+
+func (s *UserServiceServer) QueryMyGroupList(ctx context.Context, in *user.QueryMyGroupListRequest) (*user.UserSelectGroupsResponse, error) {
+	l := logic.NewQueryMyGroupListLogic(ctx, s.svcCtx)
+	return l.QueryMyGroupList(in)
+}
+
+func (s *UserServiceServer) GroupChat(ctx context.Context, in *user.GroupChatRequest) (*user.Empty, error) {
+	l := logic.NewGroupChatLogic(ctx, s.svcCtx)
+	return l.GroupChat(in)
+}

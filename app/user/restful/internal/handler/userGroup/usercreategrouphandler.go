@@ -27,6 +27,7 @@ func UserCreateGroupHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := userGroup.NewUserCreateGroupLogic(r.Context(), svcCtx)
 		err := l.UserCreateGroup(&req)
 		if err != nil {
+			logc.Error(context.Background(), "userGroup.NewUserCreateGroupLogic(r.Context(), svcCtx) is failed", err)
 			response.Response(w, nil, response.CodeServerBusy)
 		} else {
 			response.Response(w, nil, response.CodeSuccess)
