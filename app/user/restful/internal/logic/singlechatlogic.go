@@ -17,13 +17,13 @@ func (l *ChatWSLogic) SingleChat(message types.Message) {
 		return
 	}
 	// 离线存储消息队列
-	l.WriteByConn(message)
+	l.WriteByConn(message, message.To)
 }
 
 // WriteByConn 基于conn发送消息
-func (l *ChatWSLogic) WriteByConn(message types.Message) {
+func (l *ChatWSLogic) WriteByConn(message types.Message, userId uint64) {
 	fmt.Println("<---------------消息开始写入kafka---------------->", message.To)
-	topic := fmt.Sprintf("link_user_%d", message.To)
+	topic := fmt.Sprintf("link_user_%d", userId)
 	host := "114.55.135.211:9092"
 	partition := 0
 
