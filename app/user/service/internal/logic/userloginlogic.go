@@ -28,12 +28,12 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserLog
 func (l *UserLoginLogic) UserLogin(in *user.UserLoginRequest) (pd *user.UserLoginResponse, err error) {
 	model := &types.User{}
 	// 查找用户密码
-	err = l.svcCtx.DB.Where("username = ? ", in.Username).Find(model).Error
+	err = l.svcCtx.DB.Where("phone = ? ", in.Phone).Find(model).Error
 	if err != nil {
 		return
 	}
 	if ok := bcrypt.ComparePwd(model.Password, in.Password); !ok {
-		err = errors.New("用户名或密码错误")
+		err = errors.New("account or password mistake")
 		return
 	}
 	pd = &user.UserLoginResponse{

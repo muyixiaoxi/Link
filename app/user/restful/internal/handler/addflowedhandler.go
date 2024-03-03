@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strings"
 	"user/common/response"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
@@ -21,6 +22,14 @@ func addFlowedHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := logic.NewAddFlowedLogic(r.Context(), svcCtx)
 		err := l.AddFlowed(&req)
 		if err != nil {
+			if strings.Contains(err.Error(), "repeat addition") {
+				response.Response(w, nil, response.CodeRepeatAddition)
+				return
+			}
+			if strings.Contains(err.Error(), "group chat overload") {
+				response.Response(w, nil, response.CodeGroupChatOverload)
+				return
+			}
 			response.Response(w, nil, response.CodeServerBusy)
 		} else {
 			response.Response(w, nil, response.CodeSuccess)

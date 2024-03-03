@@ -31,7 +31,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 // Login 用户登录
 func (l *LoginLogic) Login(req *types.UserLoginRequest) (resp *types.UserLoginResponse, err error) {
 	response, err := l.svcCtx.UserRpc.UserLogin(l.ctx, &user.UserLoginRequest{
-		Username: req.Username,
+		Phone:    req.Phone,
 		Password: req.Password,
 	})
 	if err != nil {
