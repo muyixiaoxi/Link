@@ -44,11 +44,14 @@ func (l *QueryLinkTagsLogic) QueryLinkTags(req *types.UserInfoRequest) (resp *ty
 		return
 	}
 	for _, value := range rpcResp.LinkTags {
+		if value.TagName == "" {
+			//系统标签
+			value.TagName = value.GroupName
+		}
 		temp := types.QueryLink{
-			Id:            value.Id,        //标签id
-			CreatorId:     value.CreatorId, //创作者id
-			TagName:       value.TagName,   //标签名称,
-			SystmeTagName: value.GroupName, //系统标签
+			Id:        value.Id,        //标签id
+			CreatorId: value.CreatorId, //创作者id
+			TagName:   value.TagName,   //标签名称,
 		}
 		temps = append(temps, temp)
 	}
