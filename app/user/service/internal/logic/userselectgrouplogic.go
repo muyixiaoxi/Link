@@ -51,7 +51,7 @@ func (l *UserSelectGroupLogic) UserSelectGroup(in *user.UserSelectGroupsRequest)
 			return nil, err
 		}
 		var tagName string
-		if err := db.Table("tb_tag").Select("tag_name").Where("id = ?", groupInfo.UserSelfTagId).Scan(&tagName).Error; err != nil {
+		if err := db.Table("tb_tag").Select("tag_name").Where("id = ? AND tag_name IS NOT NULL", groupInfo.UserSelfTagId).Scan(&tagName).Error; err != nil {
 			return nil, err
 		}
 		temp := &user.GroupInformation{
