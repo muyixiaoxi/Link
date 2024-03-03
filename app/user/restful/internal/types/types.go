@@ -58,9 +58,10 @@ type QueryGroupListRequest struct {
 }
 
 type QueryLink struct {
-	Id        uint64 `json:"id"`        //标签id
-	CreatorId uint64 `json:"creatorId"` //创作者id
-	TagName   string `json:"tagName"`   //标签名称
+	Id            uint64 `json:"id"`            //标签id
+	CreatorId     uint64 `json:"creatorId"`     //创作者id
+	TagName       string `json:"tagName"`       //标签名称
+	SystmeTagName string `json:"systmeTagName"` //系统标签名称
 }
 
 type QueryLinkTagsResponse struct {

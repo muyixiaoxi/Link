@@ -88,6 +88,7 @@ message SelectLinkTag{
   uint64 id = 1; //标签id
   uint64 creator_id = 2; //创作者id
   string tag_name = 3 ;//标签名称
+  string group_name = 4 ; //系统标签名称
 }
 message SelectLinkTagsResponse {
   repeated SelectLinkTag linkTags = 1 ; //数据

@@ -30,26 +30,23 @@ func (l *SelectLinkTagsLogic) SelectLinkTags(in *tag.SelectLinkTagsRequest) (res
 	var linkTags []*tag.SelectLinkTag
 	if in.IsSelf {
 		//如果是当前登录用户,不能查询出自己创建的标签
-		err = db.Table("tb_tag").
-			Select("tb_tag.id, tb_tag.tag_name, tb_tag.creator_id").
+		err = db.Table("tb_tag").Debug().
+			Select("tb_tag.id, tb_tag.tag_name, tb_tag.creator_id , tb_tag.group_name").
 			Joins("left join tb_user_tag on tb_tag.id = tb_user_tag.tag_id AND tb_tag.creator_id != ?", in.Id).
 			Where("tb_user_tag.user_id = ? AND tb_user_tag.deleted_at IS NULL", in.Id).
 			Where("tb_tag.deleted_at IS NULL").
-			Not("tb_tag.type", "OFFICIAL").
 			Find(&linkTags).Error
 	} else {
 		err = db.Table("tb_tag").
-			Select("tb_tag.id, tb_tag.tag_name, tb_tag.creator_id").
+			Select("tb_tag.id, tb_tag.tag_name, tb_tag.creator_id , tb_tag.group_name").
 			Joins("left join tb_user_tag on tb_tag.id = tb_user_tag.tag_id").
 			Where("tb_user_tag.user_id = ? AND tb_user_tag.deleted_at IS NULL", in.Id).
 			Where("tb_tag.deleted_at IS NULL").
-			Not("tb_tag.type", "OFFICIAL").
 			Find(&linkTags).Error
 		if err != nil {
 			return nil, err
 		}
 	}
-
 	resp = &tag.SelectLinkTagsResponse{LinkTags: linkTags}
 	return resp, err
 }
