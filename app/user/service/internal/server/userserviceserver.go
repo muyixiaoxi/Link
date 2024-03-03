@@ -171,7 +171,12 @@ func (s *UserServiceServer) QueryMyGroupList(ctx context.Context, in *user.Query
 	return l.QueryMyGroupList(in)
 }
 
-func (s *UserServiceServer) GroupChat(ctx context.Context, in *user.GroupChatRequest) (*user.Empty, error) {
-	l := logic.NewGroupChatLogic(ctx, s.svcCtx)
-	return l.GroupChat(in)
+func (s *UserServiceServer) SearchStrangerGroup(ctx context.Context, in *user.SearchStrangerGroupRequest) (*user.UserSelectGroupsResponse, error) {
+	l := logic.NewSearchStrangerGroupLogic(ctx, s.svcCtx)
+	return l.SearchStrangerGroup(in)
+}
+
+func (s *UserServiceServer) SearchMyGroupByName(ctx context.Context, in *user.SearchMyGroupByNameRequest) (*user.MyGroupResponse, error) {
+	l := logic.NewSearchMyGroupByNameLogic(ctx, s.svcCtx)
+	return l.SearchMyGroupByName(in)
 }
