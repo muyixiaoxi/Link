@@ -130,6 +130,7 @@ message DetailGroupResponse {
   float man = 8; //男生所占比例
   float woman = 9; //女生所占比例
   string address = 10 ; //群聊中地区最多的地址
+  float addressCount = 12 ; //该地区的人数
 }
 
 message NextUserIDResponse {

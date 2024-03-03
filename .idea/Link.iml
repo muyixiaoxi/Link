@@ -9,6 +9,8 @@
       <excludeFolder url="file://$MODULE_DIR$/app/tag/service/logs" />
       <excludeFolder url="file://$MODULE_DIR$/app/user/restful/logs" />
       <excludeFolder url="file://$MODULE_DIR$/app/user/service/logs" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/app/tag/restful/tag/logs" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

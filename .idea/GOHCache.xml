@@ -1305,6 +1305,13 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/L96.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1709429849282" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/../../GoAlgorithm/leecode/liko/LCR121.go">
           <value>
             <ScannedPath>
@@ -2445,7 +2452,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/selectdetailgrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709424494249" />
+              <option name="lastModified" value="1709430869497" />
               <option name="schema">
                 <list>
                   <option value="SelectDetailGroupLogic" />
@@ -2961,7 +2968,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userselectdetailgrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709261298357" />
+              <option name="lastModified" value="1709430818995" />
               <option name="schema">
                 <list>
                   <option value="UserSelectDetailGroupLogic" />

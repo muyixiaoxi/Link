@@ -43,6 +43,7 @@ func (l *SelectDetailGroupLogic) SelectDetailGroup(req *types.SelectGroupDeatilR
 		WoMan:           detailGroupRpc.Woman,
 		Address:         detailGroupRpc.Address,
 		SystemTagName:   detailGroupRpc.SystemTagName,
+		AddressCount:    detailGroupRpc.AddressCount,
 	}
 	return
 }
