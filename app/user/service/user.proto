@@ -109,6 +109,10 @@ message UserSelectGroupsResponse{
   uint64 total = 2; //总条数
 }
 
+message MyGroupResponse {
+  repeated GroupInformation groupList = 1;
+}
+
 //查看群详情
 message DetailGroupRequest {
   uint64 id = 1 ;//群id
@@ -289,6 +293,23 @@ message QueryMyGroupListRequest{
 }
 //获取群列表
 
+//搜索陌生群聊
+message SearchStrangerGroupRequest{
+  uint64 user_id = 4 ; //当前登录用户的id
+  uint64 pageNo = 1 ; //当前页
+  uint64 pageSize = 2 ;//每页显示的条数
+  string name = 3; //群聊名称
+}
+//搜索陌生群聊
+
+
+//根据备注或者群聊名称搜索我加入的群聊
+message SearchMyGroupByNameRequest {
+  uint64 user_id = 4 ; //当前登录用户id
+  string remarkOrName = 3; //群聊备注或者群聊名称
+}
+//根据备注或者群聊名称搜索我加入的群聊
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -331,6 +352,8 @@ service UserService {
   rpc UpdateGroupInformation(UpdateGroupInfoRequest) returns (UpdateGroupInfoResponse);//修改群聊信息
   rpc UpdateGroupRemark(UpdateGroupRemarkRequest) returns (UpdateGroupRemarkResponse); //用户修改自己加入的群聊的备注
   rpc QueryMyGroupList(QueryMyGroupListRequest) returns (UserSelectGroupsResponse) ; //获取群列表
+  rpc SearchStrangerGroup(SearchStrangerGroupRequest) returns(UserSelectGroupsResponse) ; //搜索陌生群聊
+  rpc SearchMyGroupByName(SearchMyGroupByNameRequest) returns (MyGroupResponse) ; //根据备注或者群名称搜索我加入的群聊
 }
 
 

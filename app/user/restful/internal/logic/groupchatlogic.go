@@ -14,17 +14,25 @@ func (l *ChatWSLogic) GroupChat(message types.Message) {
 		return
 	}
 	fmt.Println("消息", message)
+	for _, groupUser := range userList.UserList {
+		if groupUser.Id == message.From {
+			//将当前用户信息拼接
+			message.FromAvatar = groupUser.Avatar
+			message.FromUsername = groupUser.Username
+			break
+		}
+	}
 	//判断群聊内用户谁在线
 	for _, groupUser := range userList.UserList {
 		c, has := Clients[groupUser.Id]
-		if message.From == groupUser.Id {
-			fmt.Println("消息不能发送给我自己:", groupUser.Id)
-			message.FromAvatar = groupUser.Avatar
-			message.FromUsername = groupUser.Username
-		} else if groupUser.Id != message.From && has {
+		if groupUser.Id != message.From && has {
 			//消息不能发送给自己
+			fmt.Println("$$$$$$$$$$$$$$$在线消息转发$$$$$$$$$$$$$$$$$$", message)
 			c.Conn.WriteJSON(message)
+		} else if !has {
+			//如果是处于离线状态的用户 给此用户创建一个主题
+			message.To = groupUser.Id
+			l.WriteByConn(message)
 		}
-		//如果是处于离线状态的用户
 	}
 }

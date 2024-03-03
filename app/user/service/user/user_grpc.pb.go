@@ -48,6 +48,8 @@ const (
 	UserService_UpdateGroupInformation_FullMethodName = "/user.UserService/UpdateGroupInformation"
 	UserService_UpdateGroupRemark_FullMethodName      = "/user.UserService/UpdateGroupRemark"
 	UserService_QueryMyGroupList_FullMethodName       = "/user.UserService/QueryMyGroupList"
+	UserService_SearchStrangerGroup_FullMethodName    = "/user.UserService/SearchStrangerGroup"
+	UserService_SearchMyGroupByName_FullMethodName    = "/user.UserService/SearchMyGroupByName"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -87,6 +89,8 @@ type UserServiceClient interface {
 	UpdateGroupInformation(ctx context.Context, in *UpdateGroupInfoRequest, opts ...grpc.CallOption) (*UpdateGroupInfoResponse, error)
 	UpdateGroupRemark(ctx context.Context, in *UpdateGroupRemarkRequest, opts ...grpc.CallOption) (*UpdateGroupRemarkResponse, error)
 	QueryMyGroupList(ctx context.Context, in *QueryMyGroupListRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
+	SearchStrangerGroup(ctx context.Context, in *SearchStrangerGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
+	SearchMyGroupByName(ctx context.Context, in *SearchMyGroupByNameRequest, opts ...grpc.CallOption) (*MyGroupResponse, error)
 }
 
 type userServiceClient struct {
@@ -358,6 +362,24 @@ func (c *userServiceClient) QueryMyGroupList(ctx context.Context, in *QueryMyGro
 	return out, nil
 }
 
+func (c *userServiceClient) SearchStrangerGroup(ctx context.Context, in *SearchStrangerGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error) {
+	out := new(UserSelectGroupsResponse)
+	err := c.cc.Invoke(ctx, UserService_SearchStrangerGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) SearchMyGroupByName(ctx context.Context, in *SearchMyGroupByNameRequest, opts ...grpc.CallOption) (*MyGroupResponse, error) {
+	out := new(MyGroupResponse)
+	err := c.cc.Invoke(ctx, UserService_SearchMyGroupByName_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -395,6 +417,8 @@ type UserServiceServer interface {
 	UpdateGroupInformation(context.Context, *UpdateGroupInfoRequest) (*UpdateGroupInfoResponse, error)
 	UpdateGroupRemark(context.Context, *UpdateGroupRemarkRequest) (*UpdateGroupRemarkResponse, error)
 	QueryMyGroupList(context.Context, *QueryMyGroupListRequest) (*UserSelectGroupsResponse, error)
+	SearchStrangerGroup(context.Context, *SearchStrangerGroupRequest) (*UserSelectGroupsResponse, error)
+	SearchMyGroupByName(context.Context, *SearchMyGroupByNameRequest) (*MyGroupResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -488,6 +512,12 @@ func (UnimplementedUserServiceServer) UpdateGroupRemark(context.Context, *Update
 }
 func (UnimplementedUserServiceServer) QueryMyGroupList(context.Context, *QueryMyGroupListRequest) (*UserSelectGroupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryMyGroupList not implemented")
+}
+func (UnimplementedUserServiceServer) SearchStrangerGroup(context.Context, *SearchStrangerGroupRequest) (*UserSelectGroupsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchStrangerGroup not implemented")
+}
+func (UnimplementedUserServiceServer) SearchMyGroupByName(context.Context, *SearchMyGroupByNameRequest) (*MyGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchMyGroupByName not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -1024,6 +1054,42 @@ func _UserService_QueryMyGroupList_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_SearchStrangerGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchStrangerGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).SearchStrangerGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_SearchStrangerGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).SearchStrangerGroup(ctx, req.(*SearchStrangerGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_SearchMyGroupByName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchMyGroupByNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).SearchMyGroupByName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_SearchMyGroupByName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).SearchMyGroupByName(ctx, req.(*SearchMyGroupByNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1146,6 +1212,14 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryMyGroupList",
 			Handler:    _UserService_QueryMyGroupList_Handler,
+		},
+		{
+			MethodName: "SearchStrangerGroup",
+			Handler:    _UserService_SearchStrangerGroup_Handler,
+		},
+		{
+			MethodName: "SearchMyGroupByName",
+			Handler:    _UserService_SearchMyGroupByName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -106,9 +106,20 @@ type SelectGroupDeatilResponse struct {
 	UserSelfTagName string  `json:"userSelfTagName"`
 	Avatar          string  `json:"avatar"`
 	CreatedAt       string  `json:"createdAt"`
+	SystemTagName   string  `json:"systemTagName"`
 	Man             float32 `json:"man"`
 	WoMan           float32 `json:"woMan"`
 	Address         string  `json:"address"`
+}
+
+type SelectMyGroupRequest struct {
+	Name string `json:"name" validate:"required"`
+}
+
+type SelectStrangerRequest struct {
+	PageNo   uint64 `json:"pageNo" validate:"required"`
+	PageSize uint64 `json:"pageSize" validate:"required"`
+	Name     string `json:"name" validate:"required"`
 }
 
 type UpdateGroupInfoRequest struct {
