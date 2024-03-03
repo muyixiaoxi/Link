@@ -19,7 +19,7 @@ message UserCreateResponse {
 }
 
 message UserLoginRequest {
-  string username = 1;
+  string phone = 1;
   string password = 2;
 }
 message UserLoginResponse {

@@ -211,7 +211,7 @@ type UserInfoResponse struct {
 }
 
 type UserLoginRequest struct {
-	Username string `json:"username"`
+	Phone    string `json:"phone"`
 	Password string `json:"password"`
 }
 

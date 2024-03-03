@@ -15,7 +15,7 @@ type UserCreateResponse {
 }
 
 type UserLoginRequest {
-	Username string `json:"username"`
+	Phone    string `json:"phone"`
 	Password string `json:"password"`
 }
 
