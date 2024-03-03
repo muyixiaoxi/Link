@@ -53,7 +53,7 @@ func (l *ChatWSLogic) ReadByConn(id uint64) (messages []*types.Message) {
 		MaxWait:   10 * time.Second,
 	})
 
-	ctx, _ := context.WithTimeout(context.Background(), 2*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 
 	defer r.Close()
 	for {
