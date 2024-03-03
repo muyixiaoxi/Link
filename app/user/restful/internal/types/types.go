@@ -111,6 +111,7 @@ type SelectGroupDeatilResponse struct {
 	WoMan           float32 `json:"woMan"`
 	Address         string  `json:"address"`
 	AddressCount    float32 `json:"addressCount"`
+	IsExist         bool    `json:"isExist"`
 }
 
 type SelectMyGroupRequest struct {

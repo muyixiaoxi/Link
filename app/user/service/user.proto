@@ -116,6 +116,7 @@ message MyGroupResponse {
 //查看群详情
 message DetailGroupRequest {
   uint64 id = 1 ;//群id
+  uint64 user_id = 2; //当前登录用户id
 }
 
 message DetailGroupResponse {
@@ -131,6 +132,7 @@ message DetailGroupResponse {
   float woman = 9; //女生所占比例
   string address = 10 ; //群聊中地区最多的地址
   float addressCount = 12 ; //该地区的人数
+  bool isExit = 13 ; //当前登录用户是否处于该群聊之中
 }
 
 message NextUserIDResponse {

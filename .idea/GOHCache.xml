@@ -2452,7 +2452,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/selectdetailgrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709430869497" />
+              <option name="lastModified" value="1709432717800" />
               <option name="schema">
                 <list>
                   <option value="SelectDetailGroupLogic" />
@@ -2968,7 +2968,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/userselectdetailgrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709430818995" />
+              <option name="lastModified" value="1709432637943" />
               <option name="schema">
                 <list>
                   <option value="UserSelectDetailGroupLogic" />
