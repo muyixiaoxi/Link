@@ -93,5 +93,6 @@ func (l *UserSelectDetailGroupLogic) UserSelectDetailGroup(in *user.DetailGroupR
 		Man:             float32(manCount) / float32(totalPeople),
 		Woman:           float32(womanCount) / float32(totalPeople),
 		Address:         mostPopularAddress.Address,
+		AddressCount:    float32(mostPopularAddress.Count),
 	}, nil
 }

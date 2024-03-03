@@ -110,6 +110,7 @@ type SelectGroupDeatilResponse struct {
 	Man             float32 `json:"man"`
 	WoMan           float32 `json:"woMan"`
 	Address         string  `json:"address"`
+	AddressCount    float32 `json:"addressCount"`
 }
 
 type SelectMyGroupRequest struct {
