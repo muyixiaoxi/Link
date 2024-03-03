@@ -67,6 +67,12 @@ func (l *UserSelectDetailGroupLogic) UserSelectDetailGroup(in *user.DetailGroupR
 	if err := l.svcCtx.DB.Model(&types.User{}).Where("id in (?) AND gender = 2", userIds).Count(&womanCount).Error; err != nil {
 		return nil, err
 	}
+	//查询当前登录用户是否处于该群聊之中
+	var id uint64
+	isExists := true
+	if err := l.svcCtx.DB.Model(&types.UserGroupChat{}).Select("id").Where("group_chat_id = ? AND user_id = ?", in.Id, in.UserId).First(&id).Error; err != nil || id == 0 {
+		isExists = false //不再群聊之中
+	}
 	//统计人数最多的地址
 	var mostPopularAddress AddressCount
 	if err := l.svcCtx.DB.Model(&types.User{}).
@@ -94,5 +100,6 @@ func (l *UserSelectDetailGroupLogic) UserSelectDetailGroup(in *user.DetailGroupR
 		Woman:           float32(womanCount) / float32(totalPeople),
 		Address:         mostPopularAddress.Address,
 		AddressCount:    float32(mostPopularAddress.Count),
+		IsExit:          isExists,
 	}, nil
 }
