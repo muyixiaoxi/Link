@@ -35,9 +35,11 @@ func (l *UserFlowedLogic) UserFlowed(in *user.UserAddRequest) (response *user.Em
 	}
 	// 首先判断是否为自己好友
 	if model.Type == 3 {
-		err = l.svcCtx.DB.Model(&types.Friend{}).Where("user_id = ? and friend_id = ?", model.UserID, model.BeId).Error
+		tmp := &types.Friend{}
+		err = l.svcCtx.DB.Where("user_id = ? and friend_id = ?", model.UserID, model.BeId).First(tmp).Error
 	} else {
-		err = l.svcCtx.DB.Model(&types.UserGroupChat{}).Where("user_id = ? and group_chat_id = ?", model.UserID, model.BeId).Error
+		tmp := &types.UserGroupChat{}
+		err = l.svcCtx.DB.Where("user_id = ? and group_chat_id = ?", model.UserID, model.BeId).First(tmp).Error
 	}
 	// 如果添加过该好友/群聊  返回
 	if err == nil {
