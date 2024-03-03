@@ -124,6 +124,16 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
+				Path:    "/selectMyGroup",
+				Handler: userGroup.SelectMyGroupHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/selectStrangerGroup",
+				Handler: userGroup.SelectStrangerGroupHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/updateGroupInfo",
 				Handler: userGroup.UpdateGroupInfoHandler(serverCtx),
 			},

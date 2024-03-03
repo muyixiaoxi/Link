@@ -80,6 +80,7 @@ message ChooseTagsResponse{
 // 查询当前用户选择以及创建的标签 Request
 message SelectLinkTagsRequest{
   uint64 id = 1; //用户id
+  bool isSelf = 2 ; //是否是当前登录用户
 }
 
 // 查询当前用户选择以及创建的标签 Response

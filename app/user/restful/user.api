@@ -90,11 +90,13 @@ type UserAppleRequest {
 }
 
 type Message {
-	From    uint64 `json:"from,optional"`
-	To      uint64 `json:"to"`
-	Type    uint8  `json:"type"`
-	Time    string `json:"time"`
-	Content string `json:"content"`
+	From         uint64 `json:"from,optional"`
+	To           uint64 `json:"to"`
+	Type         uint8  `json:"type"`
+	Time         string `json:"time"`
+	Content      string `json:"content"`
+	FromAvatar   string `json:"fromAvatar"`
+	FromUsername string `json:"fromUsername"`
 }
 
 // 用户选择标签 Request
@@ -257,6 +259,7 @@ type SelectGroupDeatilResponse {
 	UserSelfTagName string  `json:"userSelfTagName"`
 	Avatar          string  `json:"avatar"`
 	CreatedAt       string  `json:"createdAt"`
+	SystemTagName   string  `json:"systemTagName"`
 	Man             float32 `json:"man"`
 	WoMan           float32 `json:"woMan"`
 	Address         string  `json:"address"`
@@ -322,6 +325,18 @@ type CancelRequest {
 	TagIds []uint64 `json:"tagIds" validate:"required"`
 }
 
+//用户搜索自己未加入的群聊
+type SelectStrangerRequest {
+	PageNo   uint64 `json:"pageNo" validate:"required"`
+	PageSize uint64 `json:"pageSize" validate:"required"`
+	Name     string `json:"name" validate:"required"`
+}
+
+type SelectMyGroupRequest {
+	Name string `json:"name" validate:"required"`
+}
+
+//用户搜索自己未加入的群聊
 @server (
 	prefix: /app/user
 	jwt:    Auth
@@ -363,6 +378,14 @@ service user {
 	@doc "获取当前登录用户群聊列表"
 	@handler queryGroupList
 	post /queryGroupList (QueryGroupListRequest) returns (RecommendGroupByTagResponse)
+
+	@doc "用户搜索自己未加入的群聊"
+	@handler selectStrangerGroup
+	post /selectStrangerGroup (SelectStrangerRequest) returns (RecommendGroupByTagResponse)
+
+	@doc "用户搜索自己加入的群聊"
+	@handler selectMyGroup
+	post /selectMyGroup (SelectMyGroupRequest) returns ([]GroupList)
 }
 
 @server (

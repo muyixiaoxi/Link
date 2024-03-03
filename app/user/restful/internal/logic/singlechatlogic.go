@@ -22,6 +22,7 @@ func (l *ChatWSLogic) SingleChat(message types.Message) {
 
 // WriteByConn 基于conn发送消息
 func (l *ChatWSLogic) WriteByConn(message types.Message) {
+	fmt.Println("<---------------消息开始写入kafka---------------->", message.To)
 	topic := fmt.Sprintf("link_user_%d", message.To)
 	host := "114.55.135.211:9092"
 	partition := 0
@@ -31,6 +32,7 @@ func (l *ChatWSLogic) WriteByConn(message types.Message) {
 
 	jsonMessage, _ := json.Marshal(message)
 	_, err := conn.WriteMessages(kafka.Message{Value: jsonMessage})
+	fmt.Println("<---------------消息写入kafka结束------------------->")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -55,12 +57,14 @@ func (l *ChatWSLogic) ReadByConn(id uint64) (messages []*types.Message) {
 
 	defer r.Close()
 	for {
+		fmt.Println("<--------------------kafka开始读取消息------------------->")
 		msg, err := r.ReadMessage(ctx)
 		if err != nil {
 			break
 		}
 		message := &types.Message{}
 		json.Unmarshal(msg.Value, message)
+		fmt.Println("<------------------kafka读取消息结束------------------->", message)
 		messages = append(messages, message)
 	}
 
