@@ -38,8 +38,11 @@ func (l *RecommendUserListLogic) RecommendUserList(req *types.RecommendGroupByTa
 	if len(req.TagIds) == 0 {
 		//查询出用户自己相关的标签
 		respRpc, _ := l.svcCtx.TagLoginRpc.SelectLinkTags(l.ctx, &tag.SelectLinkTagsRequest{Id: uint64(userId)})
-		for _, value := range respRpc.LinkTags {
-			tagIds = append(tagIds, value.Id)
+		for _, value := range respRpc.SelectLinkTags {
+			//tagIds = append(tagIds, value.Id)
+			for _, userSelf := range value.LinkTags {
+				tagIds = append(tagIds, userSelf.Id)
+			}
 		}
 	} else {
 		tagIds = append(tagIds, req.TagIds...)

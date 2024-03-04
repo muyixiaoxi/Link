@@ -3,6 +3,7 @@ package userTag
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"user/service/tag/service/tag"
 
 	"user/restful/internal/svc"
@@ -25,7 +26,7 @@ func NewQueryLinkTagsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Que
 	}
 }
 
-func (l *QueryLinkTagsLogic) QueryLinkTags(req *types.UserInfoRequest) (resp *types.QueryLinkTagsResponse, err error) {
+func (l *QueryLinkTagsLogic) QueryLinkTags(req *types.UserInfoRequest) (resp []types.QueryLinkTagsResponse, err error) {
 	var userId int64
 	var isSelf bool
 	if req.Id == 0 {
@@ -38,23 +39,27 @@ func (l *QueryLinkTagsLogic) QueryLinkTags(req *types.UserInfoRequest) (resp *ty
 		isSelf = false
 	}
 	//查询
-	var temps []types.QueryLink
 	rpcResp, err := l.svcCtx.TagLoginRpc.SelectLinkTags(l.ctx, &tag.SelectLinkTagsRequest{Id: uint64(userId), IsSelf: isSelf})
 	if rpcResp == nil {
 		return
 	}
-	for _, value := range rpcResp.LinkTags {
-		if value.TagName == "" {
-			//系统标签
-			value.TagName = value.GroupName
+	for _, value := range rpcResp.SelectLinkTags {
+		fmt.Println("系统标签", value)
+		var linkTags []types.QueryLink
+		for _, linkTag := range value.GetLinkTags() {
+			mid := types.QueryLink{
+				Id:        linkTag.Id,
+				CreatorId: linkTag.CreatorId,
+				TagName:   linkTag.TagName,
+			}
+			linkTags = append(linkTags, mid)
 		}
-		temp := types.QueryLink{
-			Id:        value.Id,        //标签id
-			CreatorId: value.CreatorId, //创作者id
-			TagName:   value.TagName,   //标签名称,
+		temp := types.QueryLinkTagsResponse{
+			SystemTagName: value.GroupName,
+			SystemTagId:   value.GroupId,
+			LinkTags:      linkTags,
 		}
-		temps = append(temps, temp)
+		resp = append(resp, temp)
 	}
-	resp = &types.QueryLinkTagsResponse{LinkTags: temps}
 	return
 }
