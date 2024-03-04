@@ -113,7 +113,9 @@ type QueryLink {
 }
 
 type QueryLinkTagsResponse {
-	LinkTags []QueryLink `json:"linkTags"`
+	SystemTagName string      `json:"systemTagName"`
+	SystemTagId   uint64      `json:"systemTagId"`
+	LinkTags      []QueryLink `json:"linkTags"`
 }
 
 type UserFriendsResponse {
@@ -402,7 +404,7 @@ service user {
 
 	@doc "查询和当前登录用户或者其它用户相关的标签"
 	@handler queryLinkTags
-	get /queryLinkTags/:id (UserInfoRequest) returns (QueryLinkTagsResponse)
+	get /queryLinkTags/:id (UserInfoRequest) returns ([]QueryLinkTagsResponse)
 
 	@doc "根据标签推荐人员列表"
 	@handler recommendUserList

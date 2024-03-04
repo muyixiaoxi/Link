@@ -64,7 +64,9 @@ type QueryLink struct {
 }
 
 type QueryLinkTagsResponse struct {
-	LinkTags []QueryLink `json:"linkTags"`
+	SystemTagName string      `json:"systemTagName"`
+	SystemTagId   uint64      `json:"systemTagId"`
+	LinkTags      []QueryLink `json:"linkTags"`
 }
 
 type QuitGroupRequest struct {
