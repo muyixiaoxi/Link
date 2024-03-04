@@ -3,7 +3,6 @@ package userTag
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"user/service/tag/service/tag"
 
 	"user/restful/internal/svc"
@@ -44,7 +43,6 @@ func (l *QueryLinkTagsLogic) QueryLinkTags(req *types.UserInfoRequest) (resp []t
 		return
 	}
 	for _, value := range rpcResp.SelectLinkTags {
-		fmt.Println("系统标签", value)
 		var linkTags []types.QueryLink
 		for _, linkTag := range value.GetLinkTags() {
 			mid := types.QueryLink{
