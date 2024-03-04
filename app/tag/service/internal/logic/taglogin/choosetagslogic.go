@@ -2,6 +2,8 @@ package tagloginlogic
 
 import (
 	"context"
+	"errors"
+	"gorm.io/gorm"
 	"tag/service/internal/types"
 
 	"tag/service/internal/svc"
@@ -39,16 +41,26 @@ func (l *ChooseTagsLogic) ChooseTags(in *tag.ChooseTagsRequest) (resp *tag.Choos
 			return nil, err
 		}
 	}
-	//插入用户选择的小标签
+	// 插入用户选择的小标签
 	for _, tagId := range in.TagIds {
-		//存在则忽略,不存在则插入
-		err = tx.FirstOrCreate(&types.UserTagFollow{
-			TagId:  tagId,
-			UserId: in.Id,
-		}).Error
-		if err != nil {
+		var userTag types.UserTagFollow
+		// 尝试查找记录
+		err = tx.Where("tag_id = ? AND user_id = ?", tagId, in.Id).First(&userTag).Error
+		if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 			tx.Rollback()
 			return nil, err
+		}
+
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			// 如果记录不存在，则插入新记录
+			err = tx.Create(&types.UserTagFollow{
+				TagId:  tagId,
+				UserId: in.Id,
+			}).Error
+			if err != nil {
+				tx.Rollback()
+				return nil, err
+			}
 		}
 	}
 	return &tag.ChooseTagsResponse{}, tx.Commit().Error
