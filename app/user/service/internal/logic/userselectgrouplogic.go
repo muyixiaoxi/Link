@@ -27,7 +27,6 @@ func (l *UserSelectGroupLogic) UserSelectGroup(in *user.UserSelectGroupsRequest)
 	// 根据标签查询群聊
 	var groupInformations []*user.GroupInformation
 	var groupChat []types.GroupChat
-	var total int64
 	db := l.svcCtx.DB
 	page := int(in.PageNo)
 	pageSize := int(in.PageSize)
@@ -38,10 +37,6 @@ func (l *UserSelectGroupLogic) UserSelectGroup(in *user.UserSelectGroupsRequest)
 	// 查询当前页的数据
 	err = query.Offset(offset).Limit(pageSize).Find(&groupChat).Error
 	if err != nil {
-		return nil, err
-	}
-	// 查询总记录数
-	if err := query.Count(&total).Error; err != nil {
 		return nil, err
 	}
 	//根据标签ID查询系统标签名称并添加到结果中
@@ -65,7 +60,7 @@ func (l *UserSelectGroupLogic) UserSelectGroup(in *user.UserSelectGroupsRequest)
 	}
 	resp = &user.UserSelectGroupsResponse{
 		GroupList: groupInformations,
-		Total:     uint64(total),
+		Total:     uint64(len(groupInformations)),
 	}
 
 	return
