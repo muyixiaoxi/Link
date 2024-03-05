@@ -44,6 +44,7 @@ func (l *SelectStrangerGroupLogic) SelectStrangerGroup(req *types.SelectStranger
 	for _, groupInfo := range respGroup.GroupList {
 		temp := types.GroupList{
 			Id:              groupInfo.Id,
+			Type:            2, //2表示群聊
 			Name:            groupInfo.Name,
 			SystemTagName:   groupInfo.SystemTagName,
 			UserSelfTagName: groupInfo.UserSelfTagName,

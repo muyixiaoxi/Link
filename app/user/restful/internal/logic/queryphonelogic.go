@@ -38,6 +38,7 @@ func (l *QueryPhoneLogic) QueryPhone(req *types.UserQueryPhoneRequest) (resp *ty
 		Address:   response.Address,
 		Signature: response.Signature,
 		TagName:   response.TagName,
+		Type:      1, //人
 	}
 	return
 }
