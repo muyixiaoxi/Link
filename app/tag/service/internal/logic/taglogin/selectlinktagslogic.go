@@ -2,7 +2,6 @@ package tagloginlogic
 
 import (
 	"context"
-	"fmt"
 	"tag/service/internal/svc"
 	"tag/service/tag"
 
@@ -80,7 +79,6 @@ func (l *SelectLinkTagsLogic) SelectLinkTags(in *tag.SelectLinkTagsRequest) (res
 		// 找到该系统标签下的子标签数据
 		result = append(result, temp)
 	}
-	fmt.Println(result)
 	resp = &tag.SelectLinkTagsResponse{SelectLinkTags: result}
 	return resp, err
 }
