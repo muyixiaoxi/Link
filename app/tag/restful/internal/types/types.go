@@ -2,9 +2,9 @@
 package types
 
 type CreateTagRequest struct {
-	TagName   string `json:"tagName"`
-	GroupName string `json:"groupName"`
-	Type      string `json:"type"`
+	TagName   string `json:"tagName" validate:"required"`
+	GroupName string `json:"groupName" validate:"required"`
+	Type      string `json:"type" validate:"required"`
 }
 
 type CreateTagResponse struct {
