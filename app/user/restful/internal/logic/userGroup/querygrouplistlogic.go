@@ -42,6 +42,7 @@ func (l *QueryGroupListLogic) QueryGroupList(req *types.QueryGroupListRequest) (
 	for _, groupInfo := range respGroup.GroupList {
 		temp := types.GroupList{
 			Id:              groupInfo.Id,
+			Type:            2,
 			Name:            groupInfo.Name,
 			SystemTagName:   groupInfo.SystemTagName,
 			UserSelfTagName: groupInfo.UserSelfTagName,
