@@ -15,6 +15,7 @@ type DisposeFlowedRequest struct {
 
 type GroupList struct {
 	Id              uint64 `json:"id"`              //群id
+	Type            uint64 `json:"type"`            //type类型 2 表示群聊
 	Name            string `json:"name"`            //群聊名称
 	SystemTagName   string `json:"systemTagName"`   //群聊所带的系统标签名称
 	UserSelfTagName string `json:"userSelfTagName"` //用户自定义标签
