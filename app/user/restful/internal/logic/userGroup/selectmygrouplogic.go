@@ -42,6 +42,7 @@ func (l *SelectMyGroupLogic) SelectMyGroup(req *types.SelectMyGroupRequest) (res
 	for _, groupInfo := range respGroup.GroupList {
 		temp := types.GroupList{
 			Id:              groupInfo.Id,
+			Type:            2, //2表示群聊
 			Name:            groupInfo.Name,
 			SystemTagName:   groupInfo.SystemTagName,
 			UserSelfTagName: groupInfo.UserSelfTagName,

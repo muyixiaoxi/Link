@@ -1,9 +1,9 @@
 syntax = "v1"
 
 type CreateTagRequest {
-	TagName   string `json:"tagName"`
-	groupName string `json:"groupName"`
-	Type      string `json:"type"`
+	TagName   string `json:"tagName" validate:"required"`
+	groupName string `json:"groupName" validate:"required"`
+	Type      string `json:"type" validate:"required"`
 }
 
 type CreateTagResponse {

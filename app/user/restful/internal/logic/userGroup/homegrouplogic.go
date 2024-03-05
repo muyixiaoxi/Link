@@ -61,6 +61,7 @@ func (l *HomeGroupLogic) HomeGroup(req *types.RecommendGroupByTagRequest) (resp 
 			SystemTagName:   groupInfo.SystemTagName,
 			UserSelfTagName: groupInfo.UserSelfTagName,
 			Avatar:          groupInfo.Avatar,
+			Type:            2, //2表示群聊
 		}
 		groupList = append(groupList, temp)
 	}

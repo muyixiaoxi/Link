@@ -61,6 +61,7 @@ func (l *RecommendUserListLogic) RecommendUserList(req *types.RecommendGroupByTa
 			Username:  userRpc.Username,
 			Avatar:    userRpc.Avatar,
 			Signature: userRpc.Signature,
+			Type:      1, //1表示人员
 		}
 		userList = append(userList, temp)
 	}

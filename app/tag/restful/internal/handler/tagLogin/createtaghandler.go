@@ -8,6 +8,7 @@ import (
 	"google.golang.org/grpc/status"
 	"net/http"
 	"tag/common/response"
+	"tag/common/validate"
 	"tag/restful/internal/logic/tagLogin"
 	"tag/restful/internal/svc"
 	"tag/restful/internal/types"
@@ -16,11 +17,12 @@ import (
 func CreateTagHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.CreateTagRequest
-		if err := httpx.Parse(r, &req); err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
+		httpx.Parse(r, &req)
+		validateErr := validate.Validate(req)
+		if validateErr != nil {
+			response.Response(w, nil, response.CodeParamsError)
 			return
 		}
-
 		l := tagLogin.NewCreateTagLogic(r.Context(), svcCtx)
 		resp, err := l.CreateTag(&req)
 		if err != nil {

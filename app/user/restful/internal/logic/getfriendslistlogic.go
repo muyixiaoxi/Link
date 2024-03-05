@@ -38,6 +38,7 @@ func (l *GetFriendsListLogic) GetFriendsList() (resp *types.UserFriendsResponse,
 			Remark:    u.Remark,
 			Signature: u.Signature,
 			TagName:   u.TagName,
+			Type:      1, //好友
 		})
 	}
 
