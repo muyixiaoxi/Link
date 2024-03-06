@@ -126,6 +126,11 @@ func (s *UserServiceServer) UserCreateGroup(ctx context.Context, in *user.UserCr
 	return l.UserCreateGroup(in)
 }
 
+func (s *UserServiceServer) QueryGroupHost(ctx context.Context, in *user.QueryGroupHostRequest) (*user.QueryGroupHostResponse, error) {
+	l := logic.NewQueryGroupHostLogic(ctx, s.svcCtx)
+	return l.QueryGroupHost(in)
+}
+
 func (s *UserServiceServer) UserSelectGroup(ctx context.Context, in *user.UserSelectGroupsRequest) (*user.UserSelectGroupsResponse, error) {
 	l := logic.NewUserSelectGroupLogic(ctx, s.svcCtx)
 	return l.UserSelectGroup(in)

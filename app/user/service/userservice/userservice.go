@@ -25,6 +25,8 @@ type (
 	KickOutUserGroupResponse      = user.KickOutUserGroupResponse
 	MyGroupResponse               = user.MyGroupResponse
 	NextUserIDResponse            = user.NextUserIDResponse
+	QueryGroupHostRequest         = user.QueryGroupHostRequest
+	QueryGroupHostResponse        = user.QueryGroupHostResponse
 	QueryMyGroupListRequest       = user.QueryMyGroupListRequest
 	QuitGroupRequest              = user.QuitGroupRequest
 	QuitGroupResponse             = user.QuitGroupResponse
@@ -87,6 +89,7 @@ type (
 		DecUserID(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 		// 群聊
 		UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error)
+		QueryGroupHost(ctx context.Context, in *QueryGroupHostRequest, opts ...grpc.CallOption) (*QueryGroupHostResponse, error)
 		UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 		UserUserSelfGroup(ctx context.Context, in *UserSelfGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 		UserSelectDetailGroup(ctx context.Context, in *DetailGroupRequest, opts ...grpc.CallOption) (*DetailGroupResponse, error)
@@ -213,6 +216,11 @@ func (m *defaultUserService) DecUserID(ctx context.Context, in *Empty, opts ...g
 func (m *defaultUserService) UserCreateGroup(ctx context.Context, in *UserCreateGroupRequest, opts ...grpc.CallOption) (*Empty, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserCreateGroup(ctx, in, opts...)
+}
+
+func (m *defaultUserService) QueryGroupHost(ctx context.Context, in *QueryGroupHostRequest, opts ...grpc.CallOption) (*QueryGroupHostResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.QueryGroupHost(ctx, in, opts...)
 }
 
 func (m *defaultUserService) UserSelectGroup(ctx context.Context, in *UserSelectGroupsRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error) {

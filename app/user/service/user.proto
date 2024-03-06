@@ -313,6 +313,13 @@ message SearchMyGroupByNameRequest {
 }
 //根据备注或者群聊名称搜索我加入的群聊
 
+message QueryGroupHostRequest {
+  uint64 group_id =1;
+}
+message QueryGroupHostResponse {
+  uint64 groupHostId = 1;
+}
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -346,6 +353,7 @@ service UserService {
 
   //群聊
   rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty); //创建群聊
+  rpc QueryGroupHost(QueryGroupHostRequest) returns(QueryGroupHostResponse); // 获取群主id
   rpc UserSelectGroup(UserSelectGroupsRequest) returns (UserSelectGroupsResponse) ; //首页根据标签推荐群聊
   rpc UserUserSelfGroup(UserSelfGroupRequest) returns(UserSelectGroupsResponse) ; //查询和自己相关的群聊
   rpc UserSelectDetailGroup(DetailGroupRequest) returns (DetailGroupResponse) ; //查询群聊详情

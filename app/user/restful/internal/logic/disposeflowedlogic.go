@@ -30,9 +30,12 @@ func (l *DisposeFlowedLogic) DisposeFlowed(req *types.DisposeFlowedRequest) erro
 		To:     req.To,
 		Type:   req.Type,
 		Remark: req.Remark,
+		Result: req.Res,
 	})
 	if err != nil {
 		logx.Error("l.svcCtx.UserRpc.UserDisposeFlowed failed: ", err)
+		return err
 	}
+
 	return err
 }
