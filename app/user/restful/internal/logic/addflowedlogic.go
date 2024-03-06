@@ -65,7 +65,7 @@ func (l *AddFlowedLogic) AddFlowed(req *types.UserAppleRequest) (err error) {
 		//判断该用户加入 创建的群聊数是否超过了最大限制
 		groupCount, err := l.svcCtx.UserRpc.SelectMyGroupCount(l.ctx, &user.SelectMyGroupCountRequest{UserId: uint64(id)})
 		if err != nil {
-			return
+			return err
 		}
 		if groupCount.Count > 50 {
 			return status.Error(899, "创建或者加入的群聊数据达到了最大限制")
@@ -79,7 +79,7 @@ func (l *AddFlowedLogic) AddFlowed(req *types.UserAppleRequest) (err error) {
 		// 如果该用户登录
 		if client, has := Clients[hId]; has {
 			client.Conn.WriteJSON(req)
-			return
+			return err
 		}
 		// 存储到kafka
 		message := types.Message{
@@ -90,7 +90,7 @@ func (l *AddFlowedLogic) AddFlowed(req *types.UserAppleRequest) (err error) {
 			Content: req.Content,
 		}
 		WriteByConn(message, hId)
-		return
+		return err
 	}
-	return
+	return err
 }
