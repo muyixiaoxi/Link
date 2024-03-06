@@ -313,6 +313,16 @@ message SearchMyGroupByNameRequest {
 }
 //根据备注或者群聊名称搜索我加入的群聊
 
+//搜索当前用户加入的群聊个数
+message SelectMyGroupCountRequest{
+  uint64 user_id = 1 ; //当前登录用户id
+}
+
+message SelectMyGroupCountResponse {
+  uint64 count = 1; //当前用户加入的群聊数
+}
+//搜索当前用户加入的群聊个数
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -357,6 +367,7 @@ service UserService {
   rpc QueryMyGroupList(QueryMyGroupListRequest) returns (UserSelectGroupsResponse) ; //获取群列表
   rpc SearchStrangerGroup(SearchStrangerGroupRequest) returns(UserSelectGroupsResponse) ; //搜索陌生群聊
   rpc SearchMyGroupByName(SearchMyGroupByNameRequest) returns (MyGroupResponse) ; //根据备注或者群名称搜索我加入的群聊
+  rpc SelectMyGroupCount(SelectMyGroupCountRequest) returns (SelectMyGroupCountResponse) ; //搜索当前用户加入的群聊个数
 }
 
 

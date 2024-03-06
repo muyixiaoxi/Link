@@ -180,3 +180,8 @@ func (s *UserServiceServer) SearchMyGroupByName(ctx context.Context, in *user.Se
 	l := logic.NewSearchMyGroupByNameLogic(ctx, s.svcCtx)
 	return l.SearchMyGroupByName(in)
 }
+
+func (s *UserServiceServer) SelectMyGroupCount(ctx context.Context, in *user.SelectMyGroupCountRequest) (*user.SelectMyGroupCountResponse, error) {
+	l := logic.NewSelectMyGroupCountLogic(ctx, s.svcCtx)
+	return l.SelectMyGroupCount(in)
+}
