@@ -20,6 +20,7 @@ const (
 	CodeTagMoreMax
 	CodeRepeatAddition
 	CodeGroupChatOverload
+	CodeGroupMax
 )
 
 var codeMsgMap = map[ResCode]string{
@@ -40,6 +41,7 @@ var codeMsgMap = map[ResCode]string{
 	CodeTagMoreMax:          "标签超过最大数量限制",
 	CodeRepeatAddition:      "重复添加",
 	CodeGroupChatOverload:   "群聊人数超出限制",
+	CodeGroupMax:            "加入的群聊超过最大限制",
 }
 
 func (c ResCode) Msg() string {
