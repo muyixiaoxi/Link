@@ -35,6 +35,8 @@ type (
 	RecommendUsersResponse        = user.RecommendUsersResponse
 	SearchMyGroupByNameRequest    = user.SearchMyGroupByNameRequest
 	SearchStrangerGroupRequest    = user.SearchStrangerGroupRequest
+	SelectMyGroupCountRequest     = user.SelectMyGroupCountRequest
+	SelectMyGroupCountResponse    = user.SelectMyGroupCountResponse
 	SelectUserListByGroup         = user.SelectUserListByGroup
 	SelectUserListByGroupRequest  = user.SelectUserListByGroupRequest
 	SelectUserListByGroupResponse = user.SelectUserListByGroupResponse
@@ -101,6 +103,7 @@ type (
 		QueryMyGroupList(ctx context.Context, in *QueryMyGroupListRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 		SearchStrangerGroup(ctx context.Context, in *SearchStrangerGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 		SearchMyGroupByName(ctx context.Context, in *SearchMyGroupByNameRequest, opts ...grpc.CallOption) (*MyGroupResponse, error)
+		SelectMyGroupCount(ctx context.Context, in *SelectMyGroupCountRequest, opts ...grpc.CallOption) (*SelectMyGroupCountResponse, error)
 	}
 
 	defaultUserService struct {
@@ -276,4 +279,9 @@ func (m *defaultUserService) SearchStrangerGroup(ctx context.Context, in *Search
 func (m *defaultUserService) SearchMyGroupByName(ctx context.Context, in *SearchMyGroupByNameRequest, opts ...grpc.CallOption) (*MyGroupResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.SearchMyGroupByName(ctx, in, opts...)
+}
+
+func (m *defaultUserService) SelectMyGroupCount(ctx context.Context, in *SelectMyGroupCountRequest, opts ...grpc.CallOption) (*SelectMyGroupCountResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.SelectMyGroupCount(ctx, in, opts...)
 }
