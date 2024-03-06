@@ -93,6 +93,11 @@ func (s *UserServiceServer) UserDeleteFriend(ctx context.Context, in *user.UserD
 	return l.UserDeleteFriend(in)
 }
 
+func (s *UserServiceServer) UserGetApplyFor(ctx context.Context, in *user.UserGetApplyForRequest) (*user.UserGetApplyForResponse, error) {
+	l := logic.NewUserGetApplyForLogic(ctx, s.svcCtx)
+	return l.UserGetApplyFor(in)
+}
+
 // 偏移量
 func (s *UserServiceServer) GetOffset(ctx context.Context, in *user.GetOffsetRequest) (*user.GetOffsetResponse, error) {
 	l := logic.NewGetOffsetLogic(ctx, s.svcCtx)

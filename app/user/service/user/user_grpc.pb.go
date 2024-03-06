@@ -33,6 +33,7 @@ const (
 	UserService_UserQueryFriend_FullMethodName        = "/user.UserService/UserQueryFriend"
 	UserService_UserQueryPhone_FullMethodName         = "/user.UserService/UserQueryPhone"
 	UserService_UserDeleteFriend_FullMethodName       = "/user.UserService/UserDeleteFriend"
+	UserService_UserGetApplyFor_FullMethodName        = "/user.UserService/UserGetApplyFor"
 	UserService_GetOffset_FullMethodName              = "/user.UserService/GetOffset"
 	UserService_SetOffset_FullMethodName              = "/user.UserService/SetOffset"
 	UserService_NextUserID_FullMethodName             = "/user.UserService/NextUserID"
@@ -73,6 +74,7 @@ type UserServiceClient interface {
 	UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
 	UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error)
 	UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error)
+	UserGetApplyFor(ctx context.Context, in *UserGetApplyForRequest, opts ...grpc.CallOption) (*UserGetApplyForResponse, error)
 	// 偏移量
 	GetOffset(ctx context.Context, in *GetOffsetRequest, opts ...grpc.CallOption) (*GetOffsetResponse, error)
 	SetOffset(ctx context.Context, in *SetOffsetRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -225,6 +227,15 @@ func (c *userServiceClient) UserQueryPhone(ctx context.Context, in *UserQueryPho
 func (c *userServiceClient) UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, UserService_UserDeleteFriend_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserGetApplyFor(ctx context.Context, in *UserGetApplyForRequest, opts ...grpc.CallOption) (*UserGetApplyForResponse, error) {
+	out := new(UserGetApplyForResponse)
+	err := c.cc.Invoke(ctx, UserService_UserGetApplyFor_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -421,6 +432,7 @@ type UserServiceServer interface {
 	UserQueryFriend(context.Context, *UserQueryFriendRequest) (*UserFriendResponse, error)
 	UserQueryPhone(context.Context, *UserQueryPhoneRequest) (*UserQueryPhoneResponse, error)
 	UserDeleteFriend(context.Context, *UserDeleteFriendRequest) (*Empty, error)
+	UserGetApplyFor(context.Context, *UserGetApplyForRequest) (*UserGetApplyForResponse, error)
 	// 偏移量
 	GetOffset(context.Context, *GetOffsetRequest) (*GetOffsetResponse, error)
 	SetOffset(context.Context, *SetOffsetRequest) (*Empty, error)
@@ -491,6 +503,9 @@ func (UnimplementedUserServiceServer) UserQueryPhone(context.Context, *UserQuery
 }
 func (UnimplementedUserServiceServer) UserDeleteFriend(context.Context, *UserDeleteFriendRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserDeleteFriend not implemented")
+}
+func (UnimplementedUserServiceServer) UserGetApplyFor(context.Context, *UserGetApplyForRequest) (*UserGetApplyForResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserGetApplyFor not implemented")
 }
 func (UnimplementedUserServiceServer) GetOffset(context.Context, *GetOffsetRequest) (*GetOffsetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOffset not implemented")
@@ -810,6 +825,24 @@ func _UserService_UserDeleteFriend_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).UserDeleteFriend(ctx, req.(*UserDeleteFriendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserGetApplyFor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserGetApplyForRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserGetApplyFor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserGetApplyFor_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserGetApplyFor(ctx, req.(*UserGetApplyForRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1218,6 +1251,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserDeleteFriend",
 			Handler:    _UserService_UserDeleteFriend_Handler,
+		},
+		{
+			MethodName: "UserGetApplyFor",
+			Handler:    _UserService_UserGetApplyFor_Handler,
 		},
 		{
 			MethodName: "GetOffset",

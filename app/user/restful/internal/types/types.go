@@ -149,6 +149,15 @@ type UserAppleRequest struct {
 	Remark  string `json:"remark"`
 }
 
+type UserApplyForResponse struct {
+	UserId    uint64
+	BeId      uint64
+	Message   string
+	Type      uint64
+	Result    bool
+	UpdatedAt string
+}
+
 type UserChooseTagRequst struct {
 	SystemTagId uint64   `json:"systemTagId" validate:"required"'`
 	TagIds      []uint64 `json:"tagIds" validate:"required,max=3"`

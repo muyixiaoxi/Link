@@ -330,6 +330,21 @@ message SelectMyGroupCountRequest{
 message SelectMyGroupCountResponse {
   uint64 count = 1; //当前用户加入的群聊数
 }
+
+message UserGetApplyForRequest {
+  uint64 userId = 1;
+}
+message UserGetApplyForResponse {
+  repeated ApplyFor list = 1;
+}
+message ApplyFor{
+  uint64 userId = 1;
+  uint64 beId = 2;
+  string message = 3;
+  uint64 type = 4;
+  bool result = 5;
+  string updatedAt = 6;
+}
 //搜索当前用户加入的群聊个数
 
 service UserService {
@@ -350,6 +365,7 @@ service UserService {
   rpc UserQueryFriend(UserQueryFriendRequest)returns(UserFriendResponse); // 在好友列表中搜索
   rpc UserQueryPhone(UserQueryPhoneRequest)returns(UserQueryPhoneResponse); // 通过手机号搜索（包括陌生人）
   rpc UserDeleteFriend(UserDeleteFriendRequest)returns(Empty); // 用户删除好友
+  rpc UserGetApplyFor(UserGetApplyForRequest)returns(UserGetApplyForResponse); // 获取好友申请
 
 
   // 偏移量

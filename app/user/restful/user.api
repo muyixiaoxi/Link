@@ -155,6 +155,15 @@ type UserDeleteFriendRequest {
 	FriendId uint64 `json:"friendId"`
 }
 
+type UserApplyForResponse {
+	UserId    uint64
+	BeId      uint64
+	Message   string
+	Type      uint64
+	Result    bool
+	UpdatedAt string
+}
+
 @server (
 	prefix: /app/user
 )
@@ -212,6 +221,10 @@ service user {
 	@doc "删除好友"
 	@handler DeleteFriend
 	delete /friend (UserDeleteFriendRequest)
+
+	@doc "好友申请列表"
+	@handler GetApplyFor
+	get /apply returns ([]UserApplyForResponse)
 }
 
 //首页根据标签推荐群聊

@@ -46,6 +46,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: getUserInfoHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodGet,
+				Path:    "/apply",
+				Handler: GetApplyForHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodPost,
 				Path:    "/flowed",
 				Handler: addFlowedHandler(serverCtx),

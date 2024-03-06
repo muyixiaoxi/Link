@@ -13,6 +13,7 @@ import (
 )
 
 type (
+	ApplyFor                      = user.ApplyFor
 	DetailGroupRequest            = user.DetailGroupRequest
 	DetailGroupResponse           = user.DetailGroupResponse
 	DisposeFlowedRequest          = user.DisposeFlowedRequest
@@ -53,6 +54,8 @@ type (
 	UserFriend                    = user.UserFriend
 	UserFriendRequest             = user.UserFriendRequest
 	UserFriendResponse            = user.UserFriendResponse
+	UserGetApplyForRequest        = user.UserGetApplyForRequest
+	UserGetApplyForResponse       = user.UserGetApplyForResponse
 	UserInfoRequest               = user.UserInfoRequest
 	UserInfoResponse              = user.UserInfoResponse
 	UserLoginRequest              = user.UserLoginRequest
@@ -82,6 +85,7 @@ type (
 		UserQueryFriend(ctx context.Context, in *UserQueryFriendRequest, opts ...grpc.CallOption) (*UserFriendResponse, error)
 		UserQueryPhone(ctx context.Context, in *UserQueryPhoneRequest, opts ...grpc.CallOption) (*UserQueryPhoneResponse, error)
 		UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error)
+		UserGetApplyFor(ctx context.Context, in *UserGetApplyForRequest, opts ...grpc.CallOption) (*UserGetApplyForResponse, error)
 		// 偏移量
 		GetOffset(ctx context.Context, in *GetOffsetRequest, opts ...grpc.CallOption) (*GetOffsetResponse, error)
 		SetOffset(ctx context.Context, in *SetOffsetRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -186,6 +190,11 @@ func (m *defaultUserService) UserQueryPhone(ctx context.Context, in *UserQueryPh
 func (m *defaultUserService) UserDeleteFriend(ctx context.Context, in *UserDeleteFriendRequest, opts ...grpc.CallOption) (*Empty, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.UserDeleteFriend(ctx, in, opts...)
+}
+
+func (m *defaultUserService) UserGetApplyFor(ctx context.Context, in *UserGetApplyForRequest, opts ...grpc.CallOption) (*UserGetApplyForResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.UserGetApplyFor(ctx, in, opts...)
 }
 
 // 偏移量
