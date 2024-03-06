@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"encoding/json"
+	"time"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -40,11 +41,46 @@ func (l *AddFlowedLogic) AddFlowed(req *types.UserAppleRequest) (err error) {
 		logx.Error("l.svcCtx.UserRpc.UserFlowed failed: ", err)
 		return
 	}
+	if req.Type == 3 {
+		// 如果该用户登录
+		if client, has := Clients[req.To]; has {
+			client.Conn.WriteJSON(req)
+			return
+		}
+		// 存储到kafka
+		message := types.Message{
+			From:    uint64(id),
+			To:      req.To,
+			Time:    time.Now().Format("2006/01/02 15:04:05"),
+			Type:    req.Type,
+			Content: req.Content,
+		}
+		WriteByConn(message, req.To)
+		return
+	}
 
-	// 如果该用户登录
-	if client, has := Clients[req.To]; has {
-		client.Conn.WriteJSON(req)
+	if req.Type == 4 {
+		// 获取群主id
+		resp, _ := l.svcCtx.UserRpc.QueryGroupHost(context.Background(), &user.QueryGroupHostRequest{
+			GroupId: req.To,
+		})
+		hId := resp.GroupHostId
+
+		// 如果该用户登录
+		if client, has := Clients[hId]; has {
+			client.Conn.WriteJSON(req)
+			return
+		}
+		// 存储到kafka
+		message := types.Message{
+			From:    uint64(id),
+			To:      req.To,
+			Time:    time.Now().Format("2006/01/02 15:04:05"),
+			Type:    req.Type,
+			Content: req.Content,
+		}
+		WriteByConn(message, hId)
+		return
 	}
 	return
-	return nil
 }

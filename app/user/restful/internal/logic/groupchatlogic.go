@@ -28,7 +28,7 @@ func (l *ChatWSLogic) GroupChat(message types.Message) {
 			c.Conn.WriteJSON(message)
 		} else if !has {
 			//如果是处于离线状态的用户 给此用户创建一个主题
-			l.WriteByConn(message, groupUser.Id)
+			WriteByConn(message, groupUser.Id)
 		}
 	}
 }

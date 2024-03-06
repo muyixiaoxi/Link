@@ -17,11 +17,11 @@ func (l *ChatWSLogic) SingleChat(message types.Message) {
 		return
 	}
 	// 离线存储消息队列
-	l.WriteByConn(message, message.To)
+	WriteByConn(message, message.To)
 }
 
 // WriteByConn 基于conn发送消息
-func (l *ChatWSLogic) WriteByConn(message types.Message, userId uint64) {
+func WriteByConn(message types.Message, userId uint64) {
 
 	topic := fmt.Sprintf("link_user_%d", userId)
 	host := "114.55.135.211:9092"
@@ -40,7 +40,7 @@ func (l *ChatWSLogic) WriteByConn(message types.Message, userId uint64) {
 }
 
 // ReadByConn 连接至kafka后接收消息
-func (l *ChatWSLogic) ReadByConn(id uint64) (messages []*types.Message) {
+func ReadByConn(id uint64) (messages []*types.Message) {
 	topic := fmt.Sprintf("link_user_%d", id)
 	brokers := []string{"114.55.135.211:9092"}
 

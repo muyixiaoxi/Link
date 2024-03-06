@@ -25,17 +25,18 @@ func NewUserDisposeFlowedLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *UserDisposeFlowedLogic) UserDisposeFlowed(in *user.DisposeFlowedRequest) (*user.Empty, error) {
-	// 删除记录
+	// 修改记录
 	apply := &types.ApplyFor{
 		UserID: in.From,
 		BeId:   in.To,
 		Type:   in.Type,
+		Result: in.Result,
 	}
 	if err := l.svcCtx.DB.Where("user_id = ? and be_id = ? and type = ?", apply.UserID, apply.BeId, apply.Type).First(apply).Error; err != nil {
 		return &user.Empty{}, err
 	}
 	tx := l.svcCtx.DB.Begin()
-	if err := tx.Delete(apply).Error; err != nil {
+	if err := tx.Updates(apply).Error; err != nil {
 		return &user.Empty{}, err
 	}
 	if in.Result { // 同意

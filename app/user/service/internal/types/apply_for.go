@@ -9,4 +9,5 @@ type ApplyFor struct {
 	Message string `gorm:"size:100"`
 	Type    uint32 `gorm:"not null"`
 	Remark  string `gorm:"size:20"`
+	Result  bool
 }

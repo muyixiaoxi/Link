@@ -47,7 +47,7 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := logic.NewChatWSLogic(r.Context(), svcCtx)
 
 		go func() {
-			unread := l.ReadByConn(client.Id)
+			unread := logic.ReadByConn(client.Id)
 			if unread != nil {
 				for _, message := range unread {
 					client.Conn.WriteJSON(message)
