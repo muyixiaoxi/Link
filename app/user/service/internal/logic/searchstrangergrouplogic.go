@@ -28,9 +28,13 @@ func (l *SearchStrangerGroupLogic) SearchStrangerGroup(in *user.SearchStrangerGr
 	// 搜索陌生群聊
 	// 先搜索出我加入的群聊的id
 	var myGroupID []uint64
-	err := l.svcCtx.DB.Debug().Model(&types.UserGroupChat{}).Select("group_chat_id").Where("user_id = ?", in.UserId).Find(&myGroupID).Error
+	err := l.svcCtx.DB.Model(&types.UserGroupChat{}).Select("group_chat_id").Where("user_id = ?", in.UserId).Find(&myGroupID).Error
 	if err != nil {
 		return nil, err
+	}
+	if len(myGroupID) == 0 {
+		//如果当前登录用户一个群聊也没有加入
+		myGroupID = append(myGroupID, 0)
 	}
 	//根据名称搜索我未加入的群聊
 	page := int(in.PageNo)

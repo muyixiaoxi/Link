@@ -3,6 +3,7 @@ package userGroup
 import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 	"net/http"
 	"user/common/response"
 	"user/common/validate"
@@ -27,6 +28,12 @@ func UserCreateGroupHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := userGroup.NewUserCreateGroupLogic(r.Context(), svcCtx)
 		err := l.UserCreateGroup(&req)
 		if err != nil {
+			fromErr, _ := status.FromError(err)
+			if fromErr.Code() == 899 {
+				//加入群聊达到最大限制
+				response.Response(w, nil, response.CodeGroupMax)
+				return
+			}
 			logc.Error(context.Background(), "userGroup.NewUserCreateGroupLogic(r.Context(), svcCtx) is failed", err)
 			response.Response(w, nil, response.CodeServerBusy)
 		} else {
