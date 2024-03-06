@@ -43,6 +43,7 @@ func (l *QueryFriendsLogic) QueryFriends(req *types.UserQueryFriendRequest) (res
 			Remark:    u.Remark,
 			Signature: u.Signature,
 			TagName:   u.TagName,
+			Type:      1, //人
 		})
 	}
 	return

@@ -30,6 +30,7 @@ type (
 	GroupTagResponse           = tag.GroupTagResponse
 	SelectAllTagsByGroupName   = tag.SelectAllTagsByGroupName
 	SelectLinkTag              = tag.SelectLinkTag
+	SelectLinkTagMid           = tag.SelectLinkTagMid
 	SelectLinkTagsRequest      = tag.SelectLinkTagsRequest
 	SelectLinkTagsResponse     = tag.SelectLinkTagsResponse
 	SelectMyTagsRequest        = tag.SelectMyTagsRequest

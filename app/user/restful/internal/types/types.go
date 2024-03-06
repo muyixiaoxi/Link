@@ -15,6 +15,7 @@ type DisposeFlowedRequest struct {
 
 type GroupList struct {
 	Id              uint64 `json:"id"`              //群id
+	Type            uint64 `json:"type"`            //type类型 2 表示群聊
 	Name            string `json:"name"`            //群聊名称
 	SystemTagName   string `json:"systemTagName"`   //群聊所带的系统标签名称
 	UserSelfTagName string `json:"userSelfTagName"` //用户自定义标签
@@ -64,7 +65,9 @@ type QueryLink struct {
 }
 
 type QueryLinkTagsResponse struct {
-	LinkTags []QueryLink `json:"linkTags"`
+	SystemTagName string      `json:"systemTagName"`
+	SystemTagId   uint64      `json:"systemTagId"`
+	LinkTags      []QueryLink `json:"linkTags"`
 }
 
 type QuitGroupRequest struct {
@@ -87,6 +90,7 @@ type RecommendUser struct {
 	Username  string `json:"username"`  //用户名
 	Avatar    string `json:"avatar"`    //用户头像
 	Signature string `json:"signature"` //个性签名
+	Type      uint64 `json:"type"`
 }
 
 type RecommendUserListResponse struct {
@@ -188,6 +192,7 @@ type UserFriend struct {
 	Avatar    string   `json:"avatar"`
 	Remark    string   `json:"remark"`
 	Signature string   `json:"signature"`
+	Type      uint64   `json:"type"`
 	TagName   []string `json:"tagName"`
 }
 
@@ -234,6 +239,7 @@ type UserQueryPhoneRequest struct {
 
 type UserQueryPhoneResponse struct {
 	Id        uint64   `json:"id"`
+	Type      uint64   `json:"type"`
 	Username  string   `json:"username"`
 	Avatar    string   `json:"avatar"`
 	Address   string   `json:"address"`
