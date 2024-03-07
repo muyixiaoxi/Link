@@ -38,6 +38,8 @@ func (l *GetApplyForLogic) GetApplyFor() (resp []types.UserApplyForResponse, err
 		time := t.Format("2006/01/02 15:04:05")
 		tmp := types.UserApplyForResponse{
 			UserId:    applyFor.UserId,
+			Username:  applyFor.Username,
+			Avatar:    applyFor.Avatar,
 			BeId:      applyFor.BeId,
 			Message:   applyFor.Message,
 			Type:      applyFor.Type,

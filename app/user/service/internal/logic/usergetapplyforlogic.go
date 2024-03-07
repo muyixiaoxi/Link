@@ -2,8 +2,6 @@ package logic
 
 import (
 	"context"
-	"user/service/internal/types"
-
 	"user/service/internal/svc"
 	"user/service/user"
 
@@ -26,6 +24,6 @@ func NewUserGetApplyForLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 
 func (l *UserGetApplyForLogic) UserGetApplyFor(in *user.UserGetApplyForRequest) (resp *user.UserGetApplyForResponse, err error) {
 	resp = &user.UserGetApplyForResponse{}
-	err = l.svcCtx.DB.Model(&types.ApplyFor{}).Where("be_id = ?", in.UserId).Scan(&resp.List).Error
+	err = l.svcCtx.DB.Table("apply_fors a").Select("a.user_id,a.be_id,a.message,a.type,a.result,a.updated_at,u.username,u.avatar").Joins("join users u on u.id = a.user_id").Where("a.be_id = ?", in.UserId).Scan(&resp.List).Error
 	return
 }
