@@ -150,12 +150,12 @@ type UserAppleRequest struct {
 }
 
 type UserApplyForResponse struct {
-	UserId    uint64
-	BeId      uint64
-	Message   string
-	Type      uint64
-	Result    bool
-	UpdatedAt string
+	UserId    uint64 `json:"userId"`
+	BeId      uint64 `json:"beId"`
+	Message   string `json:"message"`
+	Type      uint64 `json:"type"`
+	Result    bool   `json:"result"`
+	UpdatedAt string `json:"updatedAt"`
 }
 
 type UserChooseTagRequst struct {
