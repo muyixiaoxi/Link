@@ -29,7 +29,6 @@ func NewSignUserChooseTagRevertLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *SignUserChooseTagRevertLogic) SignUserChooseTagRevert(in *tag.UserChooseTagRequest) (*tag.UserChooseTagRequest, error) {
-
 	fmt.Println("用户标签SignUserChooseTagRevert--->开始")
 	// 获取 RawDB
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
