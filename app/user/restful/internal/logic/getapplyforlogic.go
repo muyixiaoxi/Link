@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"encoding/json"
+	"time"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -32,16 +33,18 @@ func (l *GetApplyForLogic) GetApplyFor() (resp []types.UserApplyForResponse, err
 		UserId: uint64(id),
 	})
 	resp = make([]types.UserApplyForResponse, len(response.List))
-	for _, applyFor := range response.List {
+	for i, applyFor := range response.List {
+		t, _ := time.Parse(time.RFC3339Nano, applyFor.UpdatedAt)
+		time := t.Format("2006/01/02 15:04:05")
 		tmp := types.UserApplyForResponse{
 			UserId:    applyFor.UserId,
 			BeId:      applyFor.BeId,
 			Message:   applyFor.Message,
 			Type:      applyFor.Type,
 			Result:    applyFor.Result,
-			UpdatedAt: applyFor.UpdatedAt,
+			UpdatedAt: time,
 		}
-		resp = append(resp, tmp)
+		resp[i] = tmp
 	}
 	return
 }
