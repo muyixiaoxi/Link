@@ -151,6 +151,8 @@ type UserAppleRequest struct {
 
 type UserApplyForResponse struct {
 	UserId    uint64 `json:"userId"`
+	Username  string `json:"username"`
+	Avatar    string `json:"avatar"`
 	BeId      uint64 `json:"beId"`
 	Message   string `json:"message"`
 	Type      uint64 `json:"type"`
