@@ -65,6 +65,5 @@ func (l *UserFlowedLogic) UserFlowed(in *user.UserAddRequest) (response *user.Em
 		return
 	}
 	err = l.svcCtx.DB.Where("user_id = ? and be_id = ?", model.UserID, model.BeId).Updates(&model).Update("result", nil).Error
-
 	return response, err
 }

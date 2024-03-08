@@ -26,7 +26,8 @@ func NewQueryGroupHostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Qu
 
 func (l *QueryGroupHostLogic) QueryGroupHost(in *user.QueryGroupHostRequest) (resp *user.QueryGroupHostResponse, err error) {
 	model := types.GroupChat{}
-	err = l.svcCtx.DB.Where("id = ?", in.GroupId).Find(model).Error
-	resp.GroupHostId = model.GroupBossID
+	err = l.svcCtx.DB.Where("id = ?", in.GroupId).Find(&model).Error
+	//resp.GroupHostId = model.GroupBossID
+	resp = &user.QueryGroupHostResponse{GroupHostId: model.GroupBossID}
 	return resp, err
 }
