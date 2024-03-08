@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"google.golang.org/grpc/status"
 	"time"
 	"user/service/user"
@@ -76,9 +75,6 @@ func (l *AddFlowedLogic) AddFlowed(req *types.UserAppleRequest) (err error) {
 			GroupId: req.To,
 		})
 
-		fmt.Println("@@@@@@", resp)
-
-		fmt.Println("77行空指针")
 		hId := resp.GroupHostId
 
 		// 如果该用户登录

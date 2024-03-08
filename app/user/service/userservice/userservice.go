@@ -18,6 +18,8 @@ type (
 	DetailGroupResponse           = user.DetailGroupResponse
 	DisposeFlowedRequest          = user.DisposeFlowedRequest
 	Empty                         = user.Empty
+	GetGroupNameRequest           = user.GetGroupNameRequest
+	GetGroupNameResponse          = user.GetGroupNameResponse
 	GetOffsetRequest              = user.GetOffsetRequest
 	GetOffsetResponse             = user.GetOffsetResponse
 	GroupChat                     = user.GroupChat
@@ -108,6 +110,7 @@ type (
 		SearchStrangerGroup(ctx context.Context, in *SearchStrangerGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 		SearchMyGroupByName(ctx context.Context, in *SearchMyGroupByNameRequest, opts ...grpc.CallOption) (*MyGroupResponse, error)
 		SelectMyGroupCount(ctx context.Context, in *SelectMyGroupCountRequest, opts ...grpc.CallOption) (*SelectMyGroupCountResponse, error)
+		GetGroupName(ctx context.Context, in *GetGroupNameRequest, opts ...grpc.CallOption) (*GetGroupNameResponse, error)
 	}
 
 	defaultUserService struct {
@@ -293,4 +296,9 @@ func (m *defaultUserService) SearchMyGroupByName(ctx context.Context, in *Search
 func (m *defaultUserService) SelectMyGroupCount(ctx context.Context, in *SelectMyGroupCountRequest, opts ...grpc.CallOption) (*SelectMyGroupCountResponse, error) {
 	client := user.NewUserServiceClient(m.cli.Conn())
 	return client.SelectMyGroupCount(ctx, in, opts...)
+}
+
+func (m *defaultUserService) GetGroupName(ctx context.Context, in *GetGroupNameRequest, opts ...grpc.CallOption) (*GetGroupNameResponse, error) {
+	client := user.NewUserServiceClient(m.cli.Conn())
+	return client.GetGroupName(ctx, in, opts...)
 }

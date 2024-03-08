@@ -349,6 +349,16 @@ message ApplyFor{
 }
 //搜索当前用户加入的群聊个数
 
+//获取群名称
+message GetGroupNameRequest {
+  uint64 id = 1;
+}
+message GetGroupNameResponse {
+  string group_name = 1;
+}
+//获取群名称
+
+
 service UserService {
   rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
   rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
@@ -396,6 +406,7 @@ service UserService {
   rpc SearchStrangerGroup(SearchStrangerGroupRequest) returns(UserSelectGroupsResponse) ; //搜索陌生群聊
   rpc SearchMyGroupByName(SearchMyGroupByNameRequest) returns (MyGroupResponse) ; //根据备注或者群名称搜索我加入的群聊
   rpc SelectMyGroupCount(SelectMyGroupCountRequest) returns (SelectMyGroupCountResponse) ; //搜索当前用户加入的群聊个数
+  rpc GetGroupName(GetGroupNameRequest) returns (GetGroupNameResponse); //获取群聊名称
 }
 
 

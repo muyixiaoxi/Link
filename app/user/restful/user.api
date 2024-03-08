@@ -164,6 +164,7 @@ type UserApplyForResponse {
 	Type      uint64 `json:"type"`
 	Result    bool   `json:"result"`
 	UpdatedAt string `json:"updatedAt"`
+	GroupName string `json:"groupName"`
 }
 
 @server (
