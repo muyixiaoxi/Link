@@ -39,7 +39,10 @@ func (l *UserUpdateInfoLogic) UserUpdateInfo(in *user.UserUpdateInfoRequest) (rp
 		return nil, err
 	}
 	l.svcCtx.RDB.Del(fmt.Sprintf("link:user:%d", m.ID))
-	pwd, _ := bcrypt.GetPwd(in.Password)
+	var pwd string
+	if len(in.Password) != 0 {
+		pwd, _ = bcrypt.GetPwd(in.Password)
+	}
 	model := &types.User{
 		Model:     gorm.Model{ID: uint(in.Id)},
 		Username:  in.Username,
