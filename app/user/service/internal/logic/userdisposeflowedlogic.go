@@ -32,11 +32,13 @@ func (l *UserDisposeFlowedLogic) UserDisposeFlowed(in *user.DisposeFlowedRequest
 		Type:   in.Type,
 		Result: in.Result,
 	}
-	if err := l.svcCtx.DB.Where("user_id = ? and be_id = ? and type = ?", apply.UserID, apply.BeId, apply.Type).First(apply).Error; err != nil {
+	req := &types.ApplyFor{}
+
+	if err := l.svcCtx.DB.Where("user_id = ? and be_id = ? and type = ?", apply.UserID, apply.BeId, apply.Type).First(req).Error; err != nil {
 		return &user.Empty{}, err
 	}
 	tx := l.svcCtx.DB.Begin()
-	if err := tx.Updates(apply).Error; err != nil {
+	if err := tx.Where("id = ?", req.ID).Updates(apply).Error; err != nil {
 		return &user.Empty{}, err
 	}
 	if in.Result { // 同意
