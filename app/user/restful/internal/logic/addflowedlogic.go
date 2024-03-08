@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"google.golang.org/grpc/status"
 	"time"
 	"user/service/user"
@@ -71,9 +72,13 @@ func (l *AddFlowedLogic) AddFlowed(req *types.UserAppleRequest) (err error) {
 			return status.Error(899, "创建或者加入的群聊数据达到了最大限制")
 		}
 		// 获取群主id
-		resp, _ := l.svcCtx.UserRpc.QueryGroupHost(context.Background(), &user.QueryGroupHostRequest{
+		resp, _ := l.svcCtx.UserRpc.QueryGroupHost(l.ctx, &user.QueryGroupHostRequest{
 			GroupId: req.To,
 		})
+
+		fmt.Println("@@@@@@", resp)
+
+		fmt.Println("77行空指针")
 		hId := resp.GroupHostId
 
 		// 如果该用户登录
