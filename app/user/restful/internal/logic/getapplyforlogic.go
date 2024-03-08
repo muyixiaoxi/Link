@@ -34,6 +34,12 @@ func (l *GetApplyForLogic) GetApplyFor() (resp []types.UserApplyForResponse, err
 	})
 	resp = make([]types.UserApplyForResponse, len(response.List))
 	for i, applyFor := range response.List {
+		var groupName string
+		//如果是群聊申请 , 根据id , 查询出群名
+		if applyFor.Type == 4 {
+			groupNameRpc, _ := l.svcCtx.UserRpc.GetGroupName(l.ctx, &user.GetGroupNameRequest{Id: applyFor.BeId})
+			groupName = groupNameRpc.GroupName
+		}
 		t, _ := time.Parse(time.RFC3339Nano, applyFor.UpdatedAt)
 		time := t.Format("2006/01/02 15:04:05")
 		tmp := types.UserApplyForResponse{
@@ -45,6 +51,7 @@ func (l *GetApplyForLogic) GetApplyFor() (resp []types.UserApplyForResponse, err
 			Type:      applyFor.Type,
 			Result:    applyFor.Result,
 			UpdatedAt: time,
+			GroupName: groupName,
 		}
 		resp[i] = tmp
 	}

@@ -158,6 +158,7 @@ type UserApplyForResponse struct {
 	Type      uint64 `json:"type"`
 	Result    bool   `json:"result"`
 	UpdatedAt string `json:"updatedAt"`
+	GroupName string `json:"groupName"`
 }
 
 type UserChooseTagRequst struct {

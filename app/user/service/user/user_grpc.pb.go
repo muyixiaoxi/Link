@@ -53,6 +53,7 @@ const (
 	UserService_SearchStrangerGroup_FullMethodName    = "/user.UserService/SearchStrangerGroup"
 	UserService_SearchMyGroupByName_FullMethodName    = "/user.UserService/SearchMyGroupByName"
 	UserService_SelectMyGroupCount_FullMethodName     = "/user.UserService/SelectMyGroupCount"
+	UserService_GetGroupName_FullMethodName           = "/user.UserService/GetGroupName"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -97,6 +98,7 @@ type UserServiceClient interface {
 	SearchStrangerGroup(ctx context.Context, in *SearchStrangerGroupRequest, opts ...grpc.CallOption) (*UserSelectGroupsResponse, error)
 	SearchMyGroupByName(ctx context.Context, in *SearchMyGroupByNameRequest, opts ...grpc.CallOption) (*MyGroupResponse, error)
 	SelectMyGroupCount(ctx context.Context, in *SelectMyGroupCountRequest, opts ...grpc.CallOption) (*SelectMyGroupCountResponse, error)
+	GetGroupName(ctx context.Context, in *GetGroupNameRequest, opts ...grpc.CallOption) (*GetGroupNameResponse, error)
 }
 
 type userServiceClient struct {
@@ -413,6 +415,15 @@ func (c *userServiceClient) SelectMyGroupCount(ctx context.Context, in *SelectMy
 	return out, nil
 }
 
+func (c *userServiceClient) GetGroupName(ctx context.Context, in *GetGroupNameRequest, opts ...grpc.CallOption) (*GetGroupNameResponse, error) {
+	out := new(GetGroupNameResponse)
+	err := c.cc.Invoke(ctx, UserService_GetGroupName_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -455,6 +466,7 @@ type UserServiceServer interface {
 	SearchStrangerGroup(context.Context, *SearchStrangerGroupRequest) (*UserSelectGroupsResponse, error)
 	SearchMyGroupByName(context.Context, *SearchMyGroupByNameRequest) (*MyGroupResponse, error)
 	SelectMyGroupCount(context.Context, *SelectMyGroupCountRequest) (*SelectMyGroupCountResponse, error)
+	GetGroupName(context.Context, *GetGroupNameRequest) (*GetGroupNameResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -563,6 +575,9 @@ func (UnimplementedUserServiceServer) SearchMyGroupByName(context.Context, *Sear
 }
 func (UnimplementedUserServiceServer) SelectMyGroupCount(context.Context, *SelectMyGroupCountRequest) (*SelectMyGroupCountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SelectMyGroupCount not implemented")
+}
+func (UnimplementedUserServiceServer) GetGroupName(context.Context, *GetGroupNameRequest) (*GetGroupNameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGroupName not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -1189,6 +1204,24 @@ func _UserService_SelectMyGroupCount_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_GetGroupName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGroupNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetGroupName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetGroupName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetGroupName(ctx, req.(*GetGroupNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1331,6 +1364,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SelectMyGroupCount",
 			Handler:    _UserService_SelectMyGroupCount_Handler,
+		},
+		{
+			MethodName: "GetGroupName",
+			Handler:    _UserService_GetGroupName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

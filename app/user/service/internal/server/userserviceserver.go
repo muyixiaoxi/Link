@@ -195,3 +195,8 @@ func (s *UserServiceServer) SelectMyGroupCount(ctx context.Context, in *user.Sel
 	l := logic.NewSelectMyGroupCountLogic(ctx, s.svcCtx)
 	return l.SelectMyGroupCount(in)
 }
+
+func (s *UserServiceServer) GetGroupName(ctx context.Context, in *user.GetGroupNameRequest) (*user.GetGroupNameResponse, error) {
+	l := logic.NewGetGroupNameLogic(ctx, s.svcCtx)
+	return l.GetGroupName(in)
+}
