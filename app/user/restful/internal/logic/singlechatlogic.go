@@ -22,8 +22,8 @@ func (l *ChatWSLogic) SingleChat(message types.Message) {
 
 // WriteByConn 基于conn发送消息
 func WriteByConn(message types.Message, userId uint64) {
-
 	topic := fmt.Sprintf("link_user_%d", userId)
+
 	host := "114.55.135.211:9092"
 	partition := 0
 
