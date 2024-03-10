@@ -12,14 +12,6 @@ func (l *ChatWSLogic) GroupChat(message types.Message) {
 	if err != nil {
 		return
 	}
-	for _, groupUser := range userList.UserList {
-		if groupUser.Id == message.From {
-			//将当前用户信息拼接
-			message.FromAvatar = groupUser.Avatar
-			message.FromUsername = groupUser.Username
-			break
-		}
-	}
 	//判断群聊内用户谁在线
 	for _, groupUser := range userList.UserList {
 		c, has := Clients[groupUser.Id]
