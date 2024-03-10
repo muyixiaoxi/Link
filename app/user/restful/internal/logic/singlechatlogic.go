@@ -13,7 +13,10 @@ import (
 func (l *ChatWSLogic) SingleChat(message types.Message) {
 	// 在线直接转发
 	if c, has := Clients[message.To]; has {
-		c.Conn.WriteJSON(message)
+		err := c.Conn.WriteJSON(message)
+		if err != nil {
+			WriteByConn(message, message.To)
+		}
 		return
 	}
 	// 离线存储消息队列
