@@ -3,9 +3,8 @@ package logic
 import (
 	"context"
 	"github.com/gorilla/websocket"
-	"sync"
-
 	"github.com/zeromicro/go-zero/core/logx"
+	"sync"
 	"user/restful/internal/svc"
 )
 
@@ -22,8 +21,7 @@ type Client struct {
 }
 
 var (
-	Clients     = make(map[uint64]*Client)
-	ClientsLock sync.Mutex
+	Clients = sync.Map{}
 )
 
 func NewChatWSLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ChatWSLogic {

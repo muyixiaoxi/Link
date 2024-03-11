@@ -12,9 +12,10 @@ import (
 // SingleChat 单聊
 func (l *ChatWSLogic) SingleChat(message types.Message) {
 	// 在线直接转发
-	if c, has := Clients[message.To]; has {
-		err := c.Conn.WriteJSON(message)
+	if c, has := Clients.Load(message.To); has {
+		err := c.(*Client).Conn.WriteJSON(message)
 		if err != nil {
+			Clients.Delete(message.To)
 			WriteByConn(message, message.To)
 		}
 		return
