@@ -44,8 +44,8 @@ func (l *AddFlowedLogic) AddFlowed(req *types.UserAppleRequest) (err error) {
 	}
 	if req.Type == 3 {
 		// 如果该用户登录
-		if client, has := Clients[req.To]; has {
-			client.Conn.WriteJSON(req)
+		if client, has := Clients.Load(req.To); has {
+			client.(*Client).Conn.WriteJSON(req)
 			return
 		}
 		// 存储到kafka
@@ -78,8 +78,8 @@ func (l *AddFlowedLogic) AddFlowed(req *types.UserAppleRequest) (err error) {
 		hId := resp.GroupHostId
 
 		// 如果该用户登录
-		if client, has := Clients[hId]; has {
-			client.Conn.WriteJSON(req)
+		if client, has := Clients.Load(hId); has {
+			client.(*Client).Conn.WriteJSON(req)
 			return err
 		}
 		// 存储到kafka
