@@ -35,13 +35,11 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 		client.Conn = conn
-		logic.ClientsLock.Lock()
-		logic.Clients[client.Id] = client
-		logic.ClientsLock.Unlock()
+		logic.Clients.Swap(client.Id, client)
 		conn.WriteJSON(response.InitBody(nil, response.CodeSuccess))
 		defer func() {
 			conn.Close()
-			delete(logic.Clients, client.Id)
+			logic.Clients.Delete(client.Id)
 		}()
 
 		l := logic.NewChatWSLogic(r.Context(), svcCtx)
