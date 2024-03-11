@@ -14,10 +14,10 @@ func (l *ChatWSLogic) GroupChat(message types.Message) {
 	}
 	//判断群聊内用户谁在线
 	for _, groupUser := range userList.UserList {
-		c, has := Clients[groupUser.Id]
+		c, has := Clients.Load(groupUser.Id)
 		if groupUser.Id != message.From && has {
 			//消息不能发送给自己
-			err := c.Conn.WriteJSON(message)
+			err := c.(*Client).Conn.WriteJSON(message)
 			if err != nil {
 				//如果发生错误,也可能是中途离线了,此时也将消息存入kafka中
 				WriteByConn(message, groupUser.Id)
