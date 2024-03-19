@@ -54,7 +54,7 @@ func (l *UserFlowedLogic) UserFlowed(in *user.UserAddRequest) (response *user.Em
 		tmp.ID = uint(model.BeId)
 		l.svcCtx.DB.Find(tmp)
 		if count >= int64(tmp.Max) {
-			return response, errors.New("group chat overload")
+			return response, errors.New("group restful overload")
 		}
 	}
 	err = nil

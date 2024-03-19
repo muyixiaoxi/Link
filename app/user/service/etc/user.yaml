@@ -19,8 +19,8 @@ Etcd:
     - 114.55.135.211:2379
   Key: user.rpc
 Mysql:
-  Datasource: itoffice:Wksycxy0.0@tcp(39.101.77.206:3306)/link?charset=utf8mb4&parseTime=True&loc=Local
+  Datasource: root:3yueruanjian!@tcp(110.40.228.197:3307)/link?charset=utf8mb4&parseTime=True&loc=Local
 RedisConf:
-  Host: 39.101.77.206:6379
+  Host: 110.40.228.197:6379
   Type: node
-  Pass: Wksycxy0.0
+  Pass: 3yueruanjian!

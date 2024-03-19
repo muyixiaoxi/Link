@@ -33,7 +33,7 @@ func addFlowedHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 				response.Response(w, nil, response.CodeRepeatAddition)
 				return
 			}
-			if strings.Contains(err.Error(), "group chat overload") {
+			if strings.Contains(err.Error(), "group restful overload") {
 				response.Response(w, nil, response.CodeGroupChatOverload)
 				return
 			}
