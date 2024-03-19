@@ -1,0 +1,413 @@
+syntax = "proto3";
+
+package user;
+option go_package="./user";
+import public "google/protobuf/timestamp.proto";
+
+message Empty {}
+message UserCreateRequest {
+  string username = 1;
+  string password = 2;
+  string avatar = 3;
+  string phone = 4;
+  uint64 id = 5;
+}
+message UserCreateResponse {
+  uint64 id = 1;
+  string username = 2;
+  string avatar = 3;
+}
+
+message UserLoginRequest {
+  string phone = 1;
+  string password = 2;
+}
+message UserLoginResponse {
+  uint64 id = 1;
+  string username = 2;
+  string avatar = 3;
+}
+
+message UserInfoRequest {
+  uint64 userId = 1;
+  uint64 friendId = 2;
+}
+message UserInfoResponse {
+  uint64 id = 1;
+  string username = 2;
+  string avatar = 3;
+  uint64  age = 4;
+  uint64 gender = 5;
+  string address = 6;
+  string phone = 7;
+  string signature = 8;
+  bool isFriend = 9;
+  string remark = 10;
+}
+
+message UserUpdateInfoRequest {
+  uint64 id = 1;
+  string username = 2;
+  string password = 3;
+  string avatar = 4;
+  uint64 age = 5;
+  uint64 gender = 6;
+  string address = 7;
+  string phone = 8;
+  string signature = 9;
+}
+
+message UserAddRequest {
+  uint64 id = 1;
+  uint64 beId = 2;
+  string message = 3;
+  uint32 type = 4;
+  string remark = 5;
+}
+
+message UserUpdateRemarkRequest {
+  uint64 id = 1;
+  uint64 beId = 2;
+  string remark = 3;
+}
+
+message UserCreateGroupRequest {
+  uint64 group_boss_id = 1;
+  string name = 2;
+  string avatar = 3;
+  uint64 system_tag_id = 4;
+  uint64 user_self_tag_id = 5;
+}
+
+message UserSelectGroupsRequest{
+  //根据标签查看群聊
+  repeated uint64 tag_id = 1;
+  //分页数据
+  uint64 page_no = 2;
+  uint64 page_size = 3;
+}
+
+message GroupInformation {
+  uint64 id = 1;//群id
+  string name = 3; //群聊名称
+  string system_tag_name = 4 ; //群聊所属的系统标签名称
+  string user_self_tag_name = 5 ; //群聊所属的用户自定义标签名称
+  string avatar = 6; //群聊头像
+  string remark = 7; //群聊备注
+}
+
+message DisposeFlowedRequest {
+  uint64 from =1;
+  uint64 to = 2;
+  uint32 type = 3;
+  string remark = 4;
+  bool result = 5;
+}
+
+message UserSelectGroupsResponse{
+  repeated GroupInformation groupList = 1;
+  uint64 total = 2; //总条数
+}
+
+message MyGroupResponse {
+  repeated GroupInformation groupList = 1;
+}
+
+//查看群详情
+message DetailGroupRequest {
+  uint64 id = 1 ;//群id
+  uint64 user_id = 2; //当前登录用户id
+}
+
+message DetailGroupResponse {
+  uint64 id = 1;//群id
+  uint64 count = 2 ; //群聊人数
+  uint64 group_boss_id = 11; //群主id
+  string name = 3; //群聊名称
+  string system_tag_name = 4 ; //群聊所属的系统标签名称
+  string user_self_tag_name = 5 ; //群聊所属的用户自定义标签名称
+  string avatar = 6; //群聊头像
+  google.protobuf.Timestamp created_at = 7; //群创建时间
+  float man = 8; //男生所占比例
+  float woman = 9; //女生所占比例
+  string address = 10 ; //群聊中地区最多的地址
+  float addressCount = 12 ; //该地区的人数
+  bool isExit = 13 ; //当前登录用户是否处于该群聊之中
+}
+
+message NextUserIDResponse {
+  uint64 next_user_id = 1 ; //新的主键值
+}
+
+message UserFriendRequest {
+  uint64 id = 1;
+}
+
+message UserFriendResponse {
+ repeated UserFriend list = 1;
+}
+
+message UserFriend {
+  uint64 id = 1;
+  string username = 2;
+  string remark = 3;
+  string avatar = 4;
+  string signature = 5;
+  repeated string tag_name = 6;
+}
+
+message GroupChat {
+  
+}
+
+message UserSelfGroupRequest{
+  //查询和自己相关的群聊 1.自己加入的群聊 2.自己创建的群聊
+  uint64 page_now = 1;
+  uint64 page_size = 2;
+  uint64 user_id = 3 ;
+}
+
+
+//推荐人员 或者 根据标签查询人员信息
+message RecommendUsersRequest{
+  uint64 user_id = 1 ; //用户id, 防止将自己查询出来
+  int64 page_no = 2; //当前页
+  int64 page_size = 3 ; //每页显示条数
+  repeated uint64 tag_id = 4; //标签
+}
+
+message RecommendUser{
+  uint64 id = 1 ; //用户id
+  string username = 2 ; //用户名
+  string avatar = 3;//用户头像
+  string signature = 4 ; //个性签名
+}
+
+message RecommendUsersResponse {
+  repeated RecommendUser recommendUserList = 1; //人员列表
+  int64 total = 2; //总数
+}
+//推荐人员 或者 根据标签查询人员信息
+
+message UserQueryFriendRequest{
+  uint64 userId = 1;
+  string param = 2; // 可能为用户名、备注
+}
+
+message UserQueryPhoneRequest{
+  string phone = 1;
+}
+
+message UserQueryPhoneResponse{
+  uint64 Id = 1;
+  string username = 2;
+  string avatar = 3;
+  string address = 4;
+  string signature = 5;
+  repeated string tag_name = 6;
+}
+
+message UserDeleteFriendRequest {
+  uint64 user_id = 1;
+  uint64 friend_id = 2;
+}
+
+//退出群聊 解散群聊
+message QuitGroupRequest{
+  uint64 user_id = 1;
+  uint64 group_id = 2;
+}
+message QuitGroupResponse{
+
+}
+//退出群聊 解散群聊
+
+//查询出群聊中的人员信息
+message SelectUserListByGroupRequest {
+  uint64 group_id = 1;
+}
+message SelectUserListByGroup {
+  uint64 id = 1;//用户id
+  string avatar = 2; //头像
+  string username = 3; //用户名
+}
+message SelectUserListByGroupResponse{
+  uint64 groupBossId = 1; //群主id
+  repeated SelectUserListByGroup userList = 2;
+}
+//查询出群聊中的人员信息
+
+//群主将人踢出群聊
+message KickOutUserGroupRequest{
+  uint64 user_id = 1; //当前登录用户的id
+  uint64 group_id = 2; //群id
+  repeated uint64 kick_out_usersId = 3;//想要踢出群聊的用户
+}
+message KickOutUserGroupResponse{
+
+}
+//群主将人踢出群聊
+
+
+message GetOffsetRequest{
+  uint64 user_id = 1;
+}
+
+message GetOffsetResponse{
+  uint64 offset = 1;
+}
+
+message SetOffsetRequest{
+  uint64 user_id = 1;
+  uint64 offset = 2;
+}
+
+
+//用户修改群聊信息
+message UpdateGroupInfoRequest {
+  uint64 id = 1; //群聊id
+  uint64 user_id = 2; //当前用户id
+  uint64 system_tag_id = 3 ; //系统标签id
+  uint64 user_self_tag_id = 4 ; //用户自定义标签
+  string name = 5; //新的群聊名称
+  string avatar = 6 ; //群头像
+}
+message UpdateGroupInfoResponse {
+
+}
+//用户修改群聊信息
+
+//用户修改自己加入的群聊的备注
+message UpdateGroupRemarkRequest{
+  uint64 id = 1; //群id
+  uint64 user_id = 2 ; //当前用户id
+  string remark = 3; //备注名称
+}
+message UpdateGroupRemarkResponse{
+
+}
+//用户修改自己加入的群聊的备注
+
+//获取群列表
+message QueryMyGroupListRequest{
+  uint64 user_id = 1;
+  uint64 page_no = 2;
+  uint64 page_size = 3;
+}
+//获取群列表
+
+//搜索陌生群聊
+message SearchStrangerGroupRequest{
+  uint64 user_id = 4 ; //当前登录用户的id
+  uint64 pageNo = 1 ; //当前页
+  uint64 pageSize = 2 ;//每页显示的条数
+  string name = 3; //群聊名称
+}
+//搜索陌生群聊
+
+
+//根据备注或者群聊名称搜索我加入的群聊
+message SearchMyGroupByNameRequest {
+  uint64 user_id = 4 ; //当前登录用户id
+  string remarkOrName = 3; //群聊备注或者群聊名称
+}
+//根据备注或者群聊名称搜索我加入的群聊
+
+
+message QueryGroupHostRequest {
+  uint64 group_id =1;
+}
+message QueryGroupHostResponse {
+  uint64 groupHostId = 1;
+}
+
+
+//搜索当前用户加入的群聊个数
+message SelectMyGroupCountRequest{
+  uint64 user_id = 1 ; //当前登录用户id
+}
+
+message SelectMyGroupCountResponse {
+  uint64 count = 1; //当前用户加入的群聊数
+}
+
+message UserGetApplyForRequest {
+  uint64 userId = 1;
+}
+message UserGetApplyForResponse {
+  repeated ApplyFor list = 1;
+}
+message ApplyFor{
+  uint64 userId = 1;
+  uint64 beId = 2;
+  string message = 3;
+  uint64 type = 4;
+  bool result = 5;
+  string updatedAt = 6;
+  string username = 7;
+  string avatar = 8;
+}
+//搜索当前用户加入的群聊个数
+
+//获取群名称
+message GetGroupNameRequest {
+  uint64 id = 1;
+}
+message GetGroupNameResponse {
+  string group_name = 1;
+}
+//获取群名称
+
+
+service UserService {
+  rpc UserCreate(UserCreateRequest) returns(UserCreateResponse);
+  rpc UserCreateRevertLogin(UserCreateRequest) returns (UserCreateResponse);
+  rpc UserIsExists(UserCreateRequest) returns (Empty);
+
+  rpc UserLogin(UserLoginRequest) returns(UserLoginResponse); // 登录
+  rpc UserInfo(UserInfoRequest) returns(UserInfoResponse);  // 获取用户信息
+  rpc UserUpdateInfo(UserUpdateInfoRequest) returns(Empty); // 修改用户信息
+
+  // 好友
+  rpc UserFlowed(UserAddRequest) returns(Empty);  // 添加好友/群聊
+  rpc UserDisposeFlowed(DisposeFlowedRequest) returns(Empty); // 处理好友/群聊申请
+  rpc UserUpdateRemark(UserUpdateRemarkRequest) returns(Empty); // 修改备注
+  rpc RecommendUsers(RecommendUsersRequest) returns (RecommendUsersResponse); //推荐人员列表
+  rpc UserFriendList(UserFriendRequest) returns(UserFriendResponse); // 获取好友列表
+  rpc UserQueryFriend(UserQueryFriendRequest)returns(UserFriendResponse); // 在好友列表中搜索
+  rpc UserQueryPhone(UserQueryPhoneRequest)returns(UserQueryPhoneResponse); // 通过手机号搜索（包括陌生人）
+  rpc UserDeleteFriend(UserDeleteFriendRequest)returns(Empty); // 用户删除好友
+  rpc UserGetApplyFor(UserGetApplyForRequest)returns(UserGetApplyForResponse); // 获取好友申请
+
+
+  // 偏移量
+  rpc GetOffset(GetOffsetRequest)returns(GetOffsetResponse);
+  rpc SetOffset(SetOffsetRequest)returns(Empty);
+
+
+
+  //redis自增id
+  rpc NextUserID(Empty) returns (NextUserIDResponse); //查询id
+  rpc AddUserId(Empty) returns (Empty);//生成id
+  rpc DecUserID(Empty) returns (Empty);//id减少1
+
+  //群聊
+  rpc UserCreateGroup(UserCreateGroupRequest) returns(Empty); //创建群聊
+  rpc QueryGroupHost(QueryGroupHostRequest) returns(QueryGroupHostResponse); // 获取群主id
+  rpc UserSelectGroup(UserSelectGroupsRequest) returns (UserSelectGroupsResponse) ; //首页根据标签推荐群聊
+  rpc UserUserSelfGroup(UserSelfGroupRequest) returns(UserSelectGroupsResponse) ; //查询和自己相关的群聊
+  rpc UserSelectDetailGroup(DetailGroupRequest) returns (DetailGroupResponse) ; //查询群聊详情
+  rpc QuitGroup(QuitGroupRequest) returns (QuitGroupResponse); //退出群聊 解散群聊
+  rpc UserListByGroup(SelectUserListByGroupRequest) returns (SelectUserListByGroupResponse) ; //查询群聊中的人员信息
+  rpc KickOutUserGroup(KickOutUserGroupRequest) returns (KickOutUserGroupResponse); //踢出群聊
+  rpc UpdateGroupInformation(UpdateGroupInfoRequest) returns (UpdateGroupInfoResponse);//修改群聊信息
+  rpc UpdateGroupRemark(UpdateGroupRemarkRequest) returns (UpdateGroupRemarkResponse); //用户修改自己加入的群聊的备注
+  rpc QueryMyGroupList(QueryMyGroupListRequest) returns (UserSelectGroupsResponse) ; //获取群列表
+  rpc SearchStrangerGroup(SearchStrangerGroupRequest) returns(UserSelectGroupsResponse) ; //搜索陌生群聊
+  rpc SearchMyGroupByName(SearchMyGroupByNameRequest) returns (MyGroupResponse) ; //根据备注或者群名称搜索我加入的群聊
+  rpc SelectMyGroupCount(SelectMyGroupCountRequest) returns (SelectMyGroupCountResponse) ; //搜索当前用户加入的群聊个数
+  rpc GetGroupName(GetGroupNameRequest) returns (GetGroupNameResponse); //获取群聊名称
+}
+
+
+// goctl rpc protoc user.proto --go_out=. --go-grpc_out=. --zrpc_out=.

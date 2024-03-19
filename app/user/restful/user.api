@@ -178,7 +178,7 @@ service user {
 	@handler login
 	post /login (UserLoginRequest) returns (UserLoginResponse)
 
-	@doc "chat 连接"
+	@doc "restful 连接"
 	@handler chatWS
 	get /chat
 }

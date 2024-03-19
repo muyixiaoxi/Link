@@ -21,7 +21,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/chat",
+				Path:    "/restful",
 				Handler: chatWSHandler(serverCtx),
 			},
 			{
