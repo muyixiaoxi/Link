@@ -97,6 +97,16 @@ type RecommendUserListResponse struct {
 	Total             int64           `json:"total"`
 }
 
+type RefreshTokenRequest struct {
+	RefreshToken string `json:"refreshToken"`
+}
+
+type RefreshTokenResponse struct {
+	AccessToken  string `json:"accessToken"`
+	RefreshToken string `json:"refreshToken"`
+	Expires      int64  `json:"expires"`
+}
+
 type SelectGroupDeatilRequest struct {
 	ID uint64 `json:"id" validate:"required"`
 }
@@ -234,10 +244,12 @@ type UserLoginRequest struct {
 }
 
 type UserLoginResponse struct {
-	Token    string `json:"token"`
-	Id       uint64 `json:"id"`
-	Username string `json:"username"`
-	Avatar   string `json:"avatar"`
+	AccessToken  string `json:"token"`
+	RefreshToken string `json:"refreshToken"`
+	Expires      int64  `json:"expires"`
+	Id           uint64 `json:"id"`
+	Username     string `json:"username"`
+	Avatar       string `json:"avatar"`
 }
 
 type UserQueryFriendRequest struct {

@@ -24,39 +24,41 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/createTag",
-				Handler: tagLogin.CreateTagHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/deleteTag",
-				Handler: tagLogin.DeleteTagsHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/selectAllTags",
-				Handler: tagLogin.SelectAllTagsHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/selectMyTags",
-				Handler: tagLogin.SelectMyTagsHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/selectUserTagByGroup",
-				Handler: tagLogin.SelectUserTagByGroupHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/updateSelfTag",
-				Handler: tagLogin.UpdateSelfTagHandler(serverCtx),
-			},
-		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.JWT},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/createTag",
+					Handler: tagLogin.CreateTagHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/deleteTag",
+					Handler: tagLogin.DeleteTagsHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/selectAllTags",
+					Handler: tagLogin.SelectAllTagsHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/selectMyTags",
+					Handler: tagLogin.SelectMyTagsHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/selectUserTagByGroup",
+					Handler: tagLogin.SelectUserTagByGroupHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateSelfTag",
+					Handler: tagLogin.UpdateSelfTagHandler(serverCtx),
+				},
+			}...,
+		),
 		rest.WithPrefix("/app/tag"),
 	)
 }

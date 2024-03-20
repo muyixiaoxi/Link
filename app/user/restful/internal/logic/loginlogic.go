@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"user/common/jwt"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
@@ -11,8 +13,6 @@ import (
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
-
-var jwts jwt.JWT
 
 type LoginLogic struct {
 	logx.Logger
@@ -39,18 +39,23 @@ func (l *LoginLogic) Login(req *types.UserLoginRequest) (resp *types.UserLoginRe
 		logc.Error(context.Background(), "l.svcCtx.UserRpc.UserLogin failed: ", err)
 		return
 	}
+	jwts := jwt.InitNewJWTUtils()
 	claims := jwt.UserClaims{
-		UserID:   response.Id,
+		UserId:   response.Id,
 		Username: response.Username,
 	}
-	auth := l.svcCtx.Config.Auth
-	expries := auth.AccessExpire //过期时间
-	token, _ := jwts.GenToken(claims, auth.AccessSecret, expries)
+	//返回双token
+	accessTokenString, refreshTokenString, expireAt := jwts.GetToken(claims)
+	if accessTokenString == "" || refreshTokenString == "" {
+		return nil, status.Errorf(codes.FailedPrecondition, "token签发失败")
+	}
 	resp = &types.UserLoginResponse{
-		Token:    token,
-		Id:       response.Id,
-		Username: response.Username,
-		Avatar:   response.Avatar,
+		AccessToken:  accessTokenString,
+		RefreshToken: refreshTokenString,
+		Expires:      expireAt,
+		Id:           response.Id,
+		Username:     response.Username,
+		Avatar:       response.Avatar,
 	}
 	return
 }

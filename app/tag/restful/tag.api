@@ -58,9 +58,9 @@ type SelectMyTagsResponse {
 }
 
 @server (
-	prefix: /app/tag
-	jwt:    Auth
-	group:  tagLogin
+	prefix:     /app/tag
+	middleware: JWT
+	group:      tagLogin
 )
 service tag-api {
 	@doc "创建用户自定义标签"

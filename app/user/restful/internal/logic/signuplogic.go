@@ -49,7 +49,6 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	//dtm服务的etcd注册地址
 	var dtmServer = l.svcCtx.Config.Dtm
 	//dtmServer := "etcd://etcd:2379/dtmservice"
-	fmt.Println(dtmServer)
 	// 创建一个gid
 	gid := dtmgrpc.MustGenGid(dtmServer)
 	//创建一个自增id
