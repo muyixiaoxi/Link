@@ -213,6 +213,24 @@ services:
       - kafka1
       - dtm
 
+  chat-rpc:
+    build:
+      context: chat
+      dockerfile: service/Dockerfile
+    container_name: chat-rpc
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports:
+      - "8083:8083"
+    networks:
+      - backend
+    depends_on:
+      - etcd
+      - kafka1
+      - dtm
+
   tag-api: #自定义容器名称
     build:
       context: tag
@@ -249,4 +267,21 @@ services:
       - kafka1
       - dtm
 
+  chat-api:
+    build:
+      context: chat
+      dockerfile: restful/Dockerfile
+    container_name: chat-api
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports:
+      - "8889:8889"
+    networks:
+      - backend
+    depends_on:
+      - etcd
+      - kafka1
+      - dtm
 
