@@ -2,10 +2,15 @@
 package types
 
 type Message struct {
+	Id          string `json:"id"`
 	From        uint64 `json:"from,optional"`
 	To          uint64 `json:"to"`
-	Type        uint8  `json:"type"`
-	ContentType uint8  `json:"contentType"`
+	Type        uint32 `json:"type"`
+	ContentType uint32 `json:"contentType"`
 	Time        string `json:"time"`
 	Content     string `json:"content"`
+}
+
+type Success struct {
+	Id string `json:"id"`
 }

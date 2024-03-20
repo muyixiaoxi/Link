@@ -10,18 +10,25 @@ import (
 )
 
 // SingleChat 单聊
-func (l *ChatWSLogic) SingleChat(message types.Message) {
-	// 在线直接转发
+func (l *ChatWSLogic) SingleChat(message types.Message) (err error) {
+	// 在线存储+转发
 	if c, has := Clients.Load(message.To); has {
-		err := c.(*Client).Conn.WriteJSON(message)
-		if err != nil {
+		// 如果存储失败返回
+		if err = l.SaveMessage(message, true); err != nil {
+			return
+		}
+		// 如果转发失败，当作离线存储
+		if err := c.(*Client).Conn.WriteJSON(message); err != nil {
 			Clients.Delete(message.To)
-			WriteByConn(message, message.To)
+			// 不管离线存储成功与否都返回
+			err = l.SaveMessage(message, false)
+			return
 		}
 		return
 	}
 	// 离线存储消息队列
-	WriteByConn(message, message.To)
+	err = l.SaveMessage(message, false)
+	return
 }
 
 // WriteByConn 基于conn发送消息

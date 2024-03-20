@@ -65,7 +65,9 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 				client.Conn.WriteJSON(message)
 			}
 			if message.Type == 1 {
-				l.SingleChat(message)
+				if err = l.SingleChat(message); err == nil {
+					conn.WriteJSON(response.InitBody(types.Success{Id: message.Id}, response.CodeSuccess))
+				}
 			}
 			if message.Type == 2 {
 				//群聊
