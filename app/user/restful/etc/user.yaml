@@ -1,22 +1,3 @@
-#Name: user
-#Host: 0.0.0.0
-#Port: 8887
-#UserRpc:
-#  Etcd:
-#    Hosts:
-#      - 172.27.80.1:2379
-#    Key: user.rpc
-#TagRpc:
-#  Etcd:
-#    Hosts:
-#      - 172.27.80.1:2379
-#    Key: tag.rpc
-#Auth:
-#  AccessSecret: linkMarch
-#  AccessExpire: 336
-#Dtm: "etcd://172.27.80.1:2379/dtmservice"
-
-
 Name: user
 Host: 0.0.0.0
 Port: 8887
@@ -36,5 +17,5 @@ TagRpc:
 Auth:
   AccessSecret: linkMarch
   AccessExpire: 336
-Dtm: "etcd://etcd:2379/dtmservice"
+Dtm: "etcd://114.55.135.211:2379/dtmservice"
 

@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/dtm-labs/client/dtmcli"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -30,6 +31,7 @@ func NewUserCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserCr
 }
 
 func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserCreateResponse, endErr error) {
+	fmt.Println("<----------------正常的注册逻辑---------------------->")
 	// 获取 RawDB
 	// 注册
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
@@ -43,6 +45,7 @@ func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserC
 		// 加密密码
 		pwd, _ := bcrypt.GetPwd(in.Password)
 		// 插入用户数据
+		fmt.Println("<------------------------开始插入数据----------------------->")
 		_, err = tx.Exec("INSERT INTO users (id , created_at, updated_at, username, password, avatar, phone) VALUES (?,?, ?, ?, ?, ?, ?)", in.Id, time.Now(), time.Now(), in.Username, pwd, in.Avatar, in.Phone)
 		//返回子事务执行失败
 		if err != nil {
@@ -54,5 +57,6 @@ func (l *UserCreateLogic) UserCreate(in *user.UserCreateRequest) (pd *user.UserC
 	if err != nil {
 		return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
 	}
+	fmt.Println("<----------------------注册成功--------------------------->")
 	return &user.UserCreateResponse{}, endErr
 }
