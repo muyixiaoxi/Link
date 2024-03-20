@@ -2,11 +2,7 @@ package logic
 
 import (
 	"chat/restful/internal/types"
-	"context"
-	"encoding/json"
-	"fmt"
-	"github.com/segmentio/kafka-go"
-	"time"
+	"chat/service/chat"
 )
 
 // SingleChat 单聊
@@ -31,53 +27,23 @@ func (l *ChatWSLogic) SingleChat(message types.Message) (err error) {
 	return
 }
 
-// WriteByConn 基于conn发送消息
-func WriteByConn(message types.Message, userId uint64) {
-	topic := fmt.Sprintf("link_user_%d", userId)
-
-	host := "114.55.135.211:9092"
-	partition := 0
-
-	conn, _ := kafka.DialLeader(context.Background(), "tcp", host, topic, partition)
-	conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
-
-	jsonMessage, _ := json.Marshal(message)
-	_, err := conn.WriteMessages(kafka.Message{Value: jsonMessage})
-
+// ReadOffline 读取自己的离线消息
+func (l *ChatWSLogic) ReadOffline(id uint64) (messages []*types.Message, err error) {
+	response, err := l.svcCtx.ChatRpc.GetOfflineMessage(l.ctx, &chat.GetOfflineMessageRequest{UserId: id})
 	if err != nil {
-		fmt.Println(err)
+		return
 	}
-	defer conn.Close()
-}
-
-// ReadByConn 连接至kafka后接收消息
-func ReadByConn(id uint64) (messages []*types.Message) {
-	topic := fmt.Sprintf("link_user_%d", id)
-	brokers := []string{"114.55.135.211:9092"}
-
-	r := kafka.NewReader(kafka.ReaderConfig{
-		Brokers:   brokers,
-		GroupID:   "link",
-		Topic:     topic,
-		Partition: 0,
-		MaxBytes:  10e6,
-		MaxWait:   10 * time.Second,
-	})
-
-	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
-
-	defer r.Close()
-	for {
-
-		msg, err := r.ReadMessage(ctx)
-		if err != nil {
-			break
+	messages = make([]*types.Message, len(response.Messages))
+	for i, resp := range response.Messages {
+		message := &types.Message{
+			From:        resp.From,
+			To:          resp.To,
+			Type:        resp.Type,
+			ContentType: resp.ContentType,
+			Time:        resp.Time,
+			Content:     resp.Content,
 		}
-		message := &types.Message{}
-		json.Unmarshal(msg.Value, message)
-
-		messages = append(messages, message)
+		messages[i] = message
 	}
-
 	return
 }

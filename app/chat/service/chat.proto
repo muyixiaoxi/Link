@@ -1,16 +1,42 @@
 syntax = "proto3";
 
 package chat;
-option go_package="./service";
+option go_package="./chat";
 
-message Request {
-  string ping = 1;
+message Empty {
+
 }
 
-message Response {
-  string pong = 1;
+message SaveMessageRequest{
+  string id = 1;
+  uint64 from = 2;
+  uint64 to = 3;
+  uint32 type = 4;
+  uint32 contentType = 5;
+  string time = 6;
+  string content = 7;
+  bool online = 8;
 }
+
+message GetOfflineMessageRequest {
+  uint64 userId = 1;
+}
+
+message Message {
+  uint64 from = 1;
+  uint64 to = 2;
+  uint32 type = 3;
+  uint32 contentType = 4;
+  string time = 5;
+  string content = 6;
+}
+
+message Messages {
+  repeated Message messages = 1;
+}
+
 
 service Chat {
-  rpc Ping(Request) returns(Response);
+  rpc SaveOfflineMessage(SaveMessageRequest) returns(Empty);
+  rpc GetOfflineMessage(GetOfflineMessageRequest) returns(Messages);
 }

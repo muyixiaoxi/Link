@@ -21,6 +21,7 @@ const (
 	CodeRepeatAddition
 	CodeGroupChatOverload
 	CodeGroupMax
+	CodeSyncMessageFailed
 )
 
 var codeMsgMap = map[ResCode]string{
@@ -42,6 +43,7 @@ var codeMsgMap = map[ResCode]string{
 	CodeRepeatAddition:      "重复添加",
 	CodeGroupChatOverload:   "群聊人数超出限制",
 	CodeGroupMax:            "加入的群聊超过最大限制",
+	CodeSyncMessageFailed:   "同步消息失败",
 }
 
 func (c ResCode) Msg() string {
