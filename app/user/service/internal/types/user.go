@@ -12,5 +12,6 @@ type User struct {
 	Phone          string           `gorm:"size:11;"`
 	Avatar         string           `json:"avatar"`
 	Signature      string           `gorm:"size:30"`
+	History        string           `gorm:"comment:历史头像"`
 	UserGroupChats []*UserGroupChat `json:"user_group_chats"`
 }

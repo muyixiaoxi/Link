@@ -2,7 +2,7 @@
 package types
 
 type Message struct {
-	Id          string `json:"id"`
+	Id          string `json:"id,omitempty"`
 	From        uint64 `json:"from,optional"`
 	To          uint64 `json:"to"`
 	Type        uint32 `json:"type"`

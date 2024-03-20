@@ -4,6 +4,7 @@ import (
 	initGorm "chat/common/gorm"
 	redis2 "chat/common/redis"
 	"chat/service/internal/config"
+	"chat/service/internal/types"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"gorm.io/gorm"
 )
@@ -20,10 +21,12 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Type: c.RedisConf.Type,
 		Pass: c.RedisConf.Pass,
 	}
+	db := initGorm.InitGorm(c.Mysql.DataSource)
+	db.AutoMigrate(&types.Message{})
 	red := redis2.InitRedis(rc)
 	return &ServiceContext{
 		Config: c,
-		DB:     initGorm.InitGorm(c.Mysql.DataSource),
+		DB:     db,
 		RDB:    red,
 	}
 }

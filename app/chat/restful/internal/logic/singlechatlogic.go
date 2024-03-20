@@ -14,7 +14,7 @@ func (l *ChatWSLogic) SingleChat(message types.Message) (err error) {
 			return
 		}
 		// 如果转发失败，当作离线存储
-		if err := c.(*Client).Conn.WriteJSON(message); err != nil {
+		if err = c.(*Client).Conn.WriteJSON(message); err != nil {
 			Clients.Delete(message.To)
 			// 不管离线存储成功与否都返回
 			err = l.SaveMessage(message, false)
