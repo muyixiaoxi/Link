@@ -20,11 +20,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: signUpHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
-				Path:    "/restful",
-				Handler: chatWSHandler(serverCtx),
-			},
-			{
 				Method:  http.MethodPost,
 				Path:    "/login",
 				Handler: loginHandler(serverCtx),

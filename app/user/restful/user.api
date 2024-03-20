@@ -177,10 +177,6 @@ service user {
 	@doc "登录"
 	@handler login
 	post /login (UserLoginRequest) returns (UserLoginResponse)
-
-	@doc "restful 连接"
-	@handler chatWS
-	get /chat
 }
 
 @server (
