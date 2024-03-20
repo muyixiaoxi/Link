@@ -20,6 +20,5 @@ func (l *ChatWSLogic) SaveMessage(message types.Message, online bool) (err error
 	if err != nil {
 		logc.Error(l.ctx, "l.svcCtx.ChatRpc.SaveMessage failed:", err)
 	}
-
 	return
 }
