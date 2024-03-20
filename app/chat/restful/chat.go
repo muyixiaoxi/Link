@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/rest"
 )
 
-var configFile = flag.String("f", "etc/restful-api.yaml", "the config file")
+var configFile = flag.String("f", "app/chat/restful/etc/chat.yaml", "the config file")
 
 func main() {
 	flag.Parse()
