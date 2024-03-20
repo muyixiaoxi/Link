@@ -16,6 +16,11 @@ const (
 	CodeWebSocketLinkFail
 	CodeFriendNotExist
 	CodeTagMoreMax
+	CodeTokenFormat
+	CodeTokenIsEmpty
+	CodeTokenInvalid
+	CodeTokenPast
+	CodeTokenIsFailed
 )
 
 var codeMsgMap = map[ResCode]string{
@@ -32,6 +37,11 @@ var codeMsgMap = map[ResCode]string{
 	CodeWebSocketLinkFail: "WebSocket连接失败",
 	CodeFriendNotExist:    "好友不存在",
 	CodeTagMoreMax:        "标签超过最大数量限制",
+	CodeTokenFormat:       "令牌格式错误",
+	CodeTokenIsEmpty:      "令牌为空",
+	CodeTokenInvalid:      "令牌无效,请重新登录",
+	CodeTokenPast:         "登录过期",
+	CodeTokenIsFailed:     "Token签发失败",
 }
 
 func (c ResCode) Msg() string {

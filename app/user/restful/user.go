@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"user/common/jwt"
-
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 
@@ -31,7 +29,7 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 
-	server := rest.MustNewServer(c.RestConf, rest.WithUnauthorizedCallback(jwt.JwtUnauthorizedResult), rest.WithCors())
+	server := rest.MustNewServer(c.RestConf, rest.WithCors())
 	defer server.Stop()
 
 	ctx := svc.NewServiceContext(c)

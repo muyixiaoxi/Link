@@ -20,10 +20,12 @@ type UserLoginRequest {
 }
 
 type UserLoginResponse {
-	Token    string `json:"token"`
-	Id       uint64 `json:"id"`
-	Username string `json:"username"`
-	Avatar   string `json:"avatar"`
+	AccessToken  string `json:"token"`
+	RefreshToken string `json:"refreshToken"`
+	Expires      int64  `json:"expires"`
+	Id           uint64 `json:"id"`
+	Username     string `json:"username"`
+	Avatar       string `json:"avatar"`
 }
 
 type UserInfoRequest {
@@ -166,6 +168,18 @@ type UserApplyForResponse {
 	GroupName string `json:"groupName"`
 }
 
+// 无感刷新Token
+type RefreshTokenRequest {
+	RefreshToken string `json:"refreshToken"`
+}
+
+type RefreshTokenResponse {
+	AccessToken  string `json:"accessToken"`
+	RefreshToken string `json:"refreshToken"`
+	Expires      int64  `json:"expires"`
+}
+
+// 无感刷新Token
 @server (
 	prefix: /app/user
 )
@@ -177,11 +191,15 @@ service user {
 	@doc "登录"
 	@handler login
 	post /login (UserLoginRequest) returns (UserLoginResponse)
+
+	@doc "无感刷新Token"
+	@handler refreshToken
+	get /refreshToken/:refreshToken (RefreshTokenRequest) returns (RefreshTokenResponse)
 }
 
 @server (
-	prefix: /app/user
-	jwt:    Auth
+	prefix:     /app/user
+	middleware: JWT
 )
 service user {
 	@doc "获取用户信息"
@@ -357,9 +375,9 @@ type SelectMyGroupRequest {
 
 //用户搜索自己未加入的群聊
 @server (
-	prefix: /app/user
-	jwt:    Auth
-	group:  userGroup
+	prefix:     /app/user
+	middleware: JWT
+	group:      userGroup
 )
 service user {
 	@doc "用户创建群聊"
@@ -408,9 +426,9 @@ service user {
 }
 
 @server (
-	prefix: /app/user
-	jwt:    Auth
-	group:  userTag
+	prefix:     /app/user
+	middleware: JWT
+	group:      userTag
 )
 service user {
 	@doc "用户选择标签"
