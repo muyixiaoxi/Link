@@ -2,8 +2,8 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
 	"time"
+	"user/common/jwt"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -27,10 +27,9 @@ func NewGetApplyForLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetAp
 }
 
 func (l *GetApplyForLogic) GetApplyFor() (resp []types.UserApplyForResponse, err error) {
-	jid := l.ctx.Value("user_id").(json.Number)
-	id, _ := jid.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	response, err := l.svcCtx.UserRpc.UserGetApplyFor(context.Background(), &user.UserGetApplyForRequest{
-		UserId: uint64(id),
+		UserId: userID,
 	})
 	resp = make([]types.UserApplyForResponse, len(response.List))
 	for i, applyFor := range response.List {

@@ -2,7 +2,7 @@ package userGroup
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -28,11 +28,10 @@ func NewSelectStrangerGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext
 func (l *SelectStrangerGroupLogic) SelectStrangerGroup(req *types.SelectStrangerRequest) (resp *types.RecommendGroupByTagResponse, err error) {
 	// 查询陌生群聊
 	//获取当前登录用户的id
-	jid := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jid.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 
 	respGroup, err := l.svcCtx.UserRpc.SearchStrangerGroup(l.ctx, &user.SearchStrangerGroupRequest{
-		UserId:   uint64(userId),
+		UserId:   userID,
 		PageNo:   req.PageNo,
 		PageSize: req.PageSize,
 		Name:     req.Name,

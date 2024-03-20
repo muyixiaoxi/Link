@@ -2,8 +2,8 @@ package tagLogin
 
 import (
 	"context"
-	"encoding/json"
 	"google.golang.org/grpc/status"
+	"tag/common/jwt"
 	"tag/restful/internal/svc"
 	"tag/restful/internal/types"
 
@@ -27,16 +27,15 @@ func NewCreateTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateT
 
 func (l *CreateTagLogic) CreateTag(req *types.CreateTagRequest) (resp *types.CreateTagResponse, err error) {
 	// 用户创建标签
-	userId := l.ctx.Value("user_id").(json.Number)
-	id, _ := userId.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	// 限制每个用户最多有9个标签
-	tagCount, err := l.svcCtx.TagLogin.CheckTagCount(l.ctx, &tag.CheckTagCountRequest{UserId: uint64(id)})
+	tagCount, err := l.svcCtx.TagLogin.CheckTagCount(l.ctx, &tag.CheckTagCountRequest{UserId: userID})
 	if tagCount.Count > 9 {
 		return nil, status.Error(899, "标签数量超过最大数量限制")
 	}
 	//封装请求参数
 	createTagParams := &tag.CreateTagRequest{
-		CreatorId: uint64(id),
+		CreatorId: userID,
 		TagName:   req.TagName,
 		GroupName: req.GroupName,
 		Type:      req.Type,

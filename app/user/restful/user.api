@@ -9,7 +9,6 @@ type UserCreateRequest {
 }
 
 type UserCreateResponse {
-	Token    string `json:"token"`
 	Username string `json:"username"`
 	Avatar   string `json:"avatar"`
 }
@@ -20,7 +19,7 @@ type UserLoginRequest {
 }
 
 type UserLoginResponse {
-	AccessToken  string `json:"token"`
+	AccessToken  string `json:"accessToken"`
 	RefreshToken string `json:"refreshToken"`
 	Expires      int64  `json:"expires"`
 	Id           uint64 `json:"id"`
@@ -170,7 +169,7 @@ type UserApplyForResponse {
 
 // 无感刷新Token
 type RefreshTokenRequest {
-	RefreshToken string `json:"refreshToken"`
+	RefreshToken string `path:"refreshToken"`
 }
 
 type RefreshTokenResponse {

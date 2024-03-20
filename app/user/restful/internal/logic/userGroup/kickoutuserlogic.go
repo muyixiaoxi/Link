@@ -2,7 +2,7 @@ package userGroup
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -28,10 +28,9 @@ func NewKickOutUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *KickO
 func (l *KickOutUserLogic) KickOutUser(req *types.KickOutGroupRequest) error {
 	// 踢出群聊
 	// 获取当前登录用户的id
-	jUserId := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jUserId.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	_, err := l.svcCtx.UserRpc.KickOutUserGroup(l.ctx, &user.KickOutUserGroupRequest{
-		UserId:         uint64(userId),
+		UserId:         userID,
 		GroupId:        req.GroupId,
 		KickOutUsersId: req.UserIDs,
 	})

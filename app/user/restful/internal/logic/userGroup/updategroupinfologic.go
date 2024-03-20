@@ -2,7 +2,7 @@ package userGroup
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -27,12 +27,11 @@ func NewUpdateGroupInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 
 func (l *UpdateGroupInfoLogic) UpdateGroupInfo(req *types.UpdateGroupInfoRequest) (resp *types.SelectGroupDeatilResponse, err error) {
 	// 获取当前登录用户的id
-	jUserId := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jUserId.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	// 修改群聊信息
 	_, err = l.svcCtx.UserRpc.UpdateGroupInformation(l.ctx, &user.UpdateGroupInfoRequest{
 		Id:            req.GroupId,
-		UserId:        uint64(userId),
+		UserId:        userID,
 		SystemTagId:   req.SystemTagId,
 		UserSelfTagId: req.UserSelfTagId,
 		Name:          req.Name,

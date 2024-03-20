@@ -2,7 +2,7 @@ package userGroup
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -27,12 +27,11 @@ func NewUpdateGroupRemarkLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *UpdateGroupRemarkLogic) UpdateGroupRemark(req *types.UpdateGroupRemarkRequest) error {
 	// 获取当前登录用户的id
-	jUserId := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jUserId.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	// 修改群聊备注
 	_, err := l.svcCtx.UserRpc.UpdateGroupRemark(l.ctx, &user.UpdateGroupRemarkRequest{
 		Id:     req.GroupId,
-		UserId: uint64(userId),
+		UserId: userID,
 		Remark: req.Remark,
 	})
 	return err

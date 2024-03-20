@@ -2,7 +2,7 @@ package userTag
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/service/tag/service/tag"
 
 	"user/restful/internal/svc"
@@ -27,11 +27,10 @@ func NewCancelTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CancelT
 
 func (l *CancelTagLogic) CancelTag(req *types.CancelRequest) error {
 	// 取消选择标签
-	jid := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jid.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 
 	_, err := l.svcCtx.TagLoginRpc.CancelUserTag(l.ctx, &tag.CancelRequest{
-		UserId: uint64(userId),
+		UserId: userID,
 		TagIds: req.TagIds,
 	})
 	return err
