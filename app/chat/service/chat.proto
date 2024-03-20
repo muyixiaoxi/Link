@@ -36,7 +36,7 @@ message Messages {
 }
 
 
-service Chat {
+service ChatService {
   rpc SaveOfflineMessage(SaveMessageRequest) returns(Empty);
   rpc GetOfflineMessage(GetOfflineMessageRequest) returns(Messages);
 }

@@ -2,7 +2,8 @@ package svc
 
 import (
 	"chat/restful/internal/config"
-	"chat/service/chat"
+	"chat/service/chatservice"
+
 	"chat/service/user/userservice"
 	"github.com/zeromicro/go-zero/zrpc"
 )
@@ -10,12 +11,13 @@ import (
 type ServiceContext struct {
 	Config  config.Config
 	UserRpc userservice.UserService
-	ChatRpc chat.ChatServer
+	ChatRpc chatservice.ChatService
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:  c,
 		UserRpc: userservice.NewUserService(zrpc.MustNewClient(c.UserRpc)),
+		ChatRpc: chatservice.NewChatService(zrpc.MustNewClient(c.ChatRpc)),
 	}
 }

@@ -6,6 +6,7 @@ import (
 	"chat/restful/internal/svc"
 	"chat/restful/internal/types"
 	"context"
+	"fmt"
 	"github.com/gorilla/websocket"
 	"github.com/zeromicro/go-zero/core/logc"
 	"net/http"
@@ -69,7 +70,7 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			}
 			if message.Type == 1 {
 				if err = l.SingleChat(message); err == nil {
-					conn.WriteJSON(response.InitBody(types.Success{Id: message.Id}, response.CodeSuccess))
+					conn.WriteJSON(fmt.Sprintf("messageId:%s", message.Id))
 				}
 			}
 			if message.Type == 2 {
