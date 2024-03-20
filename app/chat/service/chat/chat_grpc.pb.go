@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.25.3
-// source: service.proto
+// source: chat.proto
 
 package chat
 
@@ -19,14 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Chat_Ping_FullMethodName = "/service.Chat/Ping"
+	Chat_SaveOfflineMessage_FullMethodName = "/chat.Chat/SaveOfflineMessage"
+	Chat_GetOfflineMessage_FullMethodName  = "/chat.Chat/GetOfflineMessage"
 )
 
 // ChatClient is the client API for Chat service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ChatClient interface {
-	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	SaveOfflineMessage(ctx context.Context, in *SaveMessageRequest, opts ...grpc.CallOption) (*Empty, error)
+	GetOfflineMessage(ctx context.Context, in *GetOfflineMessageRequest, opts ...grpc.CallOption) (*Messages, error)
 }
 
 type chatClient struct {
@@ -37,9 +39,18 @@ func NewChatClient(cc grpc.ClientConnInterface) ChatClient {
 	return &chatClient{cc}
 }
 
-func (c *chatClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := c.cc.Invoke(ctx, Chat_Ping_FullMethodName, in, out, opts...)
+func (c *chatClient) SaveOfflineMessage(ctx context.Context, in *SaveMessageRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, Chat_SaveOfflineMessage_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) GetOfflineMessage(ctx context.Context, in *GetOfflineMessageRequest, opts ...grpc.CallOption) (*Messages, error) {
+	out := new(Messages)
+	err := c.cc.Invoke(ctx, Chat_GetOfflineMessage_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +61,8 @@ func (c *chatClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOpt
 // All implementations must embed UnimplementedChatServer
 // for forward compatibility
 type ChatServer interface {
-	Ping(context.Context, *Request) (*Response, error)
+	SaveOfflineMessage(context.Context, *SaveMessageRequest) (*Empty, error)
+	GetOfflineMessage(context.Context, *GetOfflineMessageRequest) (*Messages, error)
 	mustEmbedUnimplementedChatServer()
 }
 
@@ -58,8 +70,11 @@ type ChatServer interface {
 type UnimplementedChatServer struct {
 }
 
-func (UnimplementedChatServer) Ping(context.Context, *Request) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+func (UnimplementedChatServer) SaveOfflineMessage(context.Context, *SaveMessageRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveOfflineMessage not implemented")
+}
+func (UnimplementedChatServer) GetOfflineMessage(context.Context, *GetOfflineMessageRequest) (*Messages, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOfflineMessage not implemented")
 }
 func (UnimplementedChatServer) mustEmbedUnimplementedChatServer() {}
 
@@ -74,20 +89,38 @@ func RegisterChatServer(s grpc.ServiceRegistrar, srv ChatServer) {
 	s.RegisterService(&Chat_ServiceDesc, srv)
 }
 
-func _Chat_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+func _Chat_SaveOfflineMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ChatServer).Ping(ctx, in)
+		return srv.(ChatServer).SaveOfflineMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Chat_Ping_FullMethodName,
+		FullMethod: Chat_SaveOfflineMessage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChatServer).Ping(ctx, req.(*Request))
+		return srv.(ChatServer).SaveOfflineMessage(ctx, req.(*SaveMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_GetOfflineMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOfflineMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).GetOfflineMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_GetOfflineMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).GetOfflineMessage(ctx, req.(*GetOfflineMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,14 +129,18 @@ func _Chat_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Chat_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "service.Chat",
+	ServiceName: "chat.Chat",
 	HandlerType: (*ChatServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Ping",
-			Handler:    _Chat_Ping_Handler,
+			MethodName: "SaveOfflineMessage",
+			Handler:    _Chat_SaveOfflineMessage_Handler,
+		},
+		{
+			MethodName: "GetOfflineMessage",
+			Handler:    _Chat_GetOfflineMessage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "service.proto",
+	Metadata: "chat.proto",
 }
