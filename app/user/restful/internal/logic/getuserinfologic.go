@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
 	"user/service/user"
@@ -25,10 +25,9 @@ func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 }
 
 func (l *GetUserInfoLogic) GetUserInfo(req *types.UserInfoRequest) (resp *types.UserInfoResponse, err error) {
-	jid := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jid.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	response, err := l.svcCtx.UserRpc.UserInfo(context.Background(), &user.UserInfoRequest{
-		UserId:   uint64(userId),
+		UserId:   userID,
 		FriendId: req.Id,
 	})
 	if err != nil {

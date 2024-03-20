@@ -2,8 +2,8 @@ package userTag
 
 import (
 	"context"
-	"encoding/json"
 	"google.golang.org/grpc/status"
+	"user/common/jwt"
 	"user/service/tag/service/tag"
 
 	"user/restful/internal/svc"
@@ -28,16 +28,15 @@ func NewUserChooseTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Use
 
 func (l *UserChooseTagLogic) UserChooseTag(req *types.UserChooseTagRequst) error {
 	//获取当前登录的用户id
-	jid := l.ctx.Value("user_id").(json.Number)
-	id, _ := jid.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	//判断标签数量是否超过最大数量限制
-	tagCount, err := l.svcCtx.TagLoginRpc.CheckTagCount(l.ctx, &tag.CheckTagCountRequest{UserId: uint64(id)})
+	tagCount, err := l.svcCtx.TagLoginRpc.CheckTagCount(l.ctx, &tag.CheckTagCountRequest{UserId: userID})
 	if tagCount.Count > 9 {
 		return status.Error(899, "标签数量超过最大数量限制")
 	}
 	//选择标签
 	_, err = l.svcCtx.TagLoginRpc.ChooseTags(l.ctx, &tag.ChooseTagsRequest{
-		Id:       uint64(id),
+		Id:       userID,
 		SystemId: req.SystemTagId,
 		TagIds:   req.TagIds,
 	})

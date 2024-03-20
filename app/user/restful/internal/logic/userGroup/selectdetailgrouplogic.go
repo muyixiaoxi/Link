@@ -2,7 +2,7 @@ package userGroup
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -28,9 +28,8 @@ func NewSelectDetailGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 func (l *SelectDetailGroupLogic) SelectDetailGroup(req *types.SelectGroupDeatilRequest) (resp *types.SelectGroupDeatilResponse, err error) {
 	// 查询群聊详情
 	//获取当前登录用户的id
-	jid := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jid.Int64()
-	detailGroupRpc, err := l.svcCtx.UserRpc.UserSelectDetailGroup(l.ctx, &user.DetailGroupRequest{Id: req.ID, UserId: uint64(userId)})
+	userID := l.ctx.Value(jwt.UserId).(uint64)
+	detailGroupRpc, err := l.svcCtx.UserRpc.UserSelectDetailGroup(l.ctx, &user.DetailGroupRequest{Id: req.ID, UserId: userID})
 	if err != nil {
 		return nil, err
 	}

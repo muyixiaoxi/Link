@@ -2,7 +2,7 @@ package userGroup
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
 	"user/service/tag/service/tag"
@@ -28,13 +28,12 @@ func NewHomeGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *HomeGro
 func (l *HomeGroupLogic) HomeGroup(req *types.RecommendGroupByTagRequest) (resp *types.RecommendGroupByTagResponse, err error) {
 	// 首页推荐群聊
 	//获取当前登录用户的id
-	jid := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jid.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	var tagIds []uint64
 	//如果用户没有选择标签
 	if len(req.TagIds) == 0 {
 		//查询出用户自己相关的标签
-		respRpc, _ := l.svcCtx.TagLoginRpc.SelectLinkTags(l.ctx, &tag.SelectLinkTagsRequest{Id: uint64(userId)})
+		respRpc, _ := l.svcCtx.TagLoginRpc.SelectLinkTags(l.ctx, &tag.SelectLinkTagsRequest{Id: userID})
 		for _, value := range respRpc.SelectLinkTags {
 			//tagIds = append(tagIds, value.Id)
 			for _, userSelf := range value.LinkTags {

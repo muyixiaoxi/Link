@@ -2,8 +2,8 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/zeromicro/go-zero/core/logc"
+	"user/common/jwt"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -27,10 +27,9 @@ func NewDeleteFriendLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Dele
 }
 
 func (l *DeleteFriendLogic) DeleteFriend(req *types.UserDeleteFriendRequest) (err error) {
-	jId, _ := l.ctx.Value("user_id").(json.Number)
-	id, _ := jId.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	_, err = l.svcCtx.UserRpc.UserDeleteFriend(context.Background(), &user.UserDeleteFriendRequest{
-		UserId:   uint64(id),
+		UserId:   userID,
 		FriendId: req.FriendId,
 	})
 	if err != nil {

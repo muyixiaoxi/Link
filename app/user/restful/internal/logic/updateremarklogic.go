@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
 	"user/service/user"
@@ -25,10 +25,9 @@ func NewUpdateRemarkLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upda
 }
 
 func (l *UpdateRemarkLogic) UpdateRemark(req *types.UserUpdateRemarkRequest) (err error) {
-	jId := l.ctx.Value("user_id").(json.Number)
-	id, _ := jId.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	_, err = l.svcCtx.UserRpc.UserUpdateRemark(context.Background(), &user.UserUpdateRemarkRequest{
-		Id:     uint64(id),
+		Id:     userID,
 		BeId:   req.Friend,
 		Remark: req.Remark,
 	})
