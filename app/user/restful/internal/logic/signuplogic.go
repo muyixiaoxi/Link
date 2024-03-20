@@ -37,11 +37,13 @@ func (l *SignUpLogic) SignUp(req *types.UserCreateRequest) (resp *types.UserCrea
 	}
 	// 获取UserRpc 的BuildTarget
 	userRpcBuildServer, err := l.svcCtx.Config.UserRpc.BuildTarget()
+	fmt.Println("user", userRpcBuildServer)
 	if err != nil {
 		return nil, status.Error(100, "用户注册异常")
 	}
 	// 获取TagRpc 的BuildTarget
 	tagRpcBuildServer, err := l.svcCtx.Config.TagRpc.BuildTarget()
+	fmt.Println("tag", tagRpcBuildServer)
 	if err != nil {
 		return nil, status.Error(100, "标签选择异常")
 	}
