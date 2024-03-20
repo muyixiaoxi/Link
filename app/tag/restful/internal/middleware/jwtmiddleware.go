@@ -37,6 +37,7 @@ func (jm *JWTMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 		if isUpd {
+			//如果accessToken过期
 			response.Response(w, nil, response.CodeTokenPast)
 			return
 		}
