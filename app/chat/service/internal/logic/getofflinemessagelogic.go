@@ -29,6 +29,11 @@ func (l *GetOfflineMessageLogic) GetOfflineMessage(in *chat.GetOfflineMessageReq
 	response = &chat.Messages{}
 	// 首先获取自己redis，如果redis没有获取Mysql
 	messages, err := l.svcCtx.RDB.Zrange(fmt.Sprintf("link:chat:user:%d", in.UserId), 0, -1)
+	if err != nil {
+		return
+	}
+	l.svcCtx.RDB.Zrem(fmt.Sprintf("link:chat:user:%d", in.UserId), messages)
+
 	// 如果不存在离线消息去 mysql查询 ,后面再写
 
 	response.Messages = make([]*chat.Message, len(messages))
