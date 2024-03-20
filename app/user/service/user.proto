@@ -43,6 +43,7 @@ message UserInfoResponse {
   string signature = 8;
   bool isFriend = 9;
   string remark = 10;
+  string history = 11;
 }
 
 message UserUpdateInfoRequest {

@@ -49,6 +49,7 @@ func (l *UserInfoLogic) UserInfo(in *user.UserInfoRequest) (rp *user.UserInfoRes
 			Address:   model.Address,
 			Phone:     model.Phone,
 			Signature: model.Signature,
+			History:   model.History,
 		}
 		js, _ := json.Marshal(rp)
 		l.svcCtx.RDB.Setex(fmt.Sprintf("link:user:%d", model.ID), string(js), 12*60*60)

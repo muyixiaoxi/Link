@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"gorm.io/gorm"
+	"strings"
 	"user/common/bcrypt"
 	"user/service/internal/svc"
 	"user/service/internal/types"
@@ -38,6 +39,15 @@ func (l *UserUpdateInfoLogic) UserUpdateInfo(in *user.UserUpdateInfoRequest) (rp
 		err = errors.New("该手机号已被注册")
 		return nil, err
 	}
+	// 最新的头像放前面，最长为9
+	history := strings.Split(m.History, ",")
+	if m.Avatar != in.Avatar {
+		history = append([]string{in.Avatar}, history...)
+	}
+	if len(history) > 9 {
+		history = history[:len(history)-1]
+	}
+
 	l.svcCtx.RDB.Del(fmt.Sprintf("link:user:%d", m.ID))
 	var pwd string
 	if len(in.Password) != 0 {
@@ -53,6 +63,7 @@ func (l *UserUpdateInfoLogic) UserUpdateInfo(in *user.UserUpdateInfoRequest) (rp
 		Phone:     in.Phone,
 		Avatar:    in.Avatar,
 		Signature: in.Signature,
+		History:   strings.Join(history, ","),
 	}
 	err = l.svcCtx.DB.Updates(model).Error
 	model.Password = ""
