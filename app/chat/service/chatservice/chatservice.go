@@ -17,11 +17,14 @@ type (
 	GetOfflineMessageRequest = chat.GetOfflineMessageRequest
 	Message                  = chat.Message
 	Messages                 = chat.Messages
+	SaveGroupMessageRequest  = chat.SaveGroupMessageRequest
 	SaveMessageRequest       = chat.SaveMessageRequest
 
 	ChatService interface {
 		SaveOfflineMessage(ctx context.Context, in *SaveMessageRequest, opts ...grpc.CallOption) (*Empty, error)
 		GetOfflineMessage(ctx context.Context, in *GetOfflineMessageRequest, opts ...grpc.CallOption) (*Messages, error)
+		SaveGroupMessage(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error)
+		SaveGroupMessageRedis(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error)
 	}
 
 	defaultChatService struct {
@@ -43,4 +46,14 @@ func (m *defaultChatService) SaveOfflineMessage(ctx context.Context, in *SaveMes
 func (m *defaultChatService) GetOfflineMessage(ctx context.Context, in *GetOfflineMessageRequest, opts ...grpc.CallOption) (*Messages, error) {
 	client := chat.NewChatServiceClient(m.cli.Conn())
 	return client.GetOfflineMessage(ctx, in, opts...)
+}
+
+func (m *defaultChatService) SaveGroupMessage(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := chat.NewChatServiceClient(m.cli.Conn())
+	return client.SaveGroupMessage(ctx, in, opts...)
+}
+
+func (m *defaultChatService) SaveGroupMessageRedis(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := chat.NewChatServiceClient(m.cli.Conn())
+	return client.SaveGroupMessageRedis(ctx, in, opts...)
 }

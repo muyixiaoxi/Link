@@ -23,6 +23,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	}
 	db := initGorm.InitGorm(c.Mysql.DataSource)
 	db.AutoMigrate(&types.Message{})
+	db.AutoMigrate(&types.GroupMessage{})
 	red := redis2.InitRedis(rc)
 	return &ServiceContext{
 		Config: c,

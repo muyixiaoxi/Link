@@ -31,3 +31,13 @@ func (s *ChatServiceServer) GetOfflineMessage(ctx context.Context, in *chat.GetO
 	l := logic.NewGetOfflineMessageLogic(ctx, s.svcCtx)
 	return l.GetOfflineMessage(in)
 }
+
+func (s *ChatServiceServer) SaveGroupMessage(ctx context.Context, in *chat.SaveGroupMessageRequest) (*chat.Empty, error) {
+	l := logic.NewSaveGroupMessageLogic(ctx, s.svcCtx)
+	return l.SaveGroupMessage(in)
+}
+
+func (s *ChatServiceServer) SaveGroupMessageRedis(ctx context.Context, in *chat.SaveGroupMessageRequest) (*chat.Empty, error) {
+	l := logic.NewSaveGroupMessageRedisLogic(ctx, s.svcCtx)
+	return l.SaveGroupMessageRedis(in)
+}

@@ -19,7 +19,7 @@ func (jm *JWTMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		reqContext := r.Context()
 		// JWT登录验证的中间件
-		// 默认 双Token放在请求头Authorization的Bearer中 , 并以空格隔开
+		// 默认 AccessToken放在请求头Authorization的Bearer中 , 并以空格隔开
 		authHeader := r.Header.Get("Authorization")
 		if authHeader == "" {
 			response.Response(w, nil, response.CodeTokenIsEmpty)
