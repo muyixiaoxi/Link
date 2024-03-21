@@ -448,6 +448,7 @@
         <entry key="JWTMiddleware">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/app/chat/restful/internal/middleware/jwtmiddleware.go" />
               <option value="file://$PROJECT_DIR$/app/tag/restful/internal/middleware/jwtmiddleware.go" />
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/middleware/jwtmiddleware.go" />
             </set>
@@ -456,6 +457,7 @@
         <entry key="JWTUtils">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/app/tag/common/jwt/jwt.go" />
               <option value="file://$PROJECT_DIR$/app/user/common/jwt/jwt.go" />
             </set>
           </value>
@@ -955,6 +957,7 @@
         <entry key="ServiceContext">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/app/chat/restful/internal/svc/servicecontext.go" />
               <option value="file://$PROJECT_DIR$/app/tag/restful/internal/svc/servicecontext.go" />
               <option value="file://$PROJECT_DIR$/app/tag/service/internal/svc/servicecontext.go" />
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/svc/servicecontext.go" />
@@ -1708,6 +1711,37 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/chat/common/response/code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1710987610983" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/chat/restful/internal/middleware/jwtmiddleware.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1710987297738" />
+              <option name="schema">
+                <list>
+                  <option value="JWTMiddleware" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/chat/restful/internal/svc/servicecontext.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1710988052119" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceContext" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/tag/common/bcrypt/bcrypt.go">
           <value>
             <ScannedPath>
@@ -1725,12 +1759,12 @@
         <entry key="file://$PROJECT_DIR$/app/tag/common/jwt/jwt.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708266882198" />
+              <option name="lastModified" value="1710986770640" />
               <option name="schema">
                 <list>
-                  <option value="JWT" />
                   <option value="UserClaims" />
                   <option value="CustomClaims" />
+                  <option value="JWTUtils" />
                 </list>
               </option>
             </ScannedPath>
@@ -1943,7 +1977,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/middleware/jwtmiddleware.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1710944997026" />
+              <option name="lastModified" value="1710986577115" />
               <option name="schema">
                 <list>
                   <option value="JWTMiddleware" />

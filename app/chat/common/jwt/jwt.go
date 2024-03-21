@@ -4,64 +4,115 @@ import (
 	"errors"
 	"fmt"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/zeromicro/go-zero/rest/httpx"
-	"net/http"
 	"time"
-	"user/common/response"
 )
 
-type JWT struct {
-	signingKey []byte
-}
+const (
+	AccessSecret  = "linkMarchAccess"
+	RefreshSecret = "linkMarchRefresh"
+	UserId        = "user_id"
+)
+
+const (
+	TimeOut    = 1
+	MaxRefresh = 336
+)
 
 type UserClaims struct {
-	// 可根据需要自行添加字段
-	UserID   uint64 `json:"user_id"`
+	UserId   uint64 `json:"user_id"`
 	Username string `json:"username"`
 }
 
 type CustomClaims struct {
 	UserClaims
-	jwt.RegisteredClaims // 内嵌标准的声明
+	jwt.RegisteredClaims //内嵌的标准声明
 }
 
-// GenToken 生成token
-func (j *JWT) GenToken(userClaims UserClaims, accessSecret string, expires int64) (string, error) {
-	claims := CustomClaims{
-		userClaims,
-		jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * time.Duration(expires))),
+type JWTUtils struct {
+	AccessSecret  []byte
+	RefreshSecret []byte
+	Timeout       int
+	MaxRefresh    int
+}
+
+func InitNewJWTUtils() *JWTUtils {
+	authMiddleware := &JWTUtils{
+		AccessSecret:  []byte(AccessSecret),
+		RefreshSecret: []byte(RefreshSecret),
+		Timeout:       TimeOut,
+		MaxRefresh:    MaxRefresh,
+	}
+	return authMiddleware
+}
+
+// GetToken 获取accessToken 和 RefreshToken
+func (jm *JWTUtils) GetToken(userClaims UserClaims) (string, string, int64) {
+	//accessToken 数据
+	aT := CustomClaims{
+		UserClaims: userClaims,
+		RegisteredClaims: jwt.RegisteredClaims{
+			Issuer:    "zyfLink",
+			IssuedAt:  jwt.NewNumericDate(time.Now()),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * time.Duration(jm.Timeout))), //一小时过期
 		},
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString([]byte(accessSecret))
+	//refreshToken数据
+	rT := CustomClaims{
+		UserClaims: userClaims,
+		RegisteredClaims: jwt.RegisteredClaims{
+			Issuer:    "zyfLink",
+			IssuedAt:  jwt.NewNumericDate(time.Now()),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * time.Duration(jm.MaxRefresh))),
+		},
+	}
+	accessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, aT)
+	refreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, rT)
+	accessTokenSigned, err := accessToken.SignedString(jm.AccessSecret)
+	if err != nil {
+		fmt.Println("获取AccessToken失败 , Secret错误")
+		return "", "", 0
+	}
+	refreshTokenSigned, err := refreshToken.SignedString(jm.RefreshSecret)
+	if err != nil {
+		fmt.Println("获取RefreshToken失败 , Secret错误")
+		return "", "", 0
+	}
+	return accessTokenSigned, refreshTokenSigned, aT.ExpiresAt.Time.Unix()
 }
 
-// ParseToken 解析JWT
-func (j *JWT) ParseToken(tokenString string) (*CustomClaims, error) {
-	// 解析token
-	// 如果是自定义Claim结构体则需要使用 ParseWithClaims 方法
-	token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (i interface{}, err error) {
-		// 直接使用标准的Claim则可以直接使用Parse方法
-		//token, err := jwt.Parse(tokenString, func(token *jwt.Token) (i interface{}, err selfErroe) {
-		return j.signingKey, nil
+// ParseRefreshToken 解析ParserRefreshToken
+func (jm *JWTUtils) ParseRefreshToken(refreshTokenStr string) (*CustomClaims, bool, error) {
+	refreshToken, err := jwt.ParseWithClaims(refreshTokenStr, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return jm.RefreshSecret, nil
 	})
 	if err != nil {
-		return nil, err
+		//生成refreshToken失败
+		fmt.Errorf("生成refreshToken失败: %v\n", err)
+		return nil, false, err
 	}
-	// 对token对象中的Claim进行类型断言
-	if claims, ok := token.Claims.(*CustomClaims); ok && token.Valid { // 校验token
-		return claims, nil
+	if claims, ok := refreshToken.Claims.(*CustomClaims); ok && refreshToken.Valid {
+		return claims, true, nil
 	}
-	return nil, errors.New("invalid token")
+	return nil, false, errors.New("invaild token")
 }
 
-// JwtUnauthorizedResult jwt验证失败的回调函数
-func JwtUnauthorizedResult(w http.ResponseWriter, r *http.Request, err error) {
-	fmt.Println(err)
-	httpx.WriteJson(w, http.StatusOK, response.Body{
-		Code: 10087,
-		Data: nil,
-		Msg:  "用户未登录",
+// ParseAccessToken 解析ParseAccessToken
+func (jm *JWTUtils) ParseAccessToken(accessTokenStr string) (*CustomClaims, bool, error) {
+	accessToken, err := jwt.ParseWithClaims(accessTokenStr, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return jm.AccessSecret, nil
 	})
+	if err != nil {
+		v, _ := err.(*jwt.ValidationError)
+		if v.Errors == jwt.ValidationErrorExpired {
+			fmt.Println("token过期")
+		} else {
+			fmt.Errorf("生成accessToken失败: %v\n", err)
+			return nil, false, err
+		}
+
+	}
+	if claims, ok := accessToken.Claims.(*CustomClaims); ok && accessToken.Valid {
+		return claims, false, nil
+	}
+	return nil, false, errors.New("invaild token")
 }

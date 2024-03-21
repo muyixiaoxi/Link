@@ -10,6 +10,7 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/zeromicro/go-zero/core/logc"
 	"net/http"
+	"time"
 )
 
 func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
@@ -59,6 +60,7 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		message := types.Message{}
 		for {
+			conn.SetReadDeadline(time.Now().Add(10 * time.Second))
 			err := client.Conn.ReadJSON(&message)
 			if err != nil {
 				logc.Error(context.Background(), "client.conn.ReadJSON(&message) failed: ", err)
