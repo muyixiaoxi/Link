@@ -39,6 +39,7 @@ type UserInfoResponse {
 	Gender    uint   `json:"gender"`
 	Address   string `json:"address"`
 	Phone     string `json:"phone"`
+	History string `json:"history"`
 	Signature string `json:"signature"`
 	IsFriend  bool   `json:"isFriend"`
 	Remark    string `json:"remark"`

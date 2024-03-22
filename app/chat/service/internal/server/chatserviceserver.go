@@ -32,6 +32,21 @@ func (s *ChatServiceServer) GetOfflineMessage(ctx context.Context, in *chat.GetO
 	return l.GetOfflineMessage(in)
 }
 
+func (s *ChatServiceServer) Online(ctx context.Context, in *chat.OnlineRequest) (*chat.Empty, error) {
+	l := logic.NewOnlineLogic(ctx, s.svcCtx)
+	return l.Online(in)
+}
+
+func (s *ChatServiceServer) Offline(ctx context.Context, in *chat.UserId) (*chat.Empty, error) {
+	l := logic.NewOfflineLogic(ctx, s.svcCtx)
+	return l.Offline(in)
+}
+
+func (s *ChatServiceServer) GetConnectorId(ctx context.Context, in *chat.UserId) (*chat.ConnectorId, error) {
+	l := logic.NewGetConnectorIdLogic(ctx, s.svcCtx)
+	return l.GetConnectorId(in)
+}
+
 func (s *ChatServiceServer) SaveGroupMessage(ctx context.Context, in *chat.SaveGroupMessageRequest) (*chat.Empty, error) {
 	l := logic.NewSaveGroupMessageLogic(ctx, s.svcCtx)
 	return l.SaveGroupMessage(in)
