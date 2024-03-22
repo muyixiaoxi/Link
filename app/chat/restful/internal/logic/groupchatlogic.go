@@ -3,6 +3,8 @@ package logic
 import (
 	"chat/restful/internal/types"
 	"chat/service/user/user"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // GroupChat 群聊
@@ -14,7 +16,7 @@ func (l *ChatWSLogic) GroupChat(message types.Message) error {
 	}
 	// 2 . 先向mysql内存入一份消息
 	if err := l.SaveGroupMessage(message, nil); err != nil {
-		return err
+		return status.Error(codes.FailedPrecondition, "mysql存储失败")
 	}
 	// 3. 转发 , 然后获取到转发失败的用户的id
 	var failedUserIds []uint64 //转发失败的群聊用户id
