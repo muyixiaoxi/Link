@@ -2,7 +2,7 @@ package userTag
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/service/tag/service/tag"
 	"user/service/user"
 
@@ -30,14 +30,13 @@ func (l *RecommendUserListLogic) RecommendUserList(req *types.RecommendGroupByTa
 	// 根据标签推荐人员列表
 	// 获取用户id
 	//获取当前登录用户的id
-	jid := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jid.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	var tagIds []uint64
 
 	//如果用户没有选择标签
 	if len(req.TagIds) == 0 {
 		//查询出用户自己相关的标签
-		respRpc, _ := l.svcCtx.TagLoginRpc.SelectLinkTags(l.ctx, &tag.SelectLinkTagsRequest{Id: uint64(userId)})
+		respRpc, _ := l.svcCtx.TagLoginRpc.SelectLinkTags(l.ctx, &tag.SelectLinkTagsRequest{Id: userID})
 		for _, value := range respRpc.SelectLinkTags {
 			//tagIds = append(tagIds, value.Id)
 			for _, userSelf := range value.LinkTags {
@@ -52,7 +51,7 @@ func (l *RecommendUserListLogic) RecommendUserList(req *types.RecommendGroupByTa
 		PageNo:   int64(req.PageNo),
 		PageSize: int64(req.PageSize),
 		TagId:    tagIds,
-		UserId:   uint64(userId),
+		UserId:   userID,
 	})
 	var userList []types.RecommendUser
 	for _, userRpc := range rpcUserList.RecommendUserList {

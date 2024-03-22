@@ -98,7 +98,7 @@ type RecommendUserListResponse struct {
 }
 
 type RefreshTokenRequest struct {
-	RefreshToken string `json:"refreshToken"`
+	RefreshToken string `path:"refreshToken"`
 }
 
 type RefreshTokenResponse struct {
@@ -191,7 +191,6 @@ type UserCreateRequest struct {
 }
 
 type UserCreateResponse struct {
-	Token    string `json:"token"`
 	Username string `json:"username"`
 	Avatar   string `json:"avatar"`
 }
@@ -245,7 +244,7 @@ type UserLoginRequest struct {
 }
 
 type UserLoginResponse struct {
-	AccessToken  string `json:"token"`
+	AccessToken  string `json:"accessToken"`
 	RefreshToken string `json:"refreshToken"`
 	Expires      int64  `json:"expires"`
 	Id           uint64 `json:"id"`

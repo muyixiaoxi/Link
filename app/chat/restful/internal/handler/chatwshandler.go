@@ -9,7 +9,10 @@ import (
 	"fmt"
 	"github.com/gorilla/websocket"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"net/http"
+	"time"
 )
 
 func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
@@ -59,6 +62,7 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		message := types.Message{}
 		for {
+			conn.SetReadDeadline(time.Now().Add(10 * time.Second))
 			err := client.Conn.ReadJSON(&message)
 			if err != nil {
 				logc.Error(context.Background(), "client.conn.ReadJSON(&message) failed: ", err)
@@ -75,7 +79,11 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			}
 			if message.Type == 2 {
 				//群聊
-				l.GroupChat(message)
+				err = l.GroupChat(message)
+				fromErr, _ := status.FromError(err)
+				if fromErr.Code() != codes.FailedPrecondition {
+					conn.WriteJSON(fmt.Sprintf("messageId:%s", message.Id))
+				}
 			}
 		}
 

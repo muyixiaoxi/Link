@@ -46,3 +46,13 @@ func (s *ChatServiceServer) GetConnectorId(ctx context.Context, in *chat.UserId)
 	l := logic.NewGetConnectorIdLogic(ctx, s.svcCtx)
 	return l.GetConnectorId(in)
 }
+
+func (s *ChatServiceServer) SaveGroupMessage(ctx context.Context, in *chat.SaveGroupMessageRequest) (*chat.Empty, error) {
+	l := logic.NewSaveGroupMessageLogic(ctx, s.svcCtx)
+	return l.SaveGroupMessage(in)
+}
+
+func (s *ChatServiceServer) SaveGroupMessageRedis(ctx context.Context, in *chat.SaveGroupMessageRequest) (*chat.Empty, error) {
+	l := logic.NewSaveGroupMessageRedisLogic(ctx, s.svcCtx)
+	return l.SaveGroupMessageRedis(in)
+}

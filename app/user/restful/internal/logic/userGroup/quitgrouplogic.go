@@ -2,7 +2,7 @@ package userGroup
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -28,11 +28,10 @@ func NewQuitGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QuitGro
 func (l *QuitGroupLogic) QuitGroup(req *types.QuitGroupRequest) error {
 	// 解散群聊
 	// 获取当前登录用户的id
-	jid := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jid.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	//调用rpc服务
 	_, err := l.svcCtx.UserRpc.QuitGroup(l.ctx, &user.QuitGroupRequest{
-		UserId:  uint64(userId),
+		UserId:  userID,
 		GroupId: req.GroupId,
 	})
 	if err != nil {

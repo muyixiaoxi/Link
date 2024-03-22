@@ -52,7 +52,7 @@ func (l *SaveOfflineMessageLogic) SaveOfflineMessage(in *chat.SaveMessageRequest
 	}
 	// 如果离线需要存储 redis
 	if !in.Online {
-		err = l.SavaRedis(message)
+		err = l.SavaRedis(message, message.To)
 		if err != nil {
 			tx.Rollback()
 			return
@@ -65,13 +65,13 @@ func (l *SaveOfflineMessageLogic) SaveOfflineMessage(in *chat.SaveMessageRequest
 }
 
 // SavaRedis redis 保存
-func (l *SaveOfflineMessageLogic) SavaRedis(message *types.Message) (err error) {
+func (l *SaveOfflineMessageLogic) SavaRedis(message *types.Message, userId uint64) (err error) {
 	t, err := time.Parse(time.RFC3339, message.Time)
 	if err != nil {
 		return
 	}
 	score := t.Unix()
 	cache, _ := json.Marshal(message)
-	_, err = l.svcCtx.RDB.Zadd(fmt.Sprintf("link:chat:user:%d", message.To), score, string(cache))
+	_, err = l.svcCtx.RDB.Zadd(fmt.Sprintf("link:chat:user:%d", userId), score, string(cache))
 	return
 }

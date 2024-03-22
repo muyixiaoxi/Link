@@ -2,8 +2,8 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/zeromicro/go-zero/core/logc"
+	"user/common/jwt"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
 	"user/service/user"
@@ -26,10 +26,9 @@ func NewUpdateUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 }
 
 func (l *UpdateUserInfoLogic) UpdateUserInfo(req *types.UserUpdateInfoRequest) error {
-	jid := l.ctx.Value("user_id").(json.Number)
-	id, _ := jid.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	_, err := l.svcCtx.UserRpc.UserUpdateInfo(l.ctx, &user.UserUpdateInfoRequest{
-		Id:        uint64(id),
+		Id:        userID,
 		Username:  req.Username,
 		Password:  req.Password,
 		Avatar:    req.Avatar,

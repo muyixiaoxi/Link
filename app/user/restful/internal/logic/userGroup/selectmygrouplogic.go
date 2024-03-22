@@ -2,7 +2,7 @@ package userGroup
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -28,11 +28,10 @@ func NewSelectMyGroupLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Sel
 func (l *SelectMyGroupLogic) SelectMyGroup(req *types.SelectMyGroupRequest) (resp []types.GroupList, err error) {
 	// 查询我加入的群聊
 	//获取当前登录用户的id
-	jid := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jid.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	//查询相关群聊
 	respGroup, err := l.svcCtx.UserRpc.SearchMyGroupByName(l.ctx, &user.SearchMyGroupByNameRequest{
-		UserId:       uint64(userId),
+		UserId:       userID,
 		RemarkOrName: req.Name,
 	})
 	if err != nil {

@@ -19,11 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ChatService_SaveOfflineMessage_FullMethodName = "/chat.ChatService/SaveOfflineMessage"
-	ChatService_GetOfflineMessage_FullMethodName  = "/chat.ChatService/GetOfflineMessage"
-	ChatService_Online_FullMethodName             = "/chat.ChatService/Online"
-	ChatService_Offline_FullMethodName            = "/chat.ChatService/Offline"
-	ChatService_GetConnectorId_FullMethodName     = "/chat.ChatService/GetConnectorId"
+	ChatService_SaveOfflineMessage_FullMethodName    = "/chat.ChatService/SaveOfflineMessage"
+	ChatService_GetOfflineMessage_FullMethodName     = "/chat.ChatService/GetOfflineMessage"
+	ChatService_Online_FullMethodName                = "/chat.ChatService/Online"
+	ChatService_Offline_FullMethodName               = "/chat.ChatService/Offline"
+	ChatService_GetConnectorId_FullMethodName        = "/chat.ChatService/GetConnectorId"
+	ChatService_SaveGroupMessage_FullMethodName      = "/chat.ChatService/SaveGroupMessage"
+	ChatService_SaveGroupMessageRedis_FullMethodName = "/chat.ChatService/SaveGroupMessageRedis"
 )
 
 // ChatServiceClient is the client API for ChatService service.
@@ -35,6 +37,8 @@ type ChatServiceClient interface {
 	Online(ctx context.Context, in *OnlineRequest, opts ...grpc.CallOption) (*Empty, error)
 	Offline(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error)
 	GetConnectorId(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*ConnectorId, error)
+	SaveGroupMessage(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error)
+	SaveGroupMessageRedis(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type chatServiceClient struct {
@@ -90,6 +94,24 @@ func (c *chatServiceClient) GetConnectorId(ctx context.Context, in *UserId, opts
 	return out, nil
 }
 
+func (c *chatServiceClient) SaveGroupMessage(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ChatService_SaveGroupMessage_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatServiceClient) SaveGroupMessageRedis(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, ChatService_SaveGroupMessageRedis_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatServiceServer is the server API for ChatService service.
 // All implementations must embed UnimplementedChatServiceServer
 // for forward compatibility
@@ -99,6 +121,8 @@ type ChatServiceServer interface {
 	Online(context.Context, *OnlineRequest) (*Empty, error)
 	Offline(context.Context, *UserId) (*Empty, error)
 	GetConnectorId(context.Context, *UserId) (*ConnectorId, error)
+	SaveGroupMessage(context.Context, *SaveGroupMessageRequest) (*Empty, error)
+	SaveGroupMessageRedis(context.Context, *SaveGroupMessageRequest) (*Empty, error)
 	mustEmbedUnimplementedChatServiceServer()
 }
 
@@ -120,6 +144,12 @@ func (UnimplementedChatServiceServer) Offline(context.Context, *UserId) (*Empty,
 }
 func (UnimplementedChatServiceServer) GetConnectorId(context.Context, *UserId) (*ConnectorId, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConnectorId not implemented")
+}
+func (UnimplementedChatServiceServer) SaveGroupMessage(context.Context, *SaveGroupMessageRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveGroupMessage not implemented")
+}
+func (UnimplementedChatServiceServer) SaveGroupMessageRedis(context.Context, *SaveGroupMessageRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveGroupMessageRedis not implemented")
 }
 func (UnimplementedChatServiceServer) mustEmbedUnimplementedChatServiceServer() {}
 
@@ -224,6 +254,42 @@ func _ChatService_GetConnectorId_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ChatService_SaveGroupMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveGroupMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServiceServer).SaveGroupMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatService_SaveGroupMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServiceServer).SaveGroupMessage(ctx, req.(*SaveGroupMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatService_SaveGroupMessageRedis_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveGroupMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServiceServer).SaveGroupMessageRedis(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ChatService_SaveGroupMessageRedis_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServiceServer).SaveGroupMessageRedis(ctx, req.(*SaveGroupMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ChatService_ServiceDesc is the grpc.ServiceDesc for ChatService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -250,6 +316,14 @@ var ChatService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetConnectorId",
 			Handler:    _ChatService_GetConnectorId_Handler,
+		},
+		{
+			MethodName: "SaveGroupMessage",
+			Handler:    _ChatService_SaveGroupMessage_Handler,
+		},
+		{
+			MethodName: "SaveGroupMessageRedis",
+			Handler:    _ChatService_SaveGroupMessageRedis_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

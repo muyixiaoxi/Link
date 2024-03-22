@@ -48,10 +48,18 @@ message ConnectorId{
   string connectorId = 1;
 }
 
+//存储群聊消息
+message SaveGroupMessageRequest{
+  repeated uint64 userIds = 1; //群聊中离线用户的id
+  SaveMessageRequest message = 2;
+}
+
 service ChatService {
   rpc SaveOfflineMessage(SaveMessageRequest) returns(Empty);
   rpc GetOfflineMessage(GetOfflineMessageRequest) returns(Messages);
   rpc Online(OnlineRequest) returns(Empty);
   rpc Offline(UserId) returns(Empty);
   rpc GetConnectorId (UserId) returns(ConnectorId);
+  rpc SaveGroupMessage(SaveGroupMessageRequest) returns(Empty);
+  rpc SaveGroupMessageRedis(SaveGroupMessageRequest) returns (Empty);
 }

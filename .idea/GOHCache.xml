@@ -448,6 +448,7 @@
         <entry key="JWTMiddleware">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/app/chat/restful/internal/middleware/jwtmiddleware.go" />
               <option value="file://$PROJECT_DIR$/app/tag/restful/internal/middleware/jwtmiddleware.go" />
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/middleware/jwtmiddleware.go" />
             </set>
@@ -456,6 +457,7 @@
         <entry key="JWTUtils">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/app/tag/common/jwt/jwt.go" />
               <option value="file://$PROJECT_DIR$/app/user/common/jwt/jwt.go" />
             </set>
           </value>
@@ -955,6 +957,7 @@
         <entry key="ServiceContext">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/app/chat/restful/internal/svc/servicecontext.go" />
               <option value="file://$PROJECT_DIR$/app/tag/restful/internal/svc/servicecontext.go" />
               <option value="file://$PROJECT_DIR$/app/tag/service/internal/svc/servicecontext.go" />
               <option value="file://$PROJECT_DIR$/app/user/restful/internal/svc/servicecontext.go" />
@@ -1708,6 +1711,37 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/app/chat/common/response/code.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1710987610983" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/chat/restful/internal/middleware/jwtmiddleware.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1710987297738" />
+              <option name="schema">
+                <list>
+                  <option value="JWTMiddleware" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/app/chat/restful/internal/svc/servicecontext.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1710988052119" />
+              <option name="schema">
+                <list>
+                  <option value="ServiceContext" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/app/tag/common/bcrypt/bcrypt.go">
           <value>
             <ScannedPath>
@@ -1725,12 +1759,12 @@
         <entry key="file://$PROJECT_DIR$/app/tag/common/jwt/jwt.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708266882198" />
+              <option name="lastModified" value="1710986770640" />
               <option name="schema">
                 <list>
-                  <option value="JWT" />
                   <option value="UserClaims" />
                   <option value="CustomClaims" />
+                  <option value="JWTUtils" />
                 </list>
               </option>
             </ScannedPath>
@@ -1746,7 +1780,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/common/response/code.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1710935204170" />
+              <option name="lastModified" value="1710945038990" />
             </ScannedPath>
           </value>
         </entry>
@@ -1859,7 +1893,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/createtaglogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709282101436" />
+              <option name="lastModified" value="1710944314866" />
               <option name="schema">
                 <list>
                   <option value="CreateTagLogic" />
@@ -1871,7 +1905,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/deletetagslogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708270275330" />
+              <option name="lastModified" value="1710944314967" />
               <option name="schema">
                 <list>
                   <option value="DeleteTagsLogic" />
@@ -1907,7 +1941,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/selectmytagslogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709351394763" />
+              <option name="lastModified" value="1710944314925" />
               <option name="schema">
                 <list>
                   <option value="SelectMyTagsLogic" />
@@ -1931,7 +1965,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/logic/tagLogin/updateselftaglogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708270275306" />
+              <option name="lastModified" value="1710944315854" />
               <option name="schema">
                 <list>
                   <option value="UpdateSelfTagLogic" />
@@ -1943,7 +1977,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/restful/internal/middleware/jwtmiddleware.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1710935231503" />
+              <option name="lastModified" value="1710986577115" />
               <option name="schema">
                 <list>
                   <option value="JWTMiddleware" />
@@ -2151,7 +2185,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/tagsign/signuserchoosetaglogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709117082864" />
+              <option name="lastModified" value="1710940019946" />
               <option name="schema">
                 <list>
                   <option value="SignUserChooseTagLogic" />
@@ -2163,7 +2197,7 @@
         <entry key="file://$PROJECT_DIR$/app/tag/service/internal/logic/tagsign/signuserchoosetagrevertlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709780269957" />
+              <option name="lastModified" value="1710940019938" />
               <option name="schema">
                 <list>
                   <option value="SignUserChooseTagRevertLogic" />
@@ -2413,7 +2447,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/handler/getuserinfohandler.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709216396481" />
+              <option name="lastModified" value="1710943045780" />
             </ScannedPath>
           </value>
         </entry>
@@ -2606,7 +2640,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/deletefriendlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709216396487" />
+              <option name="lastModified" value="1710944314912" />
               <option name="schema">
                 <list>
                   <option value="DeleteFriendLogic" />
@@ -2630,7 +2664,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/getapplyforlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709905537840" />
+              <option name="lastModified" value="1710944314955" />
               <option name="schema">
                 <list>
                   <option value="GetApplyForLogic" />
@@ -2642,7 +2676,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/getfriendslistlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709646422101" />
+              <option name="lastModified" value="1710944314949" />
               <option name="schema">
                 <list>
                   <option value="GetFriendsListLogic" />
@@ -2654,7 +2688,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/getuserinfologic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709039623802" />
+              <option name="lastModified" value="1710944314860" />
               <option name="schema">
                 <list>
                   <option value="GetUserInfoLogic" />
@@ -2685,7 +2719,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/queryfriendslogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709646423129" />
+              <option name="lastModified" value="1710944314830" />
               <option name="schema">
                 <list>
                   <option value="QueryFriendsLogic" />
@@ -2721,7 +2755,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/signuplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1710918478285" />
+              <option name="lastModified" value="1710942552038" />
               <option name="schema">
                 <list>
                   <option value="SignUpLogic" />
@@ -2740,7 +2774,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/updateremarklogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708268117403" />
+              <option name="lastModified" value="1710944314847" />
               <option name="schema">
                 <list>
                   <option value="UpdateRemarkLogic" />
@@ -2752,7 +2786,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/updateuserinfologic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1708649824595" />
+              <option name="lastModified" value="1710944314961" />
               <option name="schema">
                 <list>
                   <option value="UpdateUserInfoLogic" />
@@ -2776,7 +2810,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/homegrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709646422325" />
+              <option name="lastModified" value="1710944314875" />
               <option name="schema">
                 <list>
                   <option value="HomeGroupLogic" />
@@ -2788,7 +2822,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/kickoutuserlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709277000847" />
+              <option name="lastModified" value="1710944314930" />
               <option name="schema">
                 <list>
                   <option value="KickOutUserLogic" />
@@ -2800,7 +2834,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/querygrouplistlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709631885248" />
+              <option name="lastModified" value="1710944314814" />
               <option name="schema">
                 <list>
                   <option value="QueryGroupListLogic" />
@@ -2812,7 +2846,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/quitgrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709260527134" />
+              <option name="lastModified" value="1710944314943" />
               <option name="schema">
                 <list>
                   <option value="QuitGroupLogic" />
@@ -2824,7 +2858,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/selectdetailgrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709432717800" />
+              <option name="lastModified" value="1710944314905" />
               <option name="schema">
                 <list>
                   <option value="SelectDetailGroupLogic" />
@@ -2836,7 +2870,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/selectmygrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709646422923" />
+              <option name="lastModified" value="1710944314980" />
               <option name="schema">
                 <list>
                   <option value="SelectMyGroupLogic" />
@@ -2848,7 +2882,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/selectstrangergrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709646422725" />
+              <option name="lastModified" value="1710944314917" />
               <option name="schema">
                 <list>
                   <option value="SelectStrangerGroupLogic" />
@@ -2860,7 +2894,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/updategroupinfologic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709296340499" />
+              <option name="lastModified" value="1710944314883" />
               <option name="schema">
                 <list>
                   <option value="UpdateGroupInfoLogic" />
@@ -2872,7 +2906,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/updategroupremarklogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709293480260" />
+              <option name="lastModified" value="1710944314892" />
               <option name="schema">
                 <list>
                   <option value="UpdateGroupRemarkLogic" />
@@ -2884,7 +2918,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userGroup/usercreategrouplogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709707605037" />
+              <option name="lastModified" value="1710944314899" />
               <option name="schema">
                 <list>
                   <option value="UserCreateGroupLogic" />
@@ -2896,7 +2930,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/canceltaglogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709351879787" />
+              <option name="lastModified" value="1710944314974" />
               <option name="schema">
                 <list>
                   <option value="CancelTagLogic" />
@@ -2908,7 +2942,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/querylinktagslogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709532793410" />
+              <option name="lastModified" value="1710944314840" />
               <option name="schema">
                 <list>
                   <option value="QueryLinkTagsLogic" />
@@ -2920,7 +2954,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/recommenduserlistlogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709646421851" />
+              <option name="lastModified" value="1710944314986" />
               <option name="schema">
                 <list>
                   <option value="RecommendUserListLogic" />
@@ -2932,7 +2966,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/logic/userTag/userchoosetaglogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709281135811" />
+              <option name="lastModified" value="1710944314936" />
               <option name="schema">
                 <list>
                   <option value="UserChooseTagLogic" />
@@ -2944,7 +2978,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/restful/internal/middleware/jwtmiddleware.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1710926288300" />
+              <option name="lastModified" value="1710942922834" />
               <option name="schema">
                 <list>
                   <option value="JWTMiddleware" />
@@ -3243,7 +3277,7 @@
         <entry key="file://$PROJECT_DIR$/app/user/service/internal/logic/usercreatelogic.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1709120080313" />
+              <option name="lastModified" value="1710939928995" />
               <option name="schema">
                 <list>
                   <option value="UserCreateLogic" />

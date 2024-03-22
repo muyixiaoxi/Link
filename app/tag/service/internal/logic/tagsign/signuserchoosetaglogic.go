@@ -32,6 +32,7 @@ func NewSignUserChooseTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *SignUserChooseTagLogic) SignUserChooseTag(in *tag.UserChooseTagRequest) (*tag.UserChooseTagRequest, error) {
+	fmt.Println("<--------------------------正常的标签逻辑------------------------------->")
 	// 获取 RawDB
 	// 注册账号时,选择标签
 	db, err := sqlx.NewMysql(l.svcCtx.Config.Mysql.DataSource).RawDB()
@@ -61,5 +62,6 @@ func (l *SignUserChooseTagLogic) SignUserChooseTag(in *tag.UserChooseTagRequest)
 	if err != nil {
 		return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
 	}
+	fmt.Println("<-------------------标签插入成功-------------------------->")
 	return &tag.UserChooseTagRequest{}, nil
 }

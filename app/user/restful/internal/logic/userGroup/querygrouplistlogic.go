@@ -2,7 +2,7 @@ package userGroup
 
 import (
 	"context"
-	"encoding/json"
+	"user/common/jwt"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
 	"user/service/user"
@@ -27,11 +27,10 @@ func NewQueryGroupListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Qu
 func (l *QueryGroupListLogic) QueryGroupList(req *types.QueryGroupListRequest) (resp *types.RecommendGroupByTagResponse, err error) {
 	// 查询当前登录用户的群列表
 	// 获取当前登录用户的id
-	jUserId := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jUserId.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	//查询相关群聊
 	respGroup, err := l.svcCtx.UserRpc.QueryMyGroupList(l.ctx, &user.QueryMyGroupListRequest{
-		UserId:   uint64(userId),
+		UserId:   userID,
 		PageNo:   req.PageNo,
 		PageSize: req.PageSize,
 	})

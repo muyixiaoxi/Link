@@ -19,6 +19,7 @@ type (
 	Message                  = chat.Message
 	Messages                 = chat.Messages
 	OnlineRequest            = chat.OnlineRequest
+	SaveGroupMessageRequest  = chat.SaveGroupMessageRequest
 	SaveMessageRequest       = chat.SaveMessageRequest
 	UserId                   = chat.UserId
 
@@ -28,6 +29,8 @@ type (
 		Online(ctx context.Context, in *OnlineRequest, opts ...grpc.CallOption) (*Empty, error)
 		Offline(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error)
 		GetConnectorId(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*ConnectorId, error)
+		SaveGroupMessage(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error)
+		SaveGroupMessageRedis(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error)
 	}
 
 	defaultChatService struct {
@@ -64,4 +67,14 @@ func (m *defaultChatService) Offline(ctx context.Context, in *UserId, opts ...gr
 func (m *defaultChatService) GetConnectorId(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*ConnectorId, error) {
 	client := chat.NewChatServiceClient(m.cli.Conn())
 	return client.GetConnectorId(ctx, in, opts...)
+}
+
+func (m *defaultChatService) SaveGroupMessage(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := chat.NewChatServiceClient(m.cli.Conn())
+	return client.SaveGroupMessage(ctx, in, opts...)
+}
+
+func (m *defaultChatService) SaveGroupMessageRedis(ctx context.Context, in *SaveGroupMessageRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := chat.NewChatServiceClient(m.cli.Conn())
+	return client.SaveGroupMessageRedis(ctx, in, opts...)
 }

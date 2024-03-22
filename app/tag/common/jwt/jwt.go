@@ -14,7 +14,7 @@ const (
 )
 
 const (
-	TimeOut    = 336
+	TimeOut    = 1
 	MaxRefresh = 336
 )
 

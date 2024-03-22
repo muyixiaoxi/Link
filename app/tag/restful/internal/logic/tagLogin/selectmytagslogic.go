@@ -2,7 +2,7 @@ package tagLogin
 
 import (
 	"context"
-	"encoding/json"
+	"tag/common/jwt"
 	"tag/service/tag"
 
 	"tag/restful/internal/svc"
@@ -27,9 +27,8 @@ func NewSelectMyTagsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Sele
 
 func (l *SelectMyTagsLogic) SelectMyTags() (resp []types.SelectMyTagsResponse, err error) {
 	// 查询我创建的标签
-	userId := l.ctx.Value("user_id").(json.Number)
-	id, _ := userId.Int64()
-	myTagList, err := l.svcCtx.TagLogin.SelectMyTags(l.ctx, &tag.SelectMyTagsRequest{UserId: uint64(id)})
+	userID := l.ctx.Value(jwt.UserId).(uint64)
+	myTagList, err := l.svcCtx.TagLogin.SelectMyTags(l.ctx, &tag.SelectMyTagsRequest{UserId: userID})
 	if err != nil {
 		return nil, err
 	}

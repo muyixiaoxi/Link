@@ -2,8 +2,8 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/zeromicro/go-zero/core/logx"
+	"user/common/jwt"
 	"user/restful/internal/svc"
 	"user/restful/internal/types"
 	"user/service/user"
@@ -24,10 +24,9 @@ func NewGetFriendsListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ge
 }
 
 func (l *GetFriendsListLogic) GetFriendsList() (resp *types.UserFriendsResponse, err error) {
-	jId := l.ctx.Value("user_id").(json.Number)
-	id, _ := jId.Int64()
+	userID := l.ctx.Value(jwt.UserId).(uint64)
 	response, err := l.svcCtx.UserRpc.UserFriendList(context.Background(), &user.UserFriendRequest{
-		Id: uint64(id),
+		Id: userID,
 	})
 	resp = &types.UserFriendsResponse{}
 	for _, u := range response.List {

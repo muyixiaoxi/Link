@@ -2,8 +2,8 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/zeromicro/go-zero/core/logc"
+	"user/common/jwt"
 	"user/service/user"
 
 	"user/restful/internal/svc"
@@ -28,9 +28,8 @@ func NewQueryFriendsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Quer
 
 func (l *QueryFriendsLogic) QueryFriends(req *types.UserQueryFriendRequest) (resp *types.UserFriendsResponse, err error) {
 	resp = &types.UserFriendsResponse{}
-	jid := l.ctx.Value("user_id").(json.Number)
-	userId, _ := jid.Int64()
-	response, err := l.svcCtx.UserRpc.UserQueryFriend(context.Background(), &user.UserQueryFriendRequest{UserId: uint64(userId), Param: req.Param})
+	userID := l.ctx.Value(jwt.UserId).(uint64)
+	response, err := l.svcCtx.UserRpc.UserQueryFriend(context.Background(), &user.UserQueryFriendRequest{UserId: userID, Param: req.Param})
 	if err != nil {
 		logc.Error(context.Background(), "l.svcCtx.UserRpc.UserQueryFriend failed: ", err)
 		return
