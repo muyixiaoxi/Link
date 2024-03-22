@@ -9,8 +9,6 @@ import (
 	"fmt"
 	"github.com/gorilla/websocket"
 	"github.com/zeromicro/go-zero/core/logc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 	"net/http"
 	"time"
 )
@@ -26,7 +24,7 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 				return true
 			},
 		}
-
+		l := logic.NewChatWSLogic(r.Context(), svcCtx)
 		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			logc.Error(context.Background(), "websocket link failed: ", err)
@@ -44,9 +42,9 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		defer func() {
 			conn.Close()
 			logic.Clients.Delete(client.Id)
+			l.Offline(client.Id)
 		}()
-
-		l := logic.NewChatWSLogic(r.Context(), svcCtx)
+		l.Online(client.Id)
 
 		go func() {
 			unread, err := l.ReadOffline(client.Id)
@@ -71,18 +69,9 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			// 心跳检测
 			if message.Type == 0 {
 				client.Conn.WriteJSON(message)
-			}
-			if message.Type == 1 {
-				if err = l.SingleChat(message); err == nil {
-					conn.WriteJSON(fmt.Sprintf("messageId:%s", message.Id))
-				}
-			}
-			if message.Type == 2 {
-				//群聊
-				err = l.GroupChat(message)
-				fromErr, _ := status.FromError(err)
-				if fromErr.Code() != codes.FailedPrecondition {
-					conn.WriteJSON(fmt.Sprintf("messageId:%s", message.Id))
+			} else {
+				if err = l.SendMessage(message); err != nil {
+					client.Conn.WriteJSON(fmt.Sprintf("messageId:%s", message.Id))
 				}
 			}
 		}
