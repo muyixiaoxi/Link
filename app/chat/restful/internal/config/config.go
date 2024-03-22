@@ -10,3 +10,6 @@ type Config struct {
 	UserRpc zrpc.RpcClientConf
 	ChatRpc zrpc.RpcClientConf
 }
+
+type Kafka struct {
+}

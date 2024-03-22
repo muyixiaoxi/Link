@@ -35,8 +35,23 @@ message Messages {
   repeated Message messages = 1;
 }
 
+message OnlineRequest {
+  int64 userId = 1;
+  string connectorId = 2;
+}
+
+message UserId {
+  int64 userId = 1;
+}
+
+message ConnectorId{
+  string connectorId = 1;
+}
 
 service ChatService {
   rpc SaveOfflineMessage(SaveMessageRequest) returns(Empty);
   rpc GetOfflineMessage(GetOfflineMessageRequest) returns(Messages);
+  rpc Online(OnlineRequest) returns(Empty);
+  rpc Offline(UserId) returns(Empty);
+  rpc GetConnectorId (UserId) returns(ConnectorId);
 }

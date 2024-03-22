@@ -12,3 +12,8 @@ ChatRpc:
     Hosts:
       - 114.55.135.211:2379
     Key: chat.rpc
+Kafka:
+  network: tcp
+  address: 114.55.135.211:9092
+  topic: link
+  partition: 0

@@ -46,6 +46,7 @@ func (l *GetUserInfoLogic) GetUserInfo(req *types.UserInfoRequest) (resp *types.
 		Signature: response.Signature,
 		IsFriend:  response.IsFriend,
 		Remark:    response.Remark,
+		History:   response.History,
 	}
 	return
 }

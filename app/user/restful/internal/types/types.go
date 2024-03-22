@@ -234,6 +234,7 @@ type UserInfoResponse struct {
 	Address   string `json:"address"`
 	Phone     string `json:"phone"`
 	Signature string `json:"signature"`
+	History string `json:"history"`
 	IsFriend  bool   `json:"isFriend"`
 	Remark    string `json:"remark"`
 }

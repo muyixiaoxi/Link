@@ -13,15 +13,21 @@ import (
 )
 
 type (
+	ConnectorId              = chat.ConnectorId
 	Empty                    = chat.Empty
 	GetOfflineMessageRequest = chat.GetOfflineMessageRequest
 	Message                  = chat.Message
 	Messages                 = chat.Messages
+	OnlineRequest            = chat.OnlineRequest
 	SaveMessageRequest       = chat.SaveMessageRequest
+	UserId                   = chat.UserId
 
 	ChatService interface {
 		SaveOfflineMessage(ctx context.Context, in *SaveMessageRequest, opts ...grpc.CallOption) (*Empty, error)
 		GetOfflineMessage(ctx context.Context, in *GetOfflineMessageRequest, opts ...grpc.CallOption) (*Messages, error)
+		Online(ctx context.Context, in *OnlineRequest, opts ...grpc.CallOption) (*Empty, error)
+		Offline(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error)
+		GetConnectorId(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*ConnectorId, error)
 	}
 
 	defaultChatService struct {
@@ -43,4 +49,19 @@ func (m *defaultChatService) SaveOfflineMessage(ctx context.Context, in *SaveMes
 func (m *defaultChatService) GetOfflineMessage(ctx context.Context, in *GetOfflineMessageRequest, opts ...grpc.CallOption) (*Messages, error) {
 	client := chat.NewChatServiceClient(m.cli.Conn())
 	return client.GetOfflineMessage(ctx, in, opts...)
+}
+
+func (m *defaultChatService) Online(ctx context.Context, in *OnlineRequest, opts ...grpc.CallOption) (*Empty, error) {
+	client := chat.NewChatServiceClient(m.cli.Conn())
+	return client.Online(ctx, in, opts...)
+}
+
+func (m *defaultChatService) Offline(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error) {
+	client := chat.NewChatServiceClient(m.cli.Conn())
+	return client.Offline(ctx, in, opts...)
+}
+
+func (m *defaultChatService) GetConnectorId(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*ConnectorId, error) {
+	client := chat.NewChatServiceClient(m.cli.Conn())
+	return client.GetConnectorId(ctx, in, opts...)
 }
