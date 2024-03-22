@@ -14,7 +14,7 @@ const (
 )
 
 const (
-	TimeOut    = 336
+	TimeOut    = 1
 	MaxRefresh = 336
 )
 
@@ -103,6 +103,7 @@ func (jm *JWTUtils) ParseAccessToken(accessTokenStr string) (*CustomClaims, bool
 	})
 	if err != nil {
 		v, _ := err.(*jwt.ValidationError)
+		fmt.Println("解析accessToken失败", err)
 		if v.Errors == jwt.ValidationErrorExpired {
 			fmt.Println("token过期")
 		} else {
