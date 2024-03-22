@@ -15,6 +15,7 @@ func (l *ChatWSLogic) SingleChat(message types.Message) (err error) {
 		}
 		// 如果转发失败，当作离线存储
 		if err = c.(*Client).Conn.WriteJSON(message); err != nil {
+			l.Offline(message.To)
 			Clients.Delete(message.To)
 			// 不管离线存储成功与否都返回
 			err = l.SaveMessage(message, false)
@@ -22,7 +23,17 @@ func (l *ChatWSLogic) SingleChat(message types.Message) (err error) {
 		}
 		return
 	}
-	// 离线存储消息队列
+	// 离线判断用户是否在其他服务端在线
+	connectorId, _ := l.svcCtx.ChatRpc.GetConnectorId(l.ctx, &chat.UserId{
+		UserId: message.To,
+	})
+	if connectorId.ConnectorId != "" {
+		if err = Producer(connectorId.ConnectorId, message); err != nil {
+			l.Offline(message.To)
+			l.SaveMessage(message, false)
+		}
+		return
+	}
 	err = l.SaveMessage(message, false)
 	return
 }

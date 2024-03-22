@@ -14,3 +14,8 @@ type Message struct {
 type Success struct {
 	Id string `json:"id"`
 }
+
+type Transmit struct {
+	Ip string
+	Message
+}

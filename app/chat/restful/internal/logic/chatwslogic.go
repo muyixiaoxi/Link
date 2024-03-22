@@ -2,8 +2,11 @@ package logic
 
 import (
 	"chat/restful/internal/svc"
+	"chat/restful/internal/types"
 	"context"
 	"github.com/gorilla/websocket"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"sync"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -36,4 +39,19 @@ func (l *ChatWSLogic) ChatWS() error {
 	// todo: add your logic here and delete this line
 
 	return nil
+}
+
+func (l *ChatWSLogic) SendMessage(message types.Message) (err error) {
+	if message.Type == 1 {
+		err = l.SingleChat(message)
+	}
+	if message.Type == 2 {
+		//群聊
+		err = l.GroupChat(message)
+		fromErr, _ := status.FromError(err)
+		if fromErr.Code() != codes.FailedPrecondition {
+			err = nil
+		}
+	}
+	return
 }

@@ -10,6 +10,11 @@ type Message {
 	Content     string `json:"content"`
 }
 
+type Transmit {
+	Ip string
+	Message
+}
+
 type Success {
 	Id string `json:"id"`
 }
@@ -21,5 +26,6 @@ service chat {
 	@doc "聊天"
 	@handler chatWS
 	get /chat
+
 }
 

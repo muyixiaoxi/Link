@@ -2,6 +2,7 @@ package logic
 
 import (
 	"chat/restful/internal/types"
+	"chat/service/chat"
 	"chat/service/user/user"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -28,13 +29,24 @@ func (l *ChatWSLogic) GroupChat(message types.Message) error {
 			if c, has := Clients.Load(userId); has {
 				if err := c.(*Client).Conn.WriteJSON(message); err != nil {
 					//如果转发失败了 , 强制让当前用户断线
+					l.Offline(userId)
 					Clients.Delete(userId)
 					//该用户属于转发失败的用户
 					failedUserIds = append(failedUserIds, userId)
 					return err
 				}
 			} else {
-				//离线用户
+				//离线用户 判断是否在其他服务端在线
+				resp, _ := l.svcCtx.ChatRpc.GetConnectorId(l.ctx, &chat.UserId{
+					UserId: userId,
+				})
+				if resp.ConnectorId != "" {
+					if err := Producer(resp.ConnectorId, message); err != nil {
+						l.Offline(userId)
+					} else {
+						continue
+					}
+				}
 				failedUserIds = append(failedUserIds, userId)
 			}
 		}

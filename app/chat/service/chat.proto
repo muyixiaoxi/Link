@@ -36,12 +36,12 @@ message Messages {
 }
 
 message OnlineRequest {
-  int64 userId = 1;
+  uint64 userId = 1;
   string connectorId = 2;
 }
 
 message UserId {
-  int64 userId = 1;
+  uint64 userId = 1;
 }
 
 message ConnectorId{
