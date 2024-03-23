@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"chat/service/chat"
 	"chat/service/internal/svc"
@@ -25,6 +26,6 @@ func NewOnlineLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OnlineLogi
 }
 
 func (l *OnlineLogic) Online(in *chat.OnlineRequest) (*chat.Empty, error) {
-	err := l.svcCtx.RDB.Set(fmt.Sprintf("link:chat:online:%d", in.UserId), in.GetConnectorId())
+	err := l.svcCtx.RDB.Hset(fmt.Sprintf("link:chat:online"), strconv.Itoa(int(in.UserId)), in.GetConnectorId())
 	return &chat.Empty{}, err
 }

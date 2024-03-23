@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"fmt"
+	"strconv"
 
 	"chat/service/chat"
 	"chat/service/internal/svc"
@@ -26,6 +26,6 @@ func NewGetConnectorIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ge
 
 func (l *GetConnectorIdLogic) GetConnectorId(in *chat.UserId) (response *chat.ConnectorId, err error) {
 	response = &chat.ConnectorId{}
-	response.ConnectorId, err = l.svcCtx.RDB.Get(fmt.Sprintf("link:chat:online:%d", in.UserId))
+	response.ConnectorId, err = l.svcCtx.RDB.Hget("link:chat:online", strconv.Itoa(int(in.UserId)))
 	return response, err
 }

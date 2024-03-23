@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logx"
 	"net"
 	"sync"
 	"transmit/common/proto"
@@ -37,19 +38,29 @@ func listenClient() {
 func addReceiver(conn net.Conn) {
 	defer conn.Close()
 	reader := bufio.NewReader(conn)
-	msg := []byte{}
 	for {
 		m, err := proto.Decode(reader)
 		if err != nil {
 			fmt.Println("与客户端", conn.LocalAddr(), "断开连接")
 			return
 		}
-		transmit := types.Transmit{}
+		transmit := types.TransmitMap{}
 		json.Unmarshal([]byte(m), &transmit)
-		// 读到消息后，进行转发
-		c, ok := Connects.Load(transmit.Ip)
-		if !ok {
-			message := types.Message{
+		// 读到消息后，根据服务器进行转发
+		for connect := range transmit.Users {
+			transmitMessage(conn, connect, transmit)
+		}
+	}
+}
+
+func transmitMessage(conn net.Conn, ip string, transmit types.TransmitMap) {
+	c, ok := Connects.Load(ip)
+	message := types.TransmitMap{
+		Users: map[string][]uint64{},
+	}
+	if !ok {
+		message = types.TransmitMap{
+			Message: types.Message{
 				Id:          "",
 				From:        0,
 				To:          0,
@@ -57,17 +68,19 @@ func addReceiver(conn net.Conn) {
 				ContentType: 0,
 				Time:        "",
 				Content:     "客户端离线",
-			}
-			s, _ := json.Marshal(message)
-			msg, _ = proto.Encode(string(s))
-			conn.Write(msg)
-			fmt.Println("客户端离线")
-			continue
+			},
 		}
-		message := transmit.Message
-		j, _ := json.Marshal(message)
-		msg, _ = proto.Encode(string(j))
-		fmt.Println("ip:", transmit.Ip, "msg:", string(msg))
-		c.(net.Conn).Write(msg)
+		s, _ := json.Marshal(message)
+		msg, _ := proto.Encode(string(s))
+		conn.Write(msg)
+		fmt.Println("客户端离线：", ip)
+		logx.Error("connect ip offline:", ip)
+		return
 	}
+	message.Users[ip] = transmit.Users[ip]
+	message.Message = transmit.Message
+	j, _ := json.Marshal(message)
+	msg, _ := proto.Encode(string(j))
+	fmt.Println("ip:", ip, "msg:", string(msg))
+	c.(net.Conn).Write(msg)
 }

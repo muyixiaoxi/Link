@@ -1,15 +1,14 @@
 package logic
 
 import (
+	"chat/service/chat"
+	"chat/service/internal/svc"
 	"chat/service/internal/types"
 	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/stores/redis"
-	"time"
-
-	"chat/service/chat"
-	"chat/service/internal/svc"
+	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -57,12 +56,8 @@ func (l *SaveGroupMessageRedisLogic) SaveGroupMessageRedis(in *chat.SaveGroupMes
 
 // SaveGroupRedis redis 保存
 func (l *SaveGroupMessageRedisLogic) SaveGroupRedis(message *types.GroupMessage, userId uint64) (err error) {
-	t, err := time.Parse(time.RFC3339, message.Time)
-	if err != nil {
-		return
-	}
-	score := t.Unix()
+	score, _ := strconv.Atoi(message.Time)
 	cache, _ := json.Marshal(message)
-	_, err = l.svcCtx.RDB.Zadd(fmt.Sprintf("link:chat:user:%d", userId), score, string(cache))
+	_, err = l.svcCtx.RDB.Zadd(fmt.Sprintf("link:chat:user:%d", userId), int64(score), string(cache))
 	return
 }
