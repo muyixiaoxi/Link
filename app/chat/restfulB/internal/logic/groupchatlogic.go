@@ -20,9 +20,9 @@ func (l *ChatWSLogic) GroupChat(message types.Message) error {
 		return status.Error(codes.FailedPrecondition, "mysql存储失败")
 	}
 	// 3. 转发 , 然后获取到转发失败的用户的id
-	var failedUserIds []uint64        //转发失败的群聊用户id
-	var onlineMap map[string][]uint64 //在其他服务端上在线的用户，分类
-	var onlineUsers []uint64          // 在其他服务端上在线的所有用户
+	var failedUserIds []uint64         //转发失败的群聊用户id
+	onlineMap := map[string][]uint64{} //在其他服务端上在线的用户，分类
+	var onlineUsers []uint64           // 在其他服务端上在线的所有用户
 	for _, userInfo := range groupUserList.UserList {
 		//不能转发给发送消息的用户
 		userId := userInfo.Id
