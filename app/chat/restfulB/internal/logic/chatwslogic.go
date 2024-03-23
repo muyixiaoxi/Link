@@ -1,8 +1,8 @@
 package logic
 
 import (
-	"chat/restful/internal/svc"
-	"chat/restful/internal/types"
+	"chat/restfulB/internal/svc"
+	"chat/restfulB/internal/types"
 	"context"
 	"github.com/gorilla/websocket"
 	"google.golang.org/grpc/codes"

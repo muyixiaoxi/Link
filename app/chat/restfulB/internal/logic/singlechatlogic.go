@@ -1,7 +1,7 @@
 package logic
 
 import (
-	"chat/restful/internal/types"
+	"chat/restfulB/internal/types"
 	"chat/service/chat"
 )
 

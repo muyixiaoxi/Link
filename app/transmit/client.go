@@ -12,6 +12,8 @@ import (
 
 func main() {
 	conn, _ := InitConnect()
+	go Consumer(conn)
+	var ip string
 	message := types.Message{
 		Id:          "123",
 		From:        1,
@@ -21,15 +23,16 @@ func main() {
 		Time:        "123",
 		Content:     "你好",
 	}
-	Consumer(conn)
-	var ip string
 	for {
-		time.Sleep(2 * time.Second)
 		fmt.Scan(&ip)
-		if err := Producer(conn, ip, message); err != nil {
+		users := map[string][]uint64{}
+		users[ip] = []uint64{1, 2}
+		time.Sleep(2 * time.Second)
+		if err := Producer(conn, users, message); err != nil {
 			fmt.Println("Producer(conn, ip, message) failed", err)
 		}
 	}
+
 }
 
 func InitConnect() (conn net.Conn, err error) {
@@ -38,10 +41,9 @@ func InitConnect() (conn net.Conn, err error) {
 	return
 }
 
-// Producer 生产者 发送消息
-func Producer(conn net.Conn, ip string, mes types.Message) (err error) {
-	transmit := types.Transmit{
-		Ip:      ip,
+func Producer(conn net.Conn, user map[string][]uint64, mes types.Message) (err error) {
+	transmit := types.TransmitMap{
+		Users:   user,
 		Message: mes,
 	}
 	message, _ := json.Marshal(transmit)
@@ -66,8 +68,13 @@ func Consumer(conn net.Conn) {
 		if err != nil {
 			continue
 		}
-		message := types.Message{}
-		json.Unmarshal([]byte(m), &message)
-		fmt.Println(message)
+		transmit := types.TransmitMap{}
+		json.Unmarshal([]byte(m), &transmit)
+		// 读到消息后，进行转发
+		for _, uIds := range transmit.Users {
+			for _, id := range uIds {
+				fmt.Println(id, transmit.Message)
+			}
+		}
 	}
 }

@@ -14,3 +14,8 @@ type Transmit struct {
 	Ip string
 	Message
 }
+
+type TransmitMap struct {
+	Users map[string][]uint64 `json:"users,omitempty"`
+	Message
+}

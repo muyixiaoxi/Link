@@ -3,7 +3,7 @@ package logic
 import (
 	"bufio"
 	"chat/common/proto"
-	"chat/restful/internal/types"
+	"chat/restfulB/internal/types"
 	"encoding/json"
 	"net"
 	"time"
