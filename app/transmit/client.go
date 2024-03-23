@@ -10,7 +10,7 @@ import (
 	"transmit/types"
 )
 
-func main() {
+func client() {
 	conn, _ := InitConnect()
 	go Consumer(conn)
 	var ip string
