@@ -238,11 +238,11 @@ services:
       - dtm
       - transmit
 
-  chat-apiB:
+  chat-api-b:
     build:
       context: chat
       dockerfile: restfulB/Dockerfile
-    container_name: chat-apiB
+    container_name: chat-api-b
     restart: always
     environment:
       - TZ=Asia/Shanghai
