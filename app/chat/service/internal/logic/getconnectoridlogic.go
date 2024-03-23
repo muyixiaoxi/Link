@@ -25,6 +25,7 @@ func NewGetConnectorIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ge
 }
 
 func (l *GetConnectorIdLogic) GetConnectorId(in *chat.UserId) (response *chat.ConnectorId, err error) {
+	response = &chat.ConnectorId{}
 	response.ConnectorId, err = l.svcCtx.RDB.Get(fmt.Sprintf("link:chat:online:%d", in.UserId))
 	return response, err
 }

@@ -10,7 +10,6 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/zeromicro/go-zero/core/logc"
 	"net/http"
-	"time"
 )
 
 func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
@@ -25,6 +24,7 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			},
 		}
 		l := logic.NewChatWSLogic(r.Context(), svcCtx)
+		logic.L = l
 		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			logc.Error(context.Background(), "websocket link failed: ", err)
@@ -44,7 +44,10 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			logic.Clients.Delete(client.Id)
 			l.Offline(client.Id)
 		}()
-		l.Online(client.Id)
+
+		if logic.Conn != nil {
+			l.Online(client.Id)
+		}
 
 		go func() {
 			unread, err := l.ReadOffline(client.Id)
@@ -60,7 +63,7 @@ func chatWSHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		message := types.Message{}
 		for {
-			conn.SetReadDeadline(time.Now().Add(10 * time.Second))
+			//conn.SetReadDeadline(time.Now().Add(10 * time.Second))
 			err := client.Conn.ReadJSON(&message)
 			if err != nil {
 				logc.Error(context.Background(), "client.conn.ReadJSON(&message) failed: ", err)
