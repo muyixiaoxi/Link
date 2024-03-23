@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-var l *ChatWSLogic
+var L *ChatWSLogic
 
 var Conn net.Conn
 
@@ -42,10 +42,13 @@ func Consumer() {
 	defer Conn.Close()
 	reader := bufio.NewReader(Conn)
 	for {
-		m, _ := proto.Decode(reader)
+		m, err := proto.Decode(reader)
+		if err != nil {
+			continue
+		}
 		message := types.Message{}
-		json.Unmarshal([]byte(m), message)
+		json.Unmarshal([]byte(m), &message)
 		// 读到消息后，进行转发
-		l.SendMessage(message)
+		L.SendMessage(message)
 	}
 }

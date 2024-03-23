@@ -29,11 +29,11 @@ func main() {
 	// 启动转发服务
 	var err error
 	logic.Conn, err = logic.InitConnect()
-	if err != nil {
-		logx.Error("logic.InitConnect() failed:", err)
-		return
+	if err == nil {
+		go logic.Consumer()
+	} else {
+		logx.Error("logic.InitConnect failed:", err)
 	}
-	go logic.Consumer()
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()

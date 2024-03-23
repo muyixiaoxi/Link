@@ -44,14 +44,15 @@ func (l *ChatWSLogic) ChatWS() error {
 func (l *ChatWSLogic) SendMessage(message types.Message) (err error) {
 	if message.Type == 1 {
 		err = l.SingleChat(message)
-	}
-	if message.Type == 2 {
+	} else if message.Type == 2 {
 		//群聊
 		err = l.GroupChat(message)
 		fromErr, _ := status.FromError(err)
 		if fromErr.Code() != codes.FailedPrecondition {
 			err = nil
 		}
+	} else if message.Type == 100 { // 集群转发失败
+		err = l.SaveMessage(message, false)
 	}
 	return
 }

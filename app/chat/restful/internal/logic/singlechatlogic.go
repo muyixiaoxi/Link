@@ -24,11 +24,11 @@ func (l *ChatWSLogic) SingleChat(message types.Message) (err error) {
 		return
 	}
 	// 离线判断用户是否在其他服务端在线
-	connectorId, _ := l.svcCtx.ChatRpc.GetConnectorId(l.ctx, &chat.UserId{
+	resp, _ := l.svcCtx.ChatRpc.GetConnectorId(l.ctx, &chat.UserId{
 		UserId: message.To,
 	})
-	if connectorId.ConnectorId != "" {
-		if err = Producer(connectorId.ConnectorId, message); err != nil {
+	if resp.ConnectorId != "" {
+		if err = Producer(resp.ConnectorId, message); err != nil {
 			l.Offline(message.To)
 			l.SaveMessage(message, false)
 		}
