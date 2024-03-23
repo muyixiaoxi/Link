@@ -206,6 +206,20 @@ services:
       - etcd
       - dtm
 
+  transmit:
+    build:
+      context: transmit
+      dockerfile: Dockerfile
+    container_name: transmit
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports:
+      - "8333:8333"
+    networks:
+      - backend
+
   chat-api:
     build:
       context: chat
@@ -222,4 +236,22 @@ services:
     depends_on:
       - etcd
       - dtm
+      - transmit
 
+  chat-apiB:
+    build:
+      context: chat
+      dockerfile: restfulB/Dockerfile
+    container_name: chat-apiB
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    privileged: true
+    ports:
+      - "8900:8900"
+    networks:
+      - backend
+    depends_on:
+      - etcd
+      - dtm
+      - transmit

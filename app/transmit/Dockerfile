@@ -14,8 +14,7 @@ ADD go.mod .
 ADD go.sum .
 RUN go mod download
 COPY . .
-COPY ./etc /app/etc
-RUN go build -ldflags="-s -w" -o /app/restfulB .
+RUN go build -ldflags="-s -w" -o /app/transmit .
 
 
 FROM scratch
@@ -25,7 +24,6 @@ COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /usr/share/zoneinfo/Asia/S
 ENV TZ Asia/Shanghai
 
 WORKDIR /app
-COPY --from=builder /app/restfulB /app/restfulB
-COPY --from=builder /app/etc /app/etc
+COPY --from=builder /app/transmit /app/transmit
 
-CMD ["./restfulB", "-f", "etc/chat.yaml"]
+CMD ["./transmit"]
